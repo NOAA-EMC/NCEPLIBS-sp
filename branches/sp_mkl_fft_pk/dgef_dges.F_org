@@ -1,0 +1,79 @@
+      subroutine dgef(A,LDA,N,IPVT)
+      implicit none
+      ! This routine is a simple wrapper around the LAPACK DGETRF, and is
+      ! designed to look like the IBM ESSL DGEF routine.
+      ! This routine calls STOP on errors.
+      ! Author: Sam Trahan, January 14, 2011
+      real(kind=8) :: A(LDA,LDA)
+      integer(kind=4) :: IPVT(LDA)
+      integer(kind=4) :: N,stat,tempN,tempLDA,LDA
+      intent(in) :: LDA,N
+      intent(inout) :: A,IPVT
+      
+      print *,'LDA=',LDA
+      print *,'N=',N
+
+      ! The MKL has a habit of trashing the N and LDA values, so:
+      tempN=N
+      tempLDA=LDA
+
+      ipvt=0
+
+      call dgetrf(tempN,tempN,A,tempLDA,IPVT,stat)
+      
+      if(stat/=0) then
+         write (0,*)                                                    &
+     & 'ABORTING IN DGEF-LOOKALIKE: dgetrf returned error status ',stat
+         stop
+      end if
+      
+      print *,'LDA=',LDA
+      print *,'N=',N
+
+      end subroutine dgef
+      
+      subroutine dges(A,LDA,N,IPVT,B,IOPT)
+      implicit none
+      ! This routine is a simple wrapper around the LAPACK DGETRS, and is
+      ! designed to look like the IBM ESSL DGES routine.  However, this
+      ! routine only handles IOPT=0.
+      ! This routine calls STOP on errors.
+      ! Author: Sam Trahan, January 14, 2011
+      real(kind=8) :: A(LDA,LDA), B(LDA)
+      integer(kind=4) :: IPVT(LDA),one
+      integer(kind=4) :: N,stat,iopt,LDA
+      integer(kind=4) :: tempN,tempLDA
+      intent(in) :: A,LDA,N,IPVT,IOPT
+      intent(inout) :: B
+
+      character :: TRANS
+
+      TRANS='N'
+      one=1
+
+      print *,'LDA=',LDA
+      print *,'N=',N
+
+      ! The MKL has a habit of trashing the N and LDA values, so:
+      tempN=N
+      tempLDA=LDA
+
+      if(iopt/=0) then
+         write(0,*)                                                     &
+     &     'ABORTING IN DGES-LOOKALIKE: only iopt=0 is suppported.'
+         stop
+      end if
+      
+      call dgetrs(trans,tempN,one,A,tempLDA,IPVT,B,tempN,stat)
+      
+      if(stat/=0) then
+         write (0,*)                                                    &
+     & 'ABORTING IN DGES-LOOKALIKE: dgetrs returned error status ',stat
+         stop
+      end if
+      
+      print *,'LDA=',LDA
+      print *,'N=',N
+
+      end subroutine dges
+
