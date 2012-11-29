@@ -32,7 +32,7 @@ C 2010-12-30  SLOVACEK update alignment so preprocessor does not cause
 C                      compilation failure
 C 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors 
 C			of _d and _8 using generic LU factorization.   
-C 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack removed
+C 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
 C----------------------------------------------------------------
 C USAGE:    CALL SPLAT(IDRT,JMAX,SLAT,WLAT)
 C
