@@ -20,8 +20,10 @@
 #              from the file modification times.
 #
 #              New source files are also compiled and added to the object 
-#              archive libraries.
+#              archive libraries
 #
+# 11-29-12     Mirvis: Added  Intel comp, optimization and OMP flags 
+#		and libsp_*g.a builds
 ###############################################################
 
 #
@@ -87,5 +89,7 @@ export LIB="../splib_v2/libsp_d.a"
 export FFLAGS=" -O3 -auto -openmp -i4 -r8 -convert big_endian -assume byterecl -fp-model strict -fpp -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
+
+
 
 rm -f make.libsp

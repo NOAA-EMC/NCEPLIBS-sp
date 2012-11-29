@@ -21,7 +21,7 @@
 #
 #              New source files are also compiled and added to the object 
 #              archive libraries.
-#
+#  11-29-12    Mirvis build in addition libsp_*g builds for debugging
 ###############################################################
 
 #
@@ -66,7 +66,7 @@ SHELL=/bin/sh
 	rm -f \$*.o
 EOF
 #
-#     Update 4-byte version of libspi_4.a 
+#     Update 4-byte version of libsp_4.a 
 #
 export LIB="../splib_v2/libsp_4g.a"
 export FFLAGS="-g -debug all -traceback -i4 -convert big_endian -assume byterecl -fp-model strict -real-size 32 -DLINUX"
