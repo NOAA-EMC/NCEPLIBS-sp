@@ -1,6 +1,6 @@
 C-----------------------------------------------------------------------
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
-C$$$  SUBPROGRAM DOCUMENTATION BLOCK
+C     SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPLAT      COMPUTE LATITUDE FUNCTIONS
 C   PRGMMR: IREDELL       ORG: W/NMC23       DATE: 96-02-20
@@ -25,8 +25,15 @@ C   96-02-20  IREDELL
 C   97-10-20  IREDELL  ADJUST PRECISION
 C   98-06-11  IREDELL  GENERALIZE PRECISION USING FORTRAN 90 INTRINSIC
 C 1998-12-03  IREDELL  GENERALIZE PRECISION FURTHER
-C 1998-12-03  IREDELL  USE BLAS CALLS
-C
+C 1998-12-03  IREDELL  USES AIX ESSL BLAS CALLS
+C 2009-12-27  DSTARK   updated to switch between ESSL calls on an AIX
+C                      platform, and Numerical Recipies calls elsewise.
+C 2010-12-30  SLOVACEK update alignment so preprocessor does not cause
+C                      compilation failure
+C 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors 
+C			of _d and _8 using generic LU factorization.   
+C 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
+C----------------------------------------------------------------
 C USAGE:    CALL SPLAT(IDRT,JMAX,SLAT,WLAT)
 C
 C   INPUT ARGUMENT LIST:
@@ -41,13 +48,15 @@ C     SLAT     - REAL (JMAX) SINES OF LATITUDE.
 C     WLAT     - REAL (JMAX) GAUSSIAN WEIGHTS.
 C
 C SUBPROGRAMS CALLED:
-C   DGEF         MATRIX FACTORIZATION
-C   DGES         MATRIX SOLVER
+C   DGEF         MATRIX FACTORIZATION - ESSL
+C   DGES         MATRIX SOLVER - ESSL
+C   LUDCMP       LU factorization - numerical recipies
+C   LUBKSB       Matrix solver - numerical recipies
 C
 C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 90
 C
-C$$$
+C
       REAL SLAT(JMAX),WLAT(JMAX)
       INTEGER,PARAMETER:: KD=SELECTED_REAL_KIND(15,45)
       REAL(KIND=KD):: PK(JMAX/2),PKM1(JMAX/2),PKM2(JMAX/2)
@@ -67,10 +76,10 @@ C$$$
      $ 121.737742088, 124.879308913, 128.020877005, 131.162446275,
      $ 134.304016638, 137.445588020, 140.587160352, 143.728733573,
      $ 146.870307625, 150.011882457, 153.153458019, 156.295034268 /
-      REAL(8):: DLT,D1=1.
-      REAL(8) AWORK((JMAX+1)/2,((JMAX+1)/2)),BWORK(((JMAX+1)/2))
-      INTEGER(4):: JHE,JHO,J0=0
-      INTEGER(4) IPVT((JMAX+1)/2)
+      REAL:: DLT,D1=1.
+      REAL AWORK((JMAX+1)/2,((JMAX+1)/2)),BWORK(((JMAX+1)/2))
+      INTEGER:: JHE,JHO,J0=0
+      INTEGER IPVT((JMAX+1)/2)
       PARAMETER(PI=3.14159265358979,C=(1.-(2./PI)**2)*0.25)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 C  GAUSSIAN LATITUDES
@@ -137,8 +146,14 @@ C  EQUALLY-SPACED LATITUDES INCLUDING POLES
         DO JS=1,JHO
           BWORK(JS)=-D1/(4*(JS-1)**2-1)
         ENDDO
+#if IBM4 || IBM8
         CALL DGEF(AWORK,JHE,JHO,IPVT)
         CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
+#endif
+#if LINUX
+        call ludcmp(awork,jho,jhe,ipvt)
+        call lubksb(awork,jho,jhe,ipvt,bwork)
+#endif
         WLAT(1)=0.
         DO J=1,JHO
           WLAT(J+1)=BWORK(J)
@@ -171,8 +186,14 @@ C  EQUALLY-SPACED LATITUDES EXCLUDING POLES
         DO JS=1,JHO
           BWORK(JS)=-D1/(4*(JS-1)**2-1)
         ENDDO
+#if IBM4 || IBM8
         CALL DGEF(AWORK,JHE,JHO,IPVT)
         CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
+#endif
+#if LINUX
+        call ludcmp(awork,jho,jhe,ipvt,d)
+        call lubksb(awork,jho,jhe,ipvt,bwork)
+#endif
         WLAT(1)=0.
         DO J=1,JHO
           WLAT(J)=BWORK(J)
