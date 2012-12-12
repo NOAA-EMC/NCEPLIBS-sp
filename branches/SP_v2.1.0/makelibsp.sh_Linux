@@ -90,3 +90,4 @@ export FFLAGS=" -O3 -auto -openmp -i4 -r8 -convert big_endian -assume byterecl -
 export AFLAGS=" "
 make -f make.libsp
 rm -f make.libsp
+rm -f *.mod
