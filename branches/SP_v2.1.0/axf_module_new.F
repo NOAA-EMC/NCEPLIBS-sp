@@ -1,0 +1,123 @@
+      module xf_module
+!$$$  SUBPROGRAM DOCUMENTATION BLOCK
+!
+! SUBPROGRAM:   xf_module    a module package to take care underflow
+!   PRGMMR: Henry Juang      ORG: W/NMC23     DATE: 2012-09-01
+!
+! ABSTRACT: This module contains several routines to take care
+!           overflow and underflow to represent computerized
+!           real number f by xB**i, where x is real, B is big
+!           number. For real4, B is 2**120, for real8 is 2**960
+!           the concept is that all real numbers have to normalize
+!           so -sqrt(B) < x <= sqrt(B), thus any computation will
+!           not fail into underflow or overflow after computing.
+!
+! PROGRAM HISTORY LOG:
+!   2012-09-01  Henry Juang	initial writing
+!
+! USAGE:    use xf_module
+!
+!   SUBROUTINES INCLUDE
+! 	xf_init		preset base values etc, default is blank now
+!	xf_norm		normalize x number
+! 	xf_lsum		linear summation
+!	xf_real		convert x number back to real number
+!
+! ATTRIBUTES:
+!   LANGUAGE: FORTRAN 90
+!
+!$$$
+
+      implicit none
+
+! real4
+!     integer,  parameter :: in_f = 120 , in_h = in_f/2
+!     real*4,   parameter :: bb_f = 2.d0 ** ( in_f )
+!     real*4,   parameter :: bs_f = 2.d0 ** (-in_f )
+!     real*4,   parameter :: bb_h = 2.d0 ** ( in_h )
+!     real*4,   parameter :: bs_h = 2.d0 ** (-in_h )
+! real8
+!     integer,  parameter :: in_f = 960 , in_h = in_f/2
+!     real*8,   parameter :: bb_f = 2.d0 ** ( in_f )
+!     real*8,   parameter :: bs_f = 2.d0 ** (-in_f )
+!     real*8,   parameter :: bb_h = 2.d0 ** ( in_h )
+!     real*8,   parameter :: bs_h = 2.d0 ** (-in_h )
+
+      real*8    bb_f, bs_f
+      real*8    bb_h, bs_h
+
+      contains
+
+! --------------------------------------------------
+      subroutine xf_init()
+      real xf
+      integer in_f, in_h
+      if( precision(xf) .gt. 10. ) then
+        in_f = 960
+      else
+        in_f = 120
+      endif
+      in_h = in_f / 2
+      bb_f = 2.d0 ** ( in_f )
+      bs_f = 2.d0 ** (-in_f )
+      bb_h = 2.d0 ** ( in_h )
+      bs_h = 2.d0 ** (-in_h )
+      return
+      end subroutine xf_init
+! --------------------------------------------------
+      subroutine xf_norm(x,ix)
+      real(kind=selected_real_kind(15,45)):: x
+      integer ix
+      real w
+        w = abs(x)
+        if( w.ge.bb_h ) then
+          x = x*bs_f
+          ix = ix + 1
+        elseif( w.lt.bs_h ) then
+          x = x*bb_f
+          ix = ix - 1
+        endif
+      return
+      end subroutine xf_norm
+! --------------------------------------------------
+      subroutine xf_lsum(a,b,x,ix,y,iy,z,iz)
+      real(kind=selected_real_kind(15,45)):: a,b,x,y,z
+      integer ix,iy,iz
+      integer id
+        id = ix - iy
+        if( id.eq.0 ) then
+          z = a*x + b*y
+          iz = ix
+        elseif( id.eq.1 ) then
+          z = a*x + b*y*bs_f
+          iz = ix
+        elseif( id.eq.-1 ) then
+          z = a*x*bs_f + b*y
+          iz = iy
+        elseif( id.gt.1 ) then
+          z = a*x
+          iz = ix
+        else
+          z = b*y
+          iz = iy
+        endif
+      return
+      end subroutine xf_lsum
+! ---------------------------------------------------
+      subroutine xf_real(x,ix,f)
+      real(kind=selected_real_kind(15,45)):: x
+      real f
+      integer ix
+        if( ix.lt.0 ) then
+          f = x * bs_f
+          if( ix.lt.-1 ) f=0.0
+        else if( ix.gt.0 ) then
+          f = x * bb_f
+          if( ix.gt.1 ) print *,' over flow '
+        else
+          f = x
+        endif
+      return
+      end subroutine xf_real
+
+      end module xf_module
