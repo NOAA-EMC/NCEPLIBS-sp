@@ -100,6 +100,7 @@ c
             y(i+1,j)=y(i,j)
           ENDDO
           y(2,j)=0.
+          y(n+2,j) = 0.
         ENDDO
       ENDIF
  
@@ -128,6 +129,8 @@ c
             y(i+1,j)=y(i,j)
           ENDDO
           y(2,j)=0.
+C 01/17/2013 E.Mirvis added ver 2.0.1 by S.Moorthi request. No +|- demo.
+          y(n+2,j) = 0.
         ENDDO
       ENDIF
  
@@ -157,6 +160,8 @@ c
           y(i+1)=y(i)
         ENDDO
         y(2)=0.
+C E.Mirvis added ver 2.0.1 by S.Moorthi request. No +|- demo.
+          y(n+2,j) = 0.
       ENDIF
  
       RETURN
