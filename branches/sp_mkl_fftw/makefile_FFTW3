@@ -1,0 +1,38 @@
+#BASE_PATH=/opt/intel/Compiler/11.1/069
+BASE_PATH=/usrx/local/intel/12.1/composerxe
+MKL_INC=-I$(BASE_PATH)/mkl/include
+INTEL_LPATH=-L$(BASE_PATH)/mkl/lib/em64t
+INTEL_LIBS=-lmkl_intel_lp64 -lmkl_intel_thread -lmkl_core -liomp5 -lpthread -lm
+#FFTW3F=-lfftw3xf_intel
+#FFTW3C=-lfftw3xc_intel
+
+#The COPTS options are not needed for 
+#this example but are used in some of
+#the MKL examples.
+#COPTS=-w -DMKL_DOUBLE
+
+both:  test_fS  test_fD
+all: both  f_testS f_testD
+
+test_fS: test_emS.f90
+	mpiifort mkl_fftw_examples_support.f test_emS.f90 $(MKL_INC)/fftw -mkl -o test_fS
+
+test_fD: test_emD.f90
+	mpiifort mkl_fftw_examples_support.f test_emD.f90 $(MKL_INC)/fftw -mkl -o test_fD
+
+f_testS: test_emS.f90
+	mpiifort mkl_fftw_examples_support.f testS_emS.f90 $(MKL_INC) $(MKL_INC)/fftw $(INTEL_LIBS) $(INTEL_LPATH) $(FFTW3F) -o f_testS 
+
+test: both
+	./test_f > f1.out
+	diff -s c1.out f1.out
+
+clean:
+	rm -rf  f_test test_f *out
+
+backup:
+	cd ./fftw2; make clean
+	cd ..
+	make clean
+	tar -cf backup.tar test.c test.f90 makefile fftw2
+	
