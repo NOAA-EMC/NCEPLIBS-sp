@@ -31,7 +31,7 @@ C   96-02-29  IREDELL
 C 1998-12-15  IREDELL  GENERIC FFT USED
 C                      OPENMP DIRECTIVES INSERTED
 C 2013-01-16  IREDELL &    
-C	      MIRVIS    :	 
+C	      MIRVIS    ::	 
 C			FIXING AFFT NEGATIVE SHARING EFFECT DURING
 C			OMP LOOPS BY CREATING TMP AFFT COPY (AFFT_TMP)
 C			TO BE PRIVATE DURING OMP LOOP THREADING	
@@ -104,8 +104,6 @@ C$$$
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 C  SET PARAMETERS
       MP=0
-!      write(0,*) 'sptranf call sptranf0'
-!        print *, "jjjjjjjcccccccccc  from SPTRANF- before NCPUS", JC
       CALL SPTRANF0(IROMB,MAXWV,IDRT,IMAX,JMAX,JB,JE,
      &              EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP,
      &              AFFT,CLAT,SLAT,WLAT,PLN,PLNTOP)
@@ -118,13 +116,11 @@ C$OMP PARALLEL DO PRIVATE(AFFT_TMP,KWS,WTOP,G,IJKN,IJKS)
           KWS=(K-1)*KW
           WTOP=0
           DO J=JB,JE
-!      write(0,*) 'sptranf call sptranf1 k,j=',k,j,kws
             CALL SPTRANF1(IROMB,MAXWV,IDRT,IMAX,JMAX,J,J,
      &                    EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP,
      &                    AFFT_TMP,CLAT(J),SLAT(J),WLAT(J),
      &                    PLN(1,J),PLNTOP(1,J),MP,
      &                    WAVE(KWS+1),WTOP,G,IDIR)
-!      write(0,*) 'sptranf exit sptranf1'
             IF(IP.EQ.1.AND.IS.EQ.1) THEN
               DO I=1,IMAX
                 IJKN=I+(J-JB)*JN+(K-1)*KG
