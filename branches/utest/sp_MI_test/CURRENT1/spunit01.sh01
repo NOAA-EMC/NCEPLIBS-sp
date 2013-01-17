@@ -1,7 +1,0 @@
-set -x
-xlf90_r -qsmp=noauto spunit01.f -L/nwprod/lib -lsp_4 -lessl -o spunit01.x4||exit 1
-spunit01.x4
-xlf90_r -qsmp=noauto -qrealsize=8 spunit01.f -L/nwprod/lib -lsp_d -lessl -o spunit01.xd||exit 1
-spunit01.xd
-xlf90_r -qsmp=noauto -qrealsize=8 -qintsize=8 spunit01.f -L/nwprod/lib -lsp_8 -lessl -o spunit01.x8||exit 1
-spunit01.x8
