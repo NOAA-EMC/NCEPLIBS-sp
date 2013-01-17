@@ -1,3 +1,8 @@
+                ======  Compilation List for SP v2.0.1  Jan 16, 2013 =====
+                       	M.Iredell EMC/NOAA 
+			E.Mirvis  NCAR@ EMC/NOAA
+		........................................................
+
 ifort -c -O3 -auto -openmp -i4 -convert big_endian -assume byterecl -fp-model strict -real-size 32 -fpp -DLINUX bll2ps.f
 ar -ruv    ../splib_v2/libsp_4.a bll2ps.o
 ar: creating ../splib_v2/libsp_4.a
