@@ -68,14 +68,14 @@ EOF
 #
 #     Update 4-byte version of libsp_4.a 
 #
-export LIB="../splib_v2/libsp_4g.a"
+export LIB="../../libsp_2.0.2g_4.a"
 export FFLAGS="-g -debug all -traceback -i4 -convert big_endian -assume byterecl -fp-model strict -real-size 32 -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
 #
 #     Update 8-byte version of libsp_8.a
 #
-export LIB="../splib_v2/libsp_8g.a"
+export LIB="../../libsp_2.0.2g_8.a"
 export FFLAGS=" -g -debug all -traceback -i8 -r8 -convert big_endian -assume byterecl -fp-model strict -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
@@ -83,7 +83,7 @@ make -f make.libsp
 #     Update Double Precision (Size of Real 8-byte and default Integer) version
 #     of libsp_d.a
 #
-export LIB="../splib_v2/libsp_dg.a"
+export LIB="../../libsp_2.0.2g_d.a"
 export FFLAGS=" -g -debug all -traceback -i4 -r8 -convert big_endian -assume byterecl -fp-model strict -DLINUX"
 export AFLAGS=" "
 make -f make.libsp

@@ -20,7 +20,7 @@ EXTRA_ARFLAGS =
 #
 # What files are we looking for - 
 # Note the new source for files w/ .F requiring preprocessing
-OBJS_F   = bll2ps.o spanaly.o spdz2uv.o speps.o spfft1.o       \
+OBJS_F   = spanaly.o spdz2uv.o speps.o spfft1.o       \
            spffte.o spfft.o spfftpt.o spgradq.o spgradx.o spgrady.o    \
            splaplac.o splegend.o sppad.o spsynth.o sptezd.o            \
            sptez.o sptezmd.o sptezm.o sptezmv.o sptezv.o sptgpmd.o     \

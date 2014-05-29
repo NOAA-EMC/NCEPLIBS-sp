@@ -24,6 +24,7 @@
 #
 # 11-29-12     Mirvis: Added  Intel comp, optimization and OMP flags 
 #		and libsp_*g.a builds
+# 05-29-14     Mirvis: Updated to ver 2.0.2 
 ###############################################################
 
 #
@@ -70,14 +71,14 @@ EOF
 #
 #     Update 4-byte version of libsp_4.a 
 #
-export LIB="/usrx/local/nceplibs/libsp_v2.0.1_4.a"
+export LIB="/usrx/local/nceplibs/libsp_v2.0.2_4.a"
 export FFLAGS="-O3 -auto -openmp -i4 -convert big_endian -assume byterecl -fp-model strict -real-size 32 -fpp -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
 #
 #     Update 8-byte version of libsp_8.a
 #
-export LIB="/usrx/local/nceplibs/libsp_v2.0.1_8.a"
+export LIB="/usrx/local/nceplibs/libsp_v2.0.2_8.a"
 export FFLAGS=" -O3 -auto -openmp -i8 -r8 -convert big_endian -assume byterecl -fp-model strict -fpp -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
@@ -85,7 +86,7 @@ make -f make.libsp
 #     Update Double Precision (Size of Real 8-byte and default Integer) version
 #     of libsp_d.a
 #
-export LIB="/usrx/local/nceplibs/libsp_v2.0.1_d.a"
+export LIB="/usrx/local/nceplibs/libsp_v2.0.2_d.a"
 export FFLAGS=" -O3 -auto -openmp -i4 -r8 -convert big_endian -assume byterecl -fp-model strict -fpp -DLINUX"
 export AFLAGS=" "
 make -f make.libsp
