@@ -24,7 +24,7 @@ dbg_build: $(LIB)
 	$(OMPFC) -c $(FFLAGS) $(FFLAGSDEFS) $<
 
 %.o: %.F
-	$(OMPFC) -c $(FFLAGS) $(FFLAGSDEFS) $<
+	$(OMPFC) -c $(FPPCPP) $(FFLAGS) $(FFLAGSDEFS) $<
 
 message: $(MSGSRC)
 	$(CC) -c $(firstword $(MSGSRC))
