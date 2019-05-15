@@ -31,6 +31,11 @@
    [[ ${3,,} == installonly ]] && { inst=true; skip=true; }
    [[ ${3,,} == localinstallonly ]] && { local=true; inst=true; skip=true; }
  }
+
+ source ./Conf/Collect_info.sh
+ source ./Conf/Gen_cfunction.sh
+ source ./Conf/Reset_version.sh
+
  if [[ ${sys} == "intel_general" ]]; then
    sys6=${sys:6}
    source ./Conf/Sp_${sys:0:5}_${sys6^}.sh
@@ -44,9 +49,6 @@
    echo "??? SP: module/environment not set."
    exit 1
  }
-
- source ./Conf/Collect_info.sh
- source ./Conf/Gen_cfunction.sh
 
 set -x
  spLib4=$(basename ${SP_LIB4})
@@ -106,17 +108,18 @@ set -x
               LIB_DIR4=..
               LIB_DIR8=..
               LIB_DIRd=..
+              SRC_DIR=
              } || {
-                   LIB_DIR4=$(dirname ${SP_LIB4})
-                   LIB_DIR8=$(dirname ${SP_LIB8})
-                   LIB_DIRd=$(dirname ${SP_LIBd})
-                  }
-   [ -d $LIB_DIR4 ] || mkdir -p $LIB_DIR4
-   [ -d $LIB_DIR8 ] || mkdir -p $LIB_DIR8
-   [ -d $LIB_DIRd ] || mkdir -p $LIB_DIRd
-   SRC_DIR=$SP_SRC
-   $local && SRC_DIR=
-   [ -d $SRC_DIR ] || mkdir -p $SRC_DIR
+              LIB_DIR4=$(dirname $SP_LIB4)
+              LIB_DIR8=$(dirname $SP_LIB8)
+              LIB_DIRd=$(dirname $SP_LIBd)
+              SRC_DIR=$SP_SRC
+              [ -d $LIB_DIR4 ] || mkdir -p $LIB_DIR4
+              [ -d $LIB_DIR8 ] || mkdir -p $LIB_DIR8
+              [ -d $LIB_DIRd ] || mkdir -p $LIB_DIRd
+              [ -z $SRC_DIR ] || { [ -d $SRC_DIR ] || mkdir -p $SRC_DIR; }
+             }
+
    make clean LIB=
    make install LIB=$spLib4 LIB_DIR=$LIB_DIR4 SRC_DIR=
    make install LIB=$spLib8 LIB_DIR=$LIB_DIR8 SRC_DIR=
