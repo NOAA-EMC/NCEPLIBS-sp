@@ -21,7 +21,7 @@ dbg_build: override FFLAGS += $(DEBUG)
 dbg_build: $(LIB)
 
 %.o: %.f
-	$(OMPFC) -c $(FFLAGS) $(FFLAGSDEFS) $<
+	$(OMPFC) -c $(FFLAGS) $<
 
 %.o: %.F
 	$(OMPFC) -c $(FPPCPP) $(FFLAGS) $(FFLAGSDEFS) $<

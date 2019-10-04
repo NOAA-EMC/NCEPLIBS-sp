@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
  : ${THISDIR:=$(dirname $(readlink -f -n ${BASH_SOURCE[0]}))}
  CDIR=$PWD; cd $THISDIR
@@ -11,9 +11,11 @@
  if [[ ${sys} == "intel_general" ]]; then
    sys6=${sys:6}
    source ./Conf/Sp_${sys:0:5}_${sys6^}.sh
+   rinst=false
  elif [[ ${sys} == "gnu_general" ]]; then
    sys4=${sys:4}
    source ./Conf/Sp_${sys:0:3}_${sys4^}.sh
+   rinst=false
  else
    source ./Conf/Sp_intel_${sys^}.sh
  fi
@@ -21,9 +23,15 @@
    echo "??? SP: compilers not set." >&2
    exit 1
  }
- [[ -z $SP_VER || -z $SP_LIB4 ]] && {
-   echo "??? SP: module/environment not set." >&2
-   exit 1
+ [[ -z ${SP_VER+x} || -z ${SP_LIB4+x} ]] && {
+   [[ -z ${libver+x} || -z ${libver} ]] && {
+     echo "??? SP: \"libver\" not set." >&2
+     exit
+   }
+   SP_LIB4=lib${libver}_4.a
+   SP_LIB8=lib${libver}_8.a
+   SP_LIBd=lib${libver}_d.a
+   SP_VER=v${libver##*_v}
  }
 
 set -x
@@ -35,7 +43,6 @@ set -x
  cd src
 #################
 
- $skip || {
 #-------------------------------------------------------------------
 # Start building libraries
 #
@@ -55,7 +62,7 @@ set -x
  echo "   ... build (i8/r8) sp library ..."
  echo
    make clean LIB=$spLib8
-   FFLAGS4="$I8R8 $FFLAGS"
+   FFLAGS8="$I8R8 $FFLAGS"
    collect_info sp 8 OneLine8 LibInfo8
    spInfo8=sp_info_and_log8.txt
    $debg && make debug FFLAGS="$FFLAGS8" LIB=$spLib8 &> $spInfo8 \
@@ -74,7 +81,6 @@ set -x
          || make build FFLAGS="$FFLAGSd" LIB=$spLibd &> $spInfod
    make message MSGSRC="$(gen_cfunction $spInfod OneLined LibInfod)" \
                 LIB=$spLibd
- }
 
  $inst && {
 #
@@ -82,20 +88,23 @@ set -x
 #
    $local && {
      instloc=..
-     LIB_DIR4=$instloc
-     LIB_DIR8=$instloc
-     LIB_DIRd=$instloc
+     LIB_DIR=$instloc/lib
+     [ -d $LIB_DIR ] || { mkdir -p $LIB_DIR; }
+     LIB_DIR4=$LIB_DIR
+     LIB_DIR8=$LIB_DIR
+     LIB_DIRd=$LIB_DIR
      SRC_DIR=
    } || {
-     [[ $instloc == --- ]] && {
-       LIB_DIR4=$(dirname $SP_LIB4)
-       LIB_DIR8=$(dirname $SP_LIB8)
-       LIB_DIRd=$(dirname $SP_LIBd)
+     $rinst && {
+       LIB_DIR4=$(dirname ${SP_LIB4})
+       LIB_DIR8=$(dirname ${SP_LIB8})
+       LIB_DIRd=$(dirname ${SP_LIBd})
        SRC_DIR=$SP_SRC
      } || {
-       LIB_DIR4=$instloc
-       LIB_DIR8=$instloc
-       LIB_DIRd=$instloc
+       LIB_DIR=$instloc/lib
+       LIB_DIR4=$LIB_DIR
+       LIB_DIR8=$LIB_DIR
+       LIB_DIRd=$LIB_DIR
        SRC_DIR=$instloc/src
        [[ $instloc == .. ]] && SRC_DIR=
      }
