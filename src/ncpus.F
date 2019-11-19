@@ -29,7 +29,7 @@ C$$$
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       INTEGER NTHREADS, TID, OMP_GET_NUM_THREADS,OMP_GET_THREAD_NUM
 C     Obtain thread number
-#ifdef LINUX
+#if defined LINUX || defined APPLE
 !$OMP PARALLEL PRIVATE(TID)
       TID = OMP_GET_THREAD_NUM()
 !      PRINT *, '...............thread # ', TID
