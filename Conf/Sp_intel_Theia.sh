@@ -1,10 +1,4 @@
 # *** for Theia (intel) ***
- WORKDIR=/scratch3/NCEPDEV/nwprod/IPS
- MODULEPATH=/apps/lmod/lmod/modulefiles/Core
- module use -a $WORKDIR/modulefiles/core_third
- module load EnvVars/1.0.2
- module load ips/18.0.1.163
- module load dev/sp/2.0.2
 
  export CC=icc
  export FC=ifort
@@ -15,13 +9,13 @@
  export MPIFC=mpiifort
 
  export DEBUG="-g -traceback -O0"
- export CFLAGS="-g -traceback -O3 -fPIC"
- export FFLAGS="-g -traceback -O3 -auto -convert big_endian -assume byterecl -fp-model strict -fPIC"
+ export CFLAGS="-g -O3 -ftz -traceback -xHOST -axcore-avx512 -fPIC"
+ export FFLAGS="-g -O3 -ftz -traceback -fpe0 -xHOST -axcore-avx512 -auto -convert big_endian -assume byterecl -fp-model strict -fPIC"
  export FPPCPP="-cpp"
  export FREEFORM="-free"
  export CPPFLAGS="-P -traditional-cpp"
- export MPICFLAGS="-g -traceback -O3 -fPIC"
- export MPIFFLAGS="-g -traceback -O3 -fPIC"
+ export MPICFLAGS="-g -O3 -ftz -traceback -xHOST -axcore-avx512 -fPIC"
+ export MPIFFLAGS="-g -O3 -ftz -traceback -fpe0 -xHOST -axcore-avx512 -fPIC"
  export MODPATH="-module "
  export I4R4="-integer-size 32 -real-size 32"
  export I4R8="-integer-size 32 -real-size 64"
@@ -29,7 +23,7 @@
 
  export CPPDEFS=""
  export CFLAGSDEFS="-DUNDERSCORE -DLINUX"
- export FFLAGSDEFS=""
+ export FFLAGSDEFS="-DLINUX"
 
  export USECC=""
  export USEFC="YES"

@@ -5,24 +5,8 @@
  ${USERMODE} && {
     echo "Environment set by user"
 # On theia/cray, user can load environment
-#   module load gcc/6.2.0
-# Or set environment on specific platform
-    gcc_version=6.2.0
-    gcc_topdir=/apps/gcc/$gcc_version
-    export PATH=$gcc_topdir/bin:$PATH
-    export LIBRARY_PATH=$gcc_topdir/lib64:$LIBRARY_PATH
-    export LD_LIBRARY_PATH=$gcc_topdir/lib64:$LD_LIBRARY_PATH
-    export INCLUDE=$gcc_topdir/include:$INCLUDE
-    export MANPATH=$gcc_topdir/share/man:$MANPATH
+    module load gcc/6.2.0
  }
-
- ANCHORDIR=..
- export COMP=gnu
- export SP_VER=v2.0.2
- export SP_SRC=
- export SP_LIB4=$ANCHORDIR/libsp_${SP_VER}_4.a
- export SP_LIB8=$ANCHORDIR/libsp_${SP_VER}_8.a
- export SP_LIBd=$ANCHORDIR/libsp_${SP_VER}_d.a
 
  export CC=gcc
  export FC=gfortran
@@ -47,7 +31,7 @@
 
  export CPPDEFS=""
  export CFLAGSDEFS="-DUNDERSCORE -DLINUX"
- export FFLAGSDEFS=""
+ export FFLAGSDEFS="-DLINUX"
 
  export USECC=""
  export USEFC="YES"
