@@ -1,4 +1,4 @@
-#if LINUX 
+#if defined LINUX || defined APPLE
       SUBROUTINE dcrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
