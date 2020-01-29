@@ -30,11 +30,11 @@ endif()
 
 if( (BUILD_RELEASE) OR (BUILD_PRODUCTION) )
   if(IntelComp)
-    set(shared_fortran_flags "-O3" "-auto" "-qopenmp" "-convert big_endian" "-assume byterecl"
-      "-fp-model strict" "-fpp")
+    set(shared_fortran_flags "-O3" "-auto" "-qopenmp" "-convert" "big_endian" "-assume" "byterecl"
+      "-fp-model" "strict" "-fpp")
     set(fortran_d_flags "-i4" "-r8")
     set(fortran_8_flags "-i8" "-r8")
-    set(fortran_4_flags "-i4" "-real-size 32")
+    set(fortran_4_flags "-i4" "-real-size" "32")
   elseif(GNUComp)
     set(shared_fortran_flags "-O3" "-fconvert=big-endian")
     set(fortran_d_flags "-fdefault-real-8")
