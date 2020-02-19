@@ -21,17 +21,21 @@ endif()
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
-      "-O3 -auto -qopenmp -qopenmp -convert big_endian -assume byterecl -fp-model strict -fpp"
+      "-auto -convert big_endian -assume byterecl -fp-model strict -fpp"
   )
+set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(CMAKE_Fortran_FLAGS_DEBUG "-g -traceback")
   set(fortran_d_flags "-i4 -r8")
   set(fortran_8_flags "-i8 -r8")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
-  set(CMAKE_Fortran_FLAGS "-O3 -fconvert=big-endian")
+  set(CMAKE_Fortran_FLAGS "-fconvert=big-endian")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(CMAKE_Fortran_FLAGS_DEBUG "-g -fbacktrace")
   set(fortran_d_flags "-fdefault-real-8")
   set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 endif()
+
+find_package(OpenMP)
 
 if(APPLE)
   add_compile_definitions(APPLE)
@@ -52,6 +56,8 @@ foreach(kind ${kinds})
                                                ${versioned_lib_name})
   set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS
                                                "${fortran_${kind}_flags}")
+  set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS
+                                               "${OpenMP_Fortran_FLAGS}")
   set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY
                                                ${module_dir})
   target_include_directories(
