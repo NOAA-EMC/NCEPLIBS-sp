@@ -1,8 +1,10 @@
 cmake_minimum_required(VERSION 3.15)
 
+file(STRINGS "VERSION" pVersion)
+
 project(
   sp
-  VERSION 2.0.2
+  VERSION ${pVersion}
   LANGUAGES Fortran)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
@@ -21,16 +23,14 @@ endif()
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
-      "-auto -convert big_endian -assume byterecl -fp-model strict -fpp"
+      "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp"
   )
 set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
-  set(CMAKE_Fortran_FLAGS_DEBUG "-g -traceback")
   set(fortran_d_flags "-i4 -r8")
   set(fortran_8_flags "-i8 -r8")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
-  set(CMAKE_Fortran_FLAGS "-fconvert=big-endian")
+  set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
-  set(CMAKE_Fortran_FLAGS_DEBUG "-g -fbacktrace")
   set(fortran_d_flags "-fdefault-real-8")
   set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 endif()
@@ -60,6 +60,8 @@ foreach(kind ${kinds})
                                                "${OpenMP_Fortran_FLAGS}")
   set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY
                                                ${module_dir})
+  set_target_properties(${lib_name} PROPERTIES INTERFACE_LINK_LIBRARIES
+                                               ${lib_name})
   target_include_directories(
     ${lib_name}
     PUBLIC $<BUILD_INTERFACE:${module_dir}>
