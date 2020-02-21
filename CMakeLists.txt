@@ -2,10 +2,9 @@ cmake_minimum_required(VERSION 3.15)
 
 file(STRINGS "VERSION" pVersion)
 
-project(
-  sp
-  VERSION ${pVersion}
-  LANGUAGES Fortran)
+project(sp VERSION ${pVersion} LANGUAGES Fortran)
+
+option(OPENMP "use OpenMP threading" OFF)
 
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
   message(STATUS "Setting build type to 'Release' as none was specified.")
@@ -16,7 +15,7 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
                                                "MinSizeRel" "RelWithDebInfo")
 endif()
 
-if(NOT CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel|GNU|Clang|AppleClang|PGI)$")
+if(NOT CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel|GNU|Clang|AppleClang)$")
   message(
     WARNING "Compiler not officially supported: ${CMAKE_Fortran_COMPILER_ID}")
 endif()
@@ -25,7 +24,7 @@ if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
       "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp"
   )
-set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(fortran_d_flags "-i4 -r8")
   set(fortran_8_flags "-i8 -r8")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
@@ -35,12 +34,15 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
   set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 endif()
 
-find_package(OpenMP)
-
 if(APPLE)
   add_compile_definitions(APPLE)
 elseif(UNIX)
   add_compile_definitions(LINUX)
+endif()
+
+if(OPENMP)
+  find_package(OpenMP REQUIRED)
+  add_compile_definitions(DOPENMP)
 endif()
 
 add_subdirectory(src)
