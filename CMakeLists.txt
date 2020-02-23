@@ -41,8 +41,10 @@ elseif(UNIX)
 endif()
 
 if(OPENMP)
-  find_package(OpenMP REQUIRED)
-  add_compile_definitions(DOPENMP)
+  find_package(OpenMP REQUIRED COMPONENTS Fortran)
+endif()
+if(OpenMP_FOUND)
+  add_compile_definitions(OPENMP)
 endif()
 
 add_subdirectory(src)
@@ -53,13 +55,16 @@ foreach(kind ${kinds})
   set(versioned_lib_name ${PROJECT_NAME}_v${PROJECT_VERSION}_${kind})
   set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include_${kind})
 
+  set(BUILD_FLAGS "${fortran_${kind}_flags}")
+  if(OpenMP_Fortran_FOUND)
+    set(BUILD_FLAGS "${BUILD_FLAGS} ${OpenMP_Fortran_FLAGS}")
+  endif()
+
   add_library(${lib_name} STATIC ${fortran_src})
   set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME
                                                ${versioned_lib_name})
   set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS
-                                               "${fortran_${kind}_flags}")
-  set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS
-                                               "${OpenMP_Fortran_FLAGS}")
+                                               "${BUILD_FLAGS}")
   set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY
                                                ${module_dir})
   set_target_properties(${lib_name} PROPERTIES INTERFACE_LINK_LIBRARIES
