@@ -7,7 +7,7 @@ For more detailed documentation see [README](README).
 
 ### Prerequisites
 
-Compilers: GNU | Intel | Clang | AppleClang | PGI
+Compilers: GNU | Intel | Clang | AppleClang 
 
 
 ### Installing
@@ -23,7 +23,7 @@ make install
 
 ### Version
 
-2.0.2
+2.1.0
 
 
 ### Authors
