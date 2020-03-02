@@ -4,6 +4,7 @@ The spectral transform library (splib) contains FORTRAN subprograms
 to be used for a variety of spectral transform functions.
 For more detailed documentation see [README](README).
 
+Code Manager: Kyle Gerheiser
 
 ### Prerequisites
 
