@@ -4,10 +4,11 @@ The spectral transform library (splib) contains FORTRAN subprograms
 to be used for a variety of spectral transform functions.
 For more detailed documentation see [README](README).
 
+Code Manager: Kyle Gerheiser
 
 ### Prerequisites
 
-Compilers: GNU | Intel | Clang | AppleClang | PGI
+Compilers: GNU | Intel | Clang | AppleClang 
 
 
 ### Installing
@@ -23,9 +24,9 @@ make install
 
 ### Version
 
-2.0.2
+2.1.0
 
 
 ### Authors
 
-* **[NCEP/EMC](NCEP.List.EMC.nceplibs.Developers@noaa.gov)**
+* **[NCEP/EMC](mailto:NCEP.List.EMC.nceplibs.Developers@noaa.gov)** 
