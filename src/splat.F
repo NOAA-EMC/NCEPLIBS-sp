@@ -33,6 +33,8 @@ C                      compilation failure
 C 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors 
 C			of _d and _8 using generic LU factorization.   
 C 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
+C 2019-01-29  EBISUZAKI convert .F -> .f, replace LUDCMP and LUBKSB by decomp, solve
+C                       both from netlib
 C----------------------------------------------------------------
 C USAGE:    CALL SPLAT(IDRT,JMAX,SLAT,WLAT)
 C
@@ -52,6 +54,7 @@ C   DGEF         MATRIX FACTORIZATION - ESSL
 C   DGES         MATRIX SOLVER - ESSL
 C   LUDCMP       LU factorization - numerical recipies
 C   LUBKSB       Matrix solver - numerical recipies
+C     above calls were replaced by call to netlib routines, decomp, solve
 C
 C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 90
@@ -78,6 +81,7 @@ C
      $ 146.870307625, 150.011882457, 153.153458019, 156.295034268 /
       REAL:: DLT,D1=1.
       REAL AWORK((JMAX+1)/2,((JMAX+1)/2)),BWORK(((JMAX+1)/2))
+      real work((JMAX+1)/2), rcond
       INTEGER:: JHE,JHO,J0=0
       INTEGER IPVT((JMAX+1)/2)
       PARAMETER(PI=3.14159265358979,C=(1.-(2./PI)**2)*0.25)
@@ -113,7 +117,6 @@ C  GAUSSIAN LATITUDES
             SPMAX=MAX(SPMAX,ABS(SP))
           ENDDO
         ENDDO
-CDIR$ IVDEP
         DO J=1,JH
           SLAT(J)=SLATD(J)
           WLAT(J)=(2.*(1.-SLATD(J)**2))/(JMAX*PKM1(J))**2
@@ -146,19 +149,28 @@ C  EQUALLY-SPACED LATITUDES INCLUDING POLES
         DO JS=1,JHO
           BWORK(JS)=-D1/(4*(JS-1)**2-1)
         ENDDO
-#if IBM4 || IBM8
-        CALL DGEF(AWORK,JHE,JHO,IPVT)
-        CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
-#endif
-#if LINUX
-        call ludcmp(awork,jho,jhe,ipvt)
-        call lubksb(awork,jho,jhe,ipvt,bwork)
-#endif
+C BLAS Version
+C        CALL DGEF(AWORK,JHE,JHO,IPVT)
+C        CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
+C Numerical Recipes Version
+C        call ludcmp(awork,jho,jhe,ipvt)
+C        call lubksb(awork,jho,jhe,ipvt,bwork)
+C netlib Version
+c ipvt(jhe)
+c awork(jhe,jhe)
+c jho = size of problem
+c      subroutine decomp(ndim,n,a,cond,ipvt,work)
+        call decomp(jhe,jho,awork,rcond,ipvt,work)
+        if (rcond+1.0 .eq. rcond) then
+c          illconditioned matrix to solve
+           stop 77
+        endif
+c bwork(jhe)
+        call solve(jhe, jho, awork, bwork, ipvt)
         WLAT(1)=0.
         DO J=1,JHO
           WLAT(J+1)=BWORK(J)
         ENDDO
-CDIR$ IVDEP
         DO J=1,JH
           SLAT(JMAX+1-J)=-SLAT(J)
           WLAT(JMAX+1-J)=WLAT(J)
@@ -186,19 +198,29 @@ C  EQUALLY-SPACED LATITUDES EXCLUDING POLES
         DO JS=1,JHO
           BWORK(JS)=-D1/(4*(JS-1)**2-1)
         ENDDO
-#if IBM4 || IBM8
-        CALL DGEF(AWORK,JHE,JHO,IPVT)
-        CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
-#endif
-#if LINUX
-        call ludcmp(awork,jho,jhe,ipvt,d)
-        call lubksb(awork,jho,jhe,ipvt,bwork)
-#endif
+C BLAS version
+C        CALL DGEF(AWORK,JHE,JHO,IPVT)
+C        CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
+C Numerical Recipes version
+c        call ludcmp(awork,jho,jhe,ipvt)
+c        call lubksb(awork,jho,jhe,ipvt,bwork)
+C netlib Version
+c ipvt(jhe)
+c awork(jhe,jhe)
+c jho = size of problem
+c      subroutine decomp(ndim,n,a,cond,ipvt,work)
+        call decomp(jhe,jho,awork,rcond,ipvt,work)
+        if (rcond+1.0 .eq. rcond) then
+c          illconditioned matrix to solve
+           stop 77
+        endif
+c bwork(jhe)
+        call solve(jhe, jho, awork, bwork, ipvt)
+
         WLAT(1)=0.
         DO J=1,JHO
           WLAT(J)=BWORK(J)
         ENDDO
-CDIR$ IVDEP
         DO J=1,JH
           SLAT(JMAX+1-J)=-SLAT(J)
           WLAT(JMAX+1-J)=WLAT(J)

@@ -109,4 +109,6 @@ set(fortran_src
   ${CMAKE_CURRENT_SOURCE_DIR}/spvar.f
   ${CMAKE_CURRENT_SOURCE_DIR}/spwget.f
   ${CMAKE_CURRENT_SOURCE_DIR}/spwget.f
+  ${CMAKE_CURRENT_SOURCE_DIR}/decomp.f
+  ${CMAKE_CURRENT_SOURCE_DIR}/solve.f
   PARENT_SCOPE)
