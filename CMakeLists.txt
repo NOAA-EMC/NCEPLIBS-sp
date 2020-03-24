@@ -34,6 +34,8 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
   set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 endif()
 
+find_package(FFTW3 CONFIG REQUIRED)
+
 if(APPLE)
   add_compile_definitions(APPLE)
 elseif(UNIX)
@@ -49,7 +51,7 @@ endif()
 
 add_subdirectory(src)
 
-set(kinds "4" "8" "d")
+set(kinds "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
   set(versioned_lib_name ${PROJECT_NAME}_v${PROJECT_VERSION}_${kind})
@@ -72,7 +74,9 @@ foreach(kind ${kinds})
   target_include_directories(
     ${lib_name}
     PUBLIC $<BUILD_INTERFACE:${module_dir}>
-           $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include_${kind}>)
+    $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include_${kind}>)
+
+  target_link_libraries(${lib_name} FFTW3::fftw3)
 
   install(
     TARGETS ${lib_name}

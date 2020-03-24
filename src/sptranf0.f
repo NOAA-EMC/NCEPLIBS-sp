@@ -65,7 +65,9 @@ C$$$
       REAL SLATX(JMAX),WLATX(JMAX)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       CALL SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
-      CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,0.,0.,0,AFFT)
+!CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,0.,0.,0,AFFT)
+      ! maybe create fft_plan here
+
       CALL SPLAT(IDRT,JMAX,SLATX,WLATX)
       JHE=(JMAX+1)/2
       IF(JHE.GT.JMAX/2) WLATX(JHE)=WLATX(JHE)/2

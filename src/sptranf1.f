@@ -2,7 +2,8 @@ C-----------------------------------------------------------------------
       SUBROUTINE SPTRANF1(IROMB,MAXWV,IDRT,IMAX,JMAX,JB,JE,
      &                    EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP,
      &                    AFFT,CLAT,SLAT,WLAT,PLN,PLNTOP,MP,
-     &                    W,WTOP,G,IDIR)
+     &     W,WTOP,G,IDIR)
+      use spfft_mod
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRANF1   SPTRANF SPECTRAL TRANSFORM
@@ -67,14 +68,13 @@ C$$$
       REAL ENN1((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
       REAL ELONN1((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
       REAL EON((MAXWV+1)*((IROMB+1)*MAXWV+2)/2),EONTOP(MAXWV+1)
-      REAL(8) AFFT(50000+4*IMAX)
       REAL CLAT(JB:JE),SLAT(JB:JE),WLAT(JB:JE)
       REAL PLN((MAXWV+1)*((IROMB+1)*MAXWV+2)/2,JB:JE)
       REAL PLNTOP(MAXWV+1,JB:JE)
       REAL W((MAXWV+1)*((IROMB+1)*MAXWV+2))
       REAL WTOP(2*(MAXWV+1))
       REAL G(IMAX,2,JB:JE)
-      REAL F(IMAX+2,2)
+      complex(8) F(IMAX/2+1,2)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 !      write(0,*) 'sptranf1 top'
       KW=(MAXWV+1)*((IROMB+1)*MAXWV+2)
@@ -84,11 +84,13 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           CALL SPSYNTH(IROMB,MAXWV,IMAX,IMAX+2,KW,KWTOP,1,
      &                 CLAT(J),PLN(1,J),PLNTOP(1,J),MP,
      &                 W,WTOP,F)
-          CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,F,G(1,1,J),+1,AFFT)
-        ENDDO
+          !CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,F,G(1,1,J),+1,AFFT)
+          call spfft(g(:,:,j), f, SPFFT_C2R)
+       ENDDO
       ELSE
         DO J=JB,JE
-          CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,F,G(1,1,J),-1,AFFT)
+!CALL SPFFTE(IMAX,(IMAX+2)/2,IMAX,2,F,G(1,1,J),-1,AFFT)
+          call spfft(g(:,:,j), f, SPFFT_R2C)
           CALL SPANALY(IROMB,MAXWV,IMAX,IMAX+2,KW,KWTOP,1,
      &                 WLAT(J),CLAT(J),PLN(1,J),PLNTOP(1,J),MP,
      &                 F,W,WTOP)
