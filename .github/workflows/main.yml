@@ -7,6 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    - name: cache pfunit
+      id: cache-pfunit
+      uses: actions/checkout@v2
+      with:
+        path: $HOME/pfunit
+        key: ${{ runner.os }}-pfunit-v4.1.8
+
     - name: checkout-pfunit
       uses: actions/checkout@v2
       with:
@@ -16,11 +23,12 @@ jobs:
     - name: build_pfunit
       env:
         FC: gfortran-9
+      if: steps.cache-pfunit.outputs.cache-hit != 'true'
       run: |
           cd pfunit
           mkdir build
           cd build
-          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=$HOME
+          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=$HOME/pfunit
           make
           make install
 
@@ -33,6 +41,6 @@ jobs:
       run: |
         mkdir build 
         cd build
-        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME
+        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/pfunit
         make
         make test
