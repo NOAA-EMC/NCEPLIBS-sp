@@ -1,3 +1,4 @@
+![Status](https://github.com/NOAA-EMC/NCEPLIBS-sp/workflows/Build%20And%20Test/badge.svg)
 # SPlib
 
 The spectral transform library (splib) contains FORTRAN subprograms
