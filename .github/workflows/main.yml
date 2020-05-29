@@ -7,11 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    -name: checkout_pFUnit
-      uses: actions/checkout@v2
-      with:
-        repository: Goddard-Fortran-Ecosystem/pFUnit
-        path: pfunit
+    - name: Checkout pfunit
+        uses: actions/checkout@v2
+          with:
+            repository:  Goddard-Fortran-Ecosystem/pFUnit
+            path: pfunit
           
     -name: build_pfunit
         env:
