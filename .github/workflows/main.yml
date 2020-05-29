@@ -12,18 +12,7 @@ jobs:
           with:
             repository:  Goddard-Fortran-Ecosystem/pFUnit
             path: pfunit
-          
-    -name: build_pfunit
-        env:
-          FC: gfortran-9
-        run: |
-            cd pfunit
-            mkdir build
-            cd build
-            cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES
-            make
-            make install
-
+              
     -uses: actions/checkout@v2
          
     -name: build_sp
