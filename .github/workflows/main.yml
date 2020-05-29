@@ -10,5 +10,5 @@ jobs:
     - name: Checkout pfunit
         uses: actions/checkout@v2
           with:
-            repository:  Goddard-Fortran-Ecosystem/pFUnit
+            repository: Goddard-Fortran-Ecosystem/pFUnit
             path: pfunit
