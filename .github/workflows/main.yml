@@ -11,7 +11,7 @@ jobs:
       id: cache-pfunit
       uses: actions/cache@v2
       with:
-        path: $HOME/pfunit
+        path: ${{ github.home }}/pfunit
         key: ${{ runner.os }}-pfunit-v4.1.8
 
     - name: checkout-pfunit
