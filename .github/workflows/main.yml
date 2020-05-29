@@ -6,6 +6,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+
     - name: checkout-pfunit
       uses: actions/checkout@v2
       with:
@@ -17,18 +18,19 @@ jobs:
       uses: actions/cache@v2
       with:
         path: ~/pfunit
-        key: pfunit-${{ runner.os }}-${{ hashFiles('VERSION') }}
+        key: pfunit-${{ runner.os }}-${{ hashFiles('pfunit/VERSION') }}
 
     - name: build_pfunit
       env:
         FC: gfortran-9
       if: steps.cache-pfunit.outputs.cache-hit != 'true'
       run: |
+          echo $GITHUB_WORKSPACE
           cd pfunit
           mkdir build
           cd build
           cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=~/pfunit
-          make
+          make -j2
           make install
 
     - uses: actions/checkout@v2
