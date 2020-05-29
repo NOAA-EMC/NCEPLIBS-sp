@@ -38,7 +38,6 @@ jobs:
       with: 
         path: sp
 
-         
     - name: build_sp
       env: 
         FC: gfortran-9
