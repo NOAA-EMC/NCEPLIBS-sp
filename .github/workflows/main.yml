@@ -1,12 +1,38 @@
-
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on: [push, pull_request]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout-pfunit
-          uses: actions/checkout@v2
-          with:
-            repository: Goddard-Fortran-Ecosystem/pFUnit
-            path: pfunit
+
+    - name: checkout-pfunit
+      uses: actions/checkout@v2
+      with:
+        repository: Goddard-Fortran-Ecosystem/pFUnit
+        path: pfunit
+
+    - name: build_pfunit
+      env:
+        FC: gfortran-9
+      run: |
+          cd pfunit
+          mkdir build
+          cd build
+          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES
+          make
+          make install
+
+    -uses: actions/checkout@v2
+         
+    -name: build_sp
+      env: 
+        FC: gfortran-9
+        CC: gcc-9
+      run: |
+        cd $
+        mkdir build 
+        cd build
+        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=${{ github.workspace }}/pfunit/build/installed
+        make
