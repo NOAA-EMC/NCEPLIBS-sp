@@ -25,7 +25,6 @@ jobs:
         FC: gfortran-9
       if: steps.cache-pfunit.outputs.cache-hit != 'true'
       run: |
-          echo $GITHUB_WORKSPACE
           cd pfunit
           mkdir build
           cd build
