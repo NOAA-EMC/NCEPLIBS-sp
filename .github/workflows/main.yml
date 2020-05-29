@@ -12,16 +12,34 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
 
     # Runs a set of commands using the runners shell
+    -name: checkout pFUnit
+      uses: actions/checkout@v2
+        with:
+          repository: Goddard-Fortran-Ecosystem/pFUnit
+          path: pfunit
+            
+    - name: build_pfunit
+        env:
+          FC=gfortran-9
+        run: |
+            cd pfunit
+            mkdir build
+            cd build
+            cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES
+            make
+            make install
+            
+     - uses: actions/checkout@v2
+         
     - name: build_sp
       env: 
         FC: gfortran-9
         CC: gcc-9
       run: |
-        cd $GITHUB_WORKSPACE
+        cd $
         mkdir build 
         cd build
-        cmake ..
+        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=pfunit/build/installed
         make

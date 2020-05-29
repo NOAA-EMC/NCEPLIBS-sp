@@ -1,112 +1,65 @@
-set(fortran_src
-  ${CMAKE_CURRENT_SOURCE_DIR}/fftpack.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/fftpack.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/lapack_gen.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/lapack_gen.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/ncpus.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/ncpus.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/spanaly.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spanaly.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spdz2uv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spdz2uv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/speps.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/speps.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfft1.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfft1.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spffte.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spffte.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfft.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfft.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfftpt.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spfftpt.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgradq.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgradq.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgradx.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgradx.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgrady.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spgrady.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/splaplac.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/splaplac.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/splat.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/splat.F
-  ${CMAKE_CURRENT_SOURCE_DIR}/splegend.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/splegend.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sppad.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sppad.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spsynth.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spsynth.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptez.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptez.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezmd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezmd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptezv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpmd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpmd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpsd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpsd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgps.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgps.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpsv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpsv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpt.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgpt.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptsd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptsd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptvd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptvd.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptgptv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrand.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrand.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptran.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptran.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf0.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf0.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf1.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf1.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranf.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranfv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranfv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptranv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrund.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrund.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrun.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrun.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrung.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrung.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrungv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrungv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunl.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunl.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunm.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunmv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptruns.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptruns.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunsv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunsv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/sptrunv.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spuv2dz.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spuv2dz.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spvar.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spvar.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spwget.f
-  ${CMAKE_CURRENT_SOURCE_DIR}/spwget.f
-  PARENT_SCOPE)
+include("list_of_files.cmake")
+
+if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
+  set(CMAKE_Fortran_FLAGS
+      "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp"
+  )
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(fortran_d_flags "-i4 -r8")
+  set(fortran_8_flags "-i8 -r8")
+elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU|Clang|AppleClang)$")
+  set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(fortran_d_flags "-fdefault-real-8")
+  set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
+endif()
+
+if(APPLE)
+  add_compile_definitions(APPLE)
+elseif(UNIX)
+  add_compile_definitions(LINUX)
+endif()
+
+if(OPENMP)
+  find_package(OpenMP REQUIRED COMPONENTS Fortran)
+endif()
+if(OpenMP_FOUND)
+  add_compile_definitions(OPENMP)
+endif()
+
+set(kinds "4" "8" "d")
+foreach(kind ${kinds})
+  set(lib_name ${PROJECT_NAME}_${kind})
+  set(versioned_lib_name ${PROJECT_NAME}_v${PROJECT_VERSION}_${kind})
+  set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include_${kind})
+
+  set(BUILD_FLAGS "${fortran_${kind}_flags}")
+  if(OpenMP_Fortran_FOUND)
+    set(BUILD_FLAGS "${BUILD_FLAGS} ${OpenMP_Fortran_FLAGS}")
+  endif()
+
+  add_library(${lib_name} STATIC ${fortran_src})
+  set_target_properties(${lib_name} PROPERTIES OUTPUT_NAME
+                                               ${versioned_lib_name})
+  set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS
+                                               "${BUILD_FLAGS}")
+  set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY
+                                               ${module_dir})
+  set_target_properties(${lib_name} PROPERTIES INTERFACE_LINK_LIBRARIES
+                                               ${lib_name})
+  target_include_directories(
+    ${lib_name}
+    PUBLIC $<BUILD_INTERFACE:${module_dir}>
+           $<INSTALL_INTERFACE:${CMAKE_INSTALL_PREFIX}/include_${kind}>)
+
+  install(
+    TARGETS ${lib_name}
+    EXPORT ${PROJECT_NAME}-config
+    RUNTIME DESTINATION bin
+    LIBRARY DESTINATION lib
+    ARCHIVE DESTINATION lib)
+  install(DIRECTORY ${module_dir} DESTINATION ${CMAKE_INSTALL_PREFIX})
+endforeach()
+
+install(EXPORT ${PROJECT_NAME}-config
+        DESTINATION ${CMAKE_INSTALL_PREFIX}/lib/cmake/${PROJECT_NAME})
