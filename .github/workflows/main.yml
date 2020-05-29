@@ -24,9 +24,9 @@ jobs:
           make
           make install
 
-    -uses: actions/checkout@v2
+    - uses: actions/checkout@v2
          
-    -name: build_sp
+    - name: build_sp
       env: 
         FC: gfortran-9
         CC: gcc-9
