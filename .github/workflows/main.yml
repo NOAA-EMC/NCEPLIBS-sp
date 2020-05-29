@@ -7,21 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-    - name: echo-thing1
-      run:
-        echo $GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE
-    
     - name: checkout-pfunit
       uses: actions/checkout@v2
       with:
         repository: Goddard-Fortran-Ecosystem/pFUnit
         path: pfunit
-  
-    - name: echo-thing2
-      run:
-        echo $GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE
 
     - name: cache pfunit
       id: cache-pfunit
