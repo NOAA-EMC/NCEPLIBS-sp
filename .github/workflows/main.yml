@@ -44,7 +44,7 @@ jobs:
         cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/pfunit
         make
     
-    -name: test_sp
+    - name: test_sp
       run: |
         cd $GITHUB_WORKSPACE/build
         make test
