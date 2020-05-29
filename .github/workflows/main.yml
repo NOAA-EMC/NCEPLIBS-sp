@@ -11,8 +11,8 @@ jobs:
       id: cache-pfunit
       uses: actions/cache@v2
       with:
-        path: ${{ github.home }}/pfunit
-        key: ${{ runner.os }}-pfunit-v4.1.8
+        path: ~/pfunit
+        key: ${{ runner.os }}-pfunit-test
 
     - name: checkout-pfunit
       uses: actions/checkout@v2
@@ -28,7 +28,7 @@ jobs:
           cd pfunit
           mkdir build
           cd build
-          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=$HOME/pfunit
+          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=~/pfunit
           make
           make install
 
@@ -41,7 +41,7 @@ jobs:
       run: |
         mkdir build 
         cd build
-        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=$HOME/pfunit
+        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=~/pfunit
         make -j2
     
     - name: test_sp
