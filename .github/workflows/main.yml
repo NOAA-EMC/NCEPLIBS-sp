@@ -45,8 +45,8 @@ jobs:
           make -j2
           make install
 
-      name: checkout-sp
-    - uses: actions/checkout@v2
+    - name: checkout-sp
+      uses: actions/checkout@v2
       with: 
         path: sp
 
