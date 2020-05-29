@@ -31,7 +31,7 @@ jobs:
         FC: gfortran-9
         CC: gcc-9
       run: |
-        cd $
+        cd $GITHUB_WORKSPACE
         mkdir build 
         cd build
         cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=${{ github.workspace }}/pfunit/build/installed
