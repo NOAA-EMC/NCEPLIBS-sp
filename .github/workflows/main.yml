@@ -36,8 +36,6 @@ jobs:
       if: steps.cache-pfunit.outputs.cache-hit != 'true'
       run: |
           pwd
-          echo $GITHUB_WORKSPACE
-          ls $GITHUB_WORKSPACE
           cd pfunit
           mkdir build
           cd build
@@ -56,9 +54,6 @@ jobs:
         FC: gfortran-9
         CC: gcc-9
       run: |
-        pwd
-        echo $GITHUB_WORKSPACE
-        ls $GITHUB_WORKSPACE
         cd sp
         mkdir build 
         cd build
