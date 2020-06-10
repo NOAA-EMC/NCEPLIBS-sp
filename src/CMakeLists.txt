@@ -38,6 +38,8 @@ foreach(kind ${kinds})
   endif()
 
   add_library(${lib_name} STATIC ${fortran_src})
+  add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name})
+  
   set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
   set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY ${module_dir})
   set_target_properties(${lib_name} PROPERTIES INTERFACE_LINK_LIBRARIES ${lib_name})
