@@ -1,0 +1,55 @@
+name: Build and Test
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: checkout-pfunit
+      uses: actions/checkout@v2
+      with:
+        repository: Goddard-Fortran-Ecosystem/pFUnit
+        path: pfunit
+
+    - name: cache pfunit
+      id: cache-pfunit
+      uses: actions/cache@v2
+      with:
+        path: ~/pfunit
+        key: pfunit-${{ runner.os }}-${{ hashFiles('pfunit/VERSION') }}
+
+    - name: build_pfunit
+      env:
+        FC: gfortran-9
+      if: steps.cache-pfunit.outputs.cache-hit != 'true'
+      run: |
+          pwd
+          cd pfunit
+          mkdir build
+          cd build
+          cmake .. -DSKIP_MPI=YES -DSKIP_ESMF=YES -DSKIP_FHAMCREST=YES -DCMAKE_INSTALL_PREFIX=~/pfunit
+          make -j2
+          make install
+
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build_sp
+      env: 
+        FC: gfortran-9
+        CC: gcc-9
+      run: |
+        cd sp
+        mkdir build 
+        cd build
+        cmake .. -DENABLE_TESTS=ON -DCMAKE_PREFIX_PATH=~/pfunit
+        make -j2
+    
+    - name: test_sp
+      run: |
+        cd $GITHUB_WORKSPACE/sp/build
+        make test
+

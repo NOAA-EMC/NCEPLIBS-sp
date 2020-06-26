@@ -150,7 +150,7 @@ C  EQUALLY-SPACED LATITUDES INCLUDING POLES
         CALL DGEF(AWORK,JHE,JHO,IPVT)
         CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
 #endif
-#if LINUX
+#if defined LINUX || defined APPLE
         call ludcmp(awork,jho,jhe,ipvt)
         call lubksb(awork,jho,jhe,ipvt,bwork)
 #endif
@@ -190,7 +190,7 @@ C  EQUALLY-SPACED LATITUDES EXCLUDING POLES
         CALL DGEF(AWORK,JHE,JHO,IPVT)
         CALL DGES(AWORK,JHE,JHO,IPVT,BWORK,J0)
 #endif
-#if LINUX
+#if defined LINUX || defined APPLE
         call ludcmp(awork,jho,jhe,ipvt,d)
         call lubksb(awork,jho,jhe,ipvt,bwork)
 #endif

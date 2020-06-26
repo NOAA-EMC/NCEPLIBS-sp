@@ -1,4 +1,4 @@
-#if LINUX
+#if defined LINUX || defined APPLE
 !----------------------------------------------------------------------
 ! From Numerical Recipes
 ! added two Numerical Recipes routines for matrix inversion
