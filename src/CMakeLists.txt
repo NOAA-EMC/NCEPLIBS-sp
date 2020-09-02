@@ -27,6 +27,7 @@ endif()
 if(OPENMP)
   find_package(OpenMP REQUIRED COMPONENTS Fortran)
 endif()
+
 if(OpenMP_FOUND)
   add_compile_definitions(OPENMP)
 endif()
@@ -36,17 +37,17 @@ foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
   set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include_${kind})
 
-  set(BUILD_FLAGS "${fortran_${kind}_flags}")
-  if(OpenMP_Fortran_FOUND)
-    set(BUILD_FLAGS "${BUILD_FLAGS} ${OpenMP_Fortran_FLAGS}")
-  endif()
-
   add_library(${lib_name} STATIC ${fortran_src})
   add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name})
+
+  set(BUILD_FLAGS "${fortran_${kind}_flags}")
+  if(OpenMP_Fortran_FOUND)
+    target_link_libraries(${lib_name} PRIVATE OpenMP::OpenMP_Fortran)
+  endif()
   
   set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
   set_target_properties(${lib_name} PROPERTIES Fortran_MODULE_DIRECTORY ${module_dir})
-  set_target_properties(${lib_name} PROPERTIES INTERFACE_LINK_LIBRARIES ${lib_name})
+
   target_include_directories(${lib_name} PUBLIC
     $<BUILD_INTERFACE:${module_dir}>
     $<INSTALL_INTERFACE:include_${kind}>)
