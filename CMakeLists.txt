@@ -37,6 +37,7 @@ OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 IF(ENABLE_DOCS)
   FIND_PACKAGE(Doxygen REQUIRED)
 ENDIF()
+ADD_SUBDIRECTORY(docs)  
 
 
 

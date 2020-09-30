@@ -1,0 +1,11 @@
+# This is the CMake file for building the docs directory of NCEPLIBS-sp.
+#
+# Ed Hartnett 9/30/20
+
+IF(ENABLE_DOCS)
+
+  # Create doxyfile.
+  CONFIGURE_FILE(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in ${CMAKE_CURRENT_BINARY_DIR}/Doxyfile @ONLY)
+
+ENDIF(ENABLE_DOCS)
+
