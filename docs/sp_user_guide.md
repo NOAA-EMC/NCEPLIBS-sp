@@ -1,10 +1,7 @@
-Code manager: Kyle Gerheiser
-libver='sp_v2.0.3'
+# Documentation of the spectral transform library splib
+May 2, 1996
 
-Documentation of the spectral transform library splib                May 2, 1996
---------------------------------------------------------------------------------
-
-I. Introduction
+## Introduction
 
 The spectral transform library splib contains FORTRAN subprograms
 to be used for a variety of spectral transform functions.
@@ -49,19 +46,9 @@ defaulting to the computed length of each field.
 
 This documentation is divided into 4 chapters.  Chapter I is this introduction.
 Chapter II is a list of all entry points.  Chapter III is a set of examples.
-Chapter IV is a recapitulation of all the docblocks.  The chapters all start
-on a line number that is 1 modulo 60 in order to facilitate laser printing.
+Chapter IV is a recapitulation of all the docblocks.
 
-
-
-
-
-
-
-
-
-
-II. Entry point list
+## Entry point list
 
    Name       Function
    ----       ------------------------------------------------------------------
@@ -106,27 +93,13 @@ II. Entry point list
    SPGRADQ    COMPUTE GRADIENT IN SPECTRAL SPACE
    SPLAPLAC   COMPUTE LAPLACIAN IN SPECTRAL SPACE
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-III. Examples
+## Examples
 
 Example 1. Interpolate heights and winds from a latlon grid
            to two antipodal polar stereographic grids.
            Subprograms GETGB and PUTGB from w3lib are referenced.
 
+<pre>
 c  unit number 11 is the input latlon grib file
 c  unit number 31 is the input latlon grib index file
 c  unit number 51 is the output northern polar stereographic grib file
@@ -449,45 +422,16 @@ c  winds
         write(51) ((vg(i,j,k),i=1,im),j=1,jm)
       enddo
       end
+</pre>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-IV. Docblocks
+## Docblocks
 
 The primary documentation of splib is via the docblocks in its subprograms.
 The following recapitulation of docblocks is current as of May, 1996.
 
 Docblock for sptrun.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUN     SPECTRALLY TRUNCATE GRIDDED SCALAR FIELDS
@@ -569,9 +513,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrunv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNV    SPECTRALLY TRUNCATE GRIDDED VECTOR FIELDS
@@ -674,9 +620,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrung.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNG    SPECTRALLY INTERPOLATE SCALARS TO STATIONS
@@ -755,9 +703,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrungv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNGV   SPECTRALLY INTERPOLATE VECTORS TO STATIONS
@@ -849,9 +799,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptruns.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNS    SPECTRALLY INTERPOLATE SCALARS TO POLAR STEREO
@@ -934,9 +886,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrunsv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNSV   SPECTRALLY INTERPOLATE VECTORS TO POLAR STEREO
@@ -1038,9 +992,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrunm.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNM    SPECTRALLY INTERPOLATE SCALARS TO MERCATOR
@@ -1131,9 +1087,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrunmv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRUNMV   SPECTRALLY INTERPOLATE VECTORS TO MERCATOR
@@ -1236,9 +1194,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptran.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRAN     PERFORM A SCALAR SPHERICAL TRANSFORM
@@ -1333,9 +1293,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptranv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRANV    PERFORM A VECTOR SPHERICAL TRANSFORM
@@ -1440,9 +1402,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptrand.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTRAND    PERFORM A GRADIENT SPHERICAL TRANSFORM
@@ -1542,9 +1506,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpt.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPT     TRANSFORM SPECTRAL SCALAR TO STATION POINTS
@@ -1596,9 +1562,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgptv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPTV    TRANSFORM SPECTRAL VECTOR TO STATION POINTS
@@ -1653,9 +1621,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgptd.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPTD    TRANSFORM SPECTRAL TO STATION POINT GRADIENTS
@@ -1708,9 +1678,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgps.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPS     TRANSFORM SPECTRAL SCALAR TO POLAR STEREO.
@@ -1780,9 +1752,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpsv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPSV    TRANSFORM SPECTRAL VECTOR TO POLAR STEREO.
@@ -1858,9 +1832,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpsd.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPSD    TRANSFORM SPECTRAL TO POLAR STEREO. GRADIENTS
@@ -1934,9 +1910,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpm.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPM     TRANSFORM SPECTRAL SCALAR TO MERCATOR
@@ -2001,9 +1979,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpmv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPMV    TRANSFORM SPECTRAL VECTOR TO MERCATOR
@@ -2071,9 +2051,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for sptgpmd.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPTGPMD    TRANSFORM SPECTRAL TO MERCATOR GRADIENTS
@@ -2139,9 +2121,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for spgget.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:  SPGGET     GET GRID-SPACE CONSTANTS
@@ -2255,9 +2239,11 @@ C ATTRIBUTES:
 C   LANGUAGE: FORTRAN 77
 C
 C$$$
+</pre>
 
 Docblock for speps.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPEPS       COMPUTE UTILITY SPECTRAL FIELDS
@@ -2294,9 +2280,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for splegend.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPLEGEND    COMPUTE LEGENDRE POLYNOMIALS
@@ -2342,9 +2330,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for spanaly.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPANALY     ANALYZE SPECTRAL FROM FOURIER
@@ -2392,9 +2382,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for spsynth.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPSYNTH     SYNTHESIZE FOURIER FROM SPECTRAL
@@ -2438,9 +2430,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for spdz2uv.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPDZ2UV     COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
@@ -2489,9 +2483,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for spuv2dz.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPUV2DZ     COMPUTE DIVERGENCE AND VORTICITY FROM WINDS
@@ -2540,9 +2536,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for spgradq.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPGRADQ     COMPUTE GRADIENT IN SPECTRAL SPACE
@@ -2584,9 +2582,11 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
 
 Docblock for splaplac.
 
+<pre>
 C$$$  SUBPROGRAM DOCUMENTATION BLOCK
 C
 C SUBPROGRAM:    SPLAPLAC    COMPUTE LAPLACIAN IN SPECTRAL SPACE
@@ -2622,3 +2622,4 @@ C ATTRIBUTES:
 C   LANGUAGE: CRAY FORTRAN
 C
 C$$$
+</pre>
