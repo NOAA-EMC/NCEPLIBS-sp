@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPPAD       PAD OR TRUNCATE A SPECTRAL FIELD
-C>   @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C> Pad or truncate a spectral field
+C> @author IREDELL @date 92-10-31
 C>
 C> PAD OR TRUNCATE A SPECTRAL FIELD
 C>

@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPGRADY     COMPUTE Y-GRADIENT IN SPECTRAL SPACE
-C>   @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C> Compute y-gradient in spectral space
+C> @author IREDELL @date 92-10-31
 C>
 C> COMPUTES THE HORIZONTAL VECTOR Y-GRADIENT OF A SCALAR FIELD
 C>           IN SPECTRAL SPACE.

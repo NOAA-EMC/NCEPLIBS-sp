@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPFFTPT     COMPUTE FOURIER TRANSFORM TO GRIDPOINTS
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-20
+C> Compute fourier transform to gridpoints
+C> @author IREDELL @date 96-02-20
 C>
 C> THIS SUBPROGRAM COMPUTES A SLOW FOURIER TRANSFORM
 C>           FROM FOURIER SPACE TO A SET OF GRIDPOINTS.

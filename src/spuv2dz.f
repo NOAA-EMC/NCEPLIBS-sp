@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPUV2DZ     COMPUTE DIVERGENCE AND VORTICITY FROM WINDS
-C>   @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C> Compute divergence and vorticity from winds
+C> @author IREDELL @date 92-10-31
 C>
 C> COMPUTES THE DIVERGENCE AND VORTICITY FROM WIND COMPONENTS
 C>           IN SPECTRAL SPACE.

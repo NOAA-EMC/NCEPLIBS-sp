@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPTEZ      PERFORM A SIMPLE SCALAR SPHERICAL TRANSFORM
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-29
+C> Perform a simple scalar spherical transform
+C> @author IREDELL @date 96-02-29
 C>
 C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
 C>           BETWEEN SPECTRAL COEFFICIENTS OF A SCALAR QUANTITY

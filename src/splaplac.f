@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPLAPLAC    COMPUTE LAPLACIAN IN SPECTRAL SPACE
-C>   @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C> Compute laplacian in spectral space
+C> @author IREDELL @date 92-10-31
 C>
 C> COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN
 C>           OF A SCALAR FIELD IN SPECTRAL SPACE.

@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPVAR       COMPUTE VARIANCE BY TOTAL WAVENUMBER
-C>   @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C> Compute variance by total wavenumber
+C> @author IREDELL @date 92-10-31
 C>
 C> COMPUTES THE VARIANCES BY TOTAL WAVENUMBER
 C>           OF A SCALAR FIELD IN SPECTRAL SPACE.

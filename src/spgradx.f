@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPGRADX    COMPUTE X-GRADIENT IN FOURIER SPACE
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-20
+C> Compute x-gradient in fourier space
+C> @author IREDELL @date 96-02-20
 C>
 C> THIS SUBPROGRAM COMPUTES THE X-GRADIENT OF FIELDS
 C>           IN COMPLEX FOURIER SPACE.

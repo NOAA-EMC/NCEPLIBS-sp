@@ -1,7 +1,7 @@
 C> @file
 C>
-C> Spectrally truncate gridded scalar fields.
-C> @author: IREDELL ORG: W/NMC23 @date: 96-02-29
+C> truncate gridded scalar fields.
+C> @author: IREDELL @date: 96-02-29
 C>
 C> This subprogram spectrally truncates scalar fields on a global
 C> cylindrical grid, returning the fields to a possibly different

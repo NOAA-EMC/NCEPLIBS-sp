@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPWGET     GET WAVE-SPACE CONSTANTS
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-29
+C> Get wave-space constants
+C> @author IREDELL @date 96-02-29
 C>
 C> THIS SUBPROGRAM GETS WAVE-SPACE CONSTANTS.
 C>

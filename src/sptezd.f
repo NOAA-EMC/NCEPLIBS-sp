@@ -1,7 +1,7 @@
 C> @file
 C>
-C> SPTEZD     PERFORM A SIMPLE GRADIENT SPHERICAL TRANSFORM
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-29
+C> Perform a simple gradient spherical transform
+C> @author IREDELL @date 96-02-29
 C>
 C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
 C>           BETWEEN SPECTRAL COEFFICIENTS OF A SCALAR FIELD
