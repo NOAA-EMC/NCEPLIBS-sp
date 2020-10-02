@@ -2,7 +2,7 @@ C> @file
 C>
 C> Transform spectral to polar stereo. gradients
 C> @author IREDELL @date 96-02-29
-C>
+
 C> this subprogram performs a spherical transform
 C> from spectral coefficients of scalar fields
 C> to gradient fields on a pair of polar stereographic grids.

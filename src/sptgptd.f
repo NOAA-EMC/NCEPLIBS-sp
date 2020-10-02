@@ -2,7 +2,7 @@ C> @file
 C>
 C> Transform spectral to station point gradients
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram performs a spherical transform
 c> from spectral coefficients of scalar fields
 c> to specified sets of station point gradients on the globe.

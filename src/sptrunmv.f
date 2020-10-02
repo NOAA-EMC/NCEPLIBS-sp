@@ -2,7 +2,7 @@ C> @file
 C>
 C> Spectrally interpolate vectors to mercator
 C> @author IREDELL @date 96-02-29
-C>
+
 C> THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS
 C>           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
 C>           TO A MERCATOR GRID.

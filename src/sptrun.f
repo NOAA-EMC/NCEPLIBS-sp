@@ -2,7 +2,7 @@ C> @file
 C>
 C> truncate gridded scalar fields.
 C> @author: IREDELL @date: 96-02-29
-C>
+
 C> This subprogram spectrally truncates scalar fields on a global
 C> cylindrical grid, returning the fields to a possibly different
 C> global cylindrical grid. The wave-space can be either triangular
@@ -50,11 +50,11 @@ C>                (DEFAULTS TO ENVIRONMENT NCPUS IF JCPU=0)
 C> @param GRIDI    - REAL (*) INPUT GRID FIELDS
 C> @param GRIDO    - REAL (*) OUTPUT GRID FIELDS
 C>                (MAY OVERLAY INPUT FIELDS IF GRID SHAPE IS APPROPRIATE)
-C
+C>
 C>    CALLED:
 C>   SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
 C>   NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
-C
+C>
 C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
 C>   DIMENSION                    LINEAR              QUADRATIC
 C>   -----------------------      ---------           -------------

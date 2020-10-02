@@ -2,7 +2,7 @@ C> @file
 C>
 C> Pad or truncate a spectral field
 C> @author IREDELL @date 92-10-31
-C>
+
 C> Pad or truncate a spectral field.
 C>
 C> @param I1       - INTEGER INPUT SPECTRAL DOMAIN SHAPE

@@ -2,7 +2,7 @@ C> @file
 C>
 C> Compute laplacian in spectral space
 C> @author IREDELL @date 92-10-31
-C>
+
 C> COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN
 C> OF A SCALAR FIELD IN SPECTRAL SPACE.
 C> SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY.
@@ -12,14 +12,12 @@ C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
 C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
 C> @param M        - INTEGER SPECTRAL TRUNCATION
 C> @param ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C> @param Q        - IF IDIR > 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C> @param QD2      - IF IDIR < 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN
+C> @param[out] Q        - IF IDIR > 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
+C>                (Q(0,0) IS NOT COMPUTED)
+C> @param[out] QD2      - IF IDIR < 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN
 C> @param IDIR     - INTEGER FLAG
 C>                IDIR > 0 TO TAKE LAPLACIAN
 C>                IDIR < 0 TO TAKE INVERSE LAPLACIAN
-C> @param Q        - IF IDIR < 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C>                (Q(0,0) IS NOT COMPUTED)
-C> @param QD2      - IF IDIR > 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN
       SUBROUTINE SPLAPLAC(I,M,ENN1,Q,QD2,IDIR)
 
       REAL ENN1((M+1)*((I+1)*M+2)/2)

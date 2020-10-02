@@ -2,7 +2,7 @@ C>@file
 C>
 C> Compute utility spectral fields
 C> @author IREDELL  @date 92-10-31
-C>
+
 C> Computes constant fields indexed in the spectral domain
 C> in "IBM ORDER" (Zonal wavenumber is the slower index).
 C> If L is the zonal wavenumber and N is the total wavenumber

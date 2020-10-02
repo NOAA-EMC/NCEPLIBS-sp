@@ -2,7 +2,7 @@ C> @file
 C>
 C> Perform multiple fast fourier transforms
 C> @author IREDELL @date 96-02-20
-C>
+
 C> This subprogram performs multiple fast fourier transforms
 C> between complex amplitudes in fourier space and real values
 C> in cyclic physical space.
@@ -22,16 +22,13 @@ C>                (INCW >= IMAX/2+1)
 C> @param INCG     - INTEGER FIRST DIMENSION OF THE REAL VALUE ARRAY
 C>                (INCG >= IMAX)
 C> @param KMAX     - INTEGER NUMBER OF TRANSFORMS TO PERFORM
-C> @param W        - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR>0
-C> @param G        - REAL(INCG,KMAX) REAL VALUES IF IDIR<0
+C> @param[out] W        - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR>0
+C> @param[out] G        - REAL(INCG,KMAX) REAL VALUES IF IDIR<0
 C> @param IDIR     - INTEGER DIRECTION FLAG
 C> - IDIR=0 TO INITIALIZE TRIGONOMETRIC DATA
 C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
 C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
-C> @param AFFT       REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR<>0
-C> @param W        - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR<0
-C> @param G        - REAL(INCG,KMAX) REAL VALUES IF IDIR>0
-C> @param AFFT       REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR=0
+C> @param[out] AFFT       REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR<>0
 C>
 C> SUBPROGRAMS CALLED:
 C>   -SCRFT()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM

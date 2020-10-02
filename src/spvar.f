@@ -2,7 +2,7 @@ C> @file
 C>
 C> Compute variance by total wavenumber
 C> @author IREDELL @date 92-10-31
-C>
+
 C> Computes the variances by total wavenumber
 C> of a scalar field in spectral space.
 C>

@@ -2,7 +2,7 @@ C> @file
 C>
 C> Spectrally truncate gridded vector fields
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram spectrally truncates vector fields
 C> on a global cylindrical grid, returning the fields
 C> to a possibly different global cylindrical grid.

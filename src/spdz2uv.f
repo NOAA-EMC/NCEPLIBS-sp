@@ -2,7 +2,7 @@ C> @file
 C
 C> Compute winds from divergence and vorticity
 C> @author IREDELL          ORG: W/NMC23     @date 92-10-31
-C>
+
 C> Computes the wind components from divergence and vorticity
 c> in spectral space.
 C> Subprogram speps should be called already.

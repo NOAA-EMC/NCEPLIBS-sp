@@ -2,7 +2,7 @@ C> @file
 C>
 C> Transform spectral scalar to mercator
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of scalar quantities
 C> to scalar fields on a mercator grid.

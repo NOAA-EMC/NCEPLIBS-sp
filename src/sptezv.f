@@ -2,7 +2,7 @@ C> @file
 C>
 C> Perform a simple vector spherical transform
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram performs a spherical transform
 C> between spectral coefficients of divergence and curl
 C> and a vector field on a global cylindrical grid.
@@ -23,20 +23,14 @@ C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
 C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
 C> @param IMAX     - INTEGER EVEN NUMBER OF LONGITUDES.
 C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
-C> @param WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR>0
+C> @param[out] WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR>0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C> @param WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
+C> @param[out] WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C> @param GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR<0
-C> @param GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR<0
+C> @param[out] GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR<0
+C> @param[out] GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR<0
 C> @param IDIR     - INTEGER TRANSFORM FLAG
 C>                (IDIR>0 FOR WAVE TO GRID, IDIR<0 FOR GRID TO WAVE)
-C> @param WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR<0
-C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C> @param WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
-C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C> @param GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR>0
-C> @param GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR>0
 C>
 C> SUBPROGRAMS CALLED:
 C>   - SPTRANFV()     PERFORM A VECTOR SPHERICAL TRANSFORM

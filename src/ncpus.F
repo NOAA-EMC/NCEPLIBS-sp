@@ -1,7 +1,7 @@
 C> @file
 C> Set number of cpus.
 C> @author IREDELL @DATE 94-08-19
-C>
+
 C> Set number of cpus.
 C> Designating the number of processors over which to parallelize.
 C>
@@ -16,7 +16,7 @@ C> @param NCPUS        INTEGER NUMBER OF CPUS
 C>
 C>SUBPROGRAMS CALLED:
 C>   - NUM_PARTHDS  XLF INTRINSIC>TO RETURN NUMBER OF THREADSRTHDS
-C>
+
       FUNCTION NCPUS()
       INTEGER NTHREADS, TID, OMP_GET_NUM_THREADS,OMP_GET_THREAD_NUM
 C    Obtain thread number

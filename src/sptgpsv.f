@@ -2,7 +2,7 @@ C> @file
 C>
 C> Transform spectral vector to polar stereo.
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of divergences and curls
 C> to vector fields on a pair of polar stereographic grids.

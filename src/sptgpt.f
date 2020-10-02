@@ -2,7 +2,7 @@ C> @file
 C>
 C> Transform spectral scalar to station points
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram performs a spherical transform
 c> from spectral coefficients of scalar quantities
 c> to specified sets of station points on the globe.

@@ -2,7 +2,7 @@ C> @file
 C>
 C> Get wave-space constants
 C> @author IREDELL @date 96-02-29
-C>
+
 C> This subprogram gets wave-space constants.
 C>
 C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
