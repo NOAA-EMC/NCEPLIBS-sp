@@ -26,8 +26,7 @@ var NAVTREE =
     [ "Documentation of the spectral transform library splib", "index.html", [
       [ "Introduction", "index.html#autotoc_md1", null ],
       [ "Entry point list", "index.html#autotoc_md2", null ],
-      [ "Examples", "index.html#autotoc_md3", null ],
-      [ "Docblocks", "index.html#autotoc_md4", null ]
+      [ "Examples", "index.html#autotoc_md3", null ]
     ] ],
     [ "Files", "files.html", [
       [ "File List", "files.html", "files_dup" ],

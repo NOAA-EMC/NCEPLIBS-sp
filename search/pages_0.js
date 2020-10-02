@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['documentation_20of_20the_20spectral_20transform_20library_20splib_109',['Documentation of the spectral transform library splib',['../index.html',1,'']]]
+  ['documentation_20of_20the_20spectral_20transform_20library_20splib_107',['Documentation of the spectral transform library splib',['../index.html',1,'']]]
 ];

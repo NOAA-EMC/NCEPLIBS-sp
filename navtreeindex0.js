@@ -8,7 +8,6 @@ var NAVTREEINDEX0 =
 "index.html#autotoc_md1":[0,0],
 "index.html#autotoc_md2":[0,1],
 "index.html#autotoc_md3":[0,2],
-"index.html#autotoc_md4":[0,3],
 "pages.html":[],
 "spanaly_8f.html":[1,0,0],
 "spanaly_8f.html#a5cc846d796d393d7499cde0f3d1d6e6a":[1,0,0,0],

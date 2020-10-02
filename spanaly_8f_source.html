@@ -117,16 +117,16 @@ $(document).ready(function(){initNavTree('spanaly_8f_source.html',''); initResiz
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">C&gt; @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS COMBINED</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">C&gt; @param SPC      - REAL (NC,KM) SPECTRAL COEFFICIENTS</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">C&gt; @param SPCTOP   - REAL (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="comment">C&gt;</span></div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="spanaly_8f.html#a5cc846d796d393d7499cde0f3d1d6e6a">spanaly</a>(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     &amp;                   F,SPC,SPCTOP)</div>
-<div class="line"><a name="l00035"></a><span class="lineno"><a class="line" href="spanaly_8f.html#a5cc846d796d393d7499cde0f3d1d6e6a">   35</a></span>&#160;<span class="keywordtype">      REAL</span> PLN((M+1)*((I+1)*M+2)/2),PLNTOP(M+1)</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keyword">SUBROUTINE </span>spanaly(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     &amp;                   F,SPC,SPCTOP)</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordtype">INTEGER</span> MP(KM)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">      REAL</span> PLN((M+1)*((I+1)*M+2)/2),PLNTOP(M+1)</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">      REAL</span> F(IX,2,KM)</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">      REAL</span> SPC(NC,KM),SPCTOP(NCTOP,KM)</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">      REAL</span> FW(2,2)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">C&gt;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">C&gt; FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">C&gt; ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">C FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      lx=min(m,im/2)</div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">!C$OMP PARALLEL DO PRIVATE(L,NT,KS,KP,FW)</span></div>
 <div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keywordflow">DO</span> k=1,km</div>
@@ -157,12 +157,11 @@ $(document).ready(function(){initNavTree('spanaly_8f_source.html',''); initResiz
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">          ENDDO</span></div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">        ENDDO</span></div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">      ENDDO</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">C&gt;- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keywordflow">RETURN</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="aspanaly_8f_html_a5cc846d796d393d7499cde0f3d1d6e6a"><div class="ttname"><a href="spanaly_8f.html#a5cc846d796d393d7499cde0f3d1d6e6a">spanaly</a></div><div class="ttdeci">subroutine spanaly(I, M, IM, IX, NC, NCTOP, KM, WGT, CLAT, PLN, PLNTOP, MP, F, SPC, SPCTOP)</div><div class="ttdef"><b>Definition:</b> <a href="spanaly_8f_source.html#l00035">spanaly.f:35</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
