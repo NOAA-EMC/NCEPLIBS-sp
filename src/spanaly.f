@@ -29,7 +29,6 @@ C> @param MP       - INTEGER (KM) IDENTIFIERS (0 FOR SCALAR, 1 FOR VECTOR)
 C> @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS COMBINED
 C> @param SPC      - REAL (NC,KM) SPECTRAL COEFFICIENTS
 C> @param SPCTOP   - REAL (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP
-C>
       SUBROUTINE SPANALY(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,
      &                   F,SPC,SPCTOP)
       INTEGER MP(KM)
@@ -37,9 +36,9 @@ C>
       REAL F(IX,2,KM)
       REAL SPC(NC,KM),SPCTOP(NCTOP,KM)
       REAL FW(2,2)
-C>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-C> FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.
-C> ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.
+C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+C FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.
+C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.
       LX=MIN(M,IM/2)
 !C$OMP PARALLEL DO PRIVATE(L,NT,KS,KP,FW)
       DO K=1,KM
@@ -70,6 +69,6 @@ C> ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.
           ENDDO
         ENDDO
       ENDDO
-C>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       RETURN
       END
