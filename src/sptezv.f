@@ -1,68 +1,57 @@
 C> @file
 C>
-C> SPTEZV     PERFORM A SIMPLE VECTOR SPHERICAL TRANSFORM
-C>   @author IREDELL       ORG: W/NMC23       @date 96-02-29
+C> Perform a simple vector spherical transform
+C> @author IREDELL @date 96-02-29
 C>
-C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
-C>           BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCE AND CURL
-C>           AND A VECTOR FIELD ON A GLOBAL CYLINDRICAL GRID.
-C>           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C>           THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C>           (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C>           THE WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER'.
-C>           THE GRID FIELS IS INDEXED EAST TO WEST, THEN NORTH TO SOUTH.
-C>           FOR MORE FLEXIBILITY AND EFFICIENCY, CALL SPTRAN.
-C>           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram performs a spherical transform
+C> between spectral coefficients of divergence and curl
+C> and a vector field on a global cylindrical grid.
+C> The wave-space can be either triangular or rhomboidal.
+C> The grid-space can be either an equally-spaced grid
+C> (with or without pole points) or a gaussian grid.
+C> The wave field is in sequential 'IBM ORDER'.
+C> The grid fiels is indexed east to west, then north to south.
+C> For more flexibility and efficiency, call SPTRAN().
+C> Subprogram can be called from a multiprocessing environment.
 C>
-C> PROGRAM HISTORY LOG:
-C>   96-02-29  IREDELL
-C>
-C> USAGE:    CALL SPTEZV(IROMB,MAXWV,IDRT,IMAX,JMAX,
-C>    &                  WAVED,WAVEZ,GRIDU,GRIDV,IDIR)
-C>   INPUT ARGUMENTS:
-C>     IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
+C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
 C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C>     MAXWV    - INTEGER SPECTRAL TRUNCATION
-C>     IDRT     - INTEGER GRID IDENTIFIER
+C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
+C> @param IDRT     - INTEGER GRID IDENTIFIER
 C>                (IDRT=4 FOR GAUSSIAN GRID,
 C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
 C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C>     IMAX     - INTEGER EVEN NUMBER OF LONGITUDES.
-C>     JMAX     - INTEGER NUMBER OF LATITUDES.
-C>     WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR>0
+C> @param IMAX     - INTEGER EVEN NUMBER OF LONGITUDES.
+C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
+C> @param WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR>0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C>     WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
+C> @param WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C>     GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR<0
-C>     GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR<0
-C>     IDIR     - INTEGER TRANSFORM FLAG
+C> @param GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR<0
+C> @param GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR<0
+C> @param IDIR     - INTEGER TRANSFORM FLAG
 C>                (IDIR>0 FOR WAVE TO GRID, IDIR<0 FOR GRID TO WAVE)
-C>   OUTPUT ARGUMENTS:
-C>     WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR<0
+C> @param WAVED    - REAL (2*MX) WAVE DIVERGENCE FIELD IF IDIR<0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C>     WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
+C> @param WAVEZ    - REAL (2*MX) WAVE VORTICITY FIELD IF IDIR>0
 C>                WHERE MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
-C>     GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR>0
-C>     GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR>0
+C> @param GRIDU    - REAL (IMAX,JMAX) GRID U-WIND (E->W,N->S) IF IDIR>0
+C> @param GRIDV    - REAL (IMAX,JMAX) GRID V-WIND (E->W,N->S) IF IDIR>0
 C>
 C> SUBPROGRAMS CALLED:
-C>   SPTRANFV     PERFORM A VECTOR SPHERICAL TRANSFORM
-C>   NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C>   - SPTRANFV()     PERFORM A VECTOR SPHERICAL TRANSFORM
+C>   - NCPUS()        GETS ENVIRONMENT NUMBER OF CPUS
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    LINEAR              QUADRATIC
-C>   -----------------------      ---------           -------------
-C>   IMAX                         2*MAXWV+2           3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        1*MAXWV+1           3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        2*MAXWV+1           5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        2*MAXWV+3           3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        4*MAXWV+3           5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      2*MAXWV+1           3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      4*MAXWV+1           5*MAXWV/2*2+1
-C>   -----------------------      ---------           -------------
-C>
-C>
-C-----------------------------------------------------------------------
+C> @note MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
+C>   DIMENSION                    |LINEAR              |QUADRATIC
+C>   -----------------------      |---------           |-------------
+C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
+C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
+C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
+C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
+C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
+C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
+C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
       SUBROUTINE SPTEZV(IROMB,MAXWV,IDRT,IMAX,JMAX,
      &                  WAVED,WAVEZ,GRIDU,GRIDV,IDIR)
 

@@ -1,36 +1,27 @@
 C>@file
-C
-C> SPEPS       COMPUTE UTILITY SPECTRAL FIELDS
-C>  @author IREDELL          ORG: W/NMC23     @date 92-10-31
-C
-C>COMPUTES CONSTANT FIELDS INDEXED IN THE SPECTRAL DOMAIN
-C>          IN "IBM ORDER" (ZONAL WAVENUMBER IS THE SLOWER INDEX).
-C>          IF L IS THE ZONAL WAVENUMBER AND N IS THE TOTAL WAVENUMBER
-C>          AND A IS THE EARTH RADIUS, THEN THE FIELDS RETURNED ARE:
-C>          (1) NORMALIZING FACTOR EPSILON=SQRT((N**2-L**2)/(4*N**2-1))
-C>          (2) LAPLACIAN FACTOR N*(N+1)/A**2
-C>          (3) ZONAL DERIVATIVE/LAPLACIAN FACTOR L/(N*(N+1))*A
-C>          (4) MERIDIONAL DERIVATIVE/LAPLACIAN FACTOR EPSILON/N*A
-C
-C>PROGRAM HISTORY LOG:
-C>  91-10-31  MARK IREDELL
-C
-C>USAGE:    CALL SPEPS(I,M,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
-C
-C>  INPUT ARGUMENT LIST:
-C>    I        - INTEGER SPECTRAL DOMAIN SHAPE
+C>
+C> Compute utility spectral fields
+C> @author IREDELL  @date 92-10-31
+C>
+C> Computes constant fields indexed in the spectral domain
+C> in "IBM ORDER" (Zonal wavenumber is the slower index).
+C> If L is the zonal wavenumber and N is the total wavenumber
+C> and A is the earth radius, then the fields returned are:
+C> - (1) NORMALIZING FACTOR EPSILON=SQRT((N**2-L**2)/(4*N**2-1))
+C> - (2) LAPLACIAN FACTOR N*(N+1)/A**2
+C> - (3) ZONAL DERIVATIVE/LAPLACIAN FACTOR L/(N*(N+1))*A
+C> - (4) MERIDIONAL DERIVATIVE/LAPLACIAN FACTOR EPSILON/N*A
+C>
+C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
 C>               (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C>    M        - INTEGER SPECTRAL TRUNCATION
-C
-C>  OUTPUT ARGUMENT LIST:
-C>    EPS      - REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1))
-C>    EPSTOP   - REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP
-C>    ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C>    ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C>    EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C>    EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
-C
-C
+C> @param M        - INTEGER SPECTRAL TRUNCATION
+C> @param EPS      - REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1))
+C> @param EPSTOP   - REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP
+C> @param ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
+C> @param ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
+C> @param EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
+C> @param EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
+C>
       SUBROUTINE SPEPS(I,M,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
       REAL EPS((M+1)*((I+1)*M+2)/2),EPSTOP(M+1)
       REAL ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)

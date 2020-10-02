@@ -1,48 +1,46 @@
 C> @file
 C
-C> SPDZ2UV     COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
-C>  @author IREDELL          ORG: W/NMC23     @date 92-10-31
-C
-C>COMPUTES THE WIND COMPONENTS FROM DIVERGENCE AND VORTICITY
-C>          IN SPECTRAL SPACE.
-C>          SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY.
-C>          IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER,
-C>          EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) AND A IS EARTH RADIUS,
-C>          THEN THE ZONAL WIND COMPONENT U IS COMPUTED AS
-C>            U(L,N)=-I*L/(N*(N+1))*A*D(L,N)
-C>                   +EPS(L,N+1)/(N+1)*A*Z(L,N+1)-EPS(L,N)/N*A*Z(L,N-1)
-C>          AND THE MERIDIONAL WIND COMPONENT V IS COMPUTED AS
-C>            V(L,N)=-I*L/(N*(N+1))*A*Z(L,N)
-C>                   -EPS(L,N+1)/(N+1)*A*D(L,N+1)+EPS(L,N)/N*A*D(L,N-1)
-C>          WHERE D IS DIVERGENCE AND Z IS VORTICITY.
-C>          U AND V ARE WEIGHTED BY THE COSINE OF LATITUDE.
-C>          EXTRA TERMS ARE COMPUTED OVER TOP OF THE SPECTRAL DOMAIN.
-C>          ADVANTAGE IS TAKEN OF THE FACT THAT EPS(L,L)=0
-C>          IN ORDER TO VECTORIZE OVER THE ENTIRE SPECTRAL DOMAIN.
-C
-C>PROGRAM HISTORY LOG:
-C>  91-10-31  MARK IREDELL
-C
-C>USAGE:    CALL SPDZ2UV(I,M,ENN1,ELONN1,EON,EONTOP,D,Z,U,V,UTOP,VTOP)
-C
-C>  INPUT ARGUMENT LIST:
-C>    I        - INTEGER SPECTRAL DOMAIN SHAPE
+C> Compute winds from divergence and vorticity
+C> @author IREDELL          ORG: W/NMC23     @date 92-10-31
+C>
+C> Computes the wind components from divergence and vorticity
+c> in spectral space.
+C> Subprogram speps should be called already.
+C> If L is the zonal wavenumber, N is the total wavenumber,
+C> <pre>      
+C> EPS(L,N) = SQRT((N**2-L**2)/(4*N**2-1))
+C> </pre>
+C> and A is earth radius,
+C> then the zonal wind component U is computed as
+C> <pre>
+C> U(L,N)=-I*L/(N*(N+1))*A*D(L,N)
+C> +EPS(L,N+1)/(N+1)*A*Z(L,N+1)-EPS(L,N)/N*A*Z(L,N-1)
+C> </pre>
+C> and the meridional wind component V is computed as
+C> <pre>
+C> V(L,N)=-I*L/(N*(N+1))*A*Z(L,N)
+C> -EPS(L,N+1)/(N+1)*A*D(L,N+1)+EPS(L,N)/N*A*D(L,N-1)
+C> </pre>
+C> where D is divergence and Z is vorticity.
+C> U and V are weighted by the cosine of latitude.
+C> Cxtra terms are computed over top of the spectral domain.
+C> Advantage is taken of the fact that EPS(L,L)=0
+C> in order to vectorize over the entire spectral domain.
+C>
+C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
 C>               (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C>    M        - INTEGER SPECTRAL TRUNCATION
-C>    ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C>    ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C>    EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C>    EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
-C>    D        - REAL ((M+1)*((I+1)*M+2)) DIVERGENCE
-C>    Z        - REAL ((M+1)*((I+1)*M+2)) VORTICITY
-C
-C>  OUTPUT ARGUMENT LIST:
-C>    U        - REAL ((M+1)*((I+1)*M+2)) ZONAL WIND (TIMES COSLAT)
-C>    V        - REAL ((M+1)*((I+1)*M+2)) MERID WIND (TIMES COSLAT)
-C>    UTOP     - REAL (2*(M+1)) ZONAL WIND (TIMES COSLAT) OVER TOP
-C>    VTOP     - REAL (2*(M+1)) MERID WIND (TIMES COSLAT) OVER TOP
-C
-C
+C> @param M        - INTEGER SPECTRAL TRUNCATION
+C> @param ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
+C> @param ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
+C> @param EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
+C> @param EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
+C> @param D        - REAL ((M+1)*((I+1)*M+2)) DIVERGENCE
+C> @param Z        - REAL ((M+1)*((I+1)*M+2)) VORTICITY
+C> @param U        - REAL ((M+1)*((I+1)*M+2)) ZONAL WIND (TIMES COSLAT)
+C> @param V        - REAL ((M+1)*((I+1)*M+2)) MERID WIND (TIMES COSLAT)
+C> @param UTOP     - REAL (2*(M+1)) ZONAL WIND (TIMES COSLAT) OVER TOP
+C> @param VTOP     - REAL (2*(M+1)) MERID WIND (TIMES COSLAT) OVER TOP
+C>
       SUBROUTINE SPDZ2UV(I,M,ENN1,ELONN1,EON,EONTOP,D,Z,U,V,UTOP,VTOP)
       REAL ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)
       REAL EON((M+1)*((I+1)*M+2)/2),EONTOP(M+1)
