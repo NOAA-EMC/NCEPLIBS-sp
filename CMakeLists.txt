@@ -7,6 +7,9 @@ file(STRINGS "VERSION" pVersion)
 
 project(sp VERSION ${pVersion} LANGUAGES Fortran)
 
+# Set the version for the documentation.
+SET(PACKAGE_VERSION ${pVersion})
+
 option(OPENMP "use OpenMP threading" OFF)
 option(ENABLE_TESTS "Enable tests" OFF)
 

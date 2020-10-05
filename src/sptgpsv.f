@@ -1,83 +1,84 @@
-C-----------------------------------------------------------------------
+C> @file
+C>
+C> Transform spectral vector to polar stereo.
+C> @author IREDELL @date 96-02-29
+
+C> This subprogram performs a spherical transform
+C> from spectral coefficients of divergences and curls
+C> to vector fields on a pair of polar stereographic grids.
+C> The wave-space can be either triangular or rhomboidal.
+C> The wave and grid fields may have general indexing,
+C> but each wave field is in sequential 'ibm order',
+C> i.e. with zonal wavenumber as the slower index.
+C> The two square polar stereographic grids are centered
+C> on the respective poles, with the orientation longitude
+C> of the southern hemisphere grid 180 degrees opposite
+C> that of the northern hemisphere grid.
+C> The vectors are automatically rotated to be resolved
+C> relative to the respective polar stereographic grids.
+C>
+C> The transform is made efficient
+C> by combining points in eight sectors
+C> of each polar stereographic grid,   
+C> numbered as in the diagram below.
+C> The pole and the sector boundaries  
+C> are treated specially in the code.  
+C> Unfortunately, this approach induces
+C> some hairy indexing and code loquacity,
+C> for which the developer apologizes.
+C> <pre>
+C>              \ 4 | 5 /
+C>               \  |  /
+C>              3 \ | / 6
+C>                 \|/
+C>              ----+----
+C>                 /|\
+C>              2 / | \ 7
+C>               /  |  \
+C>              / 1 | 8 \
+C> </pre>
+C>
+C> The transforms are all multiprocessed over sector points.
+C> transform several fields at a time to improve vectorization.
+C> subprogram can be called from a multiprocessing environment.
+C>
+C> PROGRAM HISTORY LOG:
+C> -  96-02-29  IREDELL
+C> - 1998-12-15  IREDELL  OPENMP DIRECTIVES INSERTED
+C>
+C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
+C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
+C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
+C> @param NPS      - INTEGER ODD ORDER OF THE POLAR STEREOGRAPHIC GRIDS
+C> @param KWSKIP   - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
+C>                (DEFAULTS TO (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
+C> @param KGSKIP   - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
+C>                (DEFAULTS TO NPS*NPS IF KGSKIP=0)
+C> @param NISKIP   - INTEGER SKIP NUMBER BETWEEN GRID I-POINTS
+C>                (DEFAULTS TO 1 IF NISKIP=0)
+C> @param NJSKIP   - INTEGER SKIP NUMBER BETWEEN GRID J-POINTS
+C>                (DEFAULTS TO NPS IF NJSKIP=0)
+C> @param TRUE     - REAL LATITUDE AT WHICH PS GRID IS TRUE (USUALLY 60.)
+C> @param XMESH    - REAL GRID LENGTH AT TRUE LATITUDE (M)
+C> @param ORIENT   - REAL LONGITUDE AT BOTTOM OF NORTHERN PS GRID
+C>                (SOUTHERN PS GRID WILL HAVE OPPOSITE ORIENTATION.)
+C> @param WAVED    - REAL (*) WAVE DIVERGENCE FIELDS
+C> @param WAVEZ    - REAL (*) WAVE VORTICITY FIELDS
+C> @param UN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC U-WINDS
+C> @param VN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC V-WINDS
+C> @param US       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC U-WINDS
+C> @param VS       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC V-WINDS
+C>
+C> SUBPROGRAMS CALLED:
+C>   - SPWGET()       GET WAVE-SPACE CONSTANTS
+C>   - SPLEGEND()     COMPUTE LEGENDRE POLYNOMIALS
+C>   - SPSYNTH()      SYNTHESIZE FOURIER FROM SPECTRAL
+C>   - SPDZ2UV()      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
       SUBROUTINE SPTGPSV(IROMB,MAXWV,KMAX,NPS,
      &                   KWSKIP,KGSKIP,NISKIP,NJSKIP,
      &                   TRUE,XMESH,ORIENT,WAVED,WAVEZ,UN,VN,US,VS)
-C$$$  SUBPROGRAM DOCUMENTATION BLOCK
-C
-C SUBPROGRAM:  SPTGPSV    TRANSFORM SPECTRAL VECTOR TO POLAR STEREO.
-C   PRGMMR: IREDELL       ORG: W/NMC23       DATE: 96-02-29
-C
-C ABSTRACT: THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
-C           FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS
-C           TO VECTOR FIELDS ON A PAIR OF POLAR STEREOGRAPHIC GRIDS.
-C           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C           THE WAVE AND GRID FIELDS MAY HAVE GENERAL INDEXING,
-C           BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER',
-C           I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX.
-C           THE TWO SQUARE POLAR STEREOGRAPHIC GRIDS ARE CENTERED
-C           ON THE RESPECTIVE POLES, WITH THE ORIENTATION LONGITUDE
-C           OF THE SOUTHERN HEMISPHERE GRID 180 DEGREES OPPOSITE
-C           THAT OF THE NORTHERN HEMISPHERE GRID.
-C           THE VECTORS ARE AUTOMATICALLY ROTATED TO BE RESOLVED
-C           RELATIVE TO THE RESPECTIVE POLAR STEREOGRAPHIC GRIDS.
-C
-C           THE TRANSFORM IS MADE EFFICIENT             \ 4 | 5 /
-C           BY COMBINING POINTS IN EIGHT SECTORS         \  |  /
-C           OF EACH POLAR STEREOGRAPHIC GRID,           3 \ | / 6
-C           NUMBERED AS IN THE DIAGRAM AT RIGHT.           \|/
-C           THE POLE AND THE SECTOR BOUNDARIES          ----+----
-C           ARE TREATED SPECIALLY IN THE CODE.             /|\
-C           UNFORTUNATELY, THIS APPROACH INDUCES        2 / | \ 7
-C           SOME HAIRY INDEXING AND CODE LOQUACITY,      /  |  \
-C           FOR WHICH THE DEVELOPER APOLOGIZES.         / 1 | 8 \
-C
-C           THE TRANSFORMS ARE ALL MULTIPROCESSED OVER SECTOR POINTS.
-C           TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
-C
-C PROGRAM HISTORY LOG:
-C   96-02-29  IREDELL
-C 1998-12-15  IREDELL  OPENMP DIRECTIVES INSERTED
-C
-C USAGE:    CALL SPTGPSV(IROMB,MAXWV,KMAX,NPS,
-C    &                   KWSKIP,KGSKIP,NISKIP,NJSKIP,
-C    &                   TRUE,XMESH,ORIENT,WAVED,WAVEZ,UN,VN,US,VS)
-C   INPUT ARGUMENTS:
-C     IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C     MAXWV    - INTEGER SPECTRAL TRUNCATION
-C     KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C     NPS      - INTEGER ODD ORDER OF THE POLAR STEREOGRAPHIC GRIDS
-C     KWSKIP   - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
-C                (DEFAULTS TO (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
-C     KGSKIP   - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
-C                (DEFAULTS TO NPS*NPS IF KGSKIP=0)
-C     NISKIP   - INTEGER SKIP NUMBER BETWEEN GRID I-POINTS
-C                (DEFAULTS TO 1 IF NISKIP=0)
-C     NJSKIP   - INTEGER SKIP NUMBER BETWEEN GRID J-POINTS
-C                (DEFAULTS TO NPS IF NJSKIP=0)
-C     TRUE     - REAL LATITUDE AT WHICH PS GRID IS TRUE (USUALLY 60.)
-C     XMESH    - REAL GRID LENGTH AT TRUE LATITUDE (M)
-C     ORIENT   - REAL LONGITUDE AT BOTTOM OF NORTHERN PS GRID
-C                (SOUTHERN PS GRID WILL HAVE OPPOSITE ORIENTATION.)
-C     WAVED    - REAL (*) WAVE DIVERGENCE FIELDS
-C     WAVEZ    - REAL (*) WAVE VORTICITY FIELDS
-C   OUTPUT ARGUMENTS:
-C     UN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC U-WINDS
-C     VN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC V-WINDS
-C     US       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC U-WINDS
-C     VS       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC V-WINDS
-C
-C SUBPROGRAMS CALLED:
-C   SPWGET       GET WAVE-SPACE CONSTANTS
-C   SPLEGEND     COMPUTE LEGENDRE POLYNOMIALS
-C   SPSYNTH      SYNTHESIZE FOURIER FROM SPECTRAL
-C   SPDZ2UV      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
-C
-C ATTRIBUTES:
-C   LANGUAGE: FORTRAN 77
-C
-C$$$
+
       REAL WAVED(*),WAVEZ(*),UN(*),VN(*),US(*),VS(*)
       REAL EPS((MAXWV+1)*((IROMB+1)*MAXWV+2)/2),EPSTOP(MAXWV+1)
       REAL ENN1((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)

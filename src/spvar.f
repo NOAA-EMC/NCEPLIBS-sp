@@ -1,31 +1,18 @@
-C-----------------------------------------------------------------------
+C> @file
+C>
+C> Compute variance by total wavenumber
+C> @author IREDELL @date 92-10-31
+
+C> Computes the variances by total wavenumber
+C> of a scalar field in spectral space.
+C>
+C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
+C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param M        - INTEGER SPECTRAL TRUNCATION
+C> @param Q        - REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
+C> @param QVAR     - REAL (0:(I+1)*M) VARIANCES
+C>
       SUBROUTINE SPVAR(I,M,Q,QVAR)
-C$$$  SUBPROGRAM DOCUMENTATION BLOCK
-C
-C SUBPROGRAM:    SPVAR       COMPUTE VARIANCE BY TOTAL WAVENUMBER
-C   PRGMMR: IREDELL          ORG: W/NMC23     DATE: 92-10-31
-C
-C ABSTRACT: COMPUTES THE VARIANCES BY TOTAL WAVENUMBER
-C           OF A SCALAR FIELD IN SPECTRAL SPACE.
-C
-C PROGRAM HISTORY LOG:
-C   91-10-31  MARK IREDELL
-C
-C USAGE:    CALL SPVAR(I,M,Q,QVAR)
-C
-C   INPUT ARGUMENT LIST:
-C     I        - INTEGER SPECTRAL DOMAIN SHAPE
-C                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C     M        - INTEGER SPECTRAL TRUNCATION
-C     Q        - REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C
-C   OUTPUT ARGUMENT LIST:
-C     QVAR     - REAL (0:(I+1)*M) VARIANCES
-C
-C ATTRIBUTES:
-C   LANGUAGE: CRAY FORTRAN
-C
-C$$$
       REAL Q((M+1)*((I+1)*M+2))
       REAL QVAR(0:(I+1)*M)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
