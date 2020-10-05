@@ -1,6 +1,8 @@
-set(test_srcs test_sp.pf)
+# This is the CMake build file for the test directory of NCEPLIBS-sp.
 
-add_pfunit_ctest (sp_mod_test
-  TEST_SOURCES test_sp_mod.pf
-  LINK_LIBRARIES sp::sp_4
-)
+# Kyle Gerheiser, Ed Hartnett
+
+add_executable (tst_sp tst_sp.F)
+add_test(tst_sp tst_sp)
+target_link_libraries (tst_sp sp_d)
+
