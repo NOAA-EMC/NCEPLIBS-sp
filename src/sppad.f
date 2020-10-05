@@ -1,33 +1,21 @@
-C-----------------------------------------------------------------------
+C> @file
+C>
+C> Pad or truncate a spectral field
+C> @author IREDELL @date 92-10-31
+
+C> Pad or truncate a spectral field.
+C>
+C> @param I1       - INTEGER INPUT SPECTRAL DOMAIN SHAPE
+C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param M1       - INTEGER INPUT SPECTRAL TRUNCATION
+C> @param Q1       - REAL ((M+1)*((I+1)*M+2)) INPUT FIELD
+C> @param I2       - INTEGER OUTPUT SPECTRAL DOMAIN SHAPE
+C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param M2       - INTEGER OUTPUT SPECTRAL TRUNCATION
+C>
+C> @param Q2       - REAL ((M+1)*((I+1)*M+2)) OUTPUT FIELD
       SUBROUTINE SPPAD(I1,M1,Q1,I2,M2,Q2)
-C$$$  SUBPROGRAM DOCUMENTATION BLOCK
-C
-C SUBPROGRAM:    SPPAD       PAD OR TRUNCATE A SPECTRAL FIELD
-C   PRGMMR: IREDELL          ORG: W/NMC23     DATE: 92-10-31
-C
-C ABSTRACT: PAD OR TRUNCATE A SPECTRAL FIELD
-C
-C PROGRAM HISTORY LOG:
-C   91-10-31  MARK IREDELL
-C
-C USAGE:    CALL SPPAD(I1,M1,Q1,I2,M2,Q2)
-C
-C   INPUT ARGUMENT LIST:
-C     I1       - INTEGER INPUT SPECTRAL DOMAIN SHAPE
-C                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C     M1       - INTEGER INPUT SPECTRAL TRUNCATION
-C     Q1       - REAL ((M+1)*((I+1)*M+2)) INPUT FIELD
-C     I2       - INTEGER OUTPUT SPECTRAL DOMAIN SHAPE
-C                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C     M2       - INTEGER OUTPUT SPECTRAL TRUNCATION
-C
-C   OUTPUT ARGUMENT LIST:
-C     Q2       - REAL ((M+1)*((I+1)*M+2)) OUTPUT FIELD
-C
-C ATTRIBUTES:
-C   LANGUAGE: FORTRAN
-C
-C$$$
+
       REAL Q1((M1+1)*((I1+1)*M1+2))
       REAL Q2((M2+1)*((I2+1)*M2+2))
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

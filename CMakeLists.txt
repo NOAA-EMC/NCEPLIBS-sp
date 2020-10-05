@@ -7,6 +7,9 @@ cmake_minimum_required(VERSION 3.15)
 file(STRINGS "VERSION" pVersion)
 project(sp VERSION ${pVersion} LANGUAGES Fortran)
 
+# Set the version for the documentation.
+SET(PACKAGE_VERSION ${pVersion})
+
 option(OPENMP "use OpenMP threading" OFF)
 
 # Check build type.
