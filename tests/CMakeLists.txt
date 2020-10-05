@@ -1,6 +1,6 @@
 # This is the CMake build file for the test directory of NCEPLIBS-sp.
 
-# Mark Potts, Kyle Gerheiser, Ed Hartnett
+# Kyle Gerheiser, Ed Hartnett
 
 add_executable (tst_sp tst_sp.F)
 add_test(tst_sp tst_sp)
