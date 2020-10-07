@@ -31,11 +31,10 @@ C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
 C> @param[out] AFFT       REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR<>0
 C>
 C> SUBPROGRAMS CALLED:
-C>   -SCRFT()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
-C>   -DCRFT()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
-C>   -SRCFT()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
-C>   -DRCFT()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
-C>
+C>   -scrft()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
+C>   -dcrft()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
+C>   -srcft()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
+C>   -drcft()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
 C>
 C> @note The restrictions on IMAX are that it must be a multiple
 C> of 1 to 25 factors of two, up to 2 factors of three,
@@ -46,6 +45,7 @@ C> The other parameters must be supplied and cannot change
 C> in succeeding calls until the next time it is called with IDIR=0.
 C>
 C> This subprogram is thread-safe.
+C>      
       SUBROUTINE SPFFTE(IMAX,INCW,INCG,KMAX,W,G,IDIR,AFFT)
         IMPLICIT NONE
         INTEGER,INTENT(IN):: IMAX,INCW,INCG,KMAX,IDIR

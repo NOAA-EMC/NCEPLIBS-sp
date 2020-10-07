@@ -3,16 +3,15 @@ C>
 C> Spectrally interpolate scalars to polar stereo
 C> @author IREDELL @date 96-02-29
 
-C> THIS SUBPROGRAM SPECTRALLY TRUNCATES SCALAR FIELDS
-C>           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
-C>           TO SPECIFIC PAIRS OF POLAR STEREOGRAPHIC SCALAR FIELDS.
-C>           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C>           THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C>           (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C>           THE GRID FIELDS MAY HAVE GENERAL INDEXING.
-C>           THE TRANSFORMS ARE ALL MULTIPROCESSED.
-C>           TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C>           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram spectrally truncates scalar fields on a global
+C> cylindrical grid, returning the fields to specific pairs of polar
+C> stereographic scalar fields. The wave-space can be either
+C> triangular or rhomboidal. The grid-space can be either an
+C> equally-spaced grid (with or without pole points) or a gaussian
+C> grid. The grid fields may have general indexing. The transforms
+C> are all multiprocessed. Transform several fields at a time to
+C> improve vectorization. Subprogram can be called from a
+C> multiprocessing environment.
 C>
 C> PROGRAM HISTORY LOG:
 C>   96-02-29  IREDELL
@@ -54,21 +53,21 @@ C> @param GN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC FIELDS
 C> @param GS       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC FIELDS
 C>
 C> SUBPROGRAMS CALLED:
-C>   SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
-C>   SPTGPS       TRANSFORM SPECTRAL SCALAR TO POLAR STEREO.
-C>   NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C> - sptran()       Perform a scalar spherical transform
+C> - sptgps()       Transform spectral scalar to polar stereo.
+C> - ncpus()        Gets environment number of cpus
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    LINEAR              QUADRATIC
-C>   -----------------------      ---------           -------------
-C>   IMAX                         2*MAXWV+2           3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        1*MAXWV+1           3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        2*MAXWV+1           5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        2*MAXWV+3           3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        4*MAXWV+3           5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      2*MAXWV+1           3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      4*MAXWV+1           5*MAXWV/2*2+1
-C>   -----------------------      ---------           -------------
+C> Minimum grid dimensions for unaliased transforms to spectral:
+C>   DIMENSION                   | LINEAR             | QUADRATIC
+C>   -----------------------     | ---------          | -------------
+C>   IMAX                        | 2*MAXWV+2          | 3*MAXWV/2*2+2
+C>   JMAX (IDRT=4,IROMB=0)       | 1*MAXWV+1          | 3*MAXWV/2+1
+C>   JMAX (IDRT=4,IROMB=1)       | 2*MAXWV+1          | 5*MAXWV/2+1
+C>   JMAX (IDRT=0,IROMB=0)       | 2*MAXWV+3          | 3*MAXWV/2*2+3
+C>   JMAX (IDRT=0,IROMB=1)       | 4*MAXWV+3          | 5*MAXWV/2*2+3
+C>   JMAX (IDRT=256,IROMB=0)     | 2*MAXWV+1          | 3*MAXWV/2*2+1
+C>   JMAX (IDRT=256,IROMB=1)     | 4*MAXWV+1          | 5*MAXWV/2*2+1
+C>
       SUBROUTINE SPTRUNS(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,NPS,
      &                   IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
      &                   NISKIP,NJSKIP,JCPU,TRUE,XMESH,ORIENT,

@@ -3,24 +3,23 @@ C>
 C> Perform a scalar spherical transform
 C> @author IREDELL @date 96-02-29
 
-C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
-C> BETWEEN SPECTRAL COEFFICIENTS OF SCALAR QUANTITIES
-C> AND FIELDS ON A GLOBAL CYLINDRICAL GRID.
-C> THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C> THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C> (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C> THE WAVE AND GRID FIELDS MAY HAVE GENERAL INDEXING,
-C> BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER',
-C> I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX.
-C> TRANSFORMS ARE DONE IN LATITUDE PAIRS FOR EFFICIENCY;
-C> THUS GRID ARRAYS FOR EACH HEMISPHERE MUST BE PASSED.
-C> IF SO REQUESTED, JUST A SUBSET OF THE LATITUDE PAIRS
-C> MAY BE TRANSFORMED IN EACH INVOCATION OF THE SUBPROGRAM.
-C> THE TRANSFORMS ARE ALL MULTIPROCESSED OVER LATITUDE EXCEPT
-C> THE TRANSFORM FROM FOURIER TO SPECTRAL IS MULTIPROCESSED
-C> OVER ZONAL WAVENUMBER TO ENSURE REPRODUCIBILITY.
-C> TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C> SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram performs a spherical transform between spectral
+C> coefficients of scalar quantities and fields on a global
+C> cylindrical grid.  The wave-space can be either triangular or
+C> rhomboidal.  The grid-space can be either an equally-spaced grid
+C> (with or without pole points) or a gaussian grid.
+C> The wave and grid fields may have general indexing,
+C> but each wave field is in sequential 'ibm order',
+C> i.e. with zonal wavenumber as the slower index.
+C> Transforms are done in latitude pairs for efficiency;
+C> thus grid arrays for each hemisphere must be passed.
+C> If so requested, just a subset of the latitude pairs
+C> may be transformed in each invocation of the subprogram.
+C> The transforms are all multiprocessed over latitude except
+C> the transform from fourier to spectral is multiprocessed
+C> over zonal wavenumber to ensure reproducibility.
+C> Transform several fields at a time to improve vectorization.
+C> Subprogram can be called from a multiprocessing environment.
 C>
 C> PROGRAM HISTORY LOG:
 C> -  96-02-29  IREDELL
@@ -55,19 +54,20 @@ C> @param IDIR     - INTEGER TRANSFORM FLAG
 C>                (IDIR>0 FOR WAVE TO GRID, IDIR<0 FOR GRID TO WAVE)
 C>
 C> SUBPROGRAMS CALLED:
-C>  - SPTRANF0     SPTRANF SPECTRAL INITIALIZATION
-C>  - SPTRANF1     SPTRANF SPECTRAL TRANSFORM
+C>  - sptranf0()     sptranf() spectral initialization
+C>  - sptranf1()     sptranf() spectral transform
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
+C> Minimum grid dimensions for unaliased transforms to spectral:
 C>   DIMENSION                    |LINEAR              |QUADRATIC
 C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C>   IMAX                         | 2*MAXWV+2          | 3*MAXWV/2*2+2
+C>   JMAX (IDRT=4,IROMB=0)        | 1*MAXWV+1          | 3*MAXWV/2+1
+C>   JMAX (IDRT=4,IROMB=1)        | 2*MAXWV+1          | 5*MAXWV/2+1
+C>   JMAX (IDRT=0,IROMB=0)        | 2*MAXWV+3          | 3*MAXWV/2*2+3
+C>   JMAX (IDRT=0,IROMB=1)        | 4*MAXWV+3          | 5*MAXWV/2*2+3
+C>   JMAX (IDRT=256,IROMB=0)      | 2*MAXWV+1          | 3*MAXWV/2*2+1
+C>   JMAX (IDRT=256,IROMB=1)      | 4*MAXWV+1          | 5*MAXWV/2*2+1
+C>
       SUBROUTINE SPTRANF(IROMB,MAXWV,IDRT,IMAX,JMAX,KMAX,
      &                   IP,IS,JN,JS,KW,KG,JB,JE,JC,
      &                   WAVE,GRIDN,GRIDS,IDIR)
