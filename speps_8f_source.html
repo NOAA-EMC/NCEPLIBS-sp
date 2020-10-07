@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('speps_8f_source.html',''); initResizab
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; Compute utility spectral fields</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt; @author IREDELL  @date 92-10-31</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; Computes constant fields indexed in the spectral domain</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">C&gt; in &quot;IBM ORDER&quot; (Zonal wavenumber is the slower index).</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">C&gt; If L is the zonal wavenumber and N is the total wavenumber</span></div>
@@ -110,8 +110,8 @@ $(document).ready(function(){initNavTree('speps_8f_source.html',''); initResizab
 <div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="comment">C&gt; @param EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A</span></div>
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">C&gt; @param EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">C&gt;</span></div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keyword">SUBROUTINE </span>speps(I,M,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="keywordtype">      REAL</span> EPS((M+1)*((I+1)*M+2)/2),EPSTOP(M+1)</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="speps_8f.html#a0ab523ec5e1393ffca970897e63a9131">speps</a>(I,M,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)</div>
+<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="speps_8f.html#a0ab523ec5e1393ffca970897e63a9131">   26</a></span>&#160;<span class="keywordtype">      REAL</span> EPS((M+1)*((I+1)*M+2)/2),EPSTOP(M+1)</div>
 <div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="keywordtype">      REAL</span> ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)</div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">      REAL</span> EON((M+1)*((I+1)*M+2)/2),EONTOP(M+1)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;      parameter(rerth=6.3712e6,ra2=1./rerth**2)</div>
@@ -142,6 +142,7 @@ $(document).ready(function(){initNavTree('speps_8f_source.html',''); initResizab
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aspeps_8f_html_a0ab523ec5e1393ffca970897e63a9131"><div class="ttname"><a href="speps_8f.html#a0ab523ec5e1393ffca970897e63a9131">speps</a></div><div class="ttdeci">subroutine speps(I, M, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP)</div><div class="ttdoc">Computes constant fields indexed in the spectral domain in &quot;IBM ORDER&quot; (Zonal wavenumber is the slowe...</div><div class="ttdef"><b>Definition:</b> <a href="speps_8f_source.html#l00026">speps.f:26</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -93,14 +93,79 @@ $(document).ready(function(){initNavTree('spwget_8f.html',''); initResizable(); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a9b6ce78350f7adf2fed874a18312c7a6"><td class="memItemLeft" align="right" valign="top"><a id="a9b6ce78350f7adf2fed874a18312c7a6"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spwget</b> (IROMB, MAXWV, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP)</td></tr>
+<tr class="memitem:a9b6ce78350f7adf2fed874a18312c7a6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">spwget</a> (IROMB, MAXWV, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP)</td></tr>
+<tr class="memdesc:a9b6ce78350f7adf2fed874a18312c7a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram gets wave-space constants.  <a href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">More...</a><br /></td></tr>
 <tr class="separator:a9b6ce78350f7adf2fed874a18312c7a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Get wave-space constants </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>This subprogram gets wave-space constants.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spwget_8f_source.html">spwget.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a9b6ce78350f7adf2fed874a18312c7a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9b6ce78350f7adf2fed874a18312c7a6">&#9670;&nbsp;</a></span>spwget()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spwget </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>EPS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(maxwv+1)&#160;</td>
+          <td class="paramname"><em>EPSTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>ENN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>ELONN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>EON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(maxwv+1)&#160;</td>
+          <td class="paramname"><em>EONTOP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram gets wave-space constants. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">IROMB</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
@@ -115,11 +180,14 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spwget</b> (IRO
   </dd>
 </dl>
 <p>SUBPROGRAMS CALLED:</p><ul>
-<li>SPEPS() COMPUTE UTILITY SPECTRAL FIELDS </li>
+<li><a class="el" href="speps_8f.html#a0ab523ec5e1393ffca970897e63a9131" title="Computes constant fields indexed in the spectral domain in &quot;IBM ORDER&quot; (Zonal wavenumber is the slowe...">speps()</a> Compute utility spectral fields </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="spwget_8f_source.html">spwget.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spwget_8f_source.html#l00022">22</a> of file <a class="el" href="spwget_8f_source.html">spwget.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

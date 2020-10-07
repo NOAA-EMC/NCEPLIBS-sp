@@ -93,14 +93,200 @@ $(document).ready(function(){initNavTree('sptrunv_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a9aa39c13dd38585b3afb30cb2486817f"><td class="memItemLeft" align="right" valign="top"><a id="a9aa39c13dd38585b3afb30cb2486817f"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptrunv</b> (IROMB, MAXWV, IDRTI, IMAXI, JMAXI, IDRTO, IMAXO, JMAXO, KMAX, IPRIME, ISKIPI, JSKIPI, KSKIPI, ISKIPO, JSKIPO, KSKIPO, JCPU, GRIDUI, GRIDVI, LUV, GRIDUO, GRIDVO, LDZ, GRIDDO, GRIDZO, LPS, GRIDPO, GRIDSO)</td></tr>
+<tr class="memitem:a9aa39c13dd38585b3afb30cb2486817f"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptrunv_8f.html#a9aa39c13dd38585b3afb30cb2486817f">sptrunv</a> (IROMB, MAXWV, IDRTI, IMAXI, JMAXI, IDRTO, IMAXO, JMAXO, KMAX, IPRIME, ISKIPI, JSKIPI, KSKIPI, ISKIPO, JSKIPO, KSKIPO, JCPU, GRIDUI, GRIDVI, LUV, GRIDUO, GRIDVO, LDZ, GRIDDO, GRIDZO, LPS, GRIDPO, GRIDSO)</td></tr>
+<tr class="memdesc:a9aa39c13dd38585b3afb30cb2486817f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram spectrally truncates vector fields on a global cylindrical grid, returning the fields to a possibly different global cylindrical grid.  <a href="sptrunv_8f.html#a9aa39c13dd38585b3afb30cb2486817f">More...</a><br /></td></tr>
 <tr class="separator:a9aa39c13dd38585b3afb30cb2486817f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Spectrally truncate gridded vector fields </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>This subprogram spectrally truncates vector fields on a global cylindrical grid, returning the fields to a possibly different global cylindrical grid. The wave-space can be either triangular or rhomboidal. Either grid-space can be either an equally-spaced grid (with or without pole points) or a gaussian grid. The grid fields may have general indexing. The transforms are all multiprocessed. Over zonal wavenumber to ensure reproducibility. Transform several fields at a time to improve vectorization. Subprogram can be called from a multiprocessing environment.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptrunv_8f_source.html">sptrunv.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a9aa39c13dd38585b3afb30cb2486817f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9aa39c13dd38585b3afb30cb2486817f">&#9670;&nbsp;</a></span>sptrunv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptrunv </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDRTI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IMAXI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JMAXI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDRTO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IMAXO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JMAXO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IPRIME</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ISKIPI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JSKIPI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KSKIPI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ISKIPO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JSKIPO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KSKIPO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JCPU</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDUI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDVI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical&#160;</td>
+          <td class="paramname"><em>LUV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDUO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDVO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical&#160;</td>
+          <td class="paramname"><em>LDZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDDO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDZO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logical&#160;</td>
+          <td class="paramname"><em>LPS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDPO</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDSO</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram spectrally truncates vector fields on a global cylindrical grid, returning the fields to a possibly different global cylindrical grid. </p>
+<p>The wave-space can be either triangular or rhomboidal. Either grid-space can be either an equally-spaced grid (with or without pole points) or a gaussian grid. The grid fields may have general indexing. The transforms are all multiprocessed. Over zonal wavenumber to ensure reproducibility. Transform several fields at a time to improve vectorization. Subprogram can be called from a multiprocessing environment.</p>
 <p>PROGRAM HISTORY LOG:</p><ul>
 <li>96-02-29 IREDELL</li>
 <li>1998-12-15 IREDELL OPENMP DIRECTIVES INSERTED</li>
@@ -164,8 +350,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptrunv</b> (IR
 <td class="markdownTableBodyNone">JMAX (IDRT=256,IROMB=1) </td><td class="markdownTableBodyNone">4*MAXWV+1 </td><td class="markdownTableBodyNone">5*MAXWV/2*2+1  </td></tr>
 </table>
 
-<p class="definition">Definition in file <a class="el" href="sptrunv_8f_source.html">sptrunv.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptrunv_8f_source.html#l00096">96</a> of file <a class="el" href="sptrunv_8f_source.html">sptrunv.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

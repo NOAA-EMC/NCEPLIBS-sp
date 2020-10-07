@@ -93,18 +93,86 @@ $(document).ready(function(){initNavTree('splegend_8f.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a9c68adc80e97c43ac983b955dd6cabac"><td class="memItemLeft" align="right" valign="top"><a id="a9c68adc80e97c43ac983b955dd6cabac"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>splegend</b> (I, M, SLAT, CLAT, EPS, EPSTOP, PLN, PLNTOP)</td></tr>
+<tr class="memitem:a9c68adc80e97c43ac983b955dd6cabac"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="splegend_8f.html#a9c68adc80e97c43ac983b955dd6cabac">splegend</a> (I, M, SLAT, CLAT, EPS, EPSTOP, PLN, PLNTOP)</td></tr>
+<tr class="memdesc:a9c68adc80e97c43ac983b955dd6cabac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Evaluates the orthonormal associated legendre polynomials in the spectral domain at a given latitude.  <a href="splegend_8f.html#a9c68adc80e97c43ac983b955dd6cabac">More...</a><br /></td></tr>
 <tr class="separator:a9c68adc80e97c43ac983b955dd6cabac"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute legendre polynomials </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>EVALUATES THE ORTHONORMAL ASSOCIATED LEGENDRE POLYNOMIALS IN THE SPECTRAL DOMAIN AT A GIVEN LATITUDE. SUBPROGRAM SPLEGEND SHOULD BE CALLED ALREADY. IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER, AND EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) THEN THE FOLLOWING BOOTSTRAPPING FORMULAS ARE USED: </p><pre>
+<dl class="section date"><dt>Date</dt><dd>92-10-31 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="splegend_8f_source.html">splegend.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a9c68adc80e97c43ac983b955dd6cabac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9c68adc80e97c43ac983b955dd6cabac">&#9670;&nbsp;</a></span>splegend()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine splegend </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>SLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>CLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>EPS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(m+1)&#160;</td>
+          <td class="paramname"><em>EPSTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>PLN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(m+1)&#160;</td>
+          <td class="paramname"><em>PLNTOP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Evaluates the orthonormal associated legendre polynomials in the spectral domain at a given latitude. </p>
+<p>Subprogram splegend should be called already. If l is the zonal wavenumber, N is the total wavenumber, and EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) then the following bootstrapping formulas are used:</p>
+<pre>
  PLN(0,0)=SQRT(0.5)
  PLN(L,L)=PLN(L-1,L-1)*CLAT*SQRT(FLOAT(2*L+1)/FLOAT(2*L))
  PLN(L,N)=(SLAT*PLN(L,N-1)-EPS(L,N-1)*PLN(L,N-2))/EPS(L,N)
- </pre><p> SYNTHESIS AT THE POLE NEEDS ONLY TWO ZONAL WAVENUMBERS. SCALAR FIELDS ARE SYNTHESIZED WITH ZONAL WAVENUMBER 0 WHILE VECTOR FIELDS ARE SYNTHESIZED WITH ZONAL WAVENUMBER 1. (THUS POLAR VECTOR FIELDS ARE IMPLICITLY DIVIDED BY CLAT.) THE FOLLOWING BOOTSTRAPPING FORMULAS ARE USED AT THE POLE: </p><pre>
+ </pre><p>Synthesis at the pole needs only two zonal wavenumbers. Scalar fields are synthesized with zonal wavenumber 0 while vector fields are synthesized with zonal wavenumber 1. (Thus polar vector fields are implicitly divided by clat.) The following bootstrapping formulas are used at the pole:</p>
+<pre>
  PLN(0,0)=SQRT(0.5)
  PLN(1,1)=SQRT(0.75)
  PLN(L,N)=(PLN(L,N-1)-EPS(L,N-1)*PLN(L,N-2))/EPS(L,N)
@@ -114,20 +182,23 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>splegend</b> (I
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
-    <tr><td class="paramname">M</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
-    <tr><td class="paramname">SLAT</td><td>- REAL SINE OF LATITUDE </td></tr>
-    <tr><td class="paramname">CLAT</td><td>- REAL COSINE OF LATITUDE </td></tr>
-    <tr><td class="paramname">EPS</td><td>- REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1)) </td></tr>
-    <tr><td class="paramname">EPSTOP</td><td>- REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP </td></tr>
-    <tr><td class="paramname">PLN</td><td>- REAL ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIAL </td></tr>
-    <tr><td class="paramname">PLNTOP</td><td>- REAL (M+1) LEGENDRE POLYNOMIAL OVER TOP </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">M</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">SLAT</td><td>- REAL SINE OF LATITUDE </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">CLAT</td><td>- REAL COSINE OF LATITUDE </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">EPS</td><td>- REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1)) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">EPSTOP</td><td>- REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">PLN</td><td>- REAL ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIAL </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">PLNTOP</td><td>- REAL (M+1) LEGENDRE POLYNOMIAL OVER TOP </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition in file <a class="el" href="splegend_8f_source.html">splegend.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="splegend_8f_source.html#l00045">45</a> of file <a class="el" href="splegend_8f_source.html">splegend.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

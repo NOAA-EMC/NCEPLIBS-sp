@@ -93,14 +93,55 @@ $(document).ready(function(){initNavTree('spvar_8f.html',''); initResizable(); }
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a840f95e09b8d930b38638a391933bee4"><td class="memItemLeft" align="right" valign="top"><a id="a840f95e09b8d930b38638a391933bee4"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spvar</b> (I, M, Q, QVAR)</td></tr>
+<tr class="memitem:a840f95e09b8d930b38638a391933bee4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spvar_8f.html#a840f95e09b8d930b38638a391933bee4">spvar</a> (I, M, Q, QVAR)</td></tr>
+<tr class="memdesc:a840f95e09b8d930b38638a391933bee4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the variances by total wavenumber of a scalar field in spectral space.  <a href="spvar_8f.html#a840f95e09b8d930b38638a391933bee4">More...</a><br /></td></tr>
 <tr class="separator:a840f95e09b8d930b38638a391933bee4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute variance by total wavenumber </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>Computes the variances by total wavenumber of a scalar field in spectral space.</p>
+<dl class="section date"><dt>Date</dt><dd>92-10-31 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spvar_8f_source.html">spvar.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a840f95e09b8d930b38638a391933bee4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a840f95e09b8d930b38638a391933bee4">&#9670;&nbsp;</a></span>spvar()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spvar </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>Q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(0:(i+1)*m)&#160;</td>
+          <td class="paramname"><em>QVAR</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Computes the variances by total wavenumber of a scalar field in spectral space. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
@@ -111,8 +152,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spvar</b> (I, M
   </dd>
 </dl>
 
-<p class="definition">Definition in file <a class="el" href="spvar_8f_source.html">spvar.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spvar_8f_source.html#l00016">16</a> of file <a class="el" href="spvar_8f_source.html">spvar.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

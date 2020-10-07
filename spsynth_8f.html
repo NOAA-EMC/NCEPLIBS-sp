@@ -93,14 +93,116 @@ $(document).ready(function(){initNavTree('spsynth_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aa6a8113a459918728c876673520126bf"><td class="memItemLeft" align="right" valign="top"><a id="aa6a8113a459918728c876673520126bf"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spsynth</b> (I, M, IM, IX, NC, NCTOP, KM, CLAT, PLN, PLNTOP, MP, SPC, SPCTOP, F)</td></tr>
+<tr class="memitem:aa6a8113a459918728c876673520126bf"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spsynth_8f.html#aa6a8113a459918728c876673520126bf">spsynth</a> (I, M, IM, IX, NC, NCTOP, KM, CLAT, PLN, PLNTOP, MP, SPC, SPCTOP, F)</td></tr>
+<tr class="memdesc:aa6a8113a459918728c876673520126bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">SYNTHESIZES FOURIER COEFFICIENTS FROM SPECTRAL COEFFICIENTS FOR A LATITUDE PAIR (NORTHERN AND SOUTHERN HEMISPHERES).  <a href="spsynth_8f.html#aa6a8113a459918728c876673520126bf">More...</a><br /></td></tr>
 <tr class="separator:aa6a8113a459918728c876673520126bf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Synthesize fourier from spectral </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>SYNTHESIZES FOURIER COEFFICIENTS FROM SPECTRAL COEFFICIENTS FOR A LATITUDE PAIR (NORTHERN AND SOUTHERN HEMISPHERES). VECTOR COMPONENTS ARE DIVIDED BY COSINE OF LATITUDE.</p>
+<dl class="section date"><dt>Date</dt><dd>92-10-31 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spsynth_8f_source.html">spsynth.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aa6a8113a459918728c876673520126bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa6a8113a459918728c876673520126bf">&#9670;&nbsp;</a></span>spsynth()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spsynth </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IM</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NC</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NCTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KM</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>CLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>PLN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(m+1)&#160;</td>
+          <td class="paramname"><em>PLNTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(km)&#160;</td>
+          <td class="paramname"><em>MP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(nc,km)&#160;</td>
+          <td class="paramname"><em>SPC</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(nctop,km)&#160;</td>
+          <td class="paramname"><em>SPCTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(ix,2,km)&#160;</td>
+          <td class="paramname"><em>F</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>SYNTHESIZES FOURIER COEFFICIENTS FROM SPECTRAL COEFFICIENTS FOR A LATITUDE PAIR (NORTHERN AND SOUTHERN HEMISPHERES). </p>
+<p>VECTOR COMPONENTS ARE DIVIDED BY COSINE OF LATITUDE.</p>
 <p>PROGRAM HISTORY LOG:</p><ul>
 <li>91-10-31 MARK IREDELL</li>
 <li>1998-12-18 MARK IREDELL INCLUDE SCALAR AND GRADIENT OPTION</li>
@@ -125,8 +227,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spsynth</b> (I,
   </dd>
 </dl>
 
-<p class="definition">Definition in file <a class="el" href="spsynth_8f_source.html">spsynth.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spsynth_8f_source.html#l00035">35</a> of file <a class="el" href="spsynth_8f_source.html">spsynth.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

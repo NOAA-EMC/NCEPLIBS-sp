@@ -89,8 +89,8 @@ $(document).ready(function(){initNavTree('spanaly_8f_source.html',''); initResiz
 <a href="spanaly_8f.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">C&gt; @file</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt; Analyze spectral from fourier</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; @author IREDELL @date 92-10-31</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt; Analyzes spectral coefficients from fourier coefficients</span></div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160; </div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt; @name SPANALY Analyzes spectral coefficients from fourier coefficients</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; for a latitude pair (northern and southern hemispheres).</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">C&gt; Vector components are multiplied by cosine of latitude.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">C&gt;</span></div>
@@ -117,49 +117,50 @@ $(document).ready(function(){initNavTree('spanaly_8f_source.html',''); initResiz
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="comment">C&gt; @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS COMBINED</span></div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">C&gt; @param SPC      - REAL (NC,KM) SPECTRAL COEFFICIENTS</span></div>
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="comment">C&gt; @param SPCTOP   - REAL (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;      <span class="keyword">SUBROUTINE </span>spanaly(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;     &amp;                   F,SPC,SPCTOP)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;      <span class="keywordtype">INTEGER</span> MP(KM)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="keywordtype">      REAL</span> PLN((M+1)*((I+1)*M+2)/2),PLNTOP(M+1)</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">      REAL</span> F(IX,2,KM)</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">      REAL</span> SPC(NC,KM),SPCTOP(NCTOP,KM)</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">      REAL</span> FW(2,2)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">C FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.</span></div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.</span></div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;      lx=min(m,im/2)</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">!C$OMP PARALLEL DO PRIVATE(L,NT,KS,KP,FW)</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keywordflow">DO</span> k=1,km</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;        <span class="keywordflow">DO</span> l=0,lx</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;          nt=mod(m+1+(i-1)*l,2)+1</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;          ks=l*(2*m+(i-1)*(l-1))</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;          kp=ks/2+1</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;          <span class="keywordflow">IF</span>(mp(k).EQ.0) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;            fw(1,1)=wgt*(f(2*l+1,1,k)+f(2*l+1,2,k))</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            fw(2,1)=wgt*(f(2*l+2,1,k)+f(2*l+2,2,k))</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            fw(1,2)=wgt*(f(2*l+1,1,k)-f(2*l+1,2,k))</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            fw(2,2)=wgt*(f(2*l+2,1,k)-f(2*l+2,2,k))</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;          <span class="keywordflow">ELSE</span></div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;            fw(1,1)=wgt*clat*(f(2*l+1,1,k)+f(2*l+1,2,k))</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            fw(2,1)=wgt*clat*(f(2*l+2,1,k)+f(2*l+2,2,k))</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            fw(1,2)=wgt*clat*(f(2*l+1,1,k)-f(2*l+1,2,k))</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            fw(2,2)=wgt*clat*(f(2*l+2,1,k)-f(2*l+2,2,k))</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            spctop(2*l+1,k)=spctop(2*l+1,k)+plntop(l+1)*fw(1,nt)</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            spctop(2*l+2,k)=spctop(2*l+2,k)+plntop(l+1)*fw(2,nt)</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="keywordflow">          ENDIF</span></div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;          <span class="keywordflow">DO</span> n=l,i*l+m,2</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;            spc(ks+2*n+1,k)=spc(ks+2*n+1,k)+pln(kp+n)*fw(1,1)</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            spc(ks+2*n+2,k)=spc(ks+2*n+2,k)+pln(kp+n)*fw(2,1)</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;<span class="keywordflow">          ENDDO</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;          <span class="keywordflow">DO</span> n=l+1,i*l+m,2</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;            spc(ks+2*n+1,k)=spc(ks+2*n+1,k)+pln(kp+n)*fw(1,2)</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            spc(ks+2*n+2,k)=spc(ks+2*n+2,k)+pln(kp+n)*fw(2,2)</div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">          ENDDO</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">        ENDDO</span></div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">      ENDDO</span></div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keywordflow">RETURN</span></div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keyword">END</span></div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160; </div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;      <span class="keyword">SUBROUTINE </span>spanaly(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;     &amp;                   F,SPC,SPCTOP)</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;      <span class="keywordtype">INTEGER</span> MP(KM)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keywordtype">      REAL</span> PLN((M+1)*((I+1)*M+2)/2),PLNTOP(M+1)</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="keywordtype">      REAL</span> F(IX,2,KM)</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keywordtype">      REAL</span> SPC(NC,KM),SPCTOP(NCTOP,KM)</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="keywordtype">      REAL</span> FW(2,2)</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">C FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;      lx=min(m,im/2)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;<span class="comment">!C$OMP PARALLEL DO PRIVATE(L,NT,KS,KP,FW)</span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">DO</span> k=1,km</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">DO</span> l=0,lx</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;          nt=mod(m+1+(i-1)*l,2)+1</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;          ks=l*(2*m+(i-1)*(l-1))</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;          kp=ks/2+1</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;          <span class="keywordflow">IF</span>(mp(k).EQ.0) <span class="keywordflow">THEN</span></div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;            fw(1,1)=wgt*(f(2*l+1,1,k)+f(2*l+1,2,k))</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;            fw(2,1)=wgt*(f(2*l+2,1,k)+f(2*l+2,2,k))</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;            fw(1,2)=wgt*(f(2*l+1,1,k)-f(2*l+1,2,k))</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;            fw(2,2)=wgt*(f(2*l+2,1,k)-f(2*l+2,2,k))</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;          <span class="keywordflow">ELSE</span></div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;            fw(1,1)=wgt*clat*(f(2*l+1,1,k)+f(2*l+1,2,k))</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;            fw(2,1)=wgt*clat*(f(2*l+2,1,k)+f(2*l+2,2,k))</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;            fw(1,2)=wgt*clat*(f(2*l+1,1,k)-f(2*l+1,2,k))</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;            fw(2,2)=wgt*clat*(f(2*l+2,1,k)-f(2*l+2,2,k))</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;            spctop(2*l+1,k)=spctop(2*l+1,k)+plntop(l+1)*fw(1,nt)</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;            spctop(2*l+2,k)=spctop(2*l+2,k)+plntop(l+1)*fw(2,nt)</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="keywordflow">          ENDIF</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;          <span class="keywordflow">DO</span> n=l,i*l+m,2</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;            spc(ks+2*n+1,k)=spc(ks+2*n+1,k)+pln(kp+n)*fw(1,1)</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;            spc(ks+2*n+2,k)=spc(ks+2*n+2,k)+pln(kp+n)*fw(2,1)</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="keywordflow">          ENDDO</span></div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;          <span class="keywordflow">DO</span> n=l+1,i*l+m,2</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;            spc(ks+2*n+1,k)=spc(ks+2*n+1,k)+pln(kp+n)*fw(1,2)</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;            spc(ks+2*n+2,k)=spc(ks+2*n+2,k)+pln(kp+n)*fw(2,2)</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;<span class="keywordflow">          ENDDO</span></div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordflow">        ENDDO</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="keywordflow">      ENDDO</span></div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;      <span class="keywordflow">RETURN</span></div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->

@@ -93,14 +93,164 @@ $(document).ready(function(){initNavTree('sptranfv_8f.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a1a7aabbd358d4fe984dac6813c98b106"><td class="memItemLeft" align="right" valign="top"><a id="a1a7aabbd358d4fe984dac6813c98b106"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptranfv</b> (IROMB, MAXWV, IDRT, IMAX, JMAX, KMAX, IP, IS, JN, JS, KW, KG, JB, JE, JC, WAVED, WAVEZ, GRIDUN, GRIDUS, GRIDVN, GRIDVS, IDIR)</td></tr>
+<tr class="memitem:a1a7aabbd358d4fe984dac6813c98b106"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptranfv_8f.html#a1a7aabbd358d4fe984dac6813c98b106">sptranfv</a> (IROMB, MAXWV, IDRT, IMAX, JMAX, KMAX, IP, IS, JN, JS, KW, KG, JB, JE, JC, WAVED, WAVEZ, GRIDUN, GRIDUS, GRIDVN, GRIDVS, IDIR)</td></tr>
+<tr class="memdesc:a1a7aabbd358d4fe984dac6813c98b106"><td class="mdescLeft">&#160;</td><td class="mdescRight">THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS AND VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID.  <a href="sptranfv_8f.html#a1a7aabbd358d4fe984dac6813c98b106">More...</a><br /></td></tr>
 <tr class="separator:a1a7aabbd358d4fe984dac6813c98b106"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Perform a vector spherical transform </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS AND VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID. THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL. THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID. THE WAVE AND GRID FIELDS MAY HAVE GENERAL INDEXING, BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER', I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX. TRANSFORMS ARE DONE IN LATITUDE PAIRS FOR EFFICIENCY; THUS GRID ARRAYS FOR EACH HEMISPHERE MUST BE PASSED. IF SO REQUESTED, JUST A SUBSET OF THE LATITUDE PAIRS MAY BE TRANSFORMED IN EACH INVOCATION OF THE SUBPROGRAM. THE TRANSFORMS ARE ALL MULTIPROCESSED OVER LATITUDE EXCEPT THE TRANSFORM FROM FOURIER TO SPECTRAL IS MULTIPROCESSED OVER ZONAL WAVENUMBER TO ENSURE REPRODUCIBILITY. TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION. SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptranfv_8f_source.html">sptranfv.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a1a7aabbd358d4fe984dac6813c98b106"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1a7aabbd358d4fe984dac6813c98b106">&#9670;&nbsp;</a></span>sptranfv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptranfv </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDRT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KG</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JC</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVED</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVEZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDUN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDUS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDVN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GRIDVS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDIR</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS AND VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID. </p>
+<p>THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL. THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID. THE WAVE AND GRID FIELDS MAY HAVE GENERAL INDEXING, BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER', I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX. TRANSFORMS ARE DONE IN LATITUDE PAIRS FOR EFFICIENCY; THUS GRID ARRAYS FOR EACH HEMISPHERE MUST BE PASSED. IF SO REQUESTED, JUST A SUBSET OF THE LATITUDE PAIRS MAY BE TRANSFORMED IN EACH INVOCATION OF THE SUBPROGRAM. THE TRANSFORMS ARE ALL MULTIPROCESSED OVER LATITUDE EXCEPT THE TRANSFORM FROM FOURIER TO SPECTRAL IS MULTIPROCESSED OVER ZONAL WAVENUMBER TO ENSURE REPRODUCIBILITY. TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION. SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.</p>
 <p>PROGRAM HISTORY LOG:</p><ul>
 <li>96-02-29 IREDELL</li>
 <li>1998-12-15 IREDELL GENERIC FFT USED, OPENMP DIRECTIVES INSERTED</li>
@@ -108,36 +258,29 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptranfv</b> (I
 </ul>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">IROMB</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
-    <tr><td class="paramname">MAXWV</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
-    <tr><td class="paramname">IDRT</td><td>- INTEGER GRID IDENTIFIER (IDRT=4 FOR GAUSSIAN GRID, IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES, IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES) </td></tr>
-    <tr><td class="paramname">IMAX</td><td>- INTEGER EVEN NUMBER OF LONGITUDES. </td></tr>
-    <tr><td class="paramname">JMAX</td><td>- INTEGER NUMBER OF LATITUDES. </td></tr>
-    <tr><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF FIELDS TO TRANSFORM. </td></tr>
-    <tr><td class="paramname">IP</td><td>- INTEGER LONGITUDE INDEX FOR THE PRIME MERIDIAN </td></tr>
-    <tr><td class="paramname">IS</td><td>- INTEGER SKIP NUMBER BETWEEN LONGITUDES </td></tr>
-    <tr><td class="paramname">JN</td><td>- INTEGER SKIP NUMBER BETWEEN N.H. LATITUDES FROM NORTH </td></tr>
-    <tr><td class="paramname">JS</td><td>- INTEGER SKIP NUMBER BETWEEN S.H. LATITUDES FROM SOUTH </td></tr>
-    <tr><td class="paramname">KW</td><td>- INTEGER SKIP NUMBER BETWEEN WAVE FIELDS </td></tr>
-    <tr><td class="paramname">KG</td><td>- INTEGER SKIP NUMBER BETWEEN GRID FIELDS </td></tr>
-    <tr><td class="paramname">JB</td><td>- INTEGER LATITUDE INDEX (FROM POLE) TO BEGIN TRANSFORM </td></tr>
-    <tr><td class="paramname">JE</td><td>- INTEGER LATITUDE INDEX (FROM POLE) TO END TRANSFORM </td></tr>
-    <tr><td class="paramname">JC</td><td>- INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS </td></tr>
-    <tr><td class="paramname">WAVED</td><td>- REAL (*) WAVE DIVERGENCE FIELDS IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">WAVEZ</td><td>- REAL (*) WAVE VORTICITY FIELDS IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">GRIDUN</td><td>- REAL (*) N.H. GRID U-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">GRIDUS</td><td>- REAL (*) S.H. GRID U-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">GRIDVN</td><td>- REAL (*) N.H. GRID V-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">GRIDVS</td><td>- REAL (*) S.H. GRID V-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">IDIR</td><td>- INTEGER TRANSFORM FLAG (IDIR&gt;0 FOR WAVE TO GRID, IDIR&lt;0 FOR GRID TO WAVE) </td></tr>
-    <tr><td class="paramname">WAVED</td><td>- REAL (*) WAVE DIVERGENCE FIELDS IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">[WAVED=(D(GRIDU)/DLAM+D(CLAT*GRIDV)/DPHI)/(CLAT*RERTH)]</td><td></td></tr>
-    <tr><td class="paramname">WAVEZ</td><td>- REAL (*) WAVE VORTICITY FIELDS IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">[WAVEZ=(D(GRIDV)/DLAM-D(CLAT*GRIDU)/DPHI)/(CLAT*RERTH)]</td><td></td></tr>
-    <tr><td class="paramname">GRIDUN</td><td>- REAL (*) N.H. GRID U-WINDS (STARTING AT JB) IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">GRIDUS</td><td>- REAL (*) S.H. GRID U-WINDS (STARTING AT JB) IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">GRIDVN</td><td>- REAL (*) N.H. GRID V-WINDS (STARTING AT JB) IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">GRIDVS</td><td>- REAL (*) S.H. GRID V-WINDS (STARTING AT JB) IF IDIR&gt;0</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IROMB</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">MAXWV</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IDRT</td><td>- INTEGER GRID IDENTIFIER (IDRT=4 FOR GAUSSIAN GRID, IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES, IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IMAX</td><td>- INTEGER EVEN NUMBER OF LONGITUDES. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JMAX</td><td>- INTEGER NUMBER OF LATITUDES. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF FIELDS TO TRANSFORM. </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IP</td><td>- INTEGER LONGITUDE INDEX FOR THE PRIME MERIDIAN </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IS</td><td>- INTEGER SKIP NUMBER BETWEEN LONGITUDES </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JN</td><td>- INTEGER SKIP NUMBER BETWEEN N.H. LATITUDES FROM NORTH </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JS</td><td>- INTEGER SKIP NUMBER BETWEEN S.H. LATITUDES FROM SOUTH </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">KW</td><td>- INTEGER SKIP NUMBER BETWEEN WAVE FIELDS </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">KG</td><td>- INTEGER SKIP NUMBER BETWEEN GRID FIELDS </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JB</td><td>- INTEGER LATITUDE INDEX (FROM POLE) TO BEGIN TRANSFORM </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JE</td><td>- INTEGER LATITUDE INDEX (FROM POLE) TO END TRANSFORM </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">JC</td><td>- INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">WAVED</td><td>- REAL (*) WAVE DIVERGENCE FIELDS IF IDIR&gt;0 [WAVED=(D(GRIDU)/DLAM+D(CLAT*GRIDV)/DPHI)/(CLAT*RERTH)] </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">WAVEZ</td><td>- REAL (*) WAVE VORTICITY FIELDS IF IDIR&gt;0 [WAVEZ=(D(GRIDV)/DLAM-D(CLAT*GRIDU)/DPHI)/(CLAT*RERTH)] <br  />
+ </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">GRIDUN</td><td>- REAL (*) N.H. GRID U-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">GRIDUS</td><td>- REAL (*) S.H. GRID U-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">GRIDVN</td><td>- REAL (*) N.H. GRID V-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">GRIDVS</td><td>- REAL (*) S.H. GRID V-WINDS (STARTING AT JB) IF IDIR&lt;0 </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IDIR</td><td>- INTEGER TRANSFORM FLAG (IDIR&gt;0 FOR WAVE TO GRID, IDIR&lt;0 FOR GRID TO WAVE)</td></tr>
   </table>
   </dd>
 </dl>
@@ -166,8 +309,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptranfv</b> (I
 <td class="markdownTableBodyNone">JMAX (IDRT=256,IROMB=1) </td><td class="markdownTableBodyNone">4*MAXWV+1 </td><td class="markdownTableBodyNone">5*MAXWV/2*2+1  </td></tr>
 </table>
 
-<p class="definition">Definition in file <a class="el" href="sptranfv_8f_source.html">sptranfv.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptranfv_8f_source.html#l00081">81</a> of file <a class="el" href="sptranfv_8f_source.html">sptranfv.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

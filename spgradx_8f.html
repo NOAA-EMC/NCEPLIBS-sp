@@ -93,31 +93,93 @@ $(document).ready(function(){initNavTree('spgradx_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a749bc07e763e9cd44490fff2284d00b4"><td class="memItemLeft" align="right" valign="top"><a id="a749bc07e763e9cd44490fff2284d00b4"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spgradx</b> (M, INCW, KMAX, MP, CLAT, W, WX)</td></tr>
+<tr class="memitem:a749bc07e763e9cd44490fff2284d00b4"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spgradx_8f.html#a749bc07e763e9cd44490fff2284d00b4">spgradx</a> (M, INCW, KMAX, MP, CLAT, W, WX)</td></tr>
+<tr class="memdesc:a749bc07e763e9cd44490fff2284d00b4"><td class="mdescLeft">&#160;</td><td class="mdescRight">THIS SUBPROGRAM COMPUTES THE X-GRADIENT OF FIELDS IN COMPLEX FOURIER SPACE.  <a href="spgradx_8f.html#a749bc07e763e9cd44490fff2284d00b4">More...</a><br /></td></tr>
 <tr class="separator:a749bc07e763e9cd44490fff2284d00b4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute x-gradient in fourier space </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-20</dd></dl>
-<p>THIS SUBPROGRAM COMPUTES THE X-GRADIENT OF FIELDS IN COMPLEX FOURIER SPACE. THE X-GRADIENT OF A VECTOR FIELD W IS WX=CONJG(W)*L/RERTH WHERE L IS THE WAVENUMBER AND RERTH IS THE EARTH RADIUS, SO THAT THE RESULT IS THE X-GRADIENT OF THE PSEUDO-VECTOR. THE X-GRADIENT OF A SCALAR FIELD W IS WX=CONJG(W)*L/(RERTH*CLAT) WHERE CLAT IS THE COSINE OF LATITUDE. AT THE POLE THIS IS UNDEFINED, SO THE WAY TO GET THE X-GRADIENT AT THE POLE IS BY PASSING BOTH THE WEIGHTED WAVENUMBER 0 AND THE UNWEIGHTED WAVENUMBER 1 AMPLITUDES AT THE POLE AND SETTING MP=10. IN THIS CASE, THE WAVENUMBER 1 AMPLITUDES ARE USED TO COMPUTE THE X-GRADIENT AND THEN ZEROED OUT.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-20 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spgradx_8f_source.html">spgradx.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a749bc07e763e9cd44490fff2284d00b4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a749bc07e763e9cd44490fff2284d00b4">&#9670;&nbsp;</a></span>spgradx()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spgradx </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>INCW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, dimension(kmax), intent(in)&#160;</td>
+          <td class="paramname"><em>MP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, intent(in)&#160;</td>
+          <td class="paramname"><em>CLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(2*incw,kmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>W</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(2*incw,kmax), intent(out)&#160;</td>
+          <td class="paramname"><em>WX</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>THIS SUBPROGRAM COMPUTES THE X-GRADIENT OF FIELDS IN COMPLEX FOURIER SPACE. </p>
+<p>THE X-GRADIENT OF A VECTOR FIELD W IS WX=CONJG(W)*L/RERTH WHERE L IS THE WAVENUMBER AND RERTH IS THE EARTH RADIUS, SO THAT THE RESULT IS THE X-GRADIENT OF THE PSEUDO-VECTOR. THE X-GRADIENT OF A SCALAR FIELD W IS WX=CONJG(W)*L/(RERTH*CLAT) WHERE CLAT IS THE COSINE OF LATITUDE. AT THE POLE THIS IS UNDEFINED, SO THE WAY TO GET THE X-GRADIENT AT THE POLE IS BY PASSING BOTH THE WEIGHTED WAVENUMBER 0 AND THE UNWEIGHTED WAVENUMBER 1 AMPLITUDES AT THE POLE AND SETTING MP=10. IN THIS CASE, THE WAVENUMBER 1 AMPLITUDES ARE USED TO COMPUTE THE X-GRADIENT AND THEN ZEROED OUT.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">M</td><td>- INTEGER FOURIER WAVENUMBER TRUNCATION </td></tr>
-    <tr><td class="paramname">INCW</td><td>- INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY (INCW &gt;= M+1) </td></tr>
-    <tr><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF FOURIER FIELDS </td></tr>
-    <tr><td class="paramname">MP</td><td>- INTEGER (KM) IDENTIFIERS (0 OR 10 FOR SCALAR, 1 FOR VECTOR) </td></tr>
-    <tr><td class="paramname">CLAT</td><td>- REAL COSINE OF LATITUDE </td></tr>
-    <tr><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) FOURIER AMPLITUDES </td></tr>
-    <tr><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) FOURIER AMPLITUDES CORRECTED WHEN MP=10 AND CLAT=0 </td></tr>
-    <tr><td class="paramname">WX</td><td>- COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES OF X-GRADIENTS</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">M</td><td>- INTEGER FOURIER WAVENUMBER TRUNCATION </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">INCW</td><td>- INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY (INCW &gt;= M+1) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF FOURIER FIELDS </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">MP</td><td>- INTEGER (KM) IDENTIFIERS (0 OR 10 FOR SCALAR, 1 FOR VECTOR) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">CLAT</td><td>- REAL COSINE OF LATITUDE </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) FOURIER AMPLITUDES CORRECTED WHEN MP=10 AND CLAT=0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">WX</td><td>- COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES OF X-GRADIENTS</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>THIS SUBPROGRAM IS THREAD-SAFE. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="spgradx_8f_source.html">spgradx.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spgradx_8f_source.html#l00035">35</a> of file <a class="el" href="spgradx_8f_source.html">spgradx.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

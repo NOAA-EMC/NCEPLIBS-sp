@@ -186,17 +186,16 @@ Functions/Subroutines</h2></td></tr>
 
 <p>Compute winds from divergence and vorticity. </p>
 <dl class="section author"><dt>Author</dt><dd>IREDELL ORG: W/NMC23 </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>Computes the wind components from divergence and vorticity in spectral space. Subprogram speps should be called already. If L is the zonal wavenumber, N is the total wavenumber, </p><pre>      
+<dl class="section date"><dt>Date</dt><dd>92-10-31 Computes the wind components from divergence and vorticity in spectral space. Subprogram speps should be called already. If L is the zonal wavenumber, N is the total wavenumber, <pre>      
  EPS(L,N) = SQRT((N**2-L**2)/(4*N**2-1))
- </pre><p> a<br  />
- nd A is earth radius, then the zonal wind component U is computed as </p><pre>
+ </pre> a<br  />
+ nd A is earth radius, then the zonal wind component U is computed as <pre>
  U(L,N)=-I*L/(N*(N+1))*A*D(L,N)
  +EPS(L,N+1)/(N+1)*A*Z(L,N+1)-EPS(L,N)/N*A*Z(L,N-1)
- </pre><p> and the meridional wind component V is computed as </p><pre>
+ </pre> and the meridional wind component V is computed as <pre>
  V(L,N)=-I*L/(N*(N+1))*A*Z(L,N)
  -EPS(L,N+1)/(N+1)*A*D(L,N+1)+EPS(L,N)/N*A*D(L,N-1)
- </pre><p> where D is divergence and Z is vorticity. U and V are weighted by the cosine of latitude. Cxtra terms are computed over top of the spectral domain. Advantage is taken of the fact that EPS(L,L)=0 in order to vectorize over the entire spectral domain.</p>
+ </pre> where D is divergence and Z is vorticity. U and V are weighted by the cosine of latitude. Cxtra terms are computed over top of the spectral domain. Advantage is taken of the fact that EPS(L,L)=0 in order to vectorize over the entire spectral domain.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>

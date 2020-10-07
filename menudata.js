@@ -25,5 +25,9 @@ var menudata={children:[
 {text:"Files",url:"files.html",children:[
 {text:"File List",url:"files.html"},
 {text:"Globals",url:"globals.html",children:[
-{text:"All",url:"globals.html"},
-{text:"Functions",url:"globals_func.html"}]}]}]}
+{text:"All",url:"globals.html",children:[
+{text:"n",url:"globals.html#index_n"},
+{text:"s",url:"globals.html#index_s"}]},
+{text:"Functions/Subroutines",url:"globals_func.html",children:[
+{text:"n",url:"globals_func.html#index_n"},
+{text:"s",url:"globals_func.html#index_s"}]}]}]}]}

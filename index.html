@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.8.17"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>NCEPLIBS-sp: Documentation of the spectral transform library splib</title>
+<title>NCEPLIBS-sp: Main Page</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -83,40 +83,101 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 
 <div class="PageDoc"><div class="header">
   <div class="headertitle">
-<div class="title">Documentation of the spectral transform library splib </div>  </div>
+<div class="title">NCEPLIBS-sp Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>May 2, 1996</p>
-<h1><a class="anchor" id="autotoc_md1"></a>
-Introduction</h1>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md0"></a>
+Documentation of the spectral transform library splib</h1>
+<p>May 2, 1996</p>
+<h2><a class="anchor" id="autotoc_md1"></a>
+Introduction</h2>
 <p>The spectral transform library splib contains FORTRAN subprograms to be used for a variety of spectral transform functions. The library has been optimized for the CRAY machines, taking full advantage of both the vector and parallel capabilities. The library is particularly efficient when transforming many fields at one time. Some entry points will diagnose the environmental number of CPUs available, but others require the number of CPUs used be specified. The library is reasonably transportable to other platforms with compilers allowing dynamic automatic arrays.</p>
 <p>The library can handle both scalar and two-dimensional vector fields. Each vector field will be represented in spectral space appropriately by its respective spherical divergence and curl (vorticity), thus avoiding the pole problems associated with representing components separately.</p>
 <p>Some of the functions performed by the library are spectral interpolations between two grids, spectral truncations in place on a grid, and basic spectral transforms between grid and wave space. Only global Gaussian or global equidistant cylindrical grids are allowed for transforming into wave space. There are no such restricitions on grids for transforming from wave space. However, there are special fast entry points for transforming wave space to polar stereographic and Mercator grids as well as the aforementioned cylindrical grids.</p>
 <p>The indexing of the cylindrical transform grids is totally general. The grids may run north to south or south to north; they may run east to west or west to east; they may start at any longitude as long as the prime meridian is on the grid; they may be dimensioned in any order (e.g. (i,j,k), (k,j,i), (i,k,nfield,j), etc.). Furthermore, the transform may be performed on only some of the latitudes at one time as long as both hemisphere counterparts are transformed at the same time (as in the global spectral model). The grid indexing will default to the customary global indexing, i.e. north to south, east to west, prime meridian as first longitude, and (i,j,k) order.</p>
 <p>The wave space may be either triangular or rhomboidal in shape. Its internal indexing is strictly "IBM order", i.e. zonal wavenumber is the slower index with the real and imaginary components always paired together. The imaginary components of all the zonally symmetric modes should always be zero, as should the global mean of any divergence and vorticity fields. The stride between the start of successive wave fields is general, defaulting to the computed length of each field.</p>
 <p>This documentation is divided into 3 chapters. Chapter I is this introduction. Chapter II is a list of all entry points. Chapter III is a set of examples.</p>
-<h1><a class="anchor" id="autotoc_md2"></a>
-Entry point list</h1>
-<p>Name Function</p>
-<hr  />
- <pre class="fragment">       Spectral interpolations or truncations between grid and grid
-</pre><pre class="fragment">         Spectral transforms between wave and grid
-</pre><pre class="fragment">         Spectral transform utilities
-</pre><pre>
-   SPGGET     GET GRID-SPACE CONSTANTS
-   SPWGET     GET WAVE-SPACE CONSTANTS
-   SPLAT      COMPUTE LATITUDE FUNCTIONS
-   SPEPS      COMPUTE UTILITY SPECTRAL FIELDS
-   SPLEGEND   COMPUTE LEGENDRE POLYNOMIALS
-   SPANALY    ANALYZE SPECTRAL FROM FOURIER
-   SPSYNTH    SYNTHESIZE FOURIER FROM SPECTRAL
-   SPDZ2UV    COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
-   SPUV2DZ    COMPUTE DIVERGENCE AND VORTICITY FROM WINDS
-   SPGRADQ    COMPUTE GRADIENT IN SPECTRAL SPACE
-   SPLAPLAC   COMPUTE LAPLACIAN IN SPECTRAL SPACE
-</pre><p>#</p>
-<h1><a class="anchor" id="autotoc_md3"></a>
-Examples</h1>
+<h2><a class="anchor" id="autotoc_md2"></a>
+Entry point list</h2>
+<p>Spectral interpolations or truncations between grid and grid</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Name </th><th class="markdownTableHeadNone">Function  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptrun_8f.html#a1f04574fbd5018f73b68bd2cd0ffc473" title="This subprogram spectrally truncates scalar fields on a global cylindrical grid, returning the fields...">sptrun()</a> </td><td class="markdownTableBodyNone">SPECTRALLY TRUNCATE GRIDDED SCALAR FIELDS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptrunv_8f.html#a9aa39c13dd38585b3afb30cb2486817f" title="This subprogram spectrally truncates vector fields on a global cylindrical grid, returning the fields...">sptrunv()</a> </td><td class="markdownTableBodyNone">SPECTRALLY TRUNCATE GRIDDED VECTOR FIELDS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptrung_8f.html#af41b64dad4789617a315515ef885912c" title="This subprogram spectrally truncates scalar fields on a global cylindrical grid, returning the fields...">sptrung()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE SCALARS TO STATIONS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptrungv_8f.html#ab7bbe6ecde57394b15e5d4925cb07164" title="THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTORS FIELDS ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELD...">sptrungv()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE VECTORS TO STATIONS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptruns_8f.html#a34f156e2049105d012e445f8aa215444" title="This subprogram spectrally truncates scalar fields on a global cylindrical grid, returning the fields...">sptruns()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE SCALARS TO POLAR STEREO  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptrunsv_8f.html#a1373b651b9dea586e33d3033aae68656" title="THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS...">sptrunsv()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE VECTORS TO POLAR STEREO  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptrunm_8f.html#a2a4e579890d3cf7f6a26091f544b6cb6" title="This subprogram spectrally truncates scalar fields on a global cylindrical grid, returning the fields...">sptrunm()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE SCALARS TO MERCATOR  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptrunmv_8f.html#a8b405d0621112d6852a3bb99602ac2fd" title="THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS...">sptrunmv()</a> </td><td class="markdownTableBodyNone">SPECTRALLY INTERPOLATE VECTORS TO MERCATOR  </td></tr>
+</table>
+<p>Spectral transforms between wave and grid</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Name </th><th class="markdownTableHeadNone">Function  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptran_8f.html#af7610e42f0dcd199b8cf80f851dcfed0" title="This subprogram performs a spherical transform between spectral coefficients of scalar quantities and...">sptran()</a> </td><td class="markdownTableBodyNone">PERFORM A SCALAR SPHERICAL TRANSFORM  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptranv_8f.html#a7d6aaa3ed70df1dfaf8dd4443b7190c1" title="THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS...">sptranv()</a> </td><td class="markdownTableBodyNone">PERFORM A VECTOR SPHERICAL TRANSFORM  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptrand_8f.html#ae810abad32bcbdfb8345a30e50bcc1ef" title="THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF SCALAR FIELDS AND THE...">sptrand()</a> </td><td class="markdownTableBodyNone">PERFORM A GRADIENT SPHERICAL TRANSFORM  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpt_8f.html#a1b8d333bcc601e5b7e8d3dd1369f54b1" title="This subprogram performs a spherical transform from spectral coefficients of scalar quantities to spe...">sptgpt()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL SCALAR TO STATION POINTS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptgptv_8f.html#a9af8a22564d132a887a5237f30710f13" title="THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS TO...">sptgptv()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL VECTOR TO STATION POINTS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptgptd_8f.html#a64d1fe761662182ca3495531152d1cd3" title="This subprogram performs a spherical transform from spectral coefficients of scalar fields to specifi...">sptgptd()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL TO STATION POINT GRADIENTS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptgps_8f.html#af06a2dccfa311014fc9f671b14f247b2" title="This subprogram performs a spherical transform from spectral coefficients of scalar quantities to sca...">sptgps()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL SCALAR TO POLAR STEREO  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpsv_8f.html#af2bf2335047ec277730564dbfa859079" title="This subprogram performs a spherical transform from spectral coefficients of divergences and curls to...">sptgpsv()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL VECTOR TO POLAR STEREO  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpsd_8f.html#ad6d10c3360c47558a8116b2f5666ed30" title="this subprogram performs a spherical transform from spectral coefficients of scalar fields to gradien...">sptgpsd()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL TO POLAR STEREO GRADIENTS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d" title="This subprogram performs a spherical transform from spectral coefficients of scalar quantities to sca...">sptgpm()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL SCALAR TO MERCATOR  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpmv_8f.html#a15de3accfd448d116324872c8fb1bb17" title="THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS TO...">sptgpmv()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL VECTOR TO MERCATOR  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="sptgpmd_8f.html#af71718c75a2b24b74fa7e1e4318d0539" title="This subprogram performs a spherical transform from spectral coefficients of scalar fields to gradien...">sptgpmd()</a> </td><td class="markdownTableBodyNone">TRANSFORM SPECTRAL TO MERCATOR GRADIENTS  </td></tr>
+</table>
+<p>Spectral transform utilities</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Name </th><th class="markdownTableHeadNone">Function  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">spgget() </td><td class="markdownTableBodyNone">GET GRID-SPACE CONSTANTS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6" title="This subprogram gets wave-space constants.">spwget()</a> </td><td class="markdownTableBodyNone">GET WAVE-SPACE CONSTANTS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="splat_8F.html#aa6db21451bb67635e7e4426546140e11" title="Computes cosines of colatitude and gaussian weights for one of the following specific global sets of ...">splat()</a> </td><td class="markdownTableBodyNone">COMPUTE LATITUDE FUNCTIONS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="speps_8f.html#a0ab523ec5e1393ffca970897e63a9131" title="Computes constant fields indexed in the spectral domain in &quot;IBM ORDER&quot; (Zonal wavenumber is the slowe...">speps()</a> </td><td class="markdownTableBodyNone">COMPUTE UTILITY SPECTRAL FIELDS  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="splegend_8f.html#a9c68adc80e97c43ac983b955dd6cabac" title="Evaluates the orthonormal associated legendre polynomials in the spectral domain at a given latitude.">splegend()</a> </td><td class="markdownTableBodyNone">COMPUTE LEGENDRE POLYNOMIALS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">spanaly() </td><td class="markdownTableBodyNone">ANALYZE SPECTRAL FROM FOURIER  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="spsynth_8f.html#aa6a8113a459918728c876673520126bf" title="SYNTHESIZES FOURIER COEFFICIENTS FROM SPECTRAL COEFFICIENTS FOR A LATITUDE PAIR (NORTHERN AND SOUTHER...">spsynth()</a> </td><td class="markdownTableBodyNone">SYNTHESIZE FOURIER FROM SPECTRAL  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="spdz2uv_8f.html#ae3a4a74c49f78a25425b610743dc0692" title="Compute winds from divergence and vorticity.">spdz2uv()</a> </td><td class="markdownTableBodyNone">COMPUTE WINDS FROM DIVERGENCE AND VORTICITY  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="spuv2dz_8f.html#a27edc2d10e0a76a45e4aaae58bf018b9" title="Computes the divergence and vorticity from wind components in spectral space.">spuv2dz()</a> </td><td class="markdownTableBodyNone">COMPUTE DIVERGENCE AND VORTICITY FROM WINDS  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone"><a class="el" href="spgradq_8f.html#a0bb358cf2a405ce9f17c6e5dfde65849" title="COMPUTES THE HORIZONTAL VECTOR GRADIENT OF A SCALAR FIELD IN SPECTRAL SPACE.">spgradq()</a> </td><td class="markdownTableBodyNone">COMPUTE GRADIENT IN SPECTRAL SPACE  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone"><a class="el" href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42" title="COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE.">splaplac()</a> </td><td class="markdownTableBodyNone">COMPUTE LAPLACIAN IN SPECTRAL SPACE  </td></tr>
+</table>
+<h2><a class="anchor" id="autotoc_md3"></a>
+Examples</h2>
 <p>Example 1. Interpolate heights and winds from a latlon grid to two antipodal polar stereographic grids. Subprograms GETGB and PUTGB from w3lib are referenced.</p>
 <pre>
 c  unit number 11 is the input latlon grib file

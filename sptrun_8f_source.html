@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('sptrun_8f_source.html',''); initResiza
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; truncate gridded scalar fields.</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt; @author: IREDELL @date: 96-02-29</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; This subprogram spectrally truncates scalar fields on a global</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">C&gt; cylindrical grid, returning the fields to a possibly different</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">C&gt; global cylindrical grid. The wave-space can be either triangular</span></div>
@@ -138,11 +138,11 @@ $(document).ready(function(){initNavTree('sptrun_8f_source.html',''); initResiza
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="comment">C&gt; @param GRIDI    - REAL (*) INPUT GRID FIELDS</span></div>
 <div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;<span class="comment">C&gt; @param GRIDO    - REAL (*) OUTPUT GRID FIELDS</span></div>
 <div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;<span class="comment">C&gt;                (MAY OVERLAY INPUT FIELDS IF GRID SHAPE IS APPROPRIATE)</span></div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">C</span></div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="comment">C&gt;    CALLED:</span></div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">C&gt;   SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">C&gt;   NCPUS        GETS ENVIRONMENT NUMBER OF CPUS</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">C</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">C&gt; REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:</span></div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">C&gt;   DIMENSION                    LINEAR              QUADRATIC</span></div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">C&gt;   -----------------------      ---------           -------------</span></div>
@@ -161,7 +161,7 @@ $(document).ready(function(){initNavTree('sptrun_8f_source.html',''); initResiza
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;<span class="comment">C  TRANSFORM INPUT GRID TO WAVE</span></div>
 <div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;      jc=jcpu</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">IF</span>(jc.EQ.0) jc=ncpus()</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;      <span class="keywordflow">IF</span>(jc.EQ.0) jc=<a class="code" href="ncpus_8F.html#a821a75ee067ea31758a038c0327bd3bd">ncpus</a>()</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;      mx=(maxwv+1)*((iromb+1)*maxwv+2)/2</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;      mdim=2*mx+1</div>
 <div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;      jn=-jskipi</div>
@@ -169,7 +169,7 @@ $(document).ready(function(){initNavTree('sptrun_8f_source.html',''); initResiza
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;      js=-jn</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;      inp=(jmaxi-1)*max(0,-jn)+1</div>
 <div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;      isp=(jmaxi-1)*max(0,-js)+1</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keyword">CALL </span>sptran(iromb,maxwv,idrti,imaxi,jmaxi,kmax,</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;      <span class="keyword">CALL </span><a class="code" href="sptran_8f.html#af7610e42f0dcd199b8cf80f851dcfed0">sptran</a>(iromb,maxwv,idrti,imaxi,jmaxi,kmax,</div>
 <div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;     &amp;            iprime,iskipi,jn,js,mdim,kskipi,0,0,jc,</div>
 <div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;     &amp;            w,gridi(inp),gridi(isp),-1)</div>
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
@@ -179,14 +179,16 @@ $(document).ready(function(){initNavTree('sptrun_8f_source.html',''); initResiza
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;      js=-jn</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      inp=(jmaxo-1)*max(0,-jn)+1</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;      isp=(jmaxo-1)*max(0,-js)+1</div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keyword">CALL </span>sptran(iromb,maxwv,idrto,imaxo,jmaxo,kmax,</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;      <span class="keyword">CALL </span><a class="code" href="sptran_8f.html#af7610e42f0dcd199b8cf80f851dcfed0">sptran</a>(iromb,maxwv,idrto,imaxo,jmaxo,kmax,</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     &amp;            0,iskipo,jn,js,mdim,kskipo,0,0,jc,</div>
 <div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;     &amp;            w,grido(inp),grido(isp),1)</div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
-<div class="ttc" id="asptrun_8f_html_a1f04574fbd5018f73b68bd2cd0ffc473"><div class="ttname"><a href="sptrun_8f.html#a1f04574fbd5018f73b68bd2cd0ffc473">sptrun</a></div><div class="ttdeci">subroutine sptrun(IROMB, MAXWV, IDRTI, IMAXI, JMAXI, IDRTO, IMAXO, JMAXO, KMAX, IPRIME, ISKIPI, JSKIPI, KSKIPI, ISKIPO, JSKIPO, KSKIPO, JCPU, GRIDI, GRIDO)</div><div class="ttdoc">CALLED: SPTRAN PERFORM A SCALAR SPHERICAL TRANSFORM NCPUS GETS ENVIRONMENT NUMBER OF CPUS.</div><div class="ttdef"><b>Definition:</b> <a href="sptrun_8f_source.html#l00071">sptrun.f:71</a></div></div>
+<div class="ttc" id="asptran_8f_html_af7610e42f0dcd199b8cf80f851dcfed0"><div class="ttname"><a href="sptran_8f.html#af7610e42f0dcd199b8cf80f851dcfed0">sptran</a></div><div class="ttdeci">subroutine sptran(IROMB, MAXWV, IDRT, IMAX, JMAX, KMAX, IPRIME, ISKIP, JNSKIP, JSSKIP, KWSKIP, KGSKIP, JBEG, JEND, JCPU, WAVE, GRIDN, GRIDS, IDIR)</div><div class="ttdoc">This subprogram performs a spherical transform between spectral coefficients of scalar quantities and...</div><div class="ttdef"><b>Definition:</b> <a href="sptran_8f_source.html#l00080">sptran.f:80</a></div></div>
+<div class="ttc" id="ancpus_8F_html_a821a75ee067ea31758a038c0327bd3bd"><div class="ttname"><a href="ncpus_8F.html#a821a75ee067ea31758a038c0327bd3bd">ncpus</a></div><div class="ttdeci">function ncpus()</div><div class="ttdoc">Set number of cpus.</div><div class="ttdef"><b>Definition:</b> <a href="ncpus_8F_source.html#l00021">ncpus.F:21</a></div></div>
+<div class="ttc" id="asptrun_8f_html_a1f04574fbd5018f73b68bd2cd0ffc473"><div class="ttname"><a href="sptrun_8f.html#a1f04574fbd5018f73b68bd2cd0ffc473">sptrun</a></div><div class="ttdeci">subroutine sptrun(IROMB, MAXWV, IDRTI, IMAXI, JMAXI, IDRTO, IMAXO, JMAXO, KMAX, IPRIME, ISKIPI, JSKIPI, KSKIPI, ISKIPO, JSKIPO, KSKIPO, JCPU, GRIDI, GRIDO)</div><div class="ttdoc">This subprogram spectrally truncates scalar fields on a global cylindrical grid, returning the fields...</div><div class="ttdef"><b>Definition:</b> <a href="sptrun_8f_source.html#l00071">sptrun.f:71</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

@@ -93,14 +93,79 @@ $(document).ready(function(){initNavTree('spfftpt_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:ad16e674ce87bd762a714853967f81356"><td class="memItemLeft" align="right" valign="top"><a id="ad16e674ce87bd762a714853967f81356"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spfftpt</b> (M, N, INCW, INCG, KMAX, RLON, W, G)</td></tr>
+<tr class="memitem:ad16e674ce87bd762a714853967f81356"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spfftpt_8f.html#ad16e674ce87bd762a714853967f81356">spfftpt</a> (M, N, INCW, INCG, KMAX, RLON, W, G)</td></tr>
+<tr class="memdesc:ad16e674ce87bd762a714853967f81356"><td class="mdescLeft">&#160;</td><td class="mdescRight">THIS SUBPROGRAM COMPUTES A SLOW FOURIER TRANSFORM FROM FOURIER SPACE TO A SET OF GRIDPOINTS.  <a href="spfftpt_8f.html#ad16e674ce87bd762a714853967f81356">More...</a><br /></td></tr>
 <tr class="separator:ad16e674ce87bd762a714853967f81356"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute fourier transform to gridpoints </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-20</dd></dl>
-<p>THIS SUBPROGRAM COMPUTES A SLOW FOURIER TRANSFORM FROM FOURIER SPACE TO A SET OF GRIDPOINTS.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-20 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spfftpt_8f_source.html">spfftpt.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ad16e674ce87bd762a714853967f81356"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad16e674ce87bd762a714853967f81356">&#9670;&nbsp;</a></span>spfftpt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spfftpt </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>N</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>INCW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>INCG</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(n), intent(in)&#160;</td>
+          <td class="paramname"><em>RLON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(2*incw,kmax), intent(in)&#160;</td>
+          <td class="paramname"><em>W</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(incg,kmax), intent(out)&#160;</td>
+          <td class="paramname"><em>G</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>THIS SUBPROGRAM COMPUTES A SLOW FOURIER TRANSFORM FROM FOURIER SPACE TO A SET OF GRIDPOINTS. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">M</td><td>- INTEGER FOURIER WAVENUMBER TRUNCATION </td></tr>
@@ -116,8 +181,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spfftpt</b> (M,
 </dl>
 <dl class="section note"><dt>Note</dt><dd>THIS SUBPROGRAM IS THREAD-SAFE. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="spfftpt_8f_source.html">spfftpt.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spfftpt_8f_source.html#l00022">22</a> of file <a class="el" href="spfftpt_8f_source.html">spfftpt.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('sptrunmv_8f_source.html',''); initResi
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; Spectrally interpolate vectors to mercator</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt; @author IREDELL @date 96-02-29</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">C&gt;           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">C&gt;           TO A MERCATOR GRID.</span></div>
@@ -177,11 +177,11 @@ $(document).ready(function(){initNavTree('sptrunmv_8f_source.html',''); initResi
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="comment">C&gt;   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3</span></div>
 <div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;<span class="comment">C&gt;   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1</span></div>
 <div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;<span class="comment">C&gt;   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1</span></div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">SUBROUTINE </span>sptrunmv(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,MI,MJ,</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="sptrunmv_8f.html#a8b405d0621112d6852a3bb99602ac2fd">sptrunmv</a>(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,MI,MJ,</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160;     &amp;                    IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,</div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;     &amp;                    NISKIP,NJSKIP,JCPU,RLAT1,RLON1,DLAT,DLON,</div>
 <div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;     &amp;                    GRIDUI,GRIDVI,LUV,UM,VM,LDZ,DM,ZM,LPS,PM,SM)</div>
-<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno"><a class="line" href="sptrunmv_8f.html#a8b405d0621112d6852a3bb99602ac2fd">   96</a></span>&#160; </div>
 <div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;      <span class="keywordtype">LOGICAL</span> LUV,LDZ,LPS</div>
 <div class="line"><a name="l00098"></a><span class="lineno">   98</span>&#160;      <span class="keywordtype">REAL</span> GRIDUI(*),GRIDVI(*)</div>
 <div class="line"><a name="l00099"></a><span class="lineno">   99</span>&#160;      <span class="keywordtype">REAL</span> UM(*),VM(*),DM(*),ZM(*),PM(*),SM(*)</div>
@@ -195,7 +195,7 @@ $(document).ready(function(){initNavTree('sptrunmv_8f_source.html',''); initResi
 <div class="line"><a name="l00107"></a><span class="lineno">  107</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00108"></a><span class="lineno">  108</span>&#160;<span class="comment">C  TRANSFORM INPUT GRID TO WAVE</span></div>
 <div class="line"><a name="l00109"></a><span class="lineno">  109</span>&#160;      jc=jcpu</div>
-<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="keywordflow">IF</span>(jc.EQ.0) jc=ncpus()</div>
+<div class="line"><a name="l00110"></a><span class="lineno">  110</span>&#160;      <span class="keywordflow">IF</span>(jc.EQ.0) jc=<a class="code" href="ncpus_8F.html#a821a75ee067ea31758a038c0327bd3bd">ncpus</a>()</div>
 <div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;      mx=(maxwv+1)*((iromb+1)*maxwv+2)/2</div>
 <div class="line"><a name="l00112"></a><span class="lineno">  112</span>&#160;      mdim=2*mx+1</div>
 <div class="line"><a name="l00113"></a><span class="lineno">  113</span>&#160;      jn=-jskipi</div>
@@ -203,44 +203,51 @@ $(document).ready(function(){initNavTree('sptrunmv_8f_source.html',''); initResi
 <div class="line"><a name="l00115"></a><span class="lineno">  115</span>&#160;      js=-jn</div>
 <div class="line"><a name="l00116"></a><span class="lineno">  116</span>&#160;      inp=(jmaxi-1)*max(0,-jn)+1</div>
 <div class="line"><a name="l00117"></a><span class="lineno">  117</span>&#160;      isp=(jmaxi-1)*max(0,-js)+1</div>
-<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      <span class="keyword">CALL </span>sptranv(iromb,maxwv,idrti,imaxi,jmaxi,kmax,</div>
+<div class="line"><a name="l00118"></a><span class="lineno">  118</span>&#160;      <span class="keyword">CALL </span><a class="code" href="sptranv_8f.html#a7d6aaa3ed70df1dfaf8dd4443b7190c1">sptranv</a>(iromb,maxwv,idrti,imaxi,jmaxi,kmax,</div>
 <div class="line"><a name="l00119"></a><span class="lineno">  119</span>&#160;     &amp;             iprime,iskipi,jn,js,mdim,kskipi,0,0,jc,</div>
 <div class="line"><a name="l00120"></a><span class="lineno">  120</span>&#160;     &amp;             wd,wz,</div>
 <div class="line"><a name="l00121"></a><span class="lineno">  121</span>&#160;     &amp;             gridui(inp),gridui(isp),gridvi(inp),gridvi(isp),-1)</div>
 <div class="line"><a name="l00122"></a><span class="lineno">  122</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00123"></a><span class="lineno">  123</span>&#160;<span class="comment">C  TRANSFORM WAVE TO OUTPUT WINDS</span></div>
 <div class="line"><a name="l00124"></a><span class="lineno">  124</span>&#160;      <span class="keywordflow">IF</span>(luv) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">CALL </span>sptgpmv(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
+<div class="line"><a name="l00125"></a><span class="lineno">  125</span>&#160;        <span class="keyword">CALL </span><a class="code" href="sptgpmv_8f.html#a15de3accfd448d116324872c8fb1bb17">sptgpmv</a>(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
 <div class="line"><a name="l00126"></a><span class="lineno">  126</span>&#160;     &amp;               rlat1,rlon1,dlat,dlon,wd,wz,um,vm)</div>
 <div class="line"><a name="l00127"></a><span class="lineno">  127</span>&#160;<span class="keywordflow">      ENDIF</span></div>
 <div class="line"><a name="l00128"></a><span class="lineno">  128</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00129"></a><span class="lineno">  129</span>&#160;<span class="comment">C  TRANSFORM WAVE TO OUTPUT DIVERGENCE AND VORTICITY</span></div>
 <div class="line"><a name="l00130"></a><span class="lineno">  130</span>&#160;      <span class="keywordflow">IF</span>(ldz) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">CALL </span>sptgpm(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
+<div class="line"><a name="l00131"></a><span class="lineno">  131</span>&#160;        <span class="keyword">CALL </span><a class="code" href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d">sptgpm</a>(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
 <div class="line"><a name="l00132"></a><span class="lineno">  132</span>&#160;     &amp;              rlat1,rlon1,dlat,dlon,wd,dm)</div>
-<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keyword">CALL </span>sptgpm(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
+<div class="line"><a name="l00133"></a><span class="lineno">  133</span>&#160;        <span class="keyword">CALL </span><a class="code" href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d">sptgpm</a>(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
 <div class="line"><a name="l00134"></a><span class="lineno">  134</span>&#160;     &amp;              rlat1,rlon1,dlat,dlon,wz,zm)</div>
 <div class="line"><a name="l00135"></a><span class="lineno">  135</span>&#160;<span class="keywordflow">      ENDIF</span></div>
 <div class="line"><a name="l00136"></a><span class="lineno">  136</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00137"></a><span class="lineno">  137</span>&#160;<span class="comment">C  TRANSFORM WAVE TO OUTPUT POTENTIAL AND STREAMFUNCTION</span></div>
 <div class="line"><a name="l00138"></a><span class="lineno">  138</span>&#160;      <span class="keywordflow">IF</span>(lps) <span class="keywordflow">THEN</span></div>
-<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keyword">CALL </span>spwget(iromb,maxwv,eps,epstop,enn1,elonn1,eon,eontop)</div>
+<div class="line"><a name="l00139"></a><span class="lineno">  139</span>&#160;        <span class="keyword">CALL </span><a class="code" href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">spwget</a>(iromb,maxwv,eps,epstop,enn1,elonn1,eon,eontop)</div>
 <div class="line"><a name="l00140"></a><span class="lineno">  140</span>&#160;<span class="comment">C$OMP PARALLEL DO</span></div>
 <div class="line"><a name="l00141"></a><span class="lineno">  141</span>&#160;        <span class="keywordflow">DO</span> k=1,kmax</div>
-<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;          <span class="keyword">CALL </span>splaplac(iromb,maxwv,enn1,wd(1,k),wd(1,k),-1)</div>
-<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;          <span class="keyword">CALL </span>splaplac(iromb,maxwv,enn1,wz(1,k),wz(1,k),-1)</div>
+<div class="line"><a name="l00142"></a><span class="lineno">  142</span>&#160;          <span class="keyword">CALL </span><a class="code" href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a>(iromb,maxwv,enn1,wd(1,k),wd(1,k),-1)</div>
+<div class="line"><a name="l00143"></a><span class="lineno">  143</span>&#160;          <span class="keyword">CALL </span><a class="code" href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a>(iromb,maxwv,enn1,wz(1,k),wz(1,k),-1)</div>
 <div class="line"><a name="l00144"></a><span class="lineno">  144</span>&#160;          wd(1:2,k)=0.</div>
 <div class="line"><a name="l00145"></a><span class="lineno">  145</span>&#160;          wz(1:2,k)=0.</div>
 <div class="line"><a name="l00146"></a><span class="lineno">  146</span>&#160;<span class="keywordflow">        ENDDO</span></div>
-<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">CALL </span>sptgpm(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
+<div class="line"><a name="l00147"></a><span class="lineno">  147</span>&#160;        <span class="keyword">CALL </span><a class="code" href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d">sptgpm</a>(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
 <div class="line"><a name="l00148"></a><span class="lineno">  148</span>&#160;     &amp;              rlat1,rlon1,dlat,dlon,wd,pm)</div>
-<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">CALL </span>sptgpm(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
+<div class="line"><a name="l00149"></a><span class="lineno">  149</span>&#160;        <span class="keyword">CALL </span><a class="code" href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d">sptgpm</a>(iromb,maxwv,kmax,mi,mj,mdim,kgskip,niskip,njskip,</div>
 <div class="line"><a name="l00150"></a><span class="lineno">  150</span>&#160;     &amp;              rlat1,rlon1,dlat,dlon,wz,sm)</div>
 <div class="line"><a name="l00151"></a><span class="lineno">  151</span>&#160;<span class="keywordflow">      ENDIF</span></div>
 <div class="line"><a name="l00152"></a><span class="lineno">  152</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00153"></a><span class="lineno">  153</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aspwget_8f_html_a9b6ce78350f7adf2fed874a18312c7a6"><div class="ttname"><a href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">spwget</a></div><div class="ttdeci">subroutine spwget(IROMB, MAXWV, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP)</div><div class="ttdoc">This subprogram gets wave-space constants.</div><div class="ttdef"><b>Definition:</b> <a href="spwget_8f_source.html#l00022">spwget.f:22</a></div></div>
+<div class="ttc" id="asplaplac_8f_html_a64338955857a3cf58283146940e7ae42"><div class="ttname"><a href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a></div><div class="ttdeci">subroutine splaplac(I, M, ENN1, Q, QD2, IDIR)</div><div class="ttdoc">COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE.</div><div class="ttdef"><b>Definition:</b> <a href="splaplac_8f_source.html#l00022">splaplac.f:22</a></div></div>
+<div class="ttc" id="asptgpm_8f_html_a6cffaeaa602eaae5c03166f48065158d"><div class="ttname"><a href="sptgpm_8f.html#a6cffaeaa602eaae5c03166f48065158d">sptgpm</a></div><div class="ttdeci">subroutine sptgpm(IROMB, MAXWV, KMAX, MI, MJ, KWSKIP, KGSKIP, NISKIP, NJSKIP, RLAT1, RLON1, DLAT, DLON, WAVE, GM)</div><div class="ttdoc">This subprogram performs a spherical transform from spectral coefficients of scalar quantities to sca...</div><div class="ttdef"><b>Definition:</b> <a href="sptgpm_8f_source.html#l00059">sptgpm.f:59</a></div></div>
+<div class="ttc" id="asptgpmv_8f_html_a15de3accfd448d116324872c8fb1bb17"><div class="ttname"><a href="sptgpmv_8f.html#a15de3accfd448d116324872c8fb1bb17">sptgpmv</a></div><div class="ttdeci">subroutine sptgpmv(IROMB, MAXWV, KMAX, MI, MJ, KWSKIP, KGSKIP, NISKIP, NJSKIP, RLAT1, RLON1, DLAT, DLON, WAVED, WAVEZ, UM, VM)</div><div class="ttdoc">THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS TO...</div><div class="ttdef"><b>Definition:</b> <a href="sptgpmv_8f_source.html#l00062">sptgpmv.f:62</a></div></div>
+<div class="ttc" id="ancpus_8F_html_a821a75ee067ea31758a038c0327bd3bd"><div class="ttname"><a href="ncpus_8F.html#a821a75ee067ea31758a038c0327bd3bd">ncpus</a></div><div class="ttdeci">function ncpus()</div><div class="ttdoc">Set number of cpus.</div><div class="ttdef"><b>Definition:</b> <a href="ncpus_8F_source.html#l00021">ncpus.F:21</a></div></div>
+<div class="ttc" id="asptranv_8f_html_a7d6aaa3ed70df1dfaf8dd4443b7190c1"><div class="ttname"><a href="sptranv_8f.html#a7d6aaa3ed70df1dfaf8dd4443b7190c1">sptranv</a></div><div class="ttdeci">subroutine sptranv(IROMB, MAXWV, IDRT, IMAX, JMAX, KMAX, IPRIME, ISKIP, JNSKIP, JSSKIP, KWSKIP, KGSKIP, JBEG, JEND, JCPU, WAVED, WAVEZ, GRIDUN, GRIDUS, GRIDVN, GRIDVS, IDIR)</div><div class="ttdoc">THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS...</div><div class="ttdef"><b>Definition:</b> <a href="sptranv_8f_source.html#l00085">sptranv.f:85</a></div></div>
+<div class="ttc" id="asptrunmv_8f_html_a8b405d0621112d6852a3bb99602ac2fd"><div class="ttname"><a href="sptrunmv_8f.html#a8b405d0621112d6852a3bb99602ac2fd">sptrunmv</a></div><div class="ttdeci">subroutine sptrunmv(IROMB, MAXWV, IDRTI, IMAXI, JMAXI, KMAX, MI, MJ, IPRIME, ISKIPI, JSKIPI, KSKIPI, KGSKIP, NISKIP, NJSKIP, JCPU, RLAT1, RLON1, DLAT, DLON, GRIDUI, GRIDVI, LUV, UM, VM, LDZ, DM, ZM, LPS, PM, SM)</div><div class="ttdoc">THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS...</div><div class="ttdef"><b>Definition:</b> <a href="sptrunmv_8f_source.html#l00096">sptrunmv.f:96</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

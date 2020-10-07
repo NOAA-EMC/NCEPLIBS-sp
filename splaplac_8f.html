@@ -93,30 +93,85 @@ $(document).ready(function(){initNavTree('splaplac_8f.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a64338955857a3cf58283146940e7ae42"><td class="memItemLeft" align="right" valign="top"><a id="a64338955857a3cf58283146940e7ae42"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>splaplac</b> (I, M, ENN1, Q, QD2, IDIR)</td></tr>
+<tr class="memitem:a64338955857a3cf58283146940e7ae42"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a> (I, M, ENN1, Q, QD2, IDIR)</td></tr>
+<tr class="memdesc:a64338955857a3cf58283146940e7ae42"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE.  <a href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">More...</a><br /></td></tr>
 <tr class="separator:a64338955857a3cf58283146940e7ae42"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute laplacian in spectral space </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE. SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY. THE LAPLACIAN OF Q(L,N) IS SIMPLY -N*(N+1)/A**2*Q(L,N)</p>
+<dl class="section date"><dt>Date</dt><dd>92-10-31 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="splaplac_8f_source.html">splaplac.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a64338955857a3cf58283146940e7ae42"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a64338955857a3cf58283146940e7ae42">&#9670;&nbsp;</a></span>splaplac()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine splaplac </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>ENN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>Q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>QD2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDIR</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE. </p>
+<p>SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY. THE LAPLACIAN OF Q(L,N) IS SIMPLY -N*(N+1)/A**2*Q(L,N)</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
-    <tr><td class="paramname">M</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
-    <tr><td class="paramname">ENN1</td><td>- REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2 </td></tr>
-    <tr><td class="paramname">Q</td><td>- IF IDIR &gt; 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD </td></tr>
-    <tr><td class="paramname">QD2</td><td>- IF IDIR &lt; 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN </td></tr>
-    <tr><td class="paramname">IDIR</td><td>- INTEGER FLAG IDIR &gt; 0 TO TAKE LAPLACIAN IDIR &lt; 0 TO TAKE INVERSE LAPLACIAN </td></tr>
-    <tr><td class="paramname">Q</td><td>- IF IDIR &lt; 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD (Q(0,0) IS NOT COMPUTED) </td></tr>
-    <tr><td class="paramname">QD2</td><td>- IF IDIR &gt; 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">M</td><td>- INTEGER SPECTRAL TRUNCATION </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">ENN1</td><td>- REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">Q</td><td>- IF IDIR &gt; 0, REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD (Q(0,0) IS NOT COMPUTED) </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">QD2</td><td>- IF IDIR &lt; 0, REAL ((M+1)*((I+1)*M+2)) LAPLACIAN </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IDIR</td><td>- INTEGER FLAG IDIR &gt; 0 TO TAKE LAPLACIAN IDIR &lt; 0 TO TAKE INVERSE LAPLACIAN </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition in file <a class="el" href="splaplac_8f_source.html">splaplac.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="splaplac_8f_source.html#l00022">22</a> of file <a class="el" href="splaplac_8f_source.html">splaplac.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

@@ -93,25 +93,83 @@ $(document).ready(function(){initNavTree('spfft1_8f.html',''); initResizable(); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:ac63643472eda83948c0b249b611346d6"><td class="memItemLeft" align="right" valign="top"><a id="ac63643472eda83948c0b249b611346d6"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spfft1</b> (IMAX, INCW, INCG, KMAX, W, G, IDIR)</td></tr>
+<tr class="memitem:ac63643472eda83948c0b249b611346d6"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spfft1_8f.html#ac63643472eda83948c0b249b611346d6">spfft1</a> (IMAX, INCW, INCG, KMAX, W, G, IDIR)</td></tr>
+<tr class="memdesc:ac63643472eda83948c0b249b611346d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram performs multiple fast fourier transforms between complex amplitudes in fourier space and real values in cyclic physical space.  <a href="spfft1_8f.html#ac63643472eda83948c0b249b611346d6">More...</a><br /></td></tr>
 <tr class="separator:ac63643472eda83948c0b249b611346d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Perform multiple fast fourier transforms </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-20</dd></dl>
-<p>This subprogram performs multiple fast fourier transforms between complex amplitudes in fourier space and real values in cyclic physical space. Subprogram SPFFT1 initializes trigonometric data each call. Use subprogram SPFFT to save time and initialize once. this version invokes the ibm essl fft.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-20 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spfft1_8f_source.html">spfft1.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="ac63643472eda83948c0b249b611346d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac63643472eda83948c0b249b611346d6">&#9670;&nbsp;</a></span>spfft1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spfft1 </td>
+          <td>(</td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>IMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>INCW</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>INCG</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">complex, dimension(incw,kmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>W</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(incg,kmax), intent(inout)&#160;</td>
+          <td class="paramname"><em>G</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">integer, intent(in)&#160;</td>
+          <td class="paramname"><em>IDIR</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram performs multiple fast fourier transforms between complex amplitudes in fourier space and real values in cyclic physical space. </p>
+<p>Subprogram SPFFT1 initializes trigonometric data each call. Use subprogram SPFFT to save time and initialize once. this version invokes the ibm essl fft.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">IMAX</td><td>- INTEGER NUMBER OF VALUES IN THE CYCLIC&gt; PHYSICAL SPACE (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.) </td></tr>
-    <tr><td class="paramname">INCW</td><td>- INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY (INCW &gt;= IMAX/2+1) </td></tr>
-    <tr><td class="paramname">INCG</td><td>- INTEGER FIRST DIMENSION OF THE REAL VALUE ARRAY (INCG &gt;= IMAX) </td></tr>
-    <tr><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF TRANSFORMS TO PERFORM </td></tr>
-    <tr><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR&gt;0 </td></tr>
-    <tr><td class="paramname">G</td><td>- REAL(INCG,KMAX) REAL VALUES IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">IDIR</td><td>- INTEGER DIRECTION FLAG IDIR&gt;0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE IDIR&lt;0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE </td></tr>
-    <tr><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR&lt;0 </td></tr>
-    <tr><td class="paramname">G</td><td>- REAL(INCG,KMAX) REAL VALUES IF IDIR&gt;0</td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IMAX</td><td>- INTEGER NUMBER OF VALUES IN THE CYCLIC&gt; PHYSICAL SPACE (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">INCW</td><td>- INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY (INCW &gt;= IMAX/2+1) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">INCG</td><td>- INTEGER FIRST DIMENSION OF THE REAL VALUE ARRAY (INCG &gt;= IMAX) </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">KMAX</td><td>- INTEGER NUMBER OF TRANSFORMS TO PERFORM </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">W</td><td>- COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR&gt;0 </td></tr>
+    <tr><td class="paramdir">[out]</td><td class="paramname">G</td><td>- REAL(INCG,KMAX) REAL VALUES IF IDIR&lt;0 </td></tr>
+    <tr><td class="paramdir"></td><td class="paramname">IDIR</td><td>- INTEGER DIRECTION FLAG IDIR&gt;0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE IDIR&lt;0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE</td></tr>
   </table>
   </dd>
 </dl>
@@ -123,8 +181,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spfft1</b> (IMA
 <dd>
 This subprogram is thread-safe. </dd></dl>
 
-<p class="definition">Definition in file <a class="el" href="spfft1_8f_source.html">spfft1.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spfft1_8f_source.html#l00036">36</a> of file <a class="el" href="spfft1_8f_source.html">spfft1.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

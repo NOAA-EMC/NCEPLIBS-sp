@@ -93,14 +93,134 @@ $(document).ready(function(){initNavTree('sptgpsv_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:af2bf2335047ec277730564dbfa859079"><td class="memItemLeft" align="right" valign="top"><a id="af2bf2335047ec277730564dbfa859079"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpsv</b> (IROMB, MAXWV, KMAX, NPS, KWSKIP, KGSKIP, NISKIP, NJSKIP, TRUE, XMESH, ORIENT, WAVED, WAVEZ, UN, VN, US, VS)</td></tr>
+<tr class="memitem:af2bf2335047ec277730564dbfa859079"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptgpsv_8f.html#af2bf2335047ec277730564dbfa859079">sptgpsv</a> (IROMB, MAXWV, KMAX, NPS, KWSKIP, KGSKIP, NISKIP, NJSKIP, TRUE, XMESH, ORIENT, WAVED, WAVEZ, UN, VN, US, VS)</td></tr>
+<tr class="memdesc:af2bf2335047ec277730564dbfa859079"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram performs a spherical transform from spectral coefficients of divergences and curls to vector fields on a pair of polar stereographic grids.  <a href="sptgpsv_8f.html#af2bf2335047ec277730564dbfa859079">More...</a><br /></td></tr>
 <tr class="separator:af2bf2335047ec277730564dbfa859079"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Transform spectral vector to polar stereo. </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>This subprogram performs a spherical transform from spectral coefficients of divergences and curls to vector fields on a pair of polar stereographic grids. The wave-space can be either triangular or rhomboidal. The wave and grid fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The two square polar stereographic grids are centered on the respective poles, with the orientation longitude of the southern hemisphere grid 180 degrees opposite that of the northern hemisphere grid. The vectors are automatically rotated to be resolved relative to the respective polar stereographic grids.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptgpsv_8f_source.html">sptgpsv.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="af2bf2335047ec277730564dbfa859079"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af2bf2335047ec277730564dbfa859079">&#9670;&nbsp;</a></span>sptgpsv()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptgpsv </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NPS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KWSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KGSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NISKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NJSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>TRUE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>XMESH</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>ORIENT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVED</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVEZ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>UN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>VN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>US</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>VS</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram performs a spherical transform from spectral coefficients of divergences and curls to vector fields on a pair of polar stereographic grids. </p>
+<p>The wave-space can be either triangular or rhomboidal. The wave and grid fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The two square polar stereographic grids are centered on the respective poles, with the orientation longitude of the southern hemisphere grid 180 degrees opposite that of the northern hemisphere grid. The vectors are automatically rotated to be resolved relative to the respective polar stereographic grids.</p>
 <p>The transform is made efficient by combining points in eight sectors of each polar stereographic grid, <br  />
  numbered as in the diagram below. The pole and the sector boundaries <br  />
  are treated specially in the code. <br  />
@@ -148,8 +268,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpsv</b> (IR
 <li>SPDZ2UV() COMPUTE WINDS FROM DIVERGENCE AND VORTICITY </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="sptgpsv_8f_source.html">sptgpsv.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptgpsv_8f_source.html#l00081">81</a> of file <a class="el" href="sptgpsv_8f_source.html">sptgpsv.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

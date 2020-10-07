@@ -93,14 +93,128 @@ $(document).ready(function(){initNavTree('sptgpmd_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:af71718c75a2b24b74fa7e1e4318d0539"><td class="memItemLeft" align="right" valign="top"><a id="af71718c75a2b24b74fa7e1e4318d0539"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpmd</b> (IROMB, MAXWV, KMAX, MI, MJ, KWSKIP, KGSKIP, NISKIP, NJSKIP, RLAT1, RLON1, DLAT, DLON, WAVE, XM, YM)</td></tr>
+<tr class="memitem:af71718c75a2b24b74fa7e1e4318d0539"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptgpmd_8f.html#af71718c75a2b24b74fa7e1e4318d0539">sptgpmd</a> (IROMB, MAXWV, KMAX, MI, MJ, KWSKIP, KGSKIP, NISKIP, NJSKIP, RLAT1, RLON1, DLAT, DLON, WAVE, XM, YM)</td></tr>
+<tr class="memdesc:af71718c75a2b24b74fa7e1e4318d0539"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram performs a spherical transform from spectral coefficients of scalar fields to gradient fields on a mercator grid.  <a href="sptgpmd_8f.html#af71718c75a2b24b74fa7e1e4318d0539">More...</a><br /></td></tr>
 <tr class="separator:af71718c75a2b24b74fa7e1e4318d0539"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Transform spectral to mercator gradients </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>This subprogram performs a spherical transform from spectral coefficients of scalar fields to gradient fields on a mercator grid. The wave-space can be either triangular or rhomboidal. The wave and grid fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The mercator grid is identified by the location of its first point and by its respective increments. The transforms are all multiprocessed over sector points. Transform several fields at a time to improve vectorization. subprogram can be called from a multiprocessing environment.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptgpmd_8f_source.html">sptgpmd.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="af71718c75a2b24b74fa7e1e4318d0539"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af71718c75a2b24b74fa7e1e4318d0539">&#9670;&nbsp;</a></span>sptgpmd()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptgpmd </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MI</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MJ</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KWSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KGSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NISKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NJSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>RLAT1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>RLON1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>DLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>DLON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>XM</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>YM</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram performs a spherical transform from spectral coefficients of scalar fields to gradient fields on a mercator grid. </p>
+<p>The wave-space can be either triangular or rhomboidal. The wave and grid fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The mercator grid is identified by the location of its first point and by its respective increments. The transforms are all multiprocessed over sector points. Transform several fields at a time to improve vectorization. subprogram can be called from a multiprocessing environment.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">IROMB</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
@@ -128,8 +242,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpmd</b> (IR
 <li>SPTGPMV() TRANSFORM SPECTRAL VECTOR TO MERCATOR </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="sptgpmd_8f_source.html">sptgpmd.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptgpmd_8f_source.html#l00056">56</a> of file <a class="el" href="sptgpmd_8f_source.html">sptgpmd.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

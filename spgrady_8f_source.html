@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('spgrady_8f_source.html',''); initResiz
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; Compute y-gradient in spectral space</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt; @author IREDELL @date 92-10-31</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; COMPUTES THE HORIZONTAL VECTOR Y-GRADIENT OF A SCALAR FIELD</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">C&gt; IN SPECTRAL SPACE.</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">C&gt; SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY.</span></div>
@@ -111,8 +111,8 @@ $(document).ready(function(){initNavTree('spgrady_8f_source.html',''); initResiz
 <div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="comment">C&gt; @param Q        - REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD</span></div>
 <div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="comment">C&gt; @param QDY      - REAL ((M+1)*((I+1)*M+2)) MERID GRADIENT (TIMES COSLAT)</span></div>
 <div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">C&gt; @param QDYTOP   - REAL (2*(M+1)) MERID GRADIENT (TIMES COSLAT) OVER TOP</span></div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      <span class="keyword">SUBROUTINE </span>spgrady(I,M,ENN1,EON,EONTOP,Q,QDY,QDYTOP)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160; </div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="spgrady_8f.html#a1b3e38e56560de7d7dcf19ea3e931cf1">spgrady</a>(I,M,ENN1,EON,EONTOP,Q,QDY,QDYTOP)</div>
+<div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="spgrady_8f.html#a1b3e38e56560de7d7dcf19ea3e931cf1">   27</a></span>&#160; </div>
 <div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="keywordtype">      REAL</span> ENN1((M+1)*((I+1)*M+2)/2)</div>
 <div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;<span class="keywordtype">      REAL</span> EON((M+1)*((I+1)*M+2)/2),EONTOP(M+1)</div>
 <div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="keywordtype">      REAL</span> Q((M+1)*((I+1)*M+2))</div>
@@ -142,6 +142,7 @@ $(document).ready(function(){initNavTree('spgrady_8f_source.html',''); initResiz
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aspgrady_8f_html_a1b3e38e56560de7d7dcf19ea3e931cf1"><div class="ttname"><a href="spgrady_8f.html#a1b3e38e56560de7d7dcf19ea3e931cf1">spgrady</a></div><div class="ttdeci">subroutine spgrady(I, M, ENN1, EON, EONTOP, Q, QDY, QDYTOP)</div><div class="ttdoc">COMPUTES THE HORIZONTAL VECTOR Y-GRADIENT OF A SCALAR FIELD IN SPECTRAL SPACE.</div><div class="ttdef"><b>Definition:</b> <a href="spgrady_8f_source.html#l00027">spgrady.f:27</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

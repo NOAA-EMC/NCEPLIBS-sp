@@ -93,14 +93,92 @@ $(document).ready(function(){initNavTree('spgradq_8f.html',''); initResizable();
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a0bb358cf2a405ce9f17c6e5dfde65849"><td class="memItemLeft" align="right" valign="top"><a id="a0bb358cf2a405ce9f17c6e5dfde65849"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spgradq</b> (I, M, ENN1, ELONN1, EON, EONTOP, Q, QDX, QDY, QDYTOP)</td></tr>
+<tr class="memitem:a0bb358cf2a405ce9f17c6e5dfde65849"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="spgradq_8f.html#a0bb358cf2a405ce9f17c6e5dfde65849">spgradq</a> (I, M, ENN1, ELONN1, EON, EONTOP, Q, QDX, QDY, QDYTOP)</td></tr>
+<tr class="memdesc:a0bb358cf2a405ce9f17c6e5dfde65849"><td class="mdescLeft">&#160;</td><td class="mdescRight">COMPUTES THE HORIZONTAL VECTOR GRADIENT OF A SCALAR FIELD IN SPECTRAL SPACE.  <a href="spgradq_8f.html#a0bb358cf2a405ce9f17c6e5dfde65849">More...</a><br /></td></tr>
 <tr class="separator:a0bb358cf2a405ce9f17c6e5dfde65849"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Compute gradient in spectral space </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>92-10-31</dd></dl>
-<p>COMPUTES THE HORIZONTAL VECTOR GRADIENT OF A SCALAR FIELD IN SPECTRAL SPACE. SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY. IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER, EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) AND A IS EARTH RADIUS, THEN THE ZONAL GRADIENT OF Q(L,N) IS SIMPLY I*L/A*Q(L,N) WHILE THE MERIDIONAL GRADIENT OF Q(L,N) IS COMPUTED AS EPS(L,N+1)*(N+2)/A*Q(L,N+1)-EPS(L,N+1)*(N-1)/A*Q(L,N-1). EXTRA TERMS ARE COMPUTED OVER TOP OF THE SPECTRAL DOMAIN. ADVANTAGE IS TAKEN OF THE FACT THAT EPS(L,L)=0 IN ORDER TO VECTORIZE OVER THE ENTIRE SPECTRAL DOMAIN.</p>
+<dl class="section date"><dt>Date</dt><dd>92-10-31 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="spgradq_8f_source.html">spgradq.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a0bb358cf2a405ce9f17c6e5dfde65849"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0bb358cf2a405ce9f17c6e5dfde65849">&#9670;&nbsp;</a></span>spgradq()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine spgradq </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>I</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>M</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>ENN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>ELONN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2)/2)&#160;</td>
+          <td class="paramname"><em>EON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(m+1)&#160;</td>
+          <td class="paramname"><em>EONTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>Q</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>QDX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((m+1)*((i+1)*m+2))&#160;</td>
+          <td class="paramname"><em>QDY</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(2*(m+1))&#160;</td>
+          <td class="paramname"><em>QDYTOP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>COMPUTES THE HORIZONTAL VECTOR GRADIENT OF A SCALAR FIELD IN SPECTRAL SPACE. </p>
+<p>SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY. IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER, EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) AND A IS EARTH RADIUS, THEN THE ZONAL GRADIENT OF Q(L,N) IS SIMPLY I*L/A*Q(L,N) WHILE THE MERIDIONAL GRADIENT OF Q(L,N) IS COMPUTED AS EPS(L,N+1)*(N+2)/A*Q(L,N+1)-EPS(L,N+1)*(N-1)/A*Q(L,N-1). EXTRA TERMS ARE COMPUTED OVER TOP OF THE SPECTRAL DOMAIN. ADVANTAGE IS TAKEN OF THE FACT THAT EPS(L,L)=0 IN ORDER TO VECTORIZE OVER THE ENTIRE SPECTRAL DOMAIN.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">I</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
@@ -117,8 +195,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>spgradq</b> (I,
   </dd>
 </dl>
 
-<p class="definition">Definition in file <a class="el" href="spgradq_8f_source.html">spgradq.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="spgradq_8f_source.html#l00030">30</a> of file <a class="el" href="spgradq_8f_source.html">spgradq.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

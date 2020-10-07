@@ -93,14 +93,146 @@ $(document).ready(function(){initNavTree('sptranf0_8f.html',''); initResizable()
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:aaf9f9002ccd7074dc04dbc40a5aad9f0"><td class="memItemLeft" align="right" valign="top"><a id="aaf9f9002ccd7074dc04dbc40a5aad9f0"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptranf0</b> (IROMB, MAXWV, IDRT, IMAX, JMAX, JB, JE, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP, AFFT, CLAT, SLAT, WLAT, PLN, PLNTOP)</td></tr>
+<tr class="memitem:aaf9f9002ccd7074dc04dbc40a5aad9f0"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptranf0_8f.html#aaf9f9002ccd7074dc04dbc40a5aad9f0">sptranf0</a> (IROMB, MAXWV, IDRT, IMAX, JMAX, JB, JE, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP, AFFT, CLAT, SLAT, WLAT, PLN, PLNTOP)</td></tr>
+<tr class="memdesc:aaf9f9002ccd7074dc04dbc40a5aad9f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram performs an initialization for subprogram <a class="el" href="sptranf_8f.html#acf086b5141203e48bdb7250441a16c8c" title="This subprogram performs a spherical transform between spectral coefficients of scalar quantities and...">sptranf()</a>.  <a href="sptranf0_8f.html#aaf9f9002ccd7074dc04dbc40a5aad9f0">More...</a><br /></td></tr>
 <tr class="separator:aaf9f9002ccd7074dc04dbc40a5aad9f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Sptranf spectral initialization </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>THIS SUBPROGRAM PERFORMS AN INITIALIZATION FOR SUBPROGRAM SPTRANF. USE THIS SUBPROGRAM OUTSIDE THE SPTRANF FAMILY CONTEXT AT YOUR OWN RISK.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptranf0_8f_source.html">sptranf0.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="aaf9f9002ccd7074dc04dbc40a5aad9f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf9f9002ccd7074dc04dbc40a5aad9f0">&#9670;&nbsp;</a></span>sptranf0()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptranf0 </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IDRT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>JE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>EPS</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(maxwv+1)&#160;</td>
+          <td class="paramname"><em>EPSTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>ENN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>ELONN1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2)&#160;</td>
+          <td class="paramname"><em>EON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(maxwv+1)&#160;</td>
+          <td class="paramname"><em>EONTOP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real(8), dimension(50000+4*imax)&#160;</td>
+          <td class="paramname"><em>AFFT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(jb:je)&#160;</td>
+          <td class="paramname"><em>CLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(jb:je)&#160;</td>
+          <td class="paramname"><em>SLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(jb:je)&#160;</td>
+          <td class="paramname"><em>WLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension((maxwv+1)*((iromb+1)*maxwv+2)/2,jb:je)&#160;</td>
+          <td class="paramname"><em>PLN</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(maxwv+1,jb:je)&#160;</td>
+          <td class="paramname"><em>PLNTOP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram performs an initialization for subprogram <a class="el" href="sptranf_8f.html#acf086b5141203e48bdb7250441a16c8c" title="This subprogram performs a spherical transform between spectral coefficients of scalar quantities and...">sptranf()</a>. </p>
+<p>Use this subprogram outside the sptranf family context at your own risk.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">IROMB</td><td>- INTEGER SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL) </td></tr>
@@ -126,14 +258,17 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptranf0</b> (I
   </dd>
 </dl>
 <p>SUBPROGRAMS CALLED:</p><ul>
-<li>SPWGET GET WAVE-SPACE CONSTANTS</li>
-<li>SPFFTE PERFORM FAST FOURIER TRANSFORM</li>
-<li>SPLAT COMPUTE LATITUDE FUNCTIONS</li>
-<li>SPLEGEND COMPUTE LEGENDRE POLYNOMIALS </li>
+<li><a class="el" href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6" title="This subprogram gets wave-space constants.">spwget()</a> GET WAVE-SPACE CONSTANTS</li>
+<li><a class="el" href="spffte_8f.html#af06489254bd3e99030b39744fce32233" title="This subprogram performs multiple fast fourier transforms between complex amplitudes in fourier space...">spffte()</a> PERFORM FAST FOURIER TRANSFORM</li>
+<li><a class="el" href="splat_8F.html#aa6db21451bb67635e7e4426546140e11" title="Computes cosines of colatitude and gaussian weights for one of the following specific global sets of ...">splat()</a> COMPUTE LATITUDE FUNCTIONS</li>
+<li><a class="el" href="splegend_8f.html#a9c68adc80e97c43ac983b955dd6cabac" title="Evaluates the orthonormal associated legendre polynomials in the spectral domain at a given latitude.">splegend()</a> COMPUTE LEGENDRE POLYNOMIALS </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="sptranf0_8f_source.html">sptranf0.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptranf0_8f_source.html#l00044">44</a> of file <a class="el" href="sptranf0_8f_source.html">sptranf0.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

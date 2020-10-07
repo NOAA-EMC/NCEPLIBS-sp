@@ -93,14 +93,104 @@ $(document).ready(function(){initNavTree('sptgpt_8f.html',''); initResizable(); 
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
 Functions/Subroutines</h2></td></tr>
-<tr class="memitem:a1b8d333bcc601e5b7e8d3dd1369f54b1"><td class="memItemLeft" align="right" valign="top"><a id="a1b8d333bcc601e5b7e8d3dd1369f54b1"></a>
-subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpt</b> (IROMB, MAXWV, KMAX, NMAX, KWSKIP, KGSKIP, NRSKIP, NGSKIP, RLAT, RLON, WAVE, GP)</td></tr>
+<tr class="memitem:a1b8d333bcc601e5b7e8d3dd1369f54b1"><td class="memItemLeft" align="right" valign="top">subroutine&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="sptgpt_8f.html#a1b8d333bcc601e5b7e8d3dd1369f54b1">sptgpt</a> (IROMB, MAXWV, KMAX, NMAX, KWSKIP, KGSKIP, NRSKIP, NGSKIP, RLAT, RLON, WAVE, GP)</td></tr>
+<tr class="memdesc:a1b8d333bcc601e5b7e8d3dd1369f54b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">This subprogram performs a spherical transform from spectral coefficients of scalar quantities to specified sets of station points on the globe.  <a href="sptgpt_8f.html#a1b8d333bcc601e5b7e8d3dd1369f54b1">More...</a><br /></td></tr>
 <tr class="separator:a1b8d333bcc601e5b7e8d3dd1369f54b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Transform spectral scalar to station points </p><dl class="section author"><dt>Author</dt><dd>IREDELL </dd></dl>
-<dl class="section date"><dt>Date</dt><dd>96-02-29</dd></dl>
-<p>This subprogram performs a spherical transform from spectral coefficients of scalar quantities to specified sets of station points on the globe. The wave-space can be either triangular or rhomboidal. The wave and point fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The transforms are all multiprocessed over stations. Transform several fields at a time to improve vectorization. Subprogram can be called from a multiprocessing environment.</p>
+<dl class="section date"><dt>Date</dt><dd>96-02-29 </dd></dl>
+
+<p class="definition">Definition in file <a class="el" href="sptgpt_8f_source.html">sptgpt.f</a>.</p>
+</div><h2 class="groupheader">Function/Subroutine Documentation</h2>
+<a id="a1b8d333bcc601e5b7e8d3dd1369f54b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1b8d333bcc601e5b7e8d3dd1369f54b1">&#9670;&nbsp;</a></span>sptgpt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">subroutine sptgpt </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>IROMB</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>MAXWV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NMAX</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KWSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>KGSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NRSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>NGSKIP</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>RLAT</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>RLON</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>WAVE</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">real, dimension(*)&#160;</td>
+          <td class="paramname"><em>GP</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>This subprogram performs a spherical transform from spectral coefficients of scalar quantities to specified sets of station points on the globe. </p>
+<p>The wave-space can be either triangular or rhomboidal. The wave and point fields may have general indexing, but each wave field is in sequential 'ibm order', i.e. with zonal wavenumber as the slower index. The transforms are all multiprocessed over stations. Transform several fields at a time to improve vectorization. Subprogram can be called from a multiprocessing environment.</p>
 <p>PROGRAM HISTORY LOG:</p><ul>
 <li>96-02-29 IREDELL</li>
 <li>1998-12-15 IREDELL OPENMP DIRECTIVES INSERTED</li>
@@ -130,8 +220,11 @@ subroutine&#160;</td><td class="memItemRight" valign="bottom"><b>sptgpt</b> (IRO
 <li>SPFFTPT() POINTWISE FOURIER TRANSFORM </li>
 </ul>
 
-<p class="definition">Definition in file <a class="el" href="sptgpt_8f_source.html">sptgpt.f</a>.</p>
-</div></div><!-- contents -->
+<p class="definition">Definition at line <a class="el" href="sptgpt_8f_source.html#l00048">48</a> of file <a class="el" href="sptgpt_8f_source.html">sptgpt.f</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->

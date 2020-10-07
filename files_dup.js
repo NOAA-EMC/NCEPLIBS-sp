@@ -1,5 +1,8 @@
 var files_dup =
 [
+    [ "fftpack.F", "fftpack_8F_source.html", null ],
+    [ "lapack_gen.F", "lapack__gen_8F_source.html", null ],
+    [ "ncpus.F", "ncpus_8F.html", "ncpus_8F" ],
     [ "spanaly.f", "spanaly_8f.html", "spanaly_8f" ],
     [ "spdz2uv.f", "spdz2uv_8f.html", "spdz2uv_8f" ],
     [ "speps.f", "speps_8f.html", "speps_8f" ],
@@ -11,6 +14,7 @@ var files_dup =
     [ "spgradx.f", "spgradx_8f.html", "spgradx_8f" ],
     [ "spgrady.f", "spgrady_8f.html", "spgrady_8f" ],
     [ "splaplac.f", "splaplac_8f.html", "splaplac_8f" ],
+    [ "splat.F", "splat_8F.html", "splat_8F" ],
     [ "splegend.f", "splegend_8f.html", "splegend_8f" ],
     [ "sppad.f", "sppad_8f.html", "sppad_8f" ],
     [ "spsynth.f", "spsynth_8f.html", "spsynth_8f" ],

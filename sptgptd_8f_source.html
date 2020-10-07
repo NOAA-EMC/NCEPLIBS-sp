@@ -90,7 +90,7 @@ $(document).ready(function(){initNavTree('sptgptd_8f_source.html',''); initResiz
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="comment">C&gt;</span></div>
 <div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="comment">C&gt; Transform spectral to station point gradients</span></div>
 <div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="comment">C&gt; @author IREDELL @date 96-02-29</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="comment">C&gt;</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160; </div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">C&gt; This subprogram performs a spherical transform</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="comment">c&gt; from spectral coefficients of scalar fields</span></div>
 <div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="comment">c&gt; to specified sets of station point gradients on the globe.</span></div>
@@ -129,10 +129,10 @@ $(document).ready(function(){initNavTree('sptgptd_8f_source.html',''); initResiz
 <div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="comment">C&gt;   - SPWGET()       GET WAVE-SPACE CONSTANTS</span></div>
 <div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="comment">C&gt;   - SPLAPLAC()     COMPUTE LAPLACIAN IN SPECTRAL SPACE</span></div>
 <div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="comment">C&gt;   - SPTGPTV()      TRANSFORM SPECTRAL VECTOR TO STATION POINTS</span></div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keyword">SUBROUTINE </span>sptgptd(IROMB,MAXWV,KMAX,NMAX,</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;      <span class="keyword">SUBROUTINE </span><a class="code" href="sptgptd_8f.html#a64d1fe761662182ca3495531152d1cd3">sptgptd</a>(IROMB,MAXWV,KMAX,NMAX,</div>
 <div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;     &amp;                   KWSKIP,KGSKIP,NRSKIP,NGSKIP,</div>
 <div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;     &amp;                   RLAT,RLON,WAVE,XP,YP)</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="sptgptd_8f.html#a64d1fe761662182ca3495531152d1cd3">   47</a></span>&#160; </div>
 <div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keywordtype">      REAL</span> RLAT(*),RLON(*),WAVE(*),XP(*),YP(*)</div>
 <div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      <span class="keywordtype">REAL</span> EPS((MAXWV+1)*((IROMB+1)*MAXWV+2)/2),EPSTOP(MAXWV+1)</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;<span class="keywordtype">      REAL</span> ENN1((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)</div>
@@ -142,7 +142,7 @@ $(document).ready(function(){initNavTree('sptgptd_8f_source.html',''); initResiz
 <div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;<span class="keywordtype">      REAL</span> WZ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)</div>
 <div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="comment">C  CALCULATE PRELIMINARY CONSTANTS</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keyword">CALL </span>spwget(iromb,maxwv,eps,epstop,enn1,elonn1,eon,eontop)</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;      <span class="keyword">CALL </span><a class="code" href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">spwget</a>(iromb,maxwv,eps,epstop,enn1,elonn1,eon,eontop)</div>
 <div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;      mx=(maxwv+1)*((iromb+1)*maxwv+2)/2</div>
 <div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;      mdim=2*mx+1</div>
 <div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;      kw=kwskip</div>
@@ -152,15 +152,19 @@ $(document).ready(function(){initNavTree('sptgptd_8f_source.html',''); initResiz
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">C$OMP PARALLEL DO PRIVATE(KWS)</span></div>
 <div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;      <span class="keywordflow">DO</span> k=1,kmax</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        kws=(k-1)*kw</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">CALL </span>splaplac(iromb,maxwv,enn1,wave(kws+1),wd(1,k),1)</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;        <span class="keyword">CALL </span><a class="code" href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a>(iromb,maxwv,enn1,wave(kws+1),wd(1,k),1)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        wz(1:2*mx,k)=0.</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="keywordflow">      ENDDO</span></div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">CALL </span>sptgptv(iromb,maxwv,kmax,nmax,mdim,kgskip,nrskip,ngskip,</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;      <span class="keyword">CALL </span><a class="code" href="sptgptv_8f.html#a9af8a22564d132a887a5237f30710f13">sptgptv</a>(iromb,maxwv,kmax,nmax,mdim,kgskip,nrskip,ngskip,</div>
 <div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;     &amp;             rlat,rlon,wd,wz,xp,yp)</div>
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment">C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</span></div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;      <span class="keyword">END</span></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
+<div class="ttc" id="aspwget_8f_html_a9b6ce78350f7adf2fed874a18312c7a6"><div class="ttname"><a href="spwget_8f.html#a9b6ce78350f7adf2fed874a18312c7a6">spwget</a></div><div class="ttdeci">subroutine spwget(IROMB, MAXWV, EPS, EPSTOP, ENN1, ELONN1, EON, EONTOP)</div><div class="ttdoc">This subprogram gets wave-space constants.</div><div class="ttdef"><b>Definition:</b> <a href="spwget_8f_source.html#l00022">spwget.f:22</a></div></div>
+<div class="ttc" id="asplaplac_8f_html_a64338955857a3cf58283146940e7ae42"><div class="ttname"><a href="splaplac_8f.html#a64338955857a3cf58283146940e7ae42">splaplac</a></div><div class="ttdeci">subroutine splaplac(I, M, ENN1, Q, QD2, IDIR)</div><div class="ttdoc">COMPUTES THE LAPLACIAN OR THE INVERSE LAPLACIAN OF A SCALAR FIELD IN SPECTRAL SPACE.</div><div class="ttdef"><b>Definition:</b> <a href="splaplac_8f_source.html#l00022">splaplac.f:22</a></div></div>
+<div class="ttc" id="asptgptd_8f_html_a64d1fe761662182ca3495531152d1cd3"><div class="ttname"><a href="sptgptd_8f.html#a64d1fe761662182ca3495531152d1cd3">sptgptd</a></div><div class="ttdeci">subroutine sptgptd(IROMB, MAXWV, KMAX, NMAX, KWSKIP, KGSKIP, NRSKIP, NGSKIP, RLAT, RLON, WAVE, XP, YP)</div><div class="ttdoc">This subprogram performs a spherical transform from spectral coefficients of scalar fields to specifi...</div><div class="ttdef"><b>Definition:</b> <a href="sptgptd_8f_source.html#l00047">sptgptd.f:47</a></div></div>
+<div class="ttc" id="asptgptv_8f_html_a9af8a22564d132a887a5237f30710f13"><div class="ttname"><a href="sptgptv_8f.html#a9af8a22564d132a887a5237f30710f13">sptgptv</a></div><div class="ttdeci">subroutine sptgptv(IROMB, MAXWV, KMAX, NMAX, KWSKIP, KGSKIP, NRSKIP, NGSKIP, RLAT, RLON, WAVED, WAVEZ, UP, VP)</div><div class="ttdoc">THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS TO...</div><div class="ttdef"><b>Definition:</b> <a href="sptgptv_8f_source.html#l00052">sptgptv.f:52</a></div></div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>

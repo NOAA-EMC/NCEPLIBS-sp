@@ -23,7 +23,7 @@ for the JavaScript code in this file
 var NAVTREE =
 [
   [ "NCEPLIBS-sp", "index.html", [
-    [ "Documentation of the spectral transform library splib", "index.html", [
+    [ "Documentation of the spectral transform library splib", "index.html#autotoc_md0", [
       [ "Introduction", "index.html#autotoc_md1", null ],
       [ "Entry point list", "index.html#autotoc_md2", null ],
       [ "Examples", "index.html#autotoc_md3", null ]
@@ -32,7 +32,7 @@ var NAVTREE =
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
-        [ "Functions", "globals_func.html", null ]
+        [ "Functions/Subroutines", "globals_func.html", null ]
       ] ]
     ] ]
   ] ]
@@ -40,7 +40,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"files.html"
+"fftpack_8F_source.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
