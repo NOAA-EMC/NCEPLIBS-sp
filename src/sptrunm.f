@@ -2,17 +2,16 @@ C> @file
 C>
 C> Spectrally interpolate scalars to mercator
 C> @author IREDELL @date 96-02-29
-
-C> THIS SUBPROGRAM SPECTRALLY TRUNCATES SCALAR FIELDS
-C>           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
-C>           TO A MERCATOR GRID.
-C>           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C>           THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C>           (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C>           THE GRID FIELDS MAY HAVE GENERAL INDEXING.
-C>           THE TRANSFORMS ARE ALL MULTIPROCESSED.
-C>           TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C>           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> 
+C> This subprogram spectrally truncates scalar fields on a global
+C> cylindrical grid, returning the fields to a mercator grid. The
+C> wave-space can be either triangular or rhomboidal. The grid-space
+C> can be either an equally-spaced grid (with or without pole
+C> points) or a gaussian grid. The grid fields may have general
+C> indexing. The transforms are all multiprocessed. Transform
+C> several fields at a time to improve vectorization. Subprogram can
+C> be called from a multiprocessing environment.
+C> 
 C>
 C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
 C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
