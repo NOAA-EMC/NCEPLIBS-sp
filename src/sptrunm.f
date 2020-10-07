@@ -2,7 +2,7 @@ C> @file
 C>
 C> Spectrally interpolate scalars to mercator
 C> @author IREDELL @date 96-02-29
-C> 
+
 C> This subprogram spectrally truncates scalar fields on a global
 C> cylindrical grid, returning the fields to a mercator grid. The
 C> wave-space can be either triangular or rhomboidal. The grid-space
@@ -58,20 +58,21 @@ C> @param GRIDI    - REAL (*) INPUT GRID FIELDS
 C> @param GM       - REAL (*) MERCATOR FIELDS
 C>
 C> SUBPROGRAMS CALLED:
-C>   - SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
-C>   - SPTGPM       TRANSFORM SPECTRAL SCALAR TO MERCATOR
-C>   - NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C>   - sptran()       Perform a scalar spherical transform
+C>   - sptgpm()       Transform spectral scalar to mercator
+C>   - ncpus()        Gets environment number of cpus
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    |LINEAR              |QUADRATIC
-C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C> MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
+C> DIMENSION                    |LINEAR             |QUADRATIC
+C> -----------------------      |---------          |-------------
+C> IMAX                         | 2*MAXWV+2         | 3*MAXWV/2*2+2
+C> JMAX (IDRT=4,IROMB=0)        | 1*MAXWV+1         | 3*MAXWV/2+1
+C> JMAX (IDRT=4,IROMB=1)        | 2*MAXWV+1         | 5*MAXWV/2+1
+C> JMAX (IDRT=0,IROMB=0)        | 2*MAXWV+3         | 3*MAXWV/2*2+3
+C> JMAX (IDRT=0,IROMB=1)        | 4*MAXWV+3         | 5*MAXWV/2*2+3
+C> JMAX (IDRT=256,IROMB=0)      | 2*MAXWV+1         | 3*MAXWV/2*2+1
+C> JMAX (IDRT=256,IROMB=1)      | 4*MAXWV+1         | 5*MAXWV/2*2+1
+C>
       SUBROUTINE SPTRUNM(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,MI,MJ,
      &                   IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
      &                   NISKIP,NJSKIP,JCPU,RLAT1,RLON1,DLAT,DLON,
