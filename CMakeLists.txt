@@ -1,6 +1,6 @@
 # This is the main CMake file for NCEPLIBS-sp.
 #
-# Mark Potts, Kyle Gerheiser
+# Mark Potts, Kyle Gerheiser, Ed Hartnett
 cmake_minimum_required(VERSION 3.15)
 
 # Get the version from the VERSION file.
@@ -20,6 +20,16 @@ if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
     CACHE STRING "Choose the type of build." FORCE)
   set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Debug" "Release"
     "MinSizeRel" "RelWithDebInfo")
+endif()
+
+# If the user selected openmp, find it.
+if(OPENMP)
+  find_package(OpenMP REQUIRED COMPONENTS Fortran)
+endif()
+
+# If we have openmp, add its compile definitions.
+if(OpenMP_FOUND)
+  add_compile_definitions(OPENMP)
 endif()
 
 # This is where the library code is.
