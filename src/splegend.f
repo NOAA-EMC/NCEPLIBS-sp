@@ -3,22 +3,24 @@ C>
 C> Compute legendre polynomials
 C> @author IREDELL @date 92-10-31
 
-C> EVALUATES THE ORTHONORMAL ASSOCIATED LEGENDRE POLYNOMIALS
-C> IN THE SPECTRAL DOMAIN AT A GIVEN LATITUDE.
-C> SUBPROGRAM SPLEGEND SHOULD BE CALLED ALREADY.
-C> IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER,
-C> AND EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) THEN
-C> THE FOLLOWING BOOTSTRAPPING FORMULAS ARE USED:
+C> Evaluates the orthonormal associated legendre polynomials in the
+C> spectral domain at a given latitude. Subprogram splegend should
+C> be called already. If l is the zonal wavenumber, N is the total
+C> wavenumber, and EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) then the
+C> following bootstrapping formulas are used:
+C>
 C> <pre>
 C> PLN(0,0)=SQRT(0.5)
 C> PLN(L,L)=PLN(L-1,L-1)*CLAT*SQRT(FLOAT(2*L+1)/FLOAT(2*L))
 C> PLN(L,N)=(SLAT*PLN(L,N-1)-EPS(L,N-1)*PLN(L,N-2))/EPS(L,N)
 C> </pre>
-C> SYNTHESIS AT THE POLE NEEDS ONLY TWO ZONAL WAVENUMBERS.
-C> SCALAR FIELDS ARE SYNTHESIZED WITH ZONAL WAVENUMBER 0 WHILE
-C> VECTOR FIELDS ARE SYNTHESIZED WITH ZONAL WAVENUMBER 1.
-C> (THUS POLAR VECTOR FIELDS ARE IMPLICITLY DIVIDED BY CLAT.)
-C> THE FOLLOWING BOOTSTRAPPING FORMULAS ARE USED AT THE POLE:
+C>
+C> Synthesis at the pole needs only two zonal wavenumbers. Scalar
+C> fields are synthesized with zonal wavenumber 0 while vector
+C> fields are synthesized with zonal wavenumber 1. (Thus polar
+C> vector fields are implicitly divided by clat.) The following
+C> bootstrapping formulas are used at the pole:
+C>
 C> <pre>
 C> PLN(0,0)=SQRT(0.5)
 C> PLN(1,1)=SQRT(0.75)
@@ -36,8 +38,9 @@ C> @param SLAT     - REAL SINE OF LATITUDE
 C> @param CLAT     - REAL COSINE OF LATITUDE
 C> @param EPS      - REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1))
 C> @param EPSTOP   - REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP
-C> @param PLN      - REAL ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIAL
-C> @param PLNTOP   - REAL (M+1) LEGENDRE POLYNOMIAL OVER TOP
+C> @param[out] PLN - REAL ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIAL
+C> @param[out] PLNTOP - REAL (M+1) LEGENDRE POLYNOMIAL OVER TOP
+C>
       SUBROUTINE SPLEGEND(I,M,SLAT,CLAT,EPS,EPSTOP,PLN,PLNTOP)
 
 CFPP$ NOCONCUR R

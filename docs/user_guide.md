@@ -1,3 +1,4 @@
+@mainpage
 # Documentation of the spectral transform library splib
 May 2, 1996
 
@@ -49,12 +50,10 @@ Chapter II is a list of all entry points.  Chapter III is a set of examples.
 
 ## Entry point list
 
-
-
 Spectral interpolations or truncations between grid and grid
 
    Name         |Function
-   ----         |------------------------------------------------------------------
+   ----         |--------
    sptrun()     |SPECTRALLY TRUNCATE GRIDDED SCALAR FIELDS
    sptrunv()    |SPECTRALLY TRUNCATE GRIDDED VECTOR FIELDS
    sptrung()    |SPECTRALLY INTERPOLATE SCALARS TO STATIONS

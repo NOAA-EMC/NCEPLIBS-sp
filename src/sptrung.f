@@ -3,16 +3,15 @@ C>
 C> Spectrally interpolate scalars to stations
 C> @author IREDELL @date 96-02-29
 
-C> THIS SUBPROGRAM SPECTRALLY TRUNCATES SCALAR FIELDS
-C>           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
-C>           TO SPECIFIED SETS OF STATION POINTS ON THE GLOBE.
-C>           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C>           THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C>           (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C>           THE GRID AND POINT FIELDS MAY HAVE GENERAL INDEXING.
-C>           THE TRANSFORMS ARE ALL MULTIPROCESSED.
-C>           TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C>           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram spectrally truncates scalar fields on a global
+C> cylindrical grid, returning the fields to specified sets of
+C> station points on the globe. The wave-space can be either
+C> triangular or rhomboidal. The grid-space can be either an
+C> equally-spaced grid (with or without pole points) or a gaussian
+C> grid. The grid and point fields may have general indexing. The
+C> transforms are all multiprocessed. Transform several fields at a
+C> time to improve vectorization. Subprogram can be called from a
+C> multiprocessing environment.
 C>
 C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
 C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
@@ -45,26 +44,27 @@ C> @param RLON     - REAL (*) STATION LONGITUDES IN DEGREES
 C> @param JCPU     - INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS
 C>                (DEFAULTS TO ENVIRONMENT NCPUS IF JCPU=0)
 C> @param GRIDI    - REAL (*) INPUT GRID FIELDS
-C> @param GP       - REAL (*) STATION POINT SETS
+C> @param[out] GP  - REAL (*) STATION POINT SETS
 C>
 C> SUBPROGRAMS CALLED:
-C>   - SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
-C>   - SPTGPT       TRANSFORM SPECTRAL SCALAR TO STATION POINTS
-C>   - NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C> - sptran()       Perform a scalar spherical transform
+C> - sptgpt()       Transform spectral scalar to station points
+C> - ncpus()        Gets environment number of cpus
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
+C> Minimum grid dimensions for unaliased transforms to spectral:
 C>   DIMENSION                    |LINEAR              |QUADRATIC
 C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C>   IMAX                         | 2*MAXWV+2          | 3*MAXWV/2*2+2
+C>   JMAX (IDRT=4,IROMB=0)        | 1*MAXWV+1          | 3*MAXWV/2+1
+C>   JMAX (IDRT=4,IROMB=1)        | 2*MAXWV+1          | 5*MAXWV/2+1
+C>   JMAX (IDRT=0,IROMB=0)        | 2*MAXWV+3          | 3*MAXWV/2*2+3
+C>   JMAX (IDRT=0,IROMB=1)        | 4*MAXWV+3          | 5*MAXWV/2*2+3
+C>   JMAX (IDRT=256,IROMB=0)      | 2*MAXWV+1          | 3*MAXWV/2*2+1
+C>   JMAX (IDRT=256,IROMB=1)      | 4*MAXWV+1          | 5*MAXWV/2*2+1
+C>
       SUBROUTINE SPTRUNG(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,NMAX,
-     &                   IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
-     &                   NRSKIP,NGSKIP,JCPU,RLAT,RLON,GRIDI,GP)
+     &     IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
+     &     NRSKIP,NGSKIP,JCPU,RLAT,RLON,GRIDI,GP)
 
       REAL RLAT(*),RLON(*),GRIDI(*),GP(*)
       REAL W((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)
@@ -80,11 +80,11 @@ C  TRANSFORM INPUT GRID TO WAVE
       INP=(JMAXI-1)*MAX(0,-JN)+1
       ISP=(JMAXI-1)*MAX(0,-JS)+1
       CALL SPTRAN(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,
-     &            IPRIME,ISKIPI,JN,JS,MDIM,KSKIPI,0,0,JC,
-     &            W,GRIDI(INP),GRIDI(ISP),-1)
+     &     IPRIME,ISKIPI,JN,JS,MDIM,KSKIPI,0,0,JC,
+     &     W,GRIDI(INP),GRIDI(ISP),-1)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 C  TRANSFORM WAVE TO OUTPUT
       CALL SPTGPT(IROMB,MAXWV,KMAX,NMAX,MDIM,KGSKIP,NRSKIP,NGSKIP,
-     &            RLAT,RLON,W,GP)
+     &     RLAT,RLON,W,GP)
 C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END

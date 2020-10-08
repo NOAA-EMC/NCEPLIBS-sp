@@ -1,3 +1,6 @@
+# This is the CMake file for the src directory of NCEPLIBS-sp.
+#
+# Mark Potts, Kyle Gerheiser
 include("list_of_files.cmake")
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
@@ -22,14 +25,6 @@ if(APPLE)
   add_compile_definitions(APPLE)
 elseif(UNIX)
   add_compile_definitions(LINUX)
-endif()
-
-if(OPENMP)
-  find_package(OpenMP REQUIRED COMPONENTS Fortran)
-endif()
-
-if(OpenMP_FOUND)
-  add_compile_definitions(OPENMP)
 endif()
 
 set(kinds "4" "8" "d")

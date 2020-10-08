@@ -3,16 +3,15 @@ C>
 C> Spectrally interpolate scalars to mercator
 C> @author IREDELL @date 96-02-29
 
-C> THIS SUBPROGRAM SPECTRALLY TRUNCATES SCALAR FIELDS
-C>           ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
-C>           TO A MERCATOR GRID.
-C>           THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C>           THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C>           (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C>           THE GRID FIELDS MAY HAVE GENERAL INDEXING.
-C>           THE TRANSFORMS ARE ALL MULTIPROCESSED.
-C>           TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C>           SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram spectrally truncates scalar fields on a global
+C> cylindrical grid, returning the fields to a mercator grid. The
+C> wave-space can be either triangular or rhomboidal. The grid-space
+C> can be either an equally-spaced grid (with or without pole
+C> points) or a gaussian grid. The grid fields may have general
+C> indexing. The transforms are all multiprocessed. Transform
+C> several fields at a time to improve vectorization. Subprogram can
+C> be called from a multiprocessing environment.
+C> 
 C>
 C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
 C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
@@ -59,20 +58,21 @@ C> @param GRIDI    - REAL (*) INPUT GRID FIELDS
 C> @param GM       - REAL (*) MERCATOR FIELDS
 C>
 C> SUBPROGRAMS CALLED:
-C>   - SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
-C>   - SPTGPM       TRANSFORM SPECTRAL SCALAR TO MERCATOR
-C>   - NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C>   - sptran()       Perform a scalar spherical transform
+C>   - sptgpm()       Transform spectral scalar to mercator
+C>   - ncpus()        Gets environment number of cpus
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    |LINEAR              |QUADRATIC
-C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C> MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
+C> DIMENSION                    |LINEAR             |QUADRATIC
+C> -----------------------      |---------          |-------------
+C> IMAX                         | 2*MAXWV+2         | 3*MAXWV/2*2+2
+C> JMAX (IDRT=4,IROMB=0)        | 1*MAXWV+1         | 3*MAXWV/2+1
+C> JMAX (IDRT=4,IROMB=1)        | 2*MAXWV+1         | 5*MAXWV/2+1
+C> JMAX (IDRT=0,IROMB=0)        | 2*MAXWV+3         | 3*MAXWV/2*2+3
+C> JMAX (IDRT=0,IROMB=1)        | 4*MAXWV+3         | 5*MAXWV/2*2+3
+C> JMAX (IDRT=256,IROMB=0)      | 2*MAXWV+1         | 3*MAXWV/2*2+1
+C> JMAX (IDRT=256,IROMB=1)      | 4*MAXWV+1         | 5*MAXWV/2*2+1
+C>
       SUBROUTINE SPTRUNM(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,MI,MJ,
      &                   IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
      &                   NISKIP,NJSKIP,JCPU,RLAT1,RLON1,DLAT,DLON,

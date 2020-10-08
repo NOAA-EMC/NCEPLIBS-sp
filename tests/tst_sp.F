@@ -2,6 +2,17 @@ C This is a test program for NCEPLIBS-sp.
 C
 C Ed Hartnett, Kyle Gerheiser
 
+C     Test of ncpus(). 
+      subroutine test_ncpus()
+      implicit none
+      integer :: n, ncpus
+
+      n = ncpus()
+#ifndef OPENMP
+      if (n .ne. 1) stop 2
+#endif
+      end subroutine test_ncpus
+
 C     Test of splat(). 
       subroutine test_splat()
       integer :: j, jmax
@@ -24,6 +35,7 @@ C     Run all the tests.
       print *, ''
       print *,'*** Testing NCEPLIBS-sp.'
 
+      call test_ncpus()
       call test_splat()
       
       print *,'*** SUCCESS!'

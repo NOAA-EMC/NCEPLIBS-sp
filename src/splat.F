@@ -3,20 +3,20 @@ C>
 C> Compute latitude functions
 C> @author IREDELL @date 96-02-20
 
-C> COMPUTES COSINES OF COLATITUDE AND GAUSSIAN WEIGHTS
-C> FOR ONE OF THE FOLLOWING SPECIFIC GLOBAL SETS OF LATITUDES.
-C> GAUSSIAN LATITUDES (IDRT=4)
-C> EQUALLY-SPACED LATITUDES INCLUDING POLES (IDRT=0)
-C> EQUALLY-SPACED LATITUDES EXCLUDING POLES (IDRT=256)
-C> THE GAUSSIAN LATITUDES ARE LOCATED AT THE ZEROES OF THE
-C> LEGENDRE POLYNOMIAL OF THE GIVEN ORDER.  THESE LATITUDES
-C> ARE EFFICIENT FOR REVERSIBLE TRANSFORMS FROM SPECTRAL SPACE.
-C> (ABOUT TWICE AS MANY EQUALLY-SPACED LATITUDES ARE NEEDED.)
-C> THE WEIGHTS FOR THE EQUALLY-SPACED LATITUDES ARE BASED ON
-C> ELLSAESSER (JAM,1966).  (NO WEIGHT IS GIVEN THE POLE POINT.)
-C> NOTE THAT WHEN ANALYZING GRID TO SPECTRAL IN LATITUDE PAIRS,
-C> IF AN EQUATOR POINT EXISTS, ITS WEIGHT SHOULD BE HALVED.
-C> THIS VERSION INVOKES THE IBM ESSL MATRIX SOLVER.
+C> Computes cosines of colatitude and gaussian weights
+C> for one of the following specific global sets of latitudes.
+C> - Gaussian latitudes (IDRT=4)
+C> - Equally-spaced latitudes including poles (IDRT=0)
+C> - Equally-spaced latitudes excluding poles (IDRT=256)
+C> The gaussian latitudes are located at the zeroes of the
+C> legendre polynomial of the given order.  these latitudes
+C> are efficient for reversible transforms from spectral space.
+C> (About twice as many equally-spaced latitudes are needed.)
+C> The weights for the equally-spaced latitudes are based on
+C> Ellsaesser (JAM,1966). (No weight is given the pole point.)
+C> Note that when analyzing grid to spectral in latitude pairs,
+C> if an equator point exists, its weight should be halved.
+C> This version invokes the ibm essl matrix solver.
 C>
 C> PROGRAM HISTORY LOG:
 C> -  96-02-20  IREDELL
@@ -37,14 +37,15 @@ C>                (IDRT=4 FOR GAUSSIAN GRID,
 C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
 C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
 C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
-C> @param SLAT     - REAL (JMAX) SINES OF LATITUDE.
-C> @param WLAT     - REAL (JMAX) GAUSSIAN WEIGHTS.
+C> @param[out] SLAT - REAL (JMAX) SINES OF LATITUDE.
+C> @param[out] WLAT - REAL (JMAX) GAUSSIAN WEIGHTS.
 C>
 C> SUBPROGRAMS CALLED:
-C>  - DGEF         MATRIX FACTORIZATION - ESSL
-C>  - DGES         MATRIX SOLVER - ESSL
-C>  - LUDCMP       LU factorization - numerical recipies
-C>  - LUBKSB       Matrix solver - numerical recipies
+C>  - dgef()         MATRIX FACTORIZATION - ESSL
+C>  - dges()         MATRIX SOLVER - ESSL
+C>  - ludcmp()       LU factorization - numerical recipies
+C>  - lubksb()       Matrix solver - numerical recipies
+C>      
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
       REAL SLAT(JMAX),WLAT(JMAX)
       INTEGER,PARAMETER:: KD=SELECTED_REAL_KIND(15,45)
