@@ -2,7 +2,7 @@ C> @file
 C> Analyze spectral from fourier
 C> @author IREDELL @date 92-10-31
 
-C> @name SPANALY Analyzes spectral coefficients from fourier coefficients
+C> Analyzes spectral coefficients from fourier coefficients
 C> for a latitude pair (northern and southern hemispheres).
 C> Vector components are multiplied by cosine of latitude.
 C>
@@ -29,7 +29,7 @@ C> @param MP       - INTEGER (KM) IDENTIFIERS (0 FOR SCALAR, 1 FOR VECTOR)
 C> @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS COMBINED
 C> @param SPC      - REAL (NC,KM) SPECTRAL COEFFICIENTS
 C> @param SPCTOP   - REAL (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP
-
+C>
       SUBROUTINE SPANALY(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,
      &                   F,SPC,SPCTOP)
       INTEGER MP(KM)
