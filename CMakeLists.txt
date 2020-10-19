@@ -10,6 +10,8 @@ project(sp VERSION ${pVersion} LANGUAGES Fortran)
 # Set the version for the documentation.
 SET(PACKAGE_VERSION ${pVersion})
 
+include(GNUInstallDirs)
+
 option(OPENMP "use OpenMP threading" OFF)
 
 # Check build type.
