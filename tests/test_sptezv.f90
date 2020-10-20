@@ -4,33 +4,43 @@ program test_sptezv
 
   integer,parameter:: iromb=0,maxwv=7
   integer,parameter:: idrtg=4,idrte=0,imax=16,jmaxg=8,jmaxe=17
+  real(real64) :: MAX_DIFF = 1d-9
   
-  call tests(iromb,maxwv,idrtg,imax,jmaxg)
-  call tests(iromb,maxwv,idrte,imax,jmaxe)
-  call testv(iromb,maxwv,idrtg,imax,jmaxg)
-  call testv(iromb,maxwv,idrte,imax,jmaxe)
+  call test_scalar(iromb,maxwv,idrtg,imax,jmaxg)
+  call test_scalar(iromb,maxwv,idrte,imax,jmaxe)
+  call test_vector(iromb,maxwv,idrtg,imax,jmaxg)
+  call test_vector(iromb,maxwv,idrte,imax,jmaxe)
   
-  call tests(0,126,4,256,128)
-  call tests(0,126,0,256,257)
-  call testv(0,126,4,256,128)
-  call testv(0,126,0,256,257)
+  call test_scalar(0,126,4,256,128)
+  call test_scalar(0,126,0,256,257)
+  call test_vector(0,126,4,256,128)
+  call test_vector(0,126,0,256,257)
 
 contains
   
-  subroutine tests(iromb,maxwv,idrt,imax,jmax)
+  subroutine test_scalar(iromb,maxwv,idrt,imax,jmax)
     implicit none
     integer,intent(in):: iromb,maxwv,idrt,imax,jmax
     real(real64) :: wave((maxwv+1)*((iromb+1)*maxwv+2)/2*2)
     real(real64) :: wave2((maxwv+1)*((iromb+1)*maxwv+2)/2*2)
     real(real64) :: grid(imax,jmax)
+    real(real64) :: avg_diff
     wave=1d0
     wave(2:2*maxwv+2:2)=0d0
     call sptez(iromb,maxwv,idrt,imax,jmax,wave,grid,+1)
     call sptez(iromb,maxwv,idrt,imax,jmax,wave2,grid,-1)
-    print *,sqrt(sum((wave2-wave)**2)/size(wave))/epsilon(wave)
-  end subroutine tests
+    avg_diff = sqrt(sum((wave2-wave)**2)/size(wave))
+
+    print *, "avg_diff = ", avg_diff
+
+    if (avg_diff > MAX_DIFF) then
+       print *, "average difference > MAX_DIFF: ", avg_diff, " > ", MAX_DIFF
+       error stop 
+    endif
+ 
+  end subroutine test_scalar
   
-  subroutine testv(iromb,maxwv,idrt,imax,jmax)
+  subroutine test_vector(iromb,maxwv,idrt,imax,jmax)
     implicit none
     integer,intent(in):: iromb,maxwv,idrt,imax,jmax
     real(real64) :: waved((maxwv+1)*((iromb+1)*maxwv+2)/2*2)
@@ -39,6 +49,7 @@ contains
     real(real64) :: wavez2((maxwv+1)*((iromb+1)*maxwv+2)/2*2)
     real(real64) :: gridu(imax,jmax)
     real(real64) :: gridv(imax,jmax)
+    real(real64) :: avg_diff
     waved=1d0
     waved(2:2*maxwv+2:2)=0d0
     waved(1)=0d0
@@ -47,7 +58,15 @@ contains
     wavez(1)=0d0
     call sptezv(iromb,maxwv,idrt,imax,jmax,waved,wavez,gridu,gridv,+1)
     call sptezv(iromb,maxwv,idrt,imax,jmax,waved2,wavez2,gridu,gridv,-1)
-    print *,sqrt((sum((waved2-waved)**2)+sum((wavez2-wavez)**2))/(2*size(waved)))/epsilon(waved)
-  end subroutine testv
+    avg_diff = sqrt((sum((waved2-waved)**2)+sum((wavez2-wavez)**2))/(2*size(waved)))
+
+    print *, "avg_diff = ", avg_diff
+    
+    if (avg_diff > MAX_DIFF) then
+       print *, "average difference > MAX_DIFF: ", avg_diff, " > ", MAX_DIFF
+       error stop 
+    endif
+    
+  end subroutine test_vector
   
 end program test_sptezv
