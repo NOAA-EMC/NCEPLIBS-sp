@@ -2,7 +2,14 @@
 
 # Kyle Gerheiser, Ed Hartnett
 
-add_executable (tst_sp tst_sp.F)
-add_test(tst_sp tst_sp)
-target_link_libraries (tst_sp sp_d)
+link_libraries(sp::sp_d)
+
+add_executable(test_ncpus test_ncpus.F90)
+add_executable(test_splat test_splat.f90)
+add_executable(test_sptezv test_sptezv.f90)
+
+add_test(test_ncpus test_ncpus)
+add_test(test_splat test_splat)
+add_test(test_sptezv test_sptezv)
+
 
