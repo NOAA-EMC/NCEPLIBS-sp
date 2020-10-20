@@ -9,13 +9,13 @@ the [NCEPLIBS](https://github.com/NOAA-EMC/NCEPLIBS) project.
 For more detailed documentation see
 https://noaa-emc.github.io/NCEPLIBS-sp/
 
-### Authors
+## Authors
 
 NCEP/EMC developers.
 
 Code Manager: Kyle Gerheiser
 
-### Installing
+## Installing
 
 ```
 mkdir build
