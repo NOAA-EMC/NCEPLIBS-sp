@@ -12,6 +12,7 @@ SET(PACKAGE_VERSION ${pVersion})
 
 include(GNUInstallDirs)
 
+# Handle user options.
 option(OPENMP "use OpenMP threading" OFF)
 
 # Check build type.
@@ -42,6 +43,11 @@ include(CTest)
 if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()
+
+# Create distributions.
+set(CPACK_PACKAGE_CONTACT "NOAA EMC")
+set(CPACK_GENERATOR "STGZ;TGZ;TZ;DEB;RPM")
+include(CPack)
   
 # Determine whether or not to generate documentation.
 OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
