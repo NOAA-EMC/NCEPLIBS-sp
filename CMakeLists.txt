@@ -45,9 +45,11 @@ if (BUILD_TESTING)
 endif()
 
 # Create distributions.
-set(CPACK_PACKAGE_CONTACT "NOAA EMC")
-set(CPACK_GENERATOR "STGZ;TGZ;TZ;DEB;RPM")
-include(CPack)
+if (UNIX)
+  set(CPACK_PACKAGE_CONTACT "NOAA EMC")
+  set(CPACK_GENERATOR "STGZ;TGZ;TZ;DEB;RPM")
+  include(CPack)
+endif()
   
 # Determine whether or not to generate documentation.
 OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
