@@ -1,11 +1,14 @@
-name: without OPENMP
+name: Build and Test
 on: [push, pull_request]
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-10.15,  ubuntu-18.04, ubuntu-20.04]
+        openmp: [ON, OFF]
     steps:
-
     - name: checkout-sp
       uses: actions/checkout@v2
       with: 
@@ -19,7 +22,7 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake ..
+        cmake .. -DOPENMP=${{ matrix.openmp }}
         make -j2
     
     - name: test_sp
