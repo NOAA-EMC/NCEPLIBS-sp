@@ -1,32 +1,33 @@
-name: Build and Test
+name: macOS-Linux-GCC
 on: [push, pull_request]
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ${{ matrix.os }}
+    env:
+      FC: ${{ matrix.compiler }}
     strategy:
       matrix:
-        os: [macos-10.15,  ubuntu-18.04, ubuntu-20.04]
-        openmp: [ON, OFF]
+        compiler: [gfortran-9, gfortran-10]
+        os: [ubuntu-latest, macos-latest]
+
     steps:
+    
     - name: checkout-sp
       uses: actions/checkout@v2
       with: 
         path: sp
 
-    - name: build_sp
-      env: 
-        FC: gfortran-9
-        CC: gcc-9
+    - name: build-sp
       run: |
         cd sp
         mkdir build 
         cd build
         cmake .. -DOPENMP=${{ matrix.openmp }}
         make -j2
-    
-    - name: test_sp
+
+    - name: test-sp
       run: |
-        cd $GITHUB_WORKSPACE/sp/build
-        make test
+        cd sp/build
+        ctest --output-on-failure
 

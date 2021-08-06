@@ -1,0 +1,50 @@
+name: Intel
+on: [push, pull_request]
+
+# Use custom shell with -l so .bash_profile is sourced which loads intel/oneapi/setvars.sh
+# without having to do it in manually every step
+defaults:
+  run:
+    shell: bash -leo pipefail {0}
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      CC: icc
+      FC: ifort
+      CXX: icpc
+    strategy:
+      matrix:
+        openmp: [ON, OFF]
+
+    steps:
+
+    # See https://software.intel.com/content/www/us/en/develop/articles/oneapi-repo-instructions.html
+    - name: install-intel
+      run: |
+        cd /tmp
+        wget https://apt.repos.intel.com/intel-gpg-keys/GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        sudo apt-key add GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        rm GPG-PUB-KEY-INTEL-SW-PRODUCTS.PUB
+        echo "deb https://apt.repos.intel.com/oneapi all main" | sudo tee /etc/apt/sources.list.d/oneAPI.list
+        sudo apt-get update
+        sudo apt-get install intel-oneapi-dev-utilities intel-oneapi-mpi-devel intel-oneapi-openmp intel-oneapi-compiler-fortran intel-oneapi-compiler-dpcpp-cpp-and-cpp-classic
+        echo "source /opt/intel/oneapi/setvars.sh" >> ~/.bash_profile
+
+    - name: checkout
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build
+      run: |
+        cd sp
+        mkdir build && cd build
+        cmake .. -DOPENMP=${{ matrix.openmp }}
+        make -j2
+
+    - name: test-sp
+      run: |
+        cd sp/build
+        ctest --output-on-failure

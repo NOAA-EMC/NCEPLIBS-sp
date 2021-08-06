@@ -1,0 +1,50 @@
+name: gcc-9_debug_docs-test_coverage
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      FC: gfortran-9
+      CC: gcc-9
+
+    steps:
+    
+    - name: install-dependencies
+      run: |
+        sudo apt-get install doxygen
+        python3 -m pip install gcovr
+        
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build-sp
+      run: |
+        cd sp
+        mkdir build 
+        cd build
+        cmake .. -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0"
+        make -j2
+
+    - name: build-docs
+      run: |
+        cd sp/build
+        make doc
+
+    - name: test-sp
+      run: |
+        cd sp/build
+        ctest --output-on-failure
+
+    - name: generate-test-coverage
+      run: |
+        cd sp/build
+        gcovr -r .. --html-details -o test-coverage.html
+
+    - uses: actions/upload-artifact@v2
+      with:
+        name: sp-test-coverage
+        path: sp/build/*.html
+
