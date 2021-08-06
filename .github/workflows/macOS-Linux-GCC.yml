@@ -2,7 +2,7 @@ name: macOS-Linux-GCC
 on: [push, pull_request]
 
 jobs:
-  build-and-test:
+  mac-linux-build:
     runs-on: ${{ matrix.os }}
     env:
       FC: ${{ matrix.compiler }}
