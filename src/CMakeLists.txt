@@ -1,7 +1,63 @@
 # This is the CMake file for the src directory of NCEPLIBS-sp.
 #
 # Mark Potts, Kyle Gerheiser
-include("list_of_files.cmake")
+set(fortran_src
+  fftpack.F
+  lapack_gen.F
+  ncpus.F
+  spanaly.f
+  spdz2uv.f
+  speps.f
+  spfft1.f
+  spffte.f
+  spfft.f
+  spfftpt.f
+  spgradq.f
+  spgradx.f
+  spgrady.f
+  splaplac.f
+  splat.F
+  splegend.f
+  sppad.f
+  spsynth.f
+  sptezd.f
+  sptez.f
+  sptezmd.f
+  sptezm.f
+  sptezmv.f
+  sptezv.f
+  sptgpmd.f
+  sptgpm.f
+  sptgpmv.f
+  sptgpsd.f
+  sptgps.f
+  sptgpsv.f
+  sptgptd.f
+  sptgpt.f
+  sptgptsd.f
+  sptgptvd.f
+  sptgptv.f
+  sptrand.f
+  sptran.f
+  sptranf0.f
+  sptranf1.f
+  sptranf.f
+  sptranfv.f
+  sptranv.f
+  sptrund.f
+  sptrun.f
+  sptrung.f
+  sptrungv.f
+  sptrunl.f
+  sptrunm.f
+  sptrunmv.f
+  sptruns.f
+  sptrunsv.f
+  sptrunv.f
+  spuv2dz.f
+  spvar.f
+  spwget.f
+  )
 
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
