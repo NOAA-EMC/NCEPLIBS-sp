@@ -53,7 +53,7 @@ contains
     max_magnitude = 0.0
     do i = 2, imax, 2
        ! Turn real array into complex numbers
-       dft = complex(w(i,1), w(i+1,1))
+       dft = cmplx(w(i,1), w(i+1,1))
        magnitude = abs(dft)
        f = i * df / 2
        if (magnitude > max_magnitude) then
