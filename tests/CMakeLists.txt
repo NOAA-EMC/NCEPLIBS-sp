@@ -4,12 +4,14 @@
 
 link_libraries(sp::sp_d)
 
-add_executable(test_ncpus test_ncpus.F90)
-add_executable(test_splat test_splat.f90)
-add_executable(test_sptezv test_sptezv.f90)
+function(make_test test_name)
+  add_executable(${test_name} ${test_name}.f90)
+  add_test(${test_name} ${test_name})
+endfunction()
 
-add_test(test_ncpus test_ncpus)
-add_test(test_splat test_splat)
-add_test(test_sptezv test_sptezv)
+make_test(test_ncpus)
+make_test(test_splat)
+make_test(test_sptezv)
+make_test(test_fft)
 
 
