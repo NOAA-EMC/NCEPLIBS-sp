@@ -1,4 +1,3 @@
-#if defined LINUX || defined APPLE
 !----------------------------------------------------------------------
 ! From Numerical Recipes
 ! added two Numerical Recipes routines for matrix inversion
@@ -102,4 +101,3 @@ C==EM==^^^
       IF(A(N,N).EQ.0.)A(N,N)=TINY
       RETURN
       END
-#endif
