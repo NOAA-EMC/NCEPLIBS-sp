@@ -1,3 +1,6 @@
+! Unit tests for FFT and inverse FFT.
+!
+! Kyle Gerheiser
 program test_fft
   use iso_fortran_env, only: real32, real64
   implicit none
@@ -14,10 +17,16 @@ program test_fft
   integer, parameter :: IDIR_R2C = -1
 
   call test_fft_real_to_complex()
+  print *, "test_fft_real_to_complex - Complete"
   call test_fft_complex_to_real()
+  print *, "test_fft_complex_to_real - Complete"
+  print *, "SUCCESS"
 
 contains
 
+  ! Test FFT
+  ! Construct a wave with known parameters, sample it, run it through FFT,
+  ! then check if frequency and DC component match the test signal.
   subroutine test_fft_real_to_complex()
     real(precision) :: amplitude, freq_hz, t, cosine, dt, sample_rate_hz, dc_component, df, f, magnitude
     real(real64) :: AFFT(50000+4*IMAX)
@@ -74,6 +83,9 @@ contains
 
   end subroutine test_fft_real_to_complex
 
+  ! Test inverse FFT.
+  ! Run synthetic test array through FFT and run results through inverse FFT
+  ! to obtain the original array
   subroutine test_fft_complex_to_real()
     real(real64) :: AFFT(50000+4*IMAX)
     real(precision), allocatable :: w(:,:), g(:,:), g_new(:,:)
@@ -81,6 +93,7 @@ contains
 
     allocate(w(2*incw, kmax), g(incg, kmax), g_new(incg, kmax))
 
+    ! Setup test array with synthetic data
     do i = 1, imax
        g(i,1) = i
     end do
