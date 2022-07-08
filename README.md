@@ -1,6 +1,6 @@
 ![Status](https://github.com/NOAA-EMC/NCEPLIBS-sp/workflows/Build%20and%20Test/badge.svg)
 
-# SPlib
+# NCEPLIBS-sp
 
 The spectral transform library (splib) contains FORTRAN subprograms to
 be used for a variety of spectral transform functions. This is part of
@@ -13,7 +13,7 @@ https://noaa-emc.github.io/NCEPLIBS-sp/
 
 NCEP/EMC developers.
 
-Code Manager: Kyle Gerheiser
+Code Manager: Kyle Gerheiser, Ed Hartnett
 
 ## Installing
 
