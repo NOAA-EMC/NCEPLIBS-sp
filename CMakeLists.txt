@@ -14,6 +14,7 @@ include(GNUInstallDirs)
 
 # Handle user options.
 option(OPENMP "use OpenMP threading" OFF)
+option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
 # Check build type.
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
