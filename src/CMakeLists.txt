@@ -85,7 +85,9 @@ foreach(kind ${kinds})
   # Create object library. The object library will be used to build
   # static and shared libraries.
   add_library(${lib_name}_objlib OBJECT ${fortran_src})
-  set_property(TARGET ${lib_name}_objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
+  if(BUILD_SHARED_LIBS)
+    set_property(TARGET ${lib_name}_objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
+  endif()
   add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name}_objlib)
 
   # Create static object library from object library.
