@@ -93,12 +93,15 @@ foreach(kind ${kinds})
   # Create static object library from object library.
   add_library(${lib_name}_static STATIC $<TARGET_OBJECTS:${lib_name}_objlib>)
   set_target_properties(${lib_name}_static PROPERTIES OUTPUT_NAME ${lib_name})
+  set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name})
+  set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name}_static)
   list(APPEND LIB_TARGETS ${lib_name}_static)
 
   if(BUILD_SHARED_LIBS)
     # Create shared object library from object library.
     add_library(${lib_name}_shared SHARED $<TARGET_OBJECTS:${lib_name}_objlib>)
     set_target_properties(${lib_name}_shared PROPERTIES OUTPUT_NAME ${lib_name})
+    set_target_properties(${lib_name}_shared PROPERTIES EXPORT_NAME ${lib_name})
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
 
