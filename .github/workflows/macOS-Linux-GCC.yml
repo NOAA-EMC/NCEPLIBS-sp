@@ -5,7 +5,7 @@ jobs:
   mac-linux-build:
     runs-on: ${{ matrix.os }}
     env:
-      FC: ${{ matrix.compiler }}
+      FC: gfortran-12
     strategy:
       matrix:
         compiler: [gfortran-9, gfortran-10]
