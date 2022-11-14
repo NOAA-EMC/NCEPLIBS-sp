@@ -1,15 +1,15 @@
-name: GCC-macOS
+name: GCC-Linux
 on: [push, pull_request]
 
 jobs:
-  mac-build:
+  linux-build:
     runs-on: ${{ matrix.os }}
     env:
       FC: gfortran-11
     strategy:
       matrix:
         compiler: [gfortran-11]
-        os: [macos-latest]
+        os: [ubuntu-latest]
         openmp: [ON, OFF]
         sharedlibs: [ON, OFF]
 
