@@ -6,9 +6,10 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        compiler: [gfortran-11, gfortran-12]
+        compiler: [gfortran-12]
         os: [ubuntu-latest, macos-latest]
         openmp: [ON, OFF]
+        sharedlibs: [ON, OFF]
 
     steps:
     
@@ -22,7 +23,7 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake .. -DOPENMP=${{ matrix.openmp }}
+        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }}
         make -j2
 
     - name: test-sp
