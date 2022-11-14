@@ -107,7 +107,9 @@ foreach(kind ${kinds})
 
   set(BUILD_FLAGS "${fortran_${kind}_flags}")
   if(OpenMP_Fortran_FOUND)
-    target_link_libraries(${lib_name}_objlib PRIVATE OpenMP::OpenMP_Fortran)
+    #target_link_libraries(${lib_name}_objlib PRIVATE OpenMP::OpenMP_Fortran)
+    target_link_libraries(${lib_name}_static PRIVATE OpenMP::OpenMP_Fortran)
+    target_link_libraries(${lib_name}_shared PRIVATE OpenMP::OpenMP_Fortran)
   endif()
   
   set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
