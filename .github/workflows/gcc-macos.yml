@@ -1,0 +1,32 @@
+name: GCC-macOS
+on: [push, pull_request]
+
+jobs:
+  mac-linux-build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        compiler: [gfortran-11]
+        os: [macos-latest]
+        openmp: [ON, OFF]
+        sharedlibs: [ON, OFF]
+
+    steps:
+
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with:
+        path: sp
+
+    - name: build-sp
+      run: |
+        cd sp
+        mkdir build
+        cd build
+        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }}
+        make -j2
+
+    - name: test-sp
+      run: |
+        cd sp/build
+        ctest --output-on-failure
