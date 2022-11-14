@@ -6,7 +6,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        compiler: [gfortran-12]
+        compiler: [gfortran-11]
         os: [ubuntu-latest, macos-latest]
         openmp: [ON, OFF]
         sharedlibs: [ON, OFF]
