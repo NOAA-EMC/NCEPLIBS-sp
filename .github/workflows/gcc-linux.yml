@@ -4,8 +4,6 @@ on: [push, pull_request]
 jobs:
   linux-build:
     runs-on: ${{ matrix.os }}
-    env:
-      FC: gfortran-11
     strategy:
       matrix:
         compiler: [gfortran-11]
