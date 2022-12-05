@@ -15,10 +15,9 @@ jobs:
   MacOS:
     runs-on: macos-latest
     env:
-      FC: ${{ matrix.compiler }}
+      FC: gfortran-10
     strategy:
       matrix:
-        compiler: [gfortran-10, gfortran-11]
         openmp: [ON, OFF]
 
     steps:
