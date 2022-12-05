@@ -36,7 +36,7 @@ jobs:
         mkdir build 
         cd build
         cmake -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug ..
-        make -j2
+        make -j2 VERBOSE=1
 
     - name: test-sp
       run: |
