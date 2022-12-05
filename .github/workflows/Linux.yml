@@ -1,0 +1,41 @@
+name: Linux
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    env:
+      FC: gfortran-9
+      CC: gcc-9
+
+    steps:
+    
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build-sp
+      run: |
+        cd sp
+        mkdir build 
+        cd build
+        cmake .. -DCMAKE_PREFIX_PATH="~/" 
+        make -j2
+
+    - name: test-sp
+      run: |
+        cd sp/build
+        ctest --verbose --output-on-failure --rerun-failed
+
+
