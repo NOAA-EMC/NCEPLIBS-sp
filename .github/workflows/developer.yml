@@ -38,11 +38,6 @@ jobs:
         cmake .. -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0"
         make -j2
 
-    - name: build-docs
-      run: |
-        cd sp/build
-        make doc
-
     - name: test-sp
       run: |
         cd sp/build
@@ -56,5 +51,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: sp-test-coverage
-        path: sp/build/*.html
+        path: |
+              sp/build/*.html 
+              sp/build/*.css
 

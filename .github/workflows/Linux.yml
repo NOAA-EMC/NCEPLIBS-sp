@@ -15,8 +15,8 @@ jobs:
   Linux:
     runs-on: ubuntu-latest
     env:
-      FC: gfortran-9
-      CC: gcc-9
+      FC: gfortran-10
+      CC: gcc-10
 
     steps:
     
