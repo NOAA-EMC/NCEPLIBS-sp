@@ -31,7 +31,7 @@ jobs:
         mkdir build 
         cd build
         cmake .. -DCMAKE_PREFIX_PATH="~/" 
-        make -j2
+        make -j2 VERBOSE=1
 
     - name: test-sp
       run: |
