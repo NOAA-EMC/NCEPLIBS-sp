@@ -1,8 +1,18 @@
-name: gcc-9_debug_docs-test_coverage
-on: [push, pull_request]
+name: developer
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
 
 jobs:
-  debug-docs-test_coverage:
+  developer:
     runs-on: ubuntu-latest
     env:
       FC: gfortran-9
@@ -25,18 +35,13 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake .. -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0"
-        make -j2
-
-    - name: build-docs
-      run: |
-        cd sp/build
-        make doc
+        cmake -DOPENMP=ON -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug ..
+        make -j2 VERBOSE=1
 
     - name: test-sp
       run: |
         cd sp/build
-        ctest --output-on-failure
+        ctest --verbose --output-on-failure --rerun-failed
 
     - name: generate-test-coverage
       run: |
@@ -46,5 +51,7 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: sp-test-coverage
-        path: sp/build/*.html
+        path: |
+              sp/build/*.html 
+              sp/build/*.css
 

@@ -1,15 +1,23 @@
-name: macOS-Linux-GCC
-on: [push, pull_request]
+name: MacOS
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
 
 jobs:
-  mac-linux-build:
-    runs-on: ${{ matrix.os }}
+  MacOS:
+    runs-on: macos-latest
     env:
-      FC: ${{ matrix.compiler }}
+      FC: gfortran-11
     strategy:
       matrix:
-        compiler: [gfortran-9, gfortran-10]
-        os: [ubuntu-latest, macos-latest]
         openmp: [ON, OFF]
 
     steps:
@@ -25,10 +33,10 @@ jobs:
         mkdir build 
         cd build
         cmake .. -DOPENMP=${{ matrix.openmp }}
-        make -j2
+        make -j2 VERBOSE=1
 
     - name: test-sp
       run: |
         cd sp/build
-        ctest --output-on-failure
+        ctest --verbose --output-on-failure --rerun-failed
 
