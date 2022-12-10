@@ -1,5 +1,15 @@
 name: Intel
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
 
 # Use custom shell with -l so .bash_profile is sourced which loads intel/oneapi/setvars.sh
 # without having to do it in manually every step
@@ -8,12 +18,11 @@ defaults:
     shell: bash -leo pipefail {0}
 
 jobs:
-  intel-build:
+  Intel:
     runs-on: ubuntu-latest
     env:
       CC: icc
       FC: ifort
-      CXX: icpc
     strategy:
       matrix:
         openmp: [ON, OFF]
@@ -41,10 +50,10 @@ jobs:
       run: |
         cd sp
         mkdir build && cd build
-        cmake .. -DOPENMP=${{ matrix.openmp }}
-        make -j2
+        cmake -DOPENMP=${{ matrix.openmp }} ..
+        make -j2 VERBOSE=1
 
     - name: test-sp
       run: |
         cd sp/build
-        ctest --output-on-failure
+        ctest --verbose --output-on-failure --rerun-failed

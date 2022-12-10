@@ -1,0 +1,44 @@
+name: Linux
+on:
+  push:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+  pull_request:
+    branches:
+    - develop
+    paths-ignore:
+    - README.md
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    env:
+      FC: gfortran-10
+      CC: gcc-10
+    strategy:
+      matrix:
+        openmp: [ON, OFF]
+
+    steps:
+    
+    - name: checkout-sp
+      uses: actions/checkout@v2
+      with: 
+        path: sp
+
+    - name: build-sp
+      run: |
+        cd sp
+        mkdir build 
+        cd build
+        cmake .. -DOPENMP=${{ matrix.openmp }}
+        make -j2 VERBOSE=1
+
+    - name: test-sp
+      run: |
+        cd sp/build
+        ctest --verbose --output-on-failure --rerun-failed
+
+
