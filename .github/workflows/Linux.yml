@@ -20,6 +20,7 @@ jobs:
     strategy:
       matrix:
         openmp: [ON, OFF]
+        sharedlibs: [ON, OFF]
 
     steps:
     
@@ -33,7 +34,7 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake .. -DOPENMP=${{ matrix.openmp }}
+        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }}
         make -j2 VERBOSE=1
 
     - name: test-sp
