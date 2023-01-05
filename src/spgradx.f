@@ -1,36 +1,39 @@
 C> @file
-C>
-C> Compute x-gradient in fourier space
+C> @brief Compute x-gradient in fourier space
 C> @author IREDELL @date 96-02-20
 
-C> THIS SUBPROGRAM COMPUTES THE X-GRADIENT OF FIELDS
-C> IN COMPLEX FOURIER SPACE.
-C> THE X-GRADIENT OF A VECTOR FIELD W IS
+C> This subprogram computes the x-gradient of fields
+C> in complex Fourier space.
+C>
+C> The x-gradient of a vector field W is
 C> WX=CONJG(W)*L/RERTH
-C> WHERE L IS THE WAVENUMBER AND RERTH IS THE EARTH RADIUS,
-C> SO THAT THE RESULT IS THE X-GRADIENT OF THE PSEUDO-VECTOR.
-C> THE X-GRADIENT OF A SCALAR FIELD W IS
+C> where L is the wavenumber and RERTH is the Earth radius,
+C> so that the result is the x-gradient of the pseudo-vector.
+C>
+C> The x-gradient of a scalar field W is
 C> WX=CONJG(W)*L/(RERTH*CLAT)
-C> WHERE CLAT IS THE COSINE OF LATITUDE.
-C> AT THE POLE THIS IS UNDEFINED, SO THE WAY TO GET
-C> THE X-GRADIENT AT THE POLE IS BY PASSING BOTH
-C> THE WEIGHTED WAVENUMBER 0 AND THE UNWEIGHTED WAVENUMBER 1 
-C> AMPLITUDES AT THE POLE AND SETTING MP=10.
-C> IN THIS CASE, THE WAVENUMBER 1 AMPLITUDES ARE USED
-C> TO COMPUTE THE X-GRADIENT AND THEN ZEROED OUT.
+C> where CLAT is the cosine of latitude.
 C>
-C> @param M        - INTEGER FOURIER WAVENUMBER TRUNCATION
-C> @param INCW     - INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
-C>                (INCW >= M+1)
-C> @param KMAX     - INTEGER NUMBER OF FOURIER FIELDS
-C> @param MP       - INTEGER (KM) IDENTIFIERS
-C>                (0 OR 10 FOR SCALAR, 1 FOR VECTOR)
-C> @param CLAT     - REAL COSINE OF LATITUDE
-C> @param[out] W        - COMPLEX(INCW,KMAX) FOURIER AMPLITUDES
-C>                CORRECTED WHEN MP=10 AND CLAT=0
-C> @param[out] WX       - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES OF X-GRADIENTS
+C> At the pole this is undefined, so the way to get
+C> the x-gradient at the pole is by passing both
+C> the weighted wavenumber 0 and the unweighted wavenumber 1 
+C> amplitudes at the pole and setting MP=10.
+C> In this case, the wavenumber 1 amplitudes are used
+C> to compute the x-gradient and then zeroed out.
 C>
-C> @note THIS SUBPROGRAM IS THREAD-SAFE.
+C> @note This subprogram is thread-safe.
+C>
+C> @param M Fourier wavenumber truncation
+C> @param INCW first dimension of the complex amplitude array
+C> (INCW >= M+1)
+C> @param KMAX number of Fourier fields
+C> @param MP identifiers
+C> (0 or 10 for scalar, 1 for vector)
+C> @param CLAT cosine of latitude
+C> @param[out] W Fourier amplitudes corrected when MP=10 and CLAT=0
+C> @param[out] WX complex amplitudes of x-gradients
+C>
+C> @author IREDELL @date 96-02-20
       SUBROUTINE SPGRADX(M,INCW,KMAX,MP,CLAT,W,WX)
 
         IMPLICIT NONE
@@ -40,7 +43,7 @@ C> @note THIS SUBPROGRAM IS THREAD-SAFE.
         REAL,INTENT(OUT):: WX(2*INCW,KMAX)
         INTEGER K,L
         REAL,PARAMETER:: RERTH=6.3712E6
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         DO K=1,KMAX
           IF(MP(K).EQ.1) THEN
             DO L=0,M
@@ -65,5 +68,5 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             ENDDO
           ENDIF
         ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       END SUBROUTINE
