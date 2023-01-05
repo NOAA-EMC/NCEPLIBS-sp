@@ -1,54 +1,56 @@
 @mainpage
-# Documentation of the spectral transform library splib
-May 2, 1996
 
 ## Introduction
 
-The spectral transform library splib contains FORTRAN subprograms
-to be used for a variety of spectral transform functions.
-The library has been optimized for the CRAY machines, taking full advantage
-of both the vector and parallel capabilities.  The library is particularly
-efficient when transforming many fields at one time.  Some entry points
-will diagnose the environmental number of CPUs available, but others require
-the number of CPUs used be specified.  The library is reasonably transportable
-to other platforms with compilers allowing dynamic automatic arrays.
+The spectral transform library splib, developed in the 1990s,
+contains FORTRAN subprograms to be used for a variety of spectral
+transform functions.
+
+The library has been optimized for the CRAY machines, taking full
+advantage of both the vector and parallel capabilities. The library is
+particularly efficient when transforming many fields at one time. Some
+entry points will diagnose the environmental number of CPUs available,
+but others require the number of CPUs used be specified.
 
 The library can handle both scalar and two-dimensional vector fields.
 Each vector field will be represented in spectral space appropriately
 by its respective spherical divergence and curl (vorticity), thus
-avoiding the pole problems associated with representing components separately.
+avoiding the pole problems associated with representing components
+separately.
 
-Some of the functions performed by the library are spectral interpolations
-between two grids, spectral truncations in place on a grid, and basic
-spectral transforms between grid and wave space.  Only global Gaussian
-or global equidistant cylindrical grids are allowed for transforming into
-wave space.  There are no such restricitions on grids for transforming from
-wave space.  However, there are special fast entry points for transforming wave
-space to polar stereographic and Mercator grids as well as the aforementioned
-cylindrical grids.
+Some of the functions performed by the library are spectral
+interpolations between two grids, spectral truncations in place on a
+grid, and basic spectral transforms between grid and wave space. Only
+global Gaussian or global equidistant cylindrical grids are allowed
+for transforming into wave space. There are no such restricitions on
+grids for transforming from wave space. However, there are special
+fast entry points for transforming wave space to polar stereographic
+and Mercator grids as well as the aforementioned cylindrical grids.
 
 The indexing of the cylindrical transform grids is totally general.
-The grids may run north to south or south to north; they may run east to west
-or west to east; they may start at any longitude as long as the prime meridian
-is on the grid; they may be dimensioned in any order (e.g. (i,j,k), (k,j,i),
-(i,k,nfield,j), etc.).  Furthermore, the transform may be performed on only
-some of the latitudes at one time as long as both hemisphere counterparts
-are transformed at the same time (as in the global spectral model).
-The grid indexing will default to the customary global indexing, i.e. north to
-south, east to west, prime meridian as first longitude, and (i,j,k) order.
+The grids may run north to south or south to north; they may run east
+to west or west to east; they may start at any longitude as long as
+the prime meridian is on the grid; they may be dimensioned in any
+order (e.g. (i,j,k), (k,j,i), (i,k,nfield,j), etc.). Furthermore, the
+transform may be performed on only some of the latitudes at one time
+as long as both hemisphere counterparts are transformed at the same
+time (as in the global spectral model). The grid indexing will
+default to the customary global indexing, i.e. north to south, east to
+west, prime meridian as first longitude, and (i,j,k) order.
 
-The wave space may be either triangular or rhomboidal in shape.
-Its internal indexing is strictly "IBM order", i.e. zonal wavenumber is the
-slower index with the real and imaginary components always paired together.
-The imaginary components of all the zonally symmetric modes should always
-be zero, as should the global mean of any divergence and vorticity fields.
-The stride between the start of successive wave fields is general,
-defaulting to the computed length of each field.
+The wave space may be either triangular or rhomboidal in shape. Its
+internal indexing is strictly "IBM order", i.e. zonal wavenumber is
+the slower index with the real and imaginary components always paired
+together. The imaginary components of all the zonally symmetric modes
+should always be zero, as should the global mean of any divergence and
+vorticity fields. The stride between the start of successive wave
+fields is general, defaulting to the computed length of each field.
 
-This documentation is divided into 3 chapters.  Chapter I is this introduction.
-Chapter II is a list of all entry points.  Chapter III is a set of examples.
+This documentation is divided into 3 chapters. Chapter I is this
+introduction.  Chapter II is a list of all entry points. Chapter III
+is a set of examples.
 
-## Entry point list
+## Subprograms
 
 Spectral interpolations or truncations between grid and grid
 

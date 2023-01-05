@@ -1,11 +1,18 @@
-!----------------------------------------------------------------------
-! From Numerical Recipes
-! added two Numerical Recipes routines for matrix inversion
-! LUBKSB - solves a system of linear equations, follows call to LUDCMP
-! LUDCMP - replaces an NxN matrix a with the LU decomposition
-! 
-!  2012-11-05 E.Mirvis separated this generic LU from the splat.F
-!----------------------------------------------------------------------
+C> @file
+C> @brief Two Numerical Recipes routines for matrix inversion From Numerical Recipes.
+C>      
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 2012-11-05 | E.Mirvis | separated this generic LU from the splat.F
+
+C> Solves a system of linear equations, follows call to ludcmp().
+C>
+C> @param A
+C> @param N
+C> @param NP
+C> @param INDX
+C> @param B
       SUBROUTINE LUBKSB(A,N,NP,INDX,B)
       REAL A(NP,NP),B(N)
       INTEGER INDX(N)
@@ -35,6 +42,12 @@
       RETURN
       END
 
+C> Replaces an NxN matrix a with the LU decomposition.
+C>
+C> @param A
+C> @param N
+C> @param NP
+C> @param INDX
       SUBROUTINE LUDCMP(A,N,NP,INDX)
 C      PARAMETER (NMAX=400,TINY=1.0E-20)
       PARAMETER (TINY=1.0E-20)

@@ -1,40 +1,38 @@
 C> @file
+C> @brief Perform multiple fast fourier transforms.
 C>
-C> Perform multiple fast fourier transforms
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 1998-12-18 | IREDELL | Initial.
+C> 2012-11-12 | MIRVIS | fixing hard-wired types problem on Intel/Linux 
+C>
 C> @author IREDELL @date 96-02-20
 
 C> This subprogram performs multiple fast fourier transforms
 C> between complex amplitudes in fourier space and real values
 C> in cyclic physical space.
-C> Subprogram SPFFTE must be invoked first with IDIR=0
-C> to initialize trigonemetric data.  use subprogram SPFFT1
+C>
+C> This subprogram must be invoked first with IDIR=0
+C> to initialize trigonemetric data. Use subprogram spfft1()
 C> to perform an fft without previous initialization.
+C>
 C> This version invokes the ibm essl fft.
 C>
-C> PROGRAM HISTORY LOG:
-C> - 1998-12-18  IREDELL
-C> - 2012-11-12  MIRVIS -fixing hard-wired types problem on Intel/Linux 
-C>
-C> @param IMAX     - INTEGER NUMBER OF VALUES IN THE CYCLIC PHYSICAL SPACE
+C> @param IMAX NUMBER OF VALUES IN THE CYCLIC PHYSICAL SPACE
 C>                (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
-C> @param INCW     - INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
+C> @param INCW FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
 C>                (INCW >= IMAX/2+1)
-C> @param INCG     - INTEGER FIRST DIMENSION OF THE REAL VALUE ARRAY
+C> @param INCG FIRST DIMENSION OF THE REAL VALUE ARRAY
 C>                (INCG >= IMAX)
-C> @param KMAX     - INTEGER NUMBER OF TRANSFORMS TO PERFORM
-C> @param[out] W        - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR>0
-C> @param[out] G        - REAL(INCG,KMAX) REAL VALUES IF IDIR<0
-C> @param IDIR     - INTEGER DIRECTION FLAG
+C> @param KMAX NUMBER OF TRANSFORMS TO PERFORM
+C> @param[out] W COMPLEX AMPLITUDES IF IDIR>0
+C> @param[out] G REAL VALUES IF IDIR<0
+C> @param IDIR  DIRECTION FLAG
 C> - IDIR=0 TO INITIALIZE TRIGONOMETRIC DATA
 C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
 C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
-C> @param[out] AFFT       REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR<>0
-C>
-C> SUBPROGRAMS CALLED:
-C>   -scrft()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
-C>   -dcrft()        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
-C>   -srcft()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
-C>   -drcft()        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
+C> @param[out] AFFT AUXILIARY ARRAY IF IDIR<>0
 C>
 C> @note The restrictions on IMAX are that it must be a multiple
 C> of 1 to 25 factors of two, up to 2 factors of three,
@@ -46,6 +44,7 @@ C> in succeeding calls until the next time it is called with IDIR=0.
 C>
 C> This subprogram is thread-safe.
 C>      
+C> @author IREDELL @date 96-02-20
       SUBROUTINE SPFFTE(IMAX,INCW,INCG,KMAX,W,G,IDIR,AFFT)
         IMPLICIT NONE
         INTEGER,INTENT(IN):: IMAX,INCW,INCG,KMAX,IDIR
