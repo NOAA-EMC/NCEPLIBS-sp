@@ -5,14 +5,14 @@ C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
 C> 96-02-20 | IREDELL | Initial.
-C> 97-10-20 | IREDELL | ADJUST PRECISION
-C> 98-06-11 | IREDELL | GENERALIZE PRECISION USING FORTRAN 90 INTRINSIC
-C> 1998-12-03 | IREDELL | GENERALIZE PRECISION FURTHER
-C> 1998-12-03 | IREDELL | USES AIX ESSL BLAS CALLS
-C> 2009-12-27 | DSTARK | updated to switch between ESSL calls on an AIX platform, and Numerical Recipies calls elsewise.
-C> 2010-12-30 | SLOVACEK | update alignment so preprocessor does not cause compilation failure
-C> 2012-09-01 | E.Mirvis & M.Iredell | merging & debugging linux errors of _d and _8 using generic LU factorization.
-C> 2012-11-05 | E.Mirvis | generic FFTPACK and LU lapack were removed
+C> 97-10-20 | IREDELL | Adjust precision.
+C> 98-06-11 | IREDELL | Generalize precision using FORTRAN 90 intrinsic.
+C> 1998-12-03 | IREDELL | Generalize precision further.
+C> 1998-12-03 | IREDELL | Uses AIX ESSL BLAS calls.
+C> 2009-12-27 | DSTARK | Updated to switch between ESSL calls on an AIX platform, and Numerical Recipies calls elsewise.
+C> 2010-12-30 | SLOVACEK | Update alignment so preprocessor does not cause compilation failure.
+C> 2012-09-01 | E.Mirvis & M.Iredell | Merging & debugging linux errors of _d and _8 using generic LU factorization.
+C> 2012-11-05 | E.Mirvis | Generic FFTPACK and LU lapack were removed.
 C>
 C> @author IREDELL @date 96-02-20
 C>
