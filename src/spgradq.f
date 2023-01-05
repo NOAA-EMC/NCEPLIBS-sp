@@ -1,6 +1,5 @@
 C> @file
-C>
-C> Compute gradient in spectral space.
+C> @brief Compute gradient in spectral space.
 C> @author IREDELL @date 92-10-31
 
 C> Computes the horizontal vector gradient of a scalar field
@@ -21,14 +20,16 @@ c> in order to vectorize over the entire spectral domain.
 C>
 C> @param I SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
 C> @param M SPECTRAL TRUNCATION
-C> @param ENN1 ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C> @param ELONN1 ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C> @param EON ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C> @param EONTOP (M+1) EPSILON/N*A OVER TOP
-C> @param Q ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C> @param QDX ((M+1)*((I+1)*M+2)) ZONAL GRADIENT (TIMES COSLAT)
-C> @param QDY ((M+1)*((I+1)*M+2)) MERID GRADIENT (TIMES COSLAT)
-C> @param QDYTOP (2*(M+1)) MERID GRADIENT (TIMES COSLAT) OVER TOP
+C> @param ENN1 
+C> @param ELONN1 
+C> @param EON EPSILON/N*A
+C> @param EONTOP EPSILON/N*A OVER TOP
+C> @param Q SCALAR FIELD
+C> @param QDX ZONAL GRADIENT (TIMES COSLAT)
+C> @param QDY MERID GRADIENT (TIMES COSLAT)
+C> @param QDYTOP MERID GRADIENT (TIMES COSLAT) OVER TOP
+C>      
+C> @author IREDELL @date 92-10-31
       SUBROUTINE SPGRADQ(I,M,ENN1,ELONN1,EON,EONTOP,Q,QDX,QDY,QDYTOP)
 
       REAL ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)
