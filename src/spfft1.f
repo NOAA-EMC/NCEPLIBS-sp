@@ -1,6 +1,5 @@
 C> @file
-C>
-C> Perform multiple fast fourier transforms
+C> @brief Perform multiple fast fourier transforms.
 C> @author IREDELL @date 96-02-20
 
 C> This subprogram performs multiple fast fourier transforms
@@ -10,28 +9,24 @@ C> Subprogram SPFFT1 initializes trigonometric data each call.
 C> Use subprogram SPFFT to save time and initialize once.
 C> this version invokes the ibm essl fft.
 C>
-C> @param IMAX     - INTEGER NUMBER OF VALUES IN THE CYCLIC> PHYSICAL SPACE
-C>                (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
-C> @param INCW     - INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
-C>                (INCW >= IMAX/2+1)
-C> @param INCG     - INTEGER FIRST DIMENSION OF THE REAL VALUE ARRAY
-C>                (INCG >= IMAX)
-C> @param KMAX     - INTEGER NUMBER OF TRANSFORMS TO PERFORM
-C> @param[out] W        - COMPLEX(INCW,KMAX) COMPLEX AMPLITUDES IF IDIR>0
-C> @param[out] G        - REAL(INCG,KMAX) REAL VALUES IF IDIR<0
-C> @param IDIR     - INTEGER DIRECTION FLAG
-C>                IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
-C>                IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
-C>
-C> SUBPROGRAMS CALLED:
-C>   - SCRFT        IBM ESSL COMPLEX TO REAL FOURIER TRANSFORM
-C>   - SRCFT        IBM ESSL REAL TO COMPLEX FOURIER TRANSFORM
+C> @param IMAX NUMBER OF VALUES IN THE CYCLIC> PHYSICAL SPACE
+C> (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
+C> @param INCW FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
+C> (INCW >= IMAX/2+1)
+C> @param INCG FIRST DIMENSION OF THE REAL VALUE ARRAY (INCG >= IMAX)
+C> @param KMAX NUMBER OF TRANSFORMS TO PERFORM
+C> @param[out] W COMPLEX AMPLITUDES IF IDIR>0
+C> @param[out] G VALUES IF IDIR<0
+C> @param IDIR DIRECTION FLAG
+C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
+C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
 C>
 C> @note The restrictions on IMAX are that it must be a multiple of 1
 C> to 25 factors of two, up to 2 factors of three, and up to 1 factor of
 C> five, seven and eleven.
 C>
 C> @note This subprogram is thread-safe.
+C> @author IREDELL @date 96-02-20
       SUBROUTINE SPFFT1(IMAX,INCW,INCG,KMAX,W,G,IDIR)
         IMPLICIT NONE
         INTEGER,INTENT(IN):: IMAX,INCW,INCG,KMAX,IDIR
