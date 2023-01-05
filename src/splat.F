@@ -31,13 +31,13 @@ C> Note that when analyzing grid to spectral in latitude pairs,
 C> if an equator point exists, its weight should be halved.
 C> This version invokes the ibm essl matrix solver.
 C>
-C> @param IDRT GRID IDENTIFIER
-C>  - IDRT=4 FOR GAUSSIAN GRID
-C>  - IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES
-C>  - IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES
-C> @param JMAX NUMBER OF LATITUDES.
-C> @param[out] SLAT (JMAX) SINES OF LATITUDE.
-C> @param[out] WLAT (JMAX) GAUSSIAN WEIGHTS.
+C> @param IDRT grid identifier
+C>  - IDRT=4 for gaussian grid
+C>  - IDRT=0 for equally-spaced grid including poles
+C>  - IDRT=256 for equally-spaced grid excluding poles
+C> @param JMAX number of latitudes
+C> @param[out] SLAT sines of latitude
+C> @param[out] WLAT gaussian weights
 C>
 C> @author IREDELL @date 96-02-20
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
