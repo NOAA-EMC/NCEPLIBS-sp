@@ -17,6 +17,7 @@ C> to parallelize.
 C>
 C> @param[out] ncpus  number of cpus
 C>
+C> @return Number of CPUs assigned.
 C>
 C> @author IREDELL @date 94-08-19
       FUNCTION NCPUS()
