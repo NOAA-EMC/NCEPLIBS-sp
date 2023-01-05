@@ -18,19 +18,21 @@ C> Note that when analyzing grid to spectral in latitude pairs,
 C> if an equator point exists, its weight should be halved.
 C> This version invokes the ibm essl matrix solver.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-20  IREDELL
-C> -  97-10-20  IREDELL  ADJUST PRECISION
-C> -  98-06-11  IREDELL  GENERALIZE PRECISION USING FORTRAN 90 INTRINSIC
-C> - 1998-12-03  IREDELL  GENERALIZE PRECISION FURTHER
-C> - 1998-12-03  IREDELL  USES AIX ESSL BLAS CALLS
-C> - 2009-12-27  DSTARK   updated to switch between ESSL calls on an AIX
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 96-02-20 | IREDELL |
+C> 97-10-20 | IREDELL | ADJUST PRECISION
+C> 98-06-11 | IREDELL | GENERALIZE PRECISION USING FORTRAN 90 INTRINSIC
+C> 1998-12-03 | IREDELL | GENERALIZE PRECISION FURTHER
+C> 1998-12-03 | IREDELL | USES AIX ESSL BLAS CALLS
+C> 2009-12-27 | DSTARK | updated to switch between ESSL calls on an AIX
 C>                      platform, and Numerical Recipies calls elsewise.
-C> - 2010-12-30  SLOVACEK update alignment so preprocessor does not cause
+C> 2010-12-30 | SLOVACEK | update alignment so preprocessor does not cause
 C>                      compilation failure
-C> - 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors 
+C> 2012-09-01 | E.Mirvis & M.Iredell | merging & debugging linux errors 
 C>			of _d and _8 using generic LU factorization.   
-C> - 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
+C> 2012-11-05 | E.Mirvis | generic FFTPACK and LU lapack were removed
 C>
 C> @param IDRT GRID IDENTIFIER
 C>             (IDRT=4 FOR GAUSSIAN GRID,
