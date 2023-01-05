@@ -4,6 +4,10 @@
 
 link_libraries(sp::sp_d)
 
+if(OpenMP_Fortran_FOUND)
+    link_libraries(OpenMP::OpenMP_Fortran)
+endif()
+
 function(make_test test_name file)
   add_executable(${test_name} ${file})
   add_test(${test_name} ${test_name})
@@ -13,7 +17,3 @@ make_test(test_ncpus test_ncpus.F90)
 make_test(test_splat test_splat.f90)
 make_test(test_sptezv test_sptezv.f90)
 make_test(test_fft test_fft.f90)
-
-
-
-
