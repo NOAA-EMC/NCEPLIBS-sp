@@ -1,6 +1,6 @@
 C> @file
 C>
-C> Compute latitude functions
+C> @brief Compute latitude functions
 C> @author IREDELL @date 96-02-20
 
 C> Computes cosines of colatitude and gaussian weights
@@ -32,20 +32,14 @@ C> - 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors
 C>			of _d and _8 using generic LU factorization.   
 C> - 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
 C>
-C> @param IDRT     - INTEGER GRID IDENTIFIER
-C>                (IDRT=4 FOR GAUSSIAN GRID,
-C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
-C> @param[out] SLAT - REAL (JMAX) SINES OF LATITUDE.
-C> @param[out] WLAT - REAL (JMAX) GAUSSIAN WEIGHTS.
+C> @param IDRT INTEGER GRID IDENTIFIER
+C>             (IDRT=4 FOR GAUSSIAN GRID,
+C>             IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
+C>             IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
+C> @param JMAX INTEGER NUMBER OF LATITUDES.
+C> @param[out] SLAT REAL (JMAX) SINES OF LATITUDE.
+C> @param[out] WLAT REAL (JMAX) GAUSSIAN WEIGHTS.
 C>
-C> SUBPROGRAMS CALLED:
-C>  - dgef()         MATRIX FACTORIZATION - ESSL
-C>  - dges()         MATRIX SOLVER - ESSL
-C>  - ludcmp()       LU factorization - numerical recipies
-C>  - lubksb()       Matrix solver - numerical recipies
-C>      
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
       REAL SLAT(JMAX),WLAT(JMAX)
       INTEGER,PARAMETER:: KD=SELECTED_REAL_KIND(15,45)
