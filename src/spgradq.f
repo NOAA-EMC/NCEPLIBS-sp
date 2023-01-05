@@ -1,31 +1,34 @@
 C> @file
 C>
-C> Compute gradient in spectral space
+C> Compute gradient in spectral space.
 C> @author IREDELL @date 92-10-31
 
-C> COMPUTES THE HORIZONTAL VECTOR GRADIENT OF A SCALAR FIELD
-C> IN SPECTRAL SPACE.
-C> SUBPROGRAM SPEPS SHOULD BE CALLED ALREADY.
-C> IF L IS THE ZONAL WAVENUMBER, N IS THE TOTAL WAVENUMBER,
-C> EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) AND A IS EARTH RADIUS,
-C> THEN THE ZONAL GRADIENT OF Q(L,N) IS SIMPLY I*L/A*Q(L,N)
-C> WHILE THE MERIDIONAL GRADIENT OF Q(L,N) IS COMPUTED AS
-C> EPS(L,N+1)*(N+2)/A*Q(L,N+1)-EPS(L,N+1)*(N-1)/A*Q(L,N-1).
-C> EXTRA TERMS ARE COMPUTED OVER TOP OF THE SPECTRAL DOMAIN.
-C> ADVANTAGE IS TAKEN OF THE FACT THAT EPS(L,L)=0
-C> IN ORDER TO VECTORIZE OVER THE ENTIRE SPECTRAL DOMAIN.
+C> Computes the horizontal vector gradient of a scalar field
+c> in spectral space.
 C>
-C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M        - INTEGER SPECTRAL TRUNCATION
-C> @param ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C> @param ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C> @param EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C> @param EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
-C> @param Q        - REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C> @param QDX      - REAL ((M+1)*((I+1)*M+2)) ZONAL GRADIENT (TIMES COSLAT)
-C> @param QDY      - REAL ((M+1)*((I+1)*M+2)) MERID GRADIENT (TIMES COSLAT)
-C> @param QDYTOP   - REAL (2*(M+1)) MERID GRADIENT (TIMES COSLAT) OVER TOP
+C> Subprogram speps() should be called already.
+C>
+C> If l is the zonal wavenumber, n is the total wavenumber,
+c> eps(l,n)=sqrt((n**2-l**2)/(4*n**2-1)) and a is earth radius,
+c> then the zonal gradient of q(l,n) is simply i*l/a*q(l,n)
+c> while the meridional gradient of q(l,n) is computed as
+c> eps(l,n+1)*(n+2)/a*q(l,n+1)-eps(l,n+1)*(n-1)/a*q(l,n-1).
+C>
+C> Extra terms are computed over top of the spectral domain.
+C>
+C> Advantage is taken of the fact that eps(l,l)=0
+c> in order to vectorize over the entire spectral domain.
+C>
+C> @param I SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param M SPECTRAL TRUNCATION
+C> @param ENN1 ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
+C> @param ELONN1 ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
+C> @param EON ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
+C> @param EONTOP (M+1) EPSILON/N*A OVER TOP
+C> @param Q ((M+1)*((I+1)*M+2)) SCALAR FIELD
+C> @param QDX ((M+1)*((I+1)*M+2)) ZONAL GRADIENT (TIMES COSLAT)
+C> @param QDY ((M+1)*((I+1)*M+2)) MERID GRADIENT (TIMES COSLAT)
+C> @param QDYTOP (2*(M+1)) MERID GRADIENT (TIMES COSLAT) OVER TOP
       SUBROUTINE SPGRADQ(I,M,ENN1,ELONN1,EON,EONTOP,Q,QDX,QDY,QDYTOP)
 
       REAL ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)
