@@ -18,8 +18,6 @@ C> @param wrk
 C> @param n2
 C> @param z
 C> @param nz
-C>
-C> @author IREDELL @date 94-08-19
       SUBROUTINE dcrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
