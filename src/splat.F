@@ -40,6 +40,12 @@ C> @param JMAX INTEGER NUMBER OF LATITUDES.
 C> @param[out] SLAT REAL (JMAX) SINES OF LATITUDE.
 C> @param[out] WLAT REAL (JMAX) GAUSSIAN WEIGHTS.
 C>
+C> SUBPROGRAMS CALLED:
+C>  - dgef()         MATRIX FACTORIZATION - ESSL
+C>  - dges()         MATRIX SOLVER - ESSL
+C>  - ludcmp()       LU factorization - numerical recipies
+C>  - lubksb()       Matrix solver - numerical recipies
+C>      
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
       REAL SLAT(JMAX),WLAT(JMAX)
       INTEGER,PARAMETER:: KD=SELECTED_REAL_KIND(15,45)
