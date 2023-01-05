@@ -6,7 +6,8 @@ C> transform of periodic and other symmetric sequences. It includes
 C> complex, real, sine, cosine, and quarter-wave transforms.
 C>      
 C>Reference:
-C>- P.N. Swarztrauber, Vectorizing the FFTs, in Parallel Computations (G. Rodrigue, ed.), Academic Press, 1982, pp. 51--83.
+C>- P.N. Swarztrauber, Vectorizing the FFTs, in Parallel Computations
+C>(G. Rodrigue, ed.), Academic Press, 1982, pp. 51--83.
 C> 
 C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
 
