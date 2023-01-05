@@ -1,3 +1,25 @@
+C> @file
+C> @brief fftpack.
+
+C> dcrft
+C>
+C> @param init
+C> @param x
+C> @param ldx
+C> @param y
+C> @param ldy
+C> @param n
+C> @param m
+C> @param isign
+C> @param scale
+C> @param  table
+C> @param n1
+C> @param wrk
+C> @param n2
+C> @param z
+C> @param nz
+C>
+C> @author IREDELL @date 94-08-19
       SUBROUTINE dcrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -24,6 +46,23 @@
       RETURN
       END
 
+C> scrft
+C>
+C> @param init
+C> @param x
+C> @param ldx
+C> @param y
+C> @param ldy
+C> @param n
+C> @param m
+C> @param isign
+C> @param scale
+C> @param  table
+C> @param n1
+C> @param wrk
+C> @param n2
+C> @param z
+C> @param nz
       SUBROUTINE scrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -49,9 +88,17 @@
  
       RETURN
       END
-c
-c***********************************************************************
-c
+
+C> csfft
+C>
+C> @param isign
+C> @param n
+C> @param scale
+C> @param x
+C> @param y
+C> @param table
+C> @param work
+C> @param isys
       SUBROUTINE csfft(isign,n,scale,x,y,table,work,isys)
  
       implicit none
@@ -74,9 +121,24 @@ c
  
       RETURN
       END
-c
-c***********************************************************************
-c
+
+C> drcft
+C>
+C> @param init
+C> @param x
+C> @param ldx
+C> @param y
+C> @param ldy
+C> @param n
+C> @param m
+C> @param isign
+C> @param scale
+C> @param table
+C> @param n1
+C> @param wrk
+C> @param n2
+C> @param z
+C> @param nz
       SUBROUTINE drcft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -107,6 +169,23 @@ C 01/17/2013 vvvvvvvvvvvvv E.Mirvis added ver 2.0.1 by S.Moorthi request. No +|-
       RETURN
       END
 
+C> srcft
+C>
+C> @param init
+C> @param x
+C> @param ldx
+C> @param y
+C> @param ldy
+C> @param n
+C> @param m
+C> @param isign
+C> @param scale
+C> @param table
+C> @param n1
+C> @param wrk
+C> @param n2
+C> @param z
+C> @param nz
       SUBROUTINE srcft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -136,9 +215,17 @@ C 01/17/2013 ^^^^^^^^^^E.Mirvis added ver 2.0.1 by S.Moorthi request. No +|- dem
  
       RETURN
       END
-c
-c***********************************************************************
-c
+
+C> scfft
+C>
+C> @param isign
+C> @param n
+C> @param scale
+C> @param x
+C> @param y
+C> @param table
+C> @param work
+C> @param isys
       SUBROUTINE scfft(isign,n,scale,x,y,table,work,isys)
  
       implicit none
@@ -164,33 +251,49 @@ c
  
       RETURN
       END
-c
-c     ******************************************************************
-c     ******************************************************************
-c     ******                                                      ******
-c     ******                        FFTPACK                       ******
-c     ******                                                      ******
-c     ******************************************************************
-c     ******************************************************************
-c
+
+C> RFFTF
+C>      
+C> @param N
+C> @param R
+C> @param WSAVE
       SUBROUTINE RFFTF (N,R,WSAVE)
       DIMENSION       R(1)       ,WSAVE(1)
       IF (N .EQ. 1) RETURN
       CALL RFFTF1 (N,R,WSAVE,WSAVE(N+1),WSAVE(2*N+1))
       RETURN
       END
+      
+C> RFFTB
+C>      
+C> @param N
+C> @param R
+C> @param WSAVE
       SUBROUTINE RFFTB (N,R,WSAVE)
       DIMENSION       R(1)       ,WSAVE(1)
       IF (N .EQ. 1) RETURN
       CALL RFFTB1 (N,R,WSAVE,WSAVE(N+1),WSAVE(2*N+1))
       RETURN
       END
+
+C> RFFTI
+C>      
+C> @param N
+C> @param WSAVE
       SUBROUTINE RFFTI (N,WSAVE)
       DIMENSION       WSAVE(1)
       IF (N .EQ. 1) RETURN
       CALL RFFTI1 (N,WSAVE(N+1),WSAVE(2*N+1))
       RETURN
       END
+
+C> RFFTB1
+C>      
+C> @param N
+C> @param C
+C> @param CH
+C> @param WA
+C> @param IFAC
       SUBROUTINE RFFTB1 (N,C,CH,WA,IFAC)
       DIMENSION       CH(1)      ,C(1)       ,WA(1)      ,IFAC(*)
       NF = IFAC(2)
@@ -251,7 +354,13 @@ c
       RETURN
       END
 
-
+C> RFFTF1
+C>      
+C> @param N
+C> @param C
+C> @param CH
+C> @param WA
+C> @param IFAC
       SUBROUTINE RFFTF1 (N,C,CH,WA,IFAC)
       DIMENSION       CH(1)      ,C(1)       ,WA(1)      ,IFAC(*)
       NF = IFAC(2)
@@ -312,7 +421,11 @@ c
       RETURN
       END
 
-
+C> RFFTI1
+C>      
+C> @param N
+C> @param WA
+C> @param IFAC
       SUBROUTINE RFFTI1 (N,WA,IFAC)
       DIMENSION       WA(1)      ,IFAC(*)    ,NTRYH(4)
       DATA NTRYH(1),NTRYH(2),NTRYH(3),NTRYH(4)/4,2,3,5/
@@ -373,7 +486,13 @@ c
       RETURN
       END
 
-
+C> RADB2
+C>      
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
       SUBROUTINE RADB2 (IDO,L1,CC,CH,WA1)
       DIMENSION       CC(IDO,2,L1)           ,CH(IDO,L1,2)           ,
      1                WA1(1)
@@ -403,7 +522,14 @@ c
   107 RETURN
       END
 
-
+C> RADB3      
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
       SUBROUTINE RADB3 (IDO,L1,CC,CH,WA1,WA2)
       DIMENSION       CC(IDO,3,L1)           ,CH(IDO,L1,3)           ,
      1                WA1(1)     ,WA2(1)
@@ -443,7 +569,15 @@ c
       RETURN
       END
 
-
+C> RADB4
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
+C> @param WA3
       SUBROUTINE RADB4 (IDO,L1,CC,CH,WA1,WA2,WA3)
       DIMENSION       CC(IDO,4,L1)           ,CH(IDO,L1,4)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
@@ -503,7 +637,16 @@ c
   107 RETURN
       END
 
-
+C> RADB5
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
+C> @param WA3
+C> @param WA4
       SUBROUTINE RADB5 (IDO,L1,CC,CH,WA1,WA2,WA3,WA4)
       DIMENSION       CC(IDO,5,L1)           ,CH(IDO,L1,5)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)     ,WA4(1)
@@ -568,7 +711,18 @@ c
       RETURN
       END
 
-
+C> RADBG
+C>
+C> @param IDO
+C> @param IP
+C> @param L1
+C> @param IDL1
+C> @param CC
+C> @param C1
+C> @param C2
+C> @param CH
+C> @param CH2
+C> @param WA
       SUBROUTINE RADBG (IDO,IP,L1,IDL1,CC,C1,C2,CH,CH2,WA)
       DIMENSION       CH(IDO,L1,IP)          ,CC(IDO,IP,L1)          ,
      1                C1(IDO,L1,IP)          ,C2(IDL1,IP),
@@ -738,7 +892,13 @@ c
   143 RETURN
       END
 
-
+C> RADBG
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
       SUBROUTINE RADF2 (IDO,L1,CC,CH,WA1)
       DIMENSION       CH(IDO,2,L1)           ,CC(IDO,L1,2)           ,
      1                WA1(1)
@@ -767,7 +927,14 @@ c
   107 RETURN
       END
 
-
+C> RADF3
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
       SUBROUTINE RADF3 (IDO,L1,CC,CH,WA1,WA2)
       DIMENSION       CH(IDO,3,L1)           ,CC(IDO,L1,3)           ,
      1                WA1(1)     ,WA2(1)
@@ -803,6 +970,16 @@ c
   103 CONTINUE
       RETURN
       END
+
+C> RADF4
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
+C> @param WA3
       SUBROUTINE RADF4 (IDO,L1,CC,CH,WA1,WA2,WA3)
       DIMENSION       CC(IDO,L1,4)           ,CH(IDO,4,L1)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
@@ -858,7 +1035,16 @@ c
   107 RETURN
       END
 
-
+C> RADF5
+C>
+C> @param IDO
+C> @param L1
+C> @param CC
+C> @param CH
+C> @param WA1
+C> @param WA2
+C> @param WA3
+C> @param WA4
       SUBROUTINE RADF5 (IDO,L1,CC,CH,WA1,WA2,WA3,WA4)
       DIMENSION       CC(IDO,L1,5)           ,CH(IDO,5,L1)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)     ,WA4(1)
@@ -919,7 +1105,18 @@ c
       RETURN
       END
 
-
+C> RADFG
+C>
+C> @param IDO
+C> @param IP
+C> @param L1
+C> @param IDL1
+C> @param CC
+C> @param C1
+C> @param C2
+C> @param CH
+C> @param CH2
+C> @param WA
       SUBROUTINE RADFG (IDO,IP,L1,IDL1,CC,C1,C2,CH,CH2,WA)
       DIMENSION       CH(IDO,L1,IP)          ,CC(IDO,IP,L1)          ,
      1                C1(IDO,L1,IP)          ,C2(IDL1,IP),
