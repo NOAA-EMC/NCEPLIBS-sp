@@ -1,6 +1,5 @@
 C>@file
-C>
-C> Compute utility spectral fields
+C> @brief Compute utility spectral fields.
 C> @author IREDELL  @date 92-10-31
 
 C> Computes constant fields indexed in the spectral domain
@@ -12,16 +11,16 @@ C> - (2) LAPLACIAN FACTOR N*(N+1)/A**2
 C> - (3) ZONAL DERIVATIVE/LAPLACIAN FACTOR L/(N*(N+1))*A
 C> - (4) MERIDIONAL DERIVATIVE/LAPLACIAN FACTOR EPSILON/N*A
 C>
-C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
-C>               (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M        - INTEGER SPECTRAL TRUNCATION
-C> @param EPS      - REAL ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1))
-C> @param EPSTOP   - REAL (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP
-C> @param ENN1     - REAL ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C> @param ELONN1   - REAL ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C> @param EON      - REAL ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C> @param EONTOP   - REAL (M+1) EPSILON/N*A OVER TOP
+C> @param I SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> @param M SPECTRAL TRUNCATION
+C> @param EPS ((M+1)*((I+1)*M+2)/2) SQRT((N**2-L**2)/(4*N**2-1))
+C> @param EPSTOP (M+1) SQRT((N**2-L**2)/(4*N**2-1)) OVER TOP
+C> @param ENN1 ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
+C> @param ELONN1 ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
+C> @param EON ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
+C> @param EONTOP (M+1) EPSILON/N*A OVER TOP
 C>
+C> @author IREDELL  @date 92-10-31
       SUBROUTINE SPEPS(I,M,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
       REAL EPS((M+1)*((I+1)*M+2)/2),EPSTOP(M+1)
       REAL ENN1((M+1)*((I+1)*M+2)/2),ELONN1((M+1)*((I+1)*M+2)/2)
