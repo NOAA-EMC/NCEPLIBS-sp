@@ -14,7 +14,7 @@ C> For more flexibility and efficiency, call SPTRAN().
 C> Subprogram can be called from a multiprocessing environment.
 C>
 C> @param IROMB Spectral domain shape
-C> (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
+C> (0 for triangular, 1 for rhomboidal)
 C> @param MAXWV Spectral truncation
 C> @param IDRT Grid identifier
 C> - IDRT=4 for Gaussian grid
