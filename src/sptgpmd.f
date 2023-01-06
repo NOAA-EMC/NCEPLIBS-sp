@@ -37,7 +37,7 @@ C> DLAT is negative for grids indexed southward.
 C> (in terms of grid increment dy valid at latitude RLATI,
 C> the latitude increment DLAT is determined as
 C> DLAT=DPR*DY/(RERTH*COS(RLATI/DPR))
-C> where DPR=180/PI and RERTH is earth's radius)
+C> where DPR=180/PI and RERTH is Earth's radius)
 c> @param DLON Longitude increment in degrees such that
 C> D(LAMBDA)/D(I)=DLON where I is zonal index.
 C> DLON is negative for grids indexed westward.
