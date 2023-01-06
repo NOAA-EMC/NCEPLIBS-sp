@@ -7,14 +7,14 @@ c> in spectral space.
 C>
 C> Subprogram speps should be called already.
 C>
-C> if L is the zonal wavenumber, N is the total wavenumber,
+C> If L is the zonal wavenumber, N is the total wavenumber,
 C> EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) and A is Earth radius,
 C> then the meridional gradient of Q(L,N) is computed as
 C> EPS(L,N+1)*(N+2)/A*Q(L,N+1)-EPS(L,N+1)*(N-1)/A*Q(L,N-1).
 C>
 C> Extra terms are computed over top of the spectral domain.
 C>
-C> advantage is taken of the fact that EPS(L,L)=0
+C> Advantage is taken of the fact that EPS(L,L)=0
 C> in order to vectorize over the entire spectral domain.
 C>
 C> @param I spectral domain shape
