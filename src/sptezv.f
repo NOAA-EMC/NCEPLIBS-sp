@@ -8,7 +8,7 @@ C> and a vector field on a global cylindrical grid.
 C> The wave-space can be either triangular or rhomboidal.
 C> The grid-space can be either an equally-spaced grid
 C> (with or without pole points) or a Gaussian grid.
-C> The wave field is in sequential 'IBM ORDER'.
+C> The wave field is in sequential 'ibm order'.
 C> The grid field is indexed east to west, then north to south.
 C> For more flexibility and efficiency, call SPTRAN().
 C> Subprogram can be called from a multiprocessing environment.
