@@ -32,7 +32,7 @@ C> @param IDIR Transform flag
 C> (IDIR>0 for wave to grid, IDIR<0 for grid to wave)
 C>
 C> @note Minimum grid dimensions for unaliased transforms to spectral:
-C>   DIMENSION                    |LINEAR              |QUADRATIC
+C>   Dimension                    |Linear              |Quadratic
 C>   -----------------------      |---------           |-------------
 C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
 C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
