@@ -7,7 +7,7 @@ C> subprogram sptranf(). Use this subprogram outside
 C> the sptranf() family context at your own risk.
 C>
 C> @param IROMB spectral domain shape
-c> (0 for triangular, 1 for rhomboidal)
+C> (0 for triangular, 1 for rhomboidal)
 C> @param MAXWV spectral truncation
 C> @param IDRT grid identifier
 C> - IDRT=4 for Gaussian grid,
