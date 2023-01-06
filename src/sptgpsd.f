@@ -1,7 +1,9 @@
 C> @file
-C> @brief Transform spectral to polar stereo. gradients
+C> @brief Transform spectral to polar stereographic gradients
 C> ### Program history log:
-C>  96-02-29 | IREDELL | Initial
+C> Date | Programmer | Comments
+C> -----|------------|----------
+C>  96-02-29 | IREDELL | Initial.
 C> 1998-12-15 | IREDELL | OpenMP directives inserted.
 C> @author IREDELL @date 96-02-29
 
