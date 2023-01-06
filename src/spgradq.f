@@ -1,6 +1,6 @@
 C> @file
 C> @brief Compute gradient in spectral space.
-C> @author IREDELL @date 92-10-31
+C> @author Iredell @date 92-10-31
 
 C> Computes the horizontal vector gradient of a scalar field
 c> in spectral space.
@@ -18,16 +18,16 @@ C>
 C> Advantage is taken of the fact that eps(l,l)=0
 c> in order to vectorize over the entire spectral domain.
 C>
-C> @param I SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M SPECTRAL TRUNCATION
+C> @param I spectral domain shape (0 for triangular, 1 for rhomboidal)
+C> @param M spectral truncation
 C> @param ENN1 
 C> @param ELONN1 
 C> @param EON EPSILON/N*A
-C> @param EONTOP EPSILON/N*A OVER TOP
-C> @param Q SCALAR FIELD
-C> @param QDX ZONAL GRADIENT (TIMES COSLAT)
-C> @param QDY MERID GRADIENT (TIMES COSLAT)
-C> @param QDYTOP MERID GRADIENT (TIMES COSLAT) OVER TOP
+C> @param EONTOP EPSILON/N*A over top
+C> @param Q scalar field
+C> @param QDX zonal gradient (times coslat)
+C> @param QDY merid gradient (times coslat)
+C> @param QDYTOP merid gradient (times coslat) over top
 C>      
 C> @author IREDELL @date 92-10-31
       SUBROUTINE SPGRADQ(I,M,ENN1,ELONN1,EON,EONTOP,Q,QDX,QDY,QDYTOP)
@@ -37,7 +37,7 @@ C> @author IREDELL @date 92-10-31
       REAL Q((M+1)*((I+1)*M+2))
       REAL QDX((M+1)*((I+1)*M+2)),QDY((M+1)*((I+1)*M+2))
       REAL QDYTOP(2*(M+1))
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TAKE ZONAL AND MERIDIONAL GRADIENTS
       K=1
       QDX(2*K-1)=0.
@@ -55,13 +55,12 @@ C  TAKE ZONAL AND MERIDIONAL GRADIENTS
       QDX(2*K)=ELONN1(K)*ENN1(K)*Q(2*K-1)
       QDY(2*K-1)=-EON(K)*ENN1(K-1)*Q(2*K-3)
       QDY(2*K)=-EON(K)*ENN1(K-1)*Q(2*K-2)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TAKE MERIDIONAL GRADIENT OVER TOP
       DO L=0,M
         K=L*(2*M+(I-1)*(L-1))/2+I*L+M+1
         QDYTOP(2*L+1)=-EONTOP(L+1)*ENN1(K)*Q(2*K-1)
         QDYTOP(2*L+2)=-EONTOP(L+1)*ENN1(K)*Q(2*K)
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       RETURN
       END
