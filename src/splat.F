@@ -1,7 +1,7 @@
 C> @file
 C> @brief Compute latitude functions
 C>
-C> 
+C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
 C> 96-02-20 | IREDELL | Initial.
