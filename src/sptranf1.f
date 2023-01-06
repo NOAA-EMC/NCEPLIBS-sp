@@ -1,46 +1,42 @@
 C> @file
-C>
-C> Sptranf spectral transform
-C> @author IREDELL @date 96-02-29
+C> @brief Sptranf spectral transform.
+C> @author Iredell @date 96-02-29
 
-C> THIS SUBPROGRAM PERFORMS AN SINGLE LATITUDE TRANSFORM FOR
-C> SUBPROGRAM SPTRANF.  USE THIS SUBPROGRAM OUTSIDE
-C> THE SPTRANF FAMILY CONTEXT AT YOUR OWN RISK.
+C> This subprogram performs an single latitude transform for
+C> subprogram sptranf(). Use this subprogram outside
+C> the sptranf() family context at your own risk.
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param IDRT     - INTEGER GRID IDENTIFIER
-C>                (IDRT=4 FOR GAUSSIAN GRID,
-C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param IMAX     - INTEGER EVEN NUMBER OF LONGITUDES
-C> @param JMAX     - INTEGER NUMBER OF LATITUDES
-C> @param JB       - INTEGER LATITUDE INDEX (FROM POLE) TO BEGIN TRANSFORM
-C> @param JE       - INTEGER LATITUDE INDEX (FROM POLE) TO END TRANSFORM
-C> @param EPS      - REAL ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EPSTOP   - REAL (MAXWV+1)
-C> @param ENN1     - REAL ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param ELONN1   - REAL ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EON      - REAL ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EONTOP   - REAL (MAXWV+1)
-C> @param CLAT     - REAL (JB:JE) COSINES OF LATITUDE
-C> @param SLAT     - REAL (JB:JE) SINES OF LATITUDE
-C> @param WLAT     - REAL (JB:JE) GAUSSIAN WEIGHTS
-C> @param AFFT     - REAL(8) (50000+4*IMAX) AUXILIARY ARRAY IF IDIR=0
-C> @param PLN      - REAL ((M+1)*((I+1)*M+2)/2,JB:JE) LEGENDRE POLYNOMIALS
-C> @param PLNTOP   - REAL (M+1,JB:JE) LEGENDRE POLYNOMIAL OVER TOP
-C> @param MP       - INTEGER IDENTIFIER (0 FOR SCALAR, 1 FOR VECTOR)
-C> @param[out] W        - REAL (*) WAVE FIELD IF IDIR>0
-C> @param[out] WTOP     - REAL (*) WAVE FIELD OVER TOP IF IDIR>0
-C> @param[out] G        - REAL (IMAX,2,JB:JE) GRID FIELD IF IDIR<0
-C> @param IDIR     - INTEGER TRANSFORM FLAG
-C>                (IDIR>0 FOR WAVE TO GRID, IDIR<0 FOR GRID TO WAVE)
+C> @param IROMB spectral domain shape
+c> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV spectral truncation
+C> @param IDRT grid identifier
+C> - IDRT=4 for Gaussian grid,
+C> - IDRT=0 for equally-spaced grid including poles,
+C> - IDRT=256 for equally-spaced grid excluding poles
+C> @param IMAX even number of longitudes
+C> @param JMAX number of latitudes
+C> @param JB latitude index (from pole) to begin transform
+C> @param JE latitude index (from pole) to end transform
+C> @param EPS
+C> @param EPSTOP
+C> @param ENN1
+C> @param ELONN1
+C> @param EON
+C> @param EONTOP
+C> @param CLAT cosines of latitude
+C> @param SLAT sines of latitude
+C> @param WLAT Gaussian weights
+C> @param AFFT auxiliary array if IDIR=0
+C> @param PLN Legendre polynomials
+C> @param PLNTOP Legendre polynomial over top
+C> @param MP identifier (0 for scalar, 1 for vector)
+C> @param[out] W wave field if IDIR>0
+C> @param[out] WTOP wave field over top if IDIR>0
+C> @param[out] G grid field if IDIR<0
+C> @param IDIR transform flag
+C> (IDIR>0 for wave to grid, IDIR<0 for grid to wave)
 C>
-C> SUBPROGRAMS CALLED:
-C>  - SPSYNTH      SYNTHESIZE FOURIER FROM SPECTRAL
-C>  - SPANALY      ANALYZE SPECTRAL FROM FOURIER
-C>  - SPFFTE       PERFORM FAST FOURIER TRANSFORM
+C> @author Iredell @date 96-02-29
       SUBROUTINE SPTRANF1(IROMB,MAXWV,IDRT,IMAX,JMAX,JB,JE,
      &                    EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP,
      &                    AFFT,CLAT,SLAT,WLAT,PLN,PLNTOP,MP,
@@ -58,8 +54,7 @@ C>  - SPFFTE       PERFORM FAST FOURIER TRANSFORM
       REAL WTOP(2*(MAXWV+1))
       REAL G(IMAX,2,JB:JE)
       REAL F(IMAX+2,2)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-!      write(0,*) 'sptranf1 top'
+
       KW=(MAXWV+1)*((IROMB+1)*MAXWV+2)
       KWTOP=2*(MAXWV+1)
       IF(IDIR.GT.0) THEN
@@ -76,7 +71,6 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
      &                 WLAT(J),CLAT(J),PLN(1,J),PLNTOP(1,J),MP,
      &                 F,W,WTOP)
         ENDDO
-!      write(0,*) 'sptranf1 end'
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       END
