@@ -1,7 +1,6 @@
 C> @file
-C>
-C> truncate gridded scalar fields.
-C> @author: IREDELL @date: 96-02-29
+C> @brief Truncate gridded scalar fields
+C> @author IREDELL @date 96-02-29
 
 C> This subprogram spectrally truncates scalar fields on a global
 C> cylindrical grid, returning the fields to a possibly different
@@ -13,58 +12,45 @@ C> multiprocessed. Transform several fields at a time to improve
 C> vectorization. Subprogram can be called from a multiprocessing
 C> environment.
 C>
+C> @param IROMB Spectral domain shape (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV Spectral truncation
+C> @param IDRTI Input grid identifier
+C>  - IDRTI=4 for gaussian grid
+C>  - IDRTI=0 for equally-spaced grid including poles
+C>  - IDRTI=256 for equally-spaced grid excluding poles
+C> @param IMAXI Even number of input longitudes
+C> @param JMAXI Number of input latitudes
+C> @param IDRTO Output grid identifier
+C>  - IDRTO=4 for gaussian grid
+C>  - IDRTO=0 for equally-spaced grid including poles
+C>  - IDRTO=256 for equally-spaced grid excluding poles
+C> @param IMAXO Even number of output longitudes
+C> @param JMAXO Number of output latitudes
+C> @param KMAX Number of fields to transform
+C> @param IPRIME Input longitude index for the prime meridian.
+C>  - Defaults to 1 if IPRIME=0
+C>  - Output longitude index for prime meridian assumed 1
+C> @param ISKIPI Skip number between input longitudes (defaults to 1 if ISKIPI=0)
+C> @param JSKIPI Skip number between input latitudes from south (defaults to -IMAXI if JSKIPI=0)
+C> @param KSKIPI Skip number between input grid fields (defaults to IMAXI*JMAXI if KSKIPI=0)
+C> @param ISKIPO Skip number between output longitudes (defaults to 1 if ISKIPO=0)
+C> @param JSKIPO Skip number between output latitudes from south (defaults to -IMAXO if JSKIPO=0)
+C> @param KSKIPO Skip number between output grid fields (defaults to IMAXO*JMAXO if KSKIPO=0)
+C> @param JCPU Number of cpus over which to multiprocess (defaults to environment NCPUS if JCPU=0)
+C> @param GRIDI Input grid fields
+C> @param GRIDO Output grid fields (may overlay input fields if grid shape is appropriate)
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param IDRTI    - INTEGER INPUT GRID IDENTIFIER
-C>                (IDRTI=4 FOR GAUSSIAN GRID,
-C>                 IDRTI=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRTI=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param IMAXI    - INTEGER EVEN NUMBER OF INPUT LONGITUDES.
-C> @param JMAXI    - INTEGER NUMBER OF INPUT LATITUDES.
-C> @param IDRTO    - INTEGER OUTPUT GRID IDENTIFIER
-C>                (IDRTO=4 FOR GAUSSIAN GRID,
-C>                 IDRTO=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRTO=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param IMAXO    - INTEGER EVEN NUMBER OF OUTPUT LONGITUDES.
-C> @param JMAXO    - INTEGER NUMBER OF OUTPUT LATITUDES.
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param IPRIME   - INTEGER INPUT LONGITUDE INDEX FOR THE PRIME MERIDIAN.
-C>                (DEFAULTS TO 1 IF IPRIME=0)
-C>                (OUTPUT LONGITUDE INDEX FOR PRIME MERIDIAN ASSUMED 1.)
-C> @param ISKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT LONGITUDES
-C>                (DEFAULTS TO 1 IF ISKIPI=0)
-C> @param JSKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT LATITUDES FROM SOUTH
-C>                (DEFAULTS TO -IMAXI IF JSKIPI=0)
-C> @param KSKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT GRID FIELDS
-C>                (DEFAULTS TO IMAXI*JMAXI IF KSKIPI=0)
-C> @param ISKIPO   - INTEGER SKIP NUMBER BETWEEN OUTPUT LONGITUDES
-C>                (DEFAULTS TO 1 IF ISKIPO=0)
-C> @param JSKIPO   - INTEGER SKIP NUMBER BETWEEN OUTPUT LATITUDES FROM SOUTH
-C>                (DEFAULTS TO -IMAXO IF JSKIPO=0)
-C> @param KSKIPO   - INTEGER SKIP NUMBER BETWEEN OUTPUT GRID FIELDS
-C>                (DEFAULTS TO IMAXO*JMAXO IF KSKIPO=0)
-C> @param JCPU     - INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS
-C>                (DEFAULTS TO ENVIRONMENT NCPUS IF JCPU=0)
-C> @param GRIDI    - REAL (*) INPUT GRID FIELDS
-C> @param GRIDO    - REAL (*) OUTPUT GRID FIELDS
-C>                (MAY OVERLAY INPUT FIELDS IF GRID SHAPE IS APPROPRIATE)
-C>
-C>    CALLED:
-C>   SPTRAN       PERFORM A SCALAR SPHERICAL TRANSFORM
-C>   NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
-C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    LINEAR              QUADRATIC
-C>   -----------------------      ---------           -------------
-C>   IMAX                         2*MAXWV+2           3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        1*MAXWV+1           3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        2*MAXWV+1           5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        2*MAXWV+3           3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        4*MAXWV+3           5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      2*MAXWV+1           3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      4*MAXWV+1           5*MAXWV/2*2+1
+C> Remarks: Minimum grid dimensions for unaliased transforms to spectral:
+C>   Dimension                 |  Linear       |     Quadratic
+C>   -----------------------   |  ---------    |     -------------
+C>   IMAX                      |  2*MAXWV+2    |     3*MAXWV/2*2+2
+C>   JMAX (IDRT=4,IROMB=0)     |  1*MAXWV+1    |     3*MAXWV/2+1
+C>   JMAX (IDRT=4,IROMB=1)     |  2*MAXWV+1    |     5*MAXWV/2+1
+C>   JMAX (IDRT=0,IROMB=0)     |  2*MAXWV+3    |     3*MAXWV/2*2+3
+C>   JMAX (IDRT=0,IROMB=1)     |  4*MAXWV+3    |     5*MAXWV/2*2+3
+C>   JMAX (IDRT=256,IROMB=0)   |  2*MAXWV+1    |     3*MAXWV/2*2+1
+C>   JMAX (IDRT=256,IROMB=1)   |  4*MAXWV+1    |     5*MAXWV/2*2+1
+C> @author IREDELL @date 96-02-29
       SUBROUTINE SPTRUN(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,IDRTO,IMAXO,JMAXO,
      &                  KMAX,IPRIME,ISKIPI,JSKIPI,KSKIPI,
      &                  ISKIPO,JSKIPO,KSKIPO,JCPU,GRIDI,GRIDO)
