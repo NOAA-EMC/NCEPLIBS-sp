@@ -19,15 +19,24 @@ C> that of the northern hemisphere grid.
 C> The vectors are automatically rotated to be resolved
 C> relative to the respective polar stereographic grids.
 C>
-C> The transform is made efficient             \ 4 | 5 /
-C> by combining points in eight sectors         \  |  /
-C> of each polar stereographic grid,           3 \ | / 6
-C> numbered as in the diagram at right.           \|/
-C> The pole and the sector boundaries          ----+----
-C> are treated specially in the code.             /|\
-C> Unfortunately, this approach induces        2 / | \ 7
-C> some hairy indexing and code loquacity,      /  |  \
-C> for which the developer apologizes.         / 1 | 8 \
+C> The transform is made efficient by combining points in eight
+C> sectors of each polar stereographic grid, numbered as in the
+C> following diagram. The pole and the sector boundaries are
+C> treated specially in the code. Unfortunately, this approach
+C> induces some hairy indexing and code loquacity, for which
+C> the developer apologizes.
+C>
+C> \verbatim
+C>   \ 4 | 5 /
+C>    \  |  /
+C>   3 \ | / 6
+C>      \|/
+C>   ----+----
+C>      /|\
+C>   2 / | \ 7
+C>    /  |  \
+C>   / 1 | 8 \
+C> \endverbatim
 C>
 C> The transforms are all multiprocessed over sector points.
 C> transform several fields at a time to improve vectorization.
