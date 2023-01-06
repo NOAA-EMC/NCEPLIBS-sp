@@ -10,27 +10,27 @@ C>
 C> @author Iredell @date 96-02-29
 
 C> This subprogram performs a spherical transform
-c> between spectral coefficients of scalar fields
-c> and their means and gradients on a global cylindrical grid.
+C> between spectral coefficients of scalar fields
+C> and their means and gradients on a global cylindrical grid.
 C>
 C> The wave-space can be either triangular or rhomboidal.
 C>
 C> The grid-space can be either an equally-spaced grid
-c> (with or without pole points) or a Gaussian grid.
+C> (with or without pole points) or a Gaussian grid.
 C>
 C> The wave and grid fields may have general indexing,
-c> but each wave field is in sequential 'IBM order',
-c> i.e. with zonal wavenumber as the slower index.
+C> but each wave field is in sequential 'IBM order',
+C> i.e. with zonal wavenumber as the slower index.
 C>
 C> Transforms are done in latitude pairs for efficiency;
-c> thus grid arrays for each hemisphere must be passed.
-c> if so requested, just a subset of the latitude pairs
-c> may be transformed in each invocation of the subprogram.
-c>
+C> thus grid arrays for each hemisphere must be passed.
+C> if so requested, just a subset of the latitude pairs
+C> may be transformed in each invocation of the subprogram.
+C>
 C> The transforms are all multiprocessed over latitude except
-c> the transform from Fourier to spectral is multiprocessed
-c> over zonal wavenumber to ensure reproducibility.
-c>
+C> the transform from Fourier to spectral is multiprocessed
+C> over zonal wavenumber to ensure reproducibility.
+C>
 C> Transform several fields at a time to improve vectorization.
 C>
 C> Subprogram can be called from a multiprocessing environment.
@@ -57,21 +57,21 @@ C> @param IMAX even number of longitudes.
 C> @param JMAX number of latitudes.
 C> @param KMAX number of fields to transform.
 C> @param IPRIME longitude index for the prime meridian.
-c> (defaults to 1 if IPRIME=0)
+C> (defaults to 1 if IPRIME=0)
 C> @param ISKIP skip number between longitudes
-c> (defaults to 1 if ISKIP=0)
+C> (defaults to 1 if ISKIP=0)
 C> @param JNSKIP skip number between n.h. latitudes from north
-c> (defaults to IMAX if JNSKIP=0)
+C> (defaults to IMAX if JNSKIP=0)
 C> @param JSSKIP skip number between s.h. latitudes from south
 C> (defaults to -IMAX if JSSKIP=0)
 C> @param KWSKIP skip number between wave fields
-c> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) if KWSKIP=0)
+C> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) if KWSKIP=0)
 C> @param KGSKIP skip number between grid fields
-c> (defaults to IMAX*JMAX if KGSKIP=0)
+C> (defaults to IMAX*JMAX if KGSKIP=0)
 C> @param JBEG latitude index (from pole) to begin transform
-c> (defaults to 1 if JBEG=0). If JBEG=0 and IDIR<0, wave is zeroed before transform.
+C> (defaults to 1 if JBEG=0). If JBEG=0 and IDIR<0, wave is zeroed before transform.
 C> @param JEND latitude index (from pole) to end transform
-c> (defaults to (JMAX+1)/2 if JEND=0)
+C> (defaults to (JMAX+1)/2 if JEND=0)
 C> @param JCPU number of cpus over which to multiprocess
 C> @param[out] WAVE wave fields if IDIR>0
 C> @param[out] GRIDMN global means if IDIR<0
