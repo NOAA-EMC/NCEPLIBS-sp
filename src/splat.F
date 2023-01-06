@@ -1,15 +1,29 @@
 C> @file
+C> @brief Compute latitude functions
 C>
-C> Compute latitude functions
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 96-02-20 | IREDELL | Initial.
+C> 97-10-20 | IREDELL | Adjust precision.
+C> 98-06-11 | IREDELL | Generalize precision using FORTRAN 90 intrinsic.
+C> 1998-12-03 | IREDELL | Generalize precision further.
+C> 1998-12-03 | IREDELL | Uses AIX ESSL BLAS calls.
+C> 2009-12-27 | DSTARK | Updated to switch between ESSL calls on an AIX platform, and Numerical Recipies calls elsewise.
+C> 2010-12-30 | SLOVACEK | Update alignment so preprocessor does not cause compilation failure.
+C> 2012-09-01 | E.Mirvis & M.Iredell | Merging & debugging linux errors of _d and _8 using generic LU factorization.
+C> 2012-11-05 | E.Mirvis | Generic FFTPACK and LU lapack were removed.
+C>
 C> @author IREDELL @date 96-02-20
 
-C> Computes cosines of colatitude and gaussian weights
+C> Computes cosines of colatitude and Gaussian weights
 C> for one of the following specific global sets of latitudes.
 C> - Gaussian latitudes (IDRT=4)
 C> - Equally-spaced latitudes including poles (IDRT=0)
 C> - Equally-spaced latitudes excluding poles (IDRT=256)
-C> The gaussian latitudes are located at the zeroes of the
-C> legendre polynomial of the given order.  these latitudes
+C>
+C> The Gaussian latitudes are located at the zeroes of the
+C> Legendre polynomial of the given order. These latitudes
 C> are efficient for reversible transforms from spectral space.
 C> (About twice as many equally-spaced latitudes are needed.)
 C> The weights for the equally-spaced latitudes are based on
@@ -18,34 +32,15 @@ C> Note that when analyzing grid to spectral in latitude pairs,
 C> if an equator point exists, its weight should be halved.
 C> This version invokes the ibm essl matrix solver.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-20  IREDELL
-C> -  97-10-20  IREDELL  ADJUST PRECISION
-C> -  98-06-11  IREDELL  GENERALIZE PRECISION USING FORTRAN 90 INTRINSIC
-C> - 1998-12-03  IREDELL  GENERALIZE PRECISION FURTHER
-C> - 1998-12-03  IREDELL  USES AIX ESSL BLAS CALLS
-C> - 2009-12-27  DSTARK   updated to switch between ESSL calls on an AIX
-C>                      platform, and Numerical Recipies calls elsewise.
-C> - 2010-12-30  SLOVACEK update alignment so preprocessor does not cause
-C>                      compilation failure
-C> - 2012-09-01  E.Mirvis & M.Iredell merging & debugging linux errors 
-C>			of _d and _8 using generic LU factorization.   
-C> - 2012-11-05  E.Mirvis  generic FFTPACK and LU lapack were removed
+C> @param IDRT grid identifier
+C>  - IDRT=4 for Gaussian grid
+C>  - IDRT=0 for equally-spaced grid including poles
+C>  - IDRT=256 for equally-spaced grid excluding poles
+C> @param JMAX number of latitudes
+C> @param[out] SLAT sines of latitude
+C> @param[out] WLAT Gaussian weights
 C>
-C> @param IDRT     - INTEGER GRID IDENTIFIER
-C>                (IDRT=4 FOR GAUSSIAN GRID,
-C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
-C> @param[out] SLAT - REAL (JMAX) SINES OF LATITUDE.
-C> @param[out] WLAT - REAL (JMAX) GAUSSIAN WEIGHTS.
-C>
-C> SUBPROGRAMS CALLED:
-C>  - dgef()         MATRIX FACTORIZATION - ESSL
-C>  - dges()         MATRIX SOLVER - ESSL
-C>  - ludcmp()       LU factorization - numerical recipies
-C>  - lubksb()       Matrix solver - numerical recipies
-C>      
+C> @author IREDELL @date 96-02-20
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
       REAL SLAT(JMAX),WLAT(JMAX)
       INTEGER,PARAMETER:: KD=SELECTED_REAL_KIND(15,45)
