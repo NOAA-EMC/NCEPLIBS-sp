@@ -1,5 +1,5 @@
 C> @file
-C> @brief Transform spectral scalar to mercator
+C> @brief Transform spectral scalar to Mercator
 C> ### Program history log:
 C>   96-02-29 | IREDELL | Initial.
 C> 1998-12-15 | IREDELL | OpenMP directives inserted.
@@ -7,12 +7,12 @@ C> @author IREDELL @date 96-02-29
 
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of scalar quantities
-C> to scalar fields on a mercator grid.
+C> to scalar fields on a Mercator grid.
 C> The wave-space can be either triangular or rhomboidal.
 C> The wave and grid fields may have general indexing,
 C> but each wave field is in sequential 'ibm order',
 C> i.e. with zonal wavenumber as the slower index.
-C> The mercator grid is identified by the location
+C> The Mercator grid is identified by the location
 C> of its first point and by its respective increments.
 C> The transforms are all multiprocessed over sector points.
 C> Transform several fields at a time to improve vectorization.

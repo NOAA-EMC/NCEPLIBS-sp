@@ -17,7 +17,7 @@ C>
 C> The wave-space can be either triangular or rhomboidal.
 C>
 C> The grid-space can be either an equally-spaced grid
-c> (with or without pole points) or a gaussian grid.
+c> (with or without pole points) or a Gaussian grid.
 C>
 C> The wave and grid fields may have general indexing,
 c> but each wave field is in sequential 'ibm order',
@@ -50,7 +50,7 @@ C> @param IROMB spectral domain shape
 c> (0 for triangular, 1 for rhomboidal)
 C> @param MAXWV spectral truncation
 C> @param IDRT grid identifier
-C> - IDRT=4 for gaussian grid
+C> - IDRT=4 for Gaussian grid
 C> - IDRT=0 for equally-spaced grid including poles
 C> - IDRT=256 for equally-spaced grid excluding poles
 C> @param IMAX even number of longitudes.
