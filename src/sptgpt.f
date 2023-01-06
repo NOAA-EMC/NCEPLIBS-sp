@@ -4,9 +4,9 @@ C>
 C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
-C> 96-02-29 | IREDELL | Initial.
-C> 1998-12-15 | IREDELL | openmp directives inserted
-C> 2003-06-30 | IREDELL | use spfftpt()
+C> 96-02-29 | Iredell | Initial.
+C> 1998-12-15 | Iredell | Openmp directives inserted.
+C> 2003-06-30 | Iredell | Use spfftpt().
 C>
 C> @author Iredell @date 96-02-29
 
