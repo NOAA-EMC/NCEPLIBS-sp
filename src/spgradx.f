@@ -1,5 +1,5 @@
 C> @file
-C> @brief Compute x-gradient in fourier space
+C> @brief Compute x-gradient in Fourier space
 C> @author IREDELL @date 96-02-20
 
 C> This subprogram computes the x-gradient of fields
