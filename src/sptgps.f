@@ -4,8 +4,8 @@ C>
 C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
-C> 96-02-29 | IREDELL | Initial
-C> 1998-12-15 | IREDELL | openmp directives inserted
+C> 96-02-29 | Iredell | Initial.
+C> 1998-12-15 | Iredell | Openmp directives inserted.
 C>
 C> @author Iredell @date 96-02-29
 

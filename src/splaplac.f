@@ -3,15 +3,15 @@ C> @brief Compute laplacian in spectral space.
 C> @author Iredell @date 92-10-31
 
 C> Computes the laplacian or the inverse laplacian
-c> of a scalar field in spectral space.
+C> of a scalar field in spectral space.
 C>      
 C> Subprogram speps() should be called already.
 C>      
 C> The Laplacian of Q(L,N) is simply -N*(N+1)/A**2*Q(L,N)
 C>
-C> @param I SPECTRAL DOMAIN SHAPE
-C> (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M SPECTRAL TRUNCATION
+C> @param I spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param M spectral truncation
 C> @param ENN1 N*(N+1)/A**2
 C> @param[out] Q if IDIR > 0, scalar field
 C> (Q(0,0) is not computed)
