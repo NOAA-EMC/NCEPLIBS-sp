@@ -1,18 +1,17 @@
 C> @file
-C>
-C> Get wave-space constants
+C> @brief Get wave-space constants.
 C> @author IREDELL @date 96-02-29
 
 C> This subprogram gets wave-space constants.
 C>
 C> @param IROMB SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
 C> @param MAXWV SPECTRAL TRUNCATION
-C> @param EPS ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EPSTOP (MAXWV+1)
-C> @param ENN1 ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param ELONN1 ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EON ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2)
-C> @param EONTOP (MAXWV+1)
+C> @param EPS 
+C> @param EPSTOP 
+C> @param ENN1 
+C> @param ELONN1 
+C> @param EON 
+C> @param EONTOP 
 C>
 C> @author IREDELL @date 96-02-29      
       SUBROUTINE SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)

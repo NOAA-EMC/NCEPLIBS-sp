@@ -1,5 +1,5 @@
 C> @file
-C> Analyze spectral from fourier
+C> @brief Analyze spectral from Fourier.
 C>
 C> ### Program History Log
 C> Date | Programmer | Comments
@@ -10,25 +10,26 @@ C> 1998-12-15 | IREDELL | Openmp directives inserted.
 C>
 C> @author IREDELL @date 91-10-31
 
-C> Analyzes spectral coefficients from fourier coefficients
-C> for a latitude pair (northern and southern hemispheres).
+C> Analyzes spectral coefficients from Fourier coefficients
+C> for a latitude pair (Northern and Southern hemispheres).
+C>
 C> Vector components are multiplied by cosine of latitude.
 C>
-C> @param I SPECTRAL DOMAIN SHAPE (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M  SPECTRAL TRUNCATION
-C> @param IM EVEN NUMBER OF FOURIER COEFFICIENTS
-C> @param IX DIMENSION OF FOURIER COEFFICIENTS (IX>=IM+2)
-C> @param NC DIMENSION OF SPECTRAL COEFFICIENTS (NC>=(M+1)*((I+1)*M+2))
-C> @param NCTOP  DIMENSION OF SPECTRAL COEFFICIENTS OVER TOP (NCTOP>=2*(M+1))
-C> @param KM NUMBER OF FIELDS
-C> @param WGT GAUSSIAN WEIGHT
-C> @param CLAT COSINE OF LATITUDE
-C> @param PLN ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIALS
-C> @param PLNTOP (M+1) LEGENDRE POLYNOMIAL OVER TOP
-C> @param MP (KM) IDENTIFIERS (0 FOR SCALAR, 1 FOR VECTOR)
-C> @param F (IX,2,KM) FOURIER COEFFICIENTS COMBINED
-C> @param SPC (NC,KM) SPECTRAL COEFFICIENTS
-C> @param SPCTOP (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP
+C> @param I spectral domain shape (0 for triangular, 1 for rhomboidal)
+C> @param M  spectral truncation
+C> @param IM even number of Fourier coefficients
+C> @param IX dimension of Fourier coefficients (IX>=IM+2)
+C> @param NC dimension of spectral coefficients (NC>=(M+1)*((I+1)*M+2))
+C> @param NCTOP dimension of spectral coefficients over top (NCTOP>=2*(M+1))
+C> @param KM number of fields
+C> @param WGT Gaussian weight
+C> @param CLAT cosine of latitude
+C> @param PLN Legendre polynomials
+C> @param PLNTOP Legendre polynomial over top
+C> @param MP identifiers (0 for scalar, 1 for vector)
+C> @param F Fourier coefficients combined
+C> @param SPC spectral coefficients
+C> @param SPCTOP spectral coefficients over top
 C>
 C> @author IREDELL @date 91-10-31
       SUBROUTINE SPANALY(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,

@@ -39,6 +39,12 @@ jobs:
         cmake -DOPENMP=ON -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug ..
         make -j2 VERBOSE=1
 
+    - uses: actions/upload-artifact@v2
+      with:
+        name: docs
+        path: |
+          sp/build/docs/html
+          
     - name: test-sp
       run: |
         cd sp/build
