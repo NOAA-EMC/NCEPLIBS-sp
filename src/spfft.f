@@ -1,6 +1,6 @@
 C> @file
 C> @brief Perform multiple fast fourier transforms.
-C> @author IREDELL @date 96-02-20
+C> @author Iredell @date 96-02-20
 
 C> This subprogram performs multiple fast fourier transforms
 C> between complex amplitudes in fourier space and real values
@@ -22,21 +22,21 @@ C>
 C> This subprogram is not thread-safe when IDIR=0. On the other hand,
 C> when IDIR is not zero, it can be called from a threaded region.
 C>
-C> @param IMAX NUMBER OF VALUES IN THE CYCLIC PHYSICAL SPACE
-C> (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
-C> @param INCW FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
+C> @param IMAX number of values in the cyclic physical space
+C> (see limitations on imax in remarks below.)
+C> @param INCW first dimension of the complex amplitude array
 C> (INCW >= IMAX/2+1)
-C> @param INCG FIRST DIMENSION OF THE REAL VALUE ARRAY
+C> @param INCG first dimension of the real value array
 C> (INCG >= IMAX)
-C> @param KMAX NUMBER OF TRANSFORMS TO PERFORM
-C> @param[out] W COMPLEX AMPLITUDES IF IDIR>0
-C> @param[out] G REAL VALUES IF IDIR<0
-C> @param IDIR DIRECTION FLAG
-C> - IDIR=0 TO INITIALIZE INTERNAL TRIGONOMETRIC DATA
-C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
-C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
+C> @param KMAX number of transforms to perform
+C> @param[out] W complex amplitudes if IDIR>0
+C> @param[out] G real values if IDIR<0
+C> @param IDIR direction flag
+C> - IDIR=0 to initialize internal trigonometric data
+C> - IDIR>0 TO transform from Fourier to physical space
+C> - IDIR<0 TO transform from physical to fourier space
 C>
-C> @author IREDELL @date 96-02-20
+C> @author Iredell @date 96-02-20
       SUBROUTINE SPFFT(IMAX,INCW,INCG,KMAX,W,G,IDIR)
 
         IMPLICIT NONE
