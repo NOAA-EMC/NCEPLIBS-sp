@@ -16,14 +16,14 @@ C> 2012-11-05 | E.Mirvis | Generic FFTPACK and LU lapack were removed.
 C>
 C> @author IREDELL @date 96-02-20
 
-C> Computes cosines of colatitude and gaussian weights
+C> Computes cosines of colatitude and Gaussian weights
 C> for one of the following specific global sets of latitudes.
 C> - Gaussian latitudes (IDRT=4)
 C> - Equally-spaced latitudes including poles (IDRT=0)
 C> - Equally-spaced latitudes excluding poles (IDRT=256)
 C>
-C> The gaussian latitudes are located at the zeroes of the
-C> legendre polynomial of the given order.  these latitudes
+C> The Gaussian latitudes are located at the zeroes of the
+C> Legendre polynomial of the given order. These latitudes
 C> are efficient for reversible transforms from spectral space.
 C> (About twice as many equally-spaced latitudes are needed.)
 C> The weights for the equally-spaced latitudes are based on
@@ -33,12 +33,12 @@ C> if an equator point exists, its weight should be halved.
 C> This version invokes the ibm essl matrix solver.
 C>
 C> @param IDRT grid identifier
-C>  - IDRT=4 for gaussian grid
+C>  - IDRT=4 for Gaussian grid
 C>  - IDRT=0 for equally-spaced grid including poles
 C>  - IDRT=256 for equally-spaced grid excluding poles
 C> @param JMAX number of latitudes
 C> @param[out] SLAT sines of latitude
-C> @param[out] WLAT gaussian weights
+C> @param[out] WLAT Gaussian weights
 C>
 C> @author IREDELL @date 96-02-20
       SUBROUTINE SPLAT(IDRT,JMAX,SLAT,WLAT)
