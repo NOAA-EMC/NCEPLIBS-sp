@@ -33,9 +33,9 @@ if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_V
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
 endif()
 
-# We build three versions of the library, _4 for standard, _8 for
-# 8-byte int and 8-byte float, and _d for 8-byte float.
-set(kinds "4" "8" "d")
+# We build two versions of the library, _4 for standard, and _d for
+# 8-byte float.
+set(kinds "4" "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
   set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include_${kind})
@@ -63,7 +63,7 @@ foreach(kind ${kinds})
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
 
-  # Set the flags for _4, _8, and _d.
+  # Set the flags for _4 or _d.
   set(BUILD_FLAGS "${fortran_${kind}_flags}")
 
   # Deal with OpenMP.
