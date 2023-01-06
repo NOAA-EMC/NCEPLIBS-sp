@@ -1,5 +1,15 @@
 C> @file
-C> @brief fftpack.
+C> @brief A concatination of the (FFTPACK)[https://netlib.org/fftpack/] library code.
+C>      
+C> FFTPACK is a package of Fortran subprograms for the fast Fourier
+C> transform of periodic and other symmetric sequences. It includes
+C> complex, real, sine, cosine, and quarter-wave transforms.
+C>      
+C>Reference:
+C>- P.N. Swarztrauber, Vectorizing the FFTs, in Parallel Computations
+C>(G. Rodrigue, ed.), Academic Press, 1982, pp. 51--83.
+C> 
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
 
 C> dcrft
 C>
@@ -18,6 +28,7 @@ C> @param wrk
 C> @param n2
 C> @param z
 C> @param nz
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE dcrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -61,6 +72,9 @@ C> @param wrk
 C> @param n2
 C> @param z
 C> @param nz
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
+      
       SUBROUTINE scrft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -97,6 +111,8 @@ C> @param y
 C> @param table
 C> @param work
 C> @param isys
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE csfft(isign,n,scale,x,y,table,work,isys)
  
       implicit none
@@ -137,6 +153,8 @@ C> @param wrk
 C> @param n2
 C> @param z
 C> @param nz
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE drcft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -184,6 +202,8 @@ C> @param wrk
 C> @param n2
 C> @param z
 C> @param nz
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE srcft(init,x,ldx,y,ldy,n,m,isign,scale,
      &                 table,n1,wrk,n2,z,nz)
  
@@ -224,6 +244,8 @@ C> @param y
 C> @param table
 C> @param work
 C> @param isys
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE scfft(isign,n,scale,x,y,table,work,isys)
  
       implicit none
@@ -255,6 +277,8 @@ C>
 C> @param N
 C> @param R
 C> @param WSAVE
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTF (N,R,WSAVE)
       DIMENSION       R(1)       ,WSAVE(1)
       IF (N .EQ. 1) RETURN
@@ -267,6 +291,8 @@ C>
 C> @param N
 C> @param R
 C> @param WSAVE
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTB (N,R,WSAVE)
       DIMENSION       R(1)       ,WSAVE(1)
       IF (N .EQ. 1) RETURN
@@ -278,6 +304,8 @@ C> RFFTI
 C>      
 C> @param N
 C> @param WSAVE
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTI (N,WSAVE)
       DIMENSION       WSAVE(1)
       IF (N .EQ. 1) RETURN
@@ -292,6 +320,8 @@ C> @param C
 C> @param CH
 C> @param WA
 C> @param IFAC
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTB1 (N,C,CH,WA,IFAC)
       DIMENSION       CH(1)      ,C(1)       ,WA(1)      ,IFAC(*)
       NF = IFAC(2)
@@ -359,6 +389,8 @@ C> @param C
 C> @param CH
 C> @param WA
 C> @param IFAC
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTF1 (N,C,CH,WA,IFAC)
       DIMENSION       CH(1)      ,C(1)       ,WA(1)      ,IFAC(*)
       NF = IFAC(2)
@@ -424,6 +456,8 @@ C>
 C> @param N
 C> @param WA
 C> @param IFAC
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RFFTI1 (N,WA,IFAC)
       DIMENSION       WA(1)      ,IFAC(*)    ,NTRYH(4)
       DATA NTRYH(1),NTRYH(2),NTRYH(3),NTRYH(4)/4,2,3,5/
@@ -491,6 +525,8 @@ C> @param L1
 C> @param CC
 C> @param CH
 C> @param WA1
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADB2 (IDO,L1,CC,CH,WA1)
       DIMENSION       CC(IDO,2,L1)           ,CH(IDO,L1,2)           ,
      1                WA1(1)
@@ -528,6 +564,8 @@ C> @param CC
 C> @param CH
 C> @param WA1
 C> @param WA2
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADB3 (IDO,L1,CC,CH,WA1,WA2)
       DIMENSION       CC(IDO,3,L1)           ,CH(IDO,L1,3)           ,
      1                WA1(1)     ,WA2(1)
@@ -576,6 +614,8 @@ C> @param CH
 C> @param WA1
 C> @param WA2
 C> @param WA3
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADB4 (IDO,L1,CC,CH,WA1,WA2,WA3)
       DIMENSION       CC(IDO,4,L1)           ,CH(IDO,L1,4)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
@@ -645,6 +685,8 @@ C> @param WA1
 C> @param WA2
 C> @param WA3
 C> @param WA4
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADB5 (IDO,L1,CC,CH,WA1,WA2,WA3,WA4)
       DIMENSION       CC(IDO,5,L1)           ,CH(IDO,L1,5)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)     ,WA4(1)
@@ -721,6 +763,8 @@ C> @param C2
 C> @param CH
 C> @param CH2
 C> @param WA
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADBG (IDO,IP,L1,IDL1,CC,C1,C2,CH,CH2,WA)
       DIMENSION       CH(IDO,L1,IP)          ,CC(IDO,IP,L1)          ,
      1                C1(IDO,L1,IP)          ,C2(IDL1,IP),
@@ -897,6 +941,8 @@ C> @param L1
 C> @param CC
 C> @param CH
 C> @param WA1
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADF2 (IDO,L1,CC,CH,WA1)
       DIMENSION       CH(IDO,2,L1)           ,CC(IDO,L1,2)           ,
      1                WA1(1)
@@ -933,6 +979,8 @@ C> @param CC
 C> @param CH
 C> @param WA1
 C> @param WA2
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADF3 (IDO,L1,CC,CH,WA1,WA2)
       DIMENSION       CH(IDO,3,L1)           ,CC(IDO,L1,3)           ,
      1                WA1(1)     ,WA2(1)
@@ -978,6 +1026,8 @@ C> @param CH
 C> @param WA1
 C> @param WA2
 C> @param WA3
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADF4 (IDO,L1,CC,CH,WA1,WA2,WA3)
       DIMENSION       CC(IDO,L1,4)           ,CH(IDO,4,L1)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)
@@ -1043,6 +1093,8 @@ C> @param WA1
 C> @param WA2
 C> @param WA3
 C> @param WA4
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADF5 (IDO,L1,CC,CH,WA1,WA2,WA3,WA4)
       DIMENSION       CC(IDO,L1,5)           ,CH(IDO,5,L1)           ,
      1                WA1(1)     ,WA2(1)     ,WA3(1)     ,WA4(1)
@@ -1115,6 +1167,8 @@ C> @param C2
 C> @param CH
 C> @param CH2
 C> @param WA
+C>
+C> @author Paul N. Swarztrauber, National Center for Atmospheric Research, Boulder, CO
       SUBROUTINE RADFG (IDO,IP,L1,IDL1,CC,C1,C2,CH,CH2,WA)
       DIMENSION       CH(IDO,L1,IP)          ,CC(IDO,IP,L1)          ,
      1                C1(IDO,L1,IP)          ,C2(IDL1,IP),

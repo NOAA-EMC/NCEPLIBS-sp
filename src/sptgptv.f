@@ -1,51 +1,53 @@
 C> @file
+C> @brief Transform spectral vector to station points.
 C>
-C> Transform spectral vector to station points
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 96-02-29 | IREDELL | Initial
+C> 1998-12-15 | IREDELL | Openmp directives inserted
+C> 1999-08-18 | IREDELL | Openmp directive typo fixed 
+C> 2003-06-30 | IREDELL | use spfftpt()
+C>
 C> @author IREDELL @date 96-02-29
 
-C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
-C> FROM SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS
-C> TO SPECIFIED SETS OF STATION POINT VECTORS ON THE GLOBE.
-C> THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C> THE WAVE AND POINT FIELDS MAY HAVE GENERAL INDEXING,
-C> BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER',
-C> I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX.
-C> THE TRANSFORMS ARE ALL MULTIPROCESSED OVER STATIONS.
-C> TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C> SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram performs a spherical transform
+C> from spectral coefficients of divergences and curls
+C> to specified sets of station point vectors on the globe.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-29  IREDELL
-C> - 1998-12-15  IREDELL  OPENMP DIRECTIVES INSERTED
-C> - 1999-08-18  IREDELL  OPENMP DIRECTIVE TYPO FIXED 
-C> - 2003-06-30  IREDELL  USE SPFFTPT
+C> The wave-space can be either triangular or rhomboidal.
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param NMAX     - INTEGER NUMBER OF STATION POINTS TO RETURN
-C> @param KWSKIP   - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
-C>                (DEFAULTS TO (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
-C> @param KGSKIP   - INTEGER SKIP NUMBER BETWEEN STATION POINT SETS
-C>                (DEFAULTS TO NMAX IF KGSKIP=0)
-C> @param NRSKIP   - INTEGER SKIP NUMBER BETWEEN STATION LATS AND LONS
-C>                (DEFAULTS TO 1 IF NRSKIP=0)
-C> @param NGSKIP   - INTEGER SKIP NUMBER BETWEEN STATION POINTS
-C>                (DEFAULTS TO 1 IF NGSKIP=0)
-C> @param RLAT     - REAL (*) STATION LATITUDES IN DEGREES
-C> @param RLON     - REAL (*) STATION LONGITUDES IN DEGREES
-C> @param WAVED    - REAL (*) WAVE DIVERGENCE FIELDS
-C> @param WAVEZ    - REAL (*) WAVE VORTICITY FIELDS
-C> @param UP       - REAL (*) STATION POINT U-WIND SETS
-C> @param VP       - REAL (*) STATION POINT V-WIND SETS
+C> The wave and point fields may have general indexing,
+C> but each wave field is in sequential 'IBM order',
+C> i.e. with zonal wavenumber as the slower index.
 C>
-C> SUBPROGRAMS CALLED:
-C>  - SPWGET       GET WAVE-SPACE CONSTANTS
-C>  - SPLEGEND     COMPUTE LEGENDRE POLYNOMIALS
-C>  - SPSYNTH      SYNTHESIZE FOURIER FROM SPECTRAL
-C>  - SPDZ2UV      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
-C>  - SPFFTPT      POINTWISE FOURIER TRANSFORM
+C> The transforms are all multiprocessed over stations.
+C>
+C> Transform several fields at a time to improve vectorization.
+C>
+C> Subprogram can be called from a multiprocessing environment.
+C>
+C> @param IROMB spectral domain shape
+c> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV spectral truncation
+C> @param KMAX number of fields to transform.
+C> @param NMAX number of station points to return
+C> @param KWSKIP skip number between wave fields
+c> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
+C> @param KGSKIP skip number between station point sets
+c> (defaults to NMAX IF KGSKIP=0)
+C> @param NRSKIP skip number between station lats and lons
+c> (defaults to 1 if NRSKIP=0)
+C> @param NGSKIP skip number between station points
+c> (defaults to 1 if NGSKIP=0)
+C> @param RLAT station latitudes in degrees
+C> @param RLON station longitudes in degrees
+C> @param WAVED wave divergence fields
+C> @param WAVEZ wave vorticity fields
+C> @param UP station point u-wind sets
+C> @param VP station point v-wind sets
+C>
+C> @author IREDELL @date 96-02-29
       SUBROUTINE SPTGPTV(IROMB,MAXWV,KMAX,NMAX,
      &                   KWSKIP,KGSKIP,NRSKIP,NGSKIP,
      &                   RLAT,RLON,WAVED,WAVEZ,UP,VP)
@@ -62,7 +64,7 @@ C>  - SPFFTPT      POINTWISE FOURIER TRANSFORM
       REAL F(2*MAXWV+3,2,2*KMAX)
       REAL G(2*KMAX)
       PARAMETER(PI=3.14159265358979)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE PRELIMINARY CONSTANTS
       CALL SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
       MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
@@ -78,7 +80,7 @@ C  CALCULATE PRELIMINARY CONSTANTS
       IF(NR.EQ.0) NR=1
       IF(NG.EQ.0) NG=1
       MP=1
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE SPECTRAL WINDS
 C$OMP PARALLEL DO PRIVATE(KWS)
       DO K=1,KMAX
@@ -87,7 +89,7 @@ C$OMP PARALLEL DO PRIVATE(KWS)
      &               WAVED(KWS+1),WAVEZ(KWS+1),
      &               W(1,K),W(1,KMAX+K),WTOP(1,K),WTOP(1,KMAX+K))
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE STATION FIELDS
 C$OMP PARALLEL DO PRIVATE(KU,KV,RADLAT,SLAT1,CLAT1)
 C$OMP&            PRIVATE(PLN,PLNTOP,F,G,NK)
@@ -116,5 +118,5 @@ C$OMP&            PRIVATE(PLN,PLNTOP,F,G,NK)
           VP(NK)=G(KV)
         ENDDO
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       END

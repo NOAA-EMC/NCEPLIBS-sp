@@ -1,80 +1,82 @@
 C> @file
+C> @brief Perform a vector spherical transform
 C>
-C> Perform a vector spherical transform
-C> @author IREDELL @date 96-02-29
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 96-02-29 | Iredell | Initial.
+C> 1998-12-15 | Iredell | Generic fft used, openmp directives inserted
+C> 2013-01-16 | Iredell & MIRVIS | Fixing afft negative sharing effect during omp loops
+C>
+C> @author Iredell @date 96-02-29
 
-C> THIS SUBPROGRAM PERFORMS A SPHERICAL TRANSFORM
-C> BETWEEN SPECTRAL COEFFICIENTS OF DIVERGENCES AND CURLS
-C> AND VECTOR FIELDS ON A GLOBAL CYLINDRICAL GRID.
-C> THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C> THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C> (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C> THE WAVE AND GRID FIELDS MAY HAVE GENERAL INDEXING,
-C> BUT EACH WAVE FIELD IS IN SEQUENTIAL 'IBM ORDER',
-C> I.E. WITH ZONAL WAVENUMBER AS THE SLOWER INDEX.
-C> TRANSFORMS ARE DONE IN LATITUDE PAIRS FOR EFFICIENCY;
-C> THUS GRID ARRAYS FOR EACH HEMISPHERE MUST BE PASSED.
-C> IF SO REQUESTED, JUST A SUBSET OF THE LATITUDE PAIRS
-C> MAY BE TRANSFORMED IN EACH INVOCATION OF THE SUBPROGRAM.
-C> THE TRANSFORMS ARE ALL MULTIPROCESSED OVER LATITUDE EXCEPT
-C> THE TRANSFORM FROM FOURIER TO SPECTRAL IS MULTIPROCESSED
-C> OVER ZONAL WAVENUMBER TO ENSURE REPRODUCIBILITY.
-C> TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C> SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram performs a spherical transform
+c> between spectral coefficients of divergences and curls
+c> and vector fields on a global cylindrical grid.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-29  IREDELL
-C> - 1998-12-15  IREDELL  GENERIC FFT USED, OPENMP DIRECTIVES INSERTED
-C> - 2013-01-16  IREDELL & MIRVIS FIXING AFFT NEGATIVE SHARING EFFECT DURING
-C>                       OMP LOOPS BY CREATING TMP AFFT COPY (AFFT_TMP)
-C>                       TO BE PRIVATE DURING OMP LOOP THREADING
+C> The wave-space can be either triangular or rhomboidal.
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param IDRT     - INTEGER GRID IDENTIFIER
-C>                (IDRT=4 FOR GAUSSIAN GRID,
-C>                 IDRT=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRT=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param IMAX     - INTEGER EVEN NUMBER OF LONGITUDES.
-C> @param JMAX     - INTEGER NUMBER OF LATITUDES.
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param IP       - INTEGER LONGITUDE INDEX FOR THE PRIME MERIDIAN
-C> @param IS       - INTEGER SKIP NUMBER BETWEEN LONGITUDES
-C> @param JN       - INTEGER SKIP NUMBER BETWEEN N.H. LATITUDES FROM NORTH
-C> @param JS       - INTEGER SKIP NUMBER BETWEEN S.H. LATITUDES FROM SOUTH
-C> @param KW       - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
-C> @param KG       - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
-C> @param JB       - INTEGER LATITUDE INDEX (FROM POLE) TO BEGIN TRANSFORM
-C> @param JE       - INTEGER LATITUDE INDEX (FROM POLE) TO END TRANSFORM
-C> @param JC       - INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS
-C> @param[out] WAVED    - REAL (*) WAVE DIVERGENCE FIELDS IF IDIR>0
+C> The grid-space can be either an equally-spaced grid
+c> (with or without pole points) or a gaussian grid.
+C>
+C> The wave and grid fields may have general indexing,
+c> but each wave field is in sequential 'ibm order',
+c> i.e. with zonal wavenumber as the slower index.
+C>
+C> Transforms are done in latitude pairs for efficiency;
+c> thus grid arrays for each hemisphere must be passed.
+c> if so requested, just a subset of the latitude pairs
+c> may be transformed in each invocation of the subprogram.
+C>
+C> The transforms are all multiprocessed over latitude except
+c> the transform from fourier to spectral is multiprocessed
+c> over zonal wavenumber to ensure reproducibility.
+C>
+C> Transform several fields at a time to improve vectorization.
+c> subprogram can be called from a multiprocessing environment.
+C>
+C> Minimum grid dimensions for unaliased transforms to spectral:
+C> DIMENSION                    |LINEAR              |QUADRATIC
+C> -----------------------      |---------           |-------------
+C> IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
+C> JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
+C> JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
+C> JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
+C> JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
+C> JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
+C> JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C>
+C> @param IROMB spectral domain shape
+c> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV spectral truncation
+C> @param IDRT grid identifier
+C> - IDRT=4 for gaussian grid
+C> - IDRT=0 for equally-spaced grid including poles
+C> - IDRT=256 for equally-spaced grid excluding poles
+C> @param IMAX even number of longitudes.
+C> @param JMAX number of latitudes.
+C> @param KMAX number of fields to transform.
+C> @param IP longitude index for the prime meridian
+C> @param IS skip number between longitudes
+C> @param JN skip number between n.h. latitudes from north
+C> @param JS skip number between s.h. latitudes from south
+C> @param KW skip number between wave fields
+C> @param KG skip number between grid fields
+C> @param JB latitude index (from pole) to begin transform
+C> @param JE latitude index (from pole) to end transform
+C> @param JC number of cpus over which to multiprocess
+C> @param[out] WAVED wave divergence fields if IDIR>0
 C> [WAVED=(D(GRIDU)/DLAM+D(CLAT*GRIDV)/DPHI)/(CLAT*RERTH)]
-C> @param[out] WAVEZ    - REAL (*) WAVE VORTICITY FIELDS IF IDIR>0
+C> @param[out] WAVEZ wave vorticity fields if IDIR>0
 C> [WAVEZ=(D(GRIDV)/DLAM-D(CLAT*GRIDU)/DPHI)/(CLAT*RERTH)]      
-C> @param[out] GRIDUN   - REAL (*) N.H. GRID U-WINDS (STARTING AT JB) IF IDIR<0
-C> @param[out] GRIDUS   - REAL (*) S.H. GRID U-WINDS (STARTING AT JB) IF IDIR<0
-C> @param[out] GRIDVN   - REAL (*) N.H. GRID V-WINDS (STARTING AT JB) IF IDIR<0
-C> @param[out] GRIDVS   - REAL (*) S.H. GRID V-WINDS (STARTING AT JB) IF IDIR<0
-C> @param IDIR     - INTEGER TRANSFORM FLAG
-C>                (IDIR>0 FOR WAVE TO GRID, IDIR<0 FOR GRID TO WAVE)
+C> @param[out] GRIDUN N.H. grid u-winds (starting at jb) if IDIR<0
+C> @param[out] GRIDUS S.H. grid u-winds (starting at jb) if IDIR<0
+C> @param[out] GRIDVN N.H. grid v-winds (starting at jb) if IDIR<0
+C> @param[out] GRIDVS S.H. grid v-winds (starting at jb) if IDIR<0
+C> @param IDIR transform flag
+C> (IDIR>0 for wave to grid, IDIR<0 for grid to wave).
 C>
-C> SUBPROGRAMS CALLED:
-C>  - SPTRANF0     SPTRANF SPECTRAL INITIALIZATION
-C>  - SPTRANF1     SPTRANF SPECTRAL TRANSFORM
-C>  - SPDZ2UV      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
-C>  - SPUV2DZ      COMPUTE DIVERGENCE AND VORTICITY FROM WINDS
-C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    |LINEAR              |QUADRATIC
-C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C> @author Iredell @date 96-02-29
       SUBROUTINE SPTRANFV(IROMB,MAXWV,IDRT,IMAX,JMAX,KMAX,
      &                    IP,IS,JN,JS,KW,KG,JB,JE,JC,
      &                    WAVED,WAVEZ,GRIDUN,GRIDUS,GRIDVN,GRIDVS,IDIR)
@@ -93,14 +95,14 @@ C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
       REAL WTOP(2*(MAXWV+1),2)
       REAL G(IMAX,2,2)
       REAL WINC((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2,2)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  SET PARAMETERS
       MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
       MP=1
       CALL SPTRANF0(IROMB,MAXWV,IDRT,IMAX,JMAX,JB,JE,
      &              EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP,
      &              AFFT,CLAT,SLAT,WLAT,PLN,PLNTOP)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM WAVE TO GRID
       IF(IDIR.GT.0) THEN
 C$OMP PARALLEL DO PRIVATE(AFFT_TMP,KWS,W,WTOP,G,IJKN,IJKS)
@@ -142,7 +144,7 @@ C$OMP PARALLEL DO PRIVATE(AFFT_TMP,KWS,W,WTOP,G,IJKN,IJKS)
             ENDIF
           ENDDO
         ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM GRID TO WAVE
       ELSE
 C$OMP PARALLEL DO PRIVATE(AFFT_TMP,KWS,W,WTOP,G,IJKN,IJKS,WINC)
@@ -191,5 +193,4 @@ C$OMP PARALLEL DO PRIVATE(AFFT_TMP,KWS,W,WTOP,G,IJKN,IJKS,WINC)
           WAVEZ(KWS+1:KWS+2*MX)=WAVEZ(KWS+1:KWS+2*MX)+WINC(1:2*MX,2)
         ENDDO
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END
