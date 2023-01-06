@@ -1,6 +1,5 @@
 C> @file
-C>
-C> Transform spectral to mercator gradients
+C> @brief Transform spectral to mercator gradients
 C> @author IREDELL @date 96-02-29
 
 C> This subprogram performs a spherical transform
@@ -16,40 +15,37 @@ C> The transforms are all multiprocessed over sector points.
 C> Transform several fields at a time to improve vectorization.
 C> subprogram can be called from a multiprocessing environment.
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param MI       - INTEGER NUMBER OF POINTS IN THE FASTER ZONAL DIRECTION
-C> @param MJ       - INTEGER NUMBER OF POINTS IN THE SLOWER MERID DIRECTION
-C> @param KWSKIP   - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
-C>                (DEFAULTS TO (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
-C> @param KGSKIP   - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
-C>                (DEFAULTS TO MI*MJ IF KGSKIP=0)
-C> @param NISKIP   - INTEGER SKIP NUMBER BETWEEN GRID I-POINTS
-C>                (DEFAULTS TO 1 IF NISKIP=0)
-C> @param NJSKIP   - INTEGER SKIP NUMBER BETWEEN GRID J-POINTS
-C>                (DEFAULTS TO MI IF NJSKIP=0)
-C> @param RLAT1    - REAL LATITUDE OF THE FIRST GRID POINT IN DEGREES
-C> @param RLON1    - REAL LONGITUDE OF THE FIRST GRID POINT IN DEGREES
-C> @param DLAT     - REAL LATITUDE INCREMENT IN DEGREES SUCH THAT
-C>                D(PHI)/D(J)=DLAT*COS(PHI) WHERE J IS MERIDIONAL INDEX.
-C>                DLAT IS NEGATIVE FOR GRIDS INDEXED SOUTHWARD.
-C>                (IN TERMS OF GRID INCREMENT DY VALID AT LATITUDE RLATI,
-C>                 THE LATITUDE INCREMENT DLAT IS DETERMINED AS
-C>                 DLAT=DPR*DY/(RERTH*COS(RLATI/DPR))
-C>                 WHERE DPR=180/PI AND RERTH IS EARTH'S RADIUS)
-C> @param DLON     - REAL LONGITUDE INCREMENT IN DEGREES SUCH THAT
-C>                D(LAMBDA)/D(I)=DLON WHERE I IS ZONAL INDEX.
-C>                DLON IS NEGATIVE FOR GRIDS INDEXED WESTWARD.
-C> @param WAVE     - REAL (*) WAVE FIELDS
-C> @param XM       - REAL (*) MERCATOR X-GRADIENTS
-C> @param YM       - REAL (*) MERCATOR Y-GRADIENTS
+C> @param IROMB Spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV Spectral truncation
+C> @param KMAX Number of fields to transform
+C> @param MI Number of points in the faster zonal direction
+C> @param MJ Number of points in the slower merid direction
+C> @param KWSKIP Skip number between wave fields
+C>                (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) if KWSKIP=0)
+C> @param KGSKIP Skip number between grid fields
+C>                (defaults to MI*MJ if KGSKIP=0)
+C> @param NISKIP Skip number between grid i-points
+C>                (defaults to 1 if NISKIP=0)
+C> @param NJSKIP Skip number between grid j-points
+C>                (defaults to MI if NJSKIP=0)
+C> @param RLAT1 Latitude of the first grid point in degrees
+C> @param RLON1 Longitude of the first grid point in degrees
+C> @param DLAT Latitude increment in degrees such that
+C> D(PHI)/D(J)=DLAT*COS(PHI) where J is meridional index.
+C> DLAT is negative for grids indexed southward.
+C> (in terms of grid increment dy valid at latitude RLATI,
+C> the latitude increment DLAT is determined as
+C> DLAT=DPR*DY/(RERTH*COS(RLATI/DPR))
+C> where DPR=180/PI and RERTH is earth's radius)
+c> @param DLON Longitude increment in degrees such that
+C> D(LAMBDA)/D(I)=DLON where I is zonal index.
+C> DLON is negative for grids indexed westward.
+C> @param WAVE Wave fields
+C> @param XM Mercator x-gradients
+C> @param YM Mercator y-gradients
 C>
-C> SUBPROGRAMS CALLED:
-C>   - SPWGET()       GET WAVE-SPACE CONSTANTS
-C>   - SPLAPLAC()     COMPUTE LAPLACIAN IN SPECTRAL SPACE
-C>   - SPTGPMV()      TRANSFORM SPECTRAL VECTOR TO MERCATOR
+C> @author IREDELL @date 96-02-29
       SUBROUTINE SPTGPMD(IROMB,MAXWV,KMAX,MI,MJ,
      &                   KWSKIP,KGSKIP,NISKIP,NJSKIP,
      &                   RLAT1,RLON1,DLAT,DLON,WAVE,XM,YM)
