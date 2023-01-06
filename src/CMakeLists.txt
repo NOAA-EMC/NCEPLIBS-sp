@@ -38,7 +38,6 @@ endif()
 set(kinds "4" "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
-  set(module_dir ${CMAKE_CURRENT_BINARY_DIR}/include_${kind})
 
   # Create object library. The object library will be used to build
   # static and shared libraries.
@@ -75,13 +74,7 @@ foreach(kind ${kinds})
   endif()
   
   set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
-  set_target_properties(${lib_name}_objlib PROPERTIES Fortran_MODULE_DIRECTORY ${module_dir})
 
-  target_include_directories(${lib_name}_objlib PUBLIC
-    $<BUILD_INTERFACE:${module_dir}>
-    $<INSTALL_INTERFACE:include_${kind}>)
-
-  install(DIRECTORY ${module_dir} DESTINATION ${CMAKE_INSTALL_PREFIX})
 endforeach()
 
 install(
