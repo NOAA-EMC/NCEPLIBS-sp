@@ -27,13 +27,13 @@ C> @param KMAX Number of fields to transform
 C> @param MI Number of points in the faster zonal direction
 C> @param MJ Number of points in the slower merid direction
 C> @param KWSKIP Skip number between wave fields
-C> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
+C> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) if KWSKIP=0)
 C> @param KGSKIP Skip number between grid fields
-C> (defaults to MI*MJ IF KGSKIP=0)
+C> (defaults to MI*MJ if KGSKIP=0)
 C> @param NISKIP Skip number between grid i-points
-C> (defaults to 1 IF NISKIP=0)
+C> (defaults to 1 if NISKIP=0)
 C> @param NJSKIP Skip number between grid j-points
-C> (defaults to MI IF NJSKIP=0)
+C> (defaults to MI if NJSKIP=0)
 C> @param RLAT1 Latitude of the first grid point in degrees
 C> @param RLON1 Longitude of the first grid point in degrees
 C> @param DLAT Latitude increment in degrees such that
