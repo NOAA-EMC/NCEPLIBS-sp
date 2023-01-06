@@ -1,7 +1,7 @@
 C> @file
 C> @brief Compute latitude functions
 C>
-C> ### Program History Log
+C> 
 C> Date | Programmer | Comments
 C> -----|------------|---------
 C> 96-02-20 | IREDELL | Initial.
@@ -21,6 +21,7 @@ C> for one of the following specific global sets of latitudes.
 C> - Gaussian latitudes (IDRT=4)
 C> - Equally-spaced latitudes including poles (IDRT=0)
 C> - Equally-spaced latitudes excluding poles (IDRT=256)
+C>
 C> The gaussian latitudes are located at the zeroes of the
 C> legendre polynomial of the given order.  these latitudes
 C> are efficient for reversible transforms from spectral space.
