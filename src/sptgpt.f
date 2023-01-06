@@ -1,6 +1,9 @@
 C> @file
 C> @brief Transform spectral scalar to station points.
 C>
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
 C> 96-02-29 | IREDELL | Initial.
 C> 1998-12-15 | IREDELL | openmp directives inserted
 C> 2003-06-30 | IREDELL | use spfftpt()

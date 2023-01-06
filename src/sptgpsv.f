@@ -1,19 +1,28 @@
 C> @file
+C> @brief Transform spectral vector to polar stereo.
 C>
-C> Transform spectral vector to polar stereo.
-C> @author IREDELL @date 96-02-29
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 96-02-29 | IREDELL | Initial
+C> 1998-12-15 | IREDELL | openmp directives inserted
+C>
+C> @author Iredell @date 96-02-29
 
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of divergences and curls
 C> to vector fields on a pair of polar stereographic grids.
 C> The wave-space can be either triangular or rhomboidal.
+C>
 C> The wave and grid fields may have general indexing,
-C> but each wave field is in sequential 'ibm order',
+C> but each wave field is in sequential 'IBM order',
 C> i.e. with zonal wavenumber as the slower index.
+C>
 C> The two square polar stereographic grids are centered
 C> on the respective poles, with the orientation longitude
 C> of the southern hemisphere grid 180 degrees opposite
 C> that of the northern hemisphere grid.
+C>
 C> The vectors are automatically rotated to be resolved
 C> relative to the respective polar stereographic grids.
 C>
@@ -26,6 +35,7 @@ C> are treated specially in the code.
 C> Unfortunately, this approach induces
 C> some hairy indexing and code loquacity,
 C> for which the developer apologizes.
+C>
 C> <pre>
 C>              \ 4 | 5 /
 C>               \  |  /
@@ -42,39 +52,31 @@ C> The transforms are all multiprocessed over sector points.
 C> transform several fields at a time to improve vectorization.
 C> subprogram can be called from a multiprocessing environment.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-29  IREDELL
-C> - 1998-12-15  IREDELL  OPENMP DIRECTIVES INSERTED
+C> @param IROMB spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV spectral truncation
+C> @param KMAX number of fields to transform.
+C> @param NPS odd order of the polar stereographic grids
+C> @param KWSKIP skip number between wave fields
+C> (defaults to (MAXWV+1)*((IROMB+1)*MAXWV+2) if KWSKIP=0)
+C> @param KGSKIP skip number between grid fields
+C> (defaults to NPS*NPS if KGSKIP=0)
+C> @param NISKIP skip number between grid i-points
+C> (defaults to 1 if NISKIP=0)
+C> @param NJSKIP skip number between grid j-points
+C> (defaults to NPS if NJSKIP=0)
+C> @param TRUE latitude at which ps grid is true (usually 60.)
+C> @param XMESH grid length at true latitude (m)
+C> @param ORIENT longitude at bottom of northern ps grid
+C> (southern ps grid will have opposite orientation.)
+C> @param WAVED wave divergence fields
+C> @param WAVEZ wave vorticity fields
+C> @param UN northern polar stereographic u-winds
+C> @param VN northern polar stereographic v-winds
+C> @param US southern polar stereographic u-winds
+C> @param VS southern polar stereographic v-winds
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param NPS      - INTEGER ODD ORDER OF THE POLAR STEREOGRAPHIC GRIDS
-C> @param KWSKIP   - INTEGER SKIP NUMBER BETWEEN WAVE FIELDS
-C>                (DEFAULTS TO (MAXWV+1)*((IROMB+1)*MAXWV+2) IF KWSKIP=0)
-C> @param KGSKIP   - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
-C>                (DEFAULTS TO NPS*NPS IF KGSKIP=0)
-C> @param NISKIP   - INTEGER SKIP NUMBER BETWEEN GRID I-POINTS
-C>                (DEFAULTS TO 1 IF NISKIP=0)
-C> @param NJSKIP   - INTEGER SKIP NUMBER BETWEEN GRID J-POINTS
-C>                (DEFAULTS TO NPS IF NJSKIP=0)
-C> @param TRUE     - REAL LATITUDE AT WHICH PS GRID IS TRUE (USUALLY 60.)
-C> @param XMESH    - REAL GRID LENGTH AT TRUE LATITUDE (M)
-C> @param ORIENT   - REAL LONGITUDE AT BOTTOM OF NORTHERN PS GRID
-C>                (SOUTHERN PS GRID WILL HAVE OPPOSITE ORIENTATION.)
-C> @param WAVED    - REAL (*) WAVE DIVERGENCE FIELDS
-C> @param WAVEZ    - REAL (*) WAVE VORTICITY FIELDS
-C> @param UN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC U-WINDS
-C> @param VN       - REAL (*) NORTHERN POLAR STEREOGRAPHIC V-WINDS
-C> @param US       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC U-WINDS
-C> @param VS       - REAL (*) SOUTHERN POLAR STEREOGRAPHIC V-WINDS
-C>
-C> SUBPROGRAMS CALLED:
-C>   - SPWGET()       GET WAVE-SPACE CONSTANTS
-C>   - SPLEGEND()     COMPUTE LEGENDRE POLYNOMIALS
-C>   - SPSYNTH()      SYNTHESIZE FOURIER FROM SPECTRAL
-C>   - SPDZ2UV()      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
+C> @author Iredell @date 96-02-29
       SUBROUTINE SPTGPSV(IROMB,MAXWV,KMAX,NPS,
      &                   KWSKIP,KGSKIP,NISKIP,NJSKIP,
      &                   TRUE,XMESH,ORIENT,WAVED,WAVEZ,UN,VN,US,VS)
@@ -93,7 +95,7 @@ C>   - SPDZ2UV()      COMPUTE WINDS FROM DIVERGENCE AND VORTICITY
       DATA SROT/0.,1.,0.,-1./,CROT/1.,0.,-1.,0./
       PARAMETER(RERTH=6.3712E6)
       PARAMETER(PI=3.14159265358979,DPR=180./PI)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE PRELIMINARY CONSTANTS
       CALL SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
       MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
@@ -112,7 +114,7 @@ C  CALCULATE PRELIMINARY CONSTANTS
       NPH=(NPS-1)/2
       GQ=((1.+SIN(TRUE/DPR))*RERTH/XMESH)**2
       SRH=SQRT(0.5)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE SPECTRAL WINDS
 C$OMP PARALLEL DO PRIVATE(KWS)
       DO K=1,KMAX
@@ -121,7 +123,7 @@ C$OMP PARALLEL DO PRIVATE(KWS)
      &               WAVED(KWS+1),WAVEZ(KWS+1),
      &               W(1,K),W(1,KMAX+K),WTOP(1,K),WTOP(1,KMAX+K))
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE POLE POINT
       I1=NPH+1
       J1=NPH+1
@@ -144,7 +146,7 @@ CDIR$ IVDEP
         US(IJK1)=2*( COSO*F(3,2,KU)-SINO*F(3,2,KV))
         VS(IJK1)=2*( SINO*F(3,2,KU)+COSO*F(3,2,KV))
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE POINTS ALONG THE ROW AND COLUMN OF THE POLE,
 C  STARTING AT THE ORIENTATION LONGITUDE AND GOING CLOCKWISE.
 C$OMP PARALLEL DO PRIVATE(I1,J2,I2,J3,I3,J4,I4,J5,I5,J6,I6,J7,I7,J8,I8)
@@ -302,7 +304,7 @@ CDIR$ IVDEP
           ENDDO
         ENDIF
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE POINTS ON THE MAIN DIAGONALS THROUGH THE POLE,
 C  STARTING CLOCKWISE OF THE ORIENTATION LONGITUDE AND GOING CLOCKWISE.
 C$OMP PARALLEL DO PRIVATE(I1,J2,I2,J3,I3,J4,I4,J5,I5,J6,I6,J7,I7,J8,I8)
@@ -524,7 +526,7 @@ CDIR$ IVDEP
           ENDDO
         ENDIF
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE THE REMAINDER OF THE POLAR STEREOGRAPHIC DOMAIN,
 C  STARTING AT THE SECTOR JUST CLOCKWISE OF THE ORIENTATION LONGITUDE
 C  AND GOING CLOCKWISE UNTIL ALL EIGHT SECTORS ARE DONE.
@@ -928,5 +930,5 @@ CDIR$ IVDEP
           ENDIF
         ENDDO
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       END

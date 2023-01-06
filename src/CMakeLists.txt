@@ -1,64 +1,19 @@
 # This is the CMake file for the src directory of NCEPLIBS-sp.
 #
 # Mark Potts, Kyle Gerheiser
-set(fortran_src
-  fftpack.F
-  lapack_gen.F
-  ncpus.F
-  spanaly.f
-  spdz2uv.f
-  speps.f
-  spfft1.f
-  spffte.f
-  spfft.f
-  spfftpt.f
-  spgradq.f
-  spgradx.f
-  spgrady.f
-  splaplac.f
-  splat.F
-  splegend.f
-  sppad.f
-  spsynth.f
-  sptezd.f
-  sptez.f
-  sptezmd.f
-  sptezm.f
-  sptezmv.f
-  sptezv.f
-  sptgpmd.f
-  sptgpm.f
-  sptgpmv.f
-  sptgpsd.f
-  sptgps.f
-  sptgpsv.f
-  sptgptd.f
-  sptgpt.f
-  sptgptsd.f
-  sptgptvd.f
-  sptgptv.f
-  sptrand.f
-  sptran.f
-  sptranf0.f
-  sptranf1.f
-  sptranf.f
-  sptranfv.f
-  sptranv.f
-  sptrund.f
-  sptrun.f
-  sptrung.f
-  sptrungv.f
-  sptrunl.f
-  sptrunm.f
-  sptrunmv.f
-  sptruns.f
-  sptrunsv.f
-  sptrunv.f
-  spuv2dz.f
-  spvar.f
-  spwget.f
-  )
 
+# These are the source files.
+set(fortran_src fftpack.F lapack_gen.F ncpus.F spanaly.f spdz2uv.f
+speps.f spfft1.f spffte.f spfft.f spfftpt.f spgradq.f spgradx.f
+spgrady.f splaplac.f splat.F splegend.f sppad.f spsynth.f sptezd.f
+sptez.f sptezmd.f sptezm.f sptezmv.f sptezv.f sptgpmd.f sptgpm.f
+sptgpmv.f sptgpsd.f sptgps.f sptgpsv.f sptgptd.f sptgpt.f sptgptsd.f
+sptgptvd.f sptgptv.f sptrand.f sptran.f sptranf0.f sptranf1.f
+sptranf.f sptranfv.f sptranv.f sptrund.f sptrun.f sptrung.f sptrungv.f
+sptrunl.f sptrunm.f sptrunmv.f sptruns.f sptrunsv.f sptrunv.f
+spuv2dz.f spvar.f spwget.f )
+
+# Set compiler flags.
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
     "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp ${CMAKE_Fortran_FLAGS}"
@@ -73,10 +28,13 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
   set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 endif()
 
+# Handle argument mismatch problems for GNU versions > 10.
 if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 10)
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
 endif()
 
+# We build three versions of the library, _4 for standard, _8 for
+# 8-byte int and 8-byte float, and _d for 8-byte float.
 set(kinds "4" "8" "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
@@ -105,7 +63,10 @@ foreach(kind ${kinds})
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
 
+  # Set the flags for _4, _8, and _d.
   set(BUILD_FLAGS "${fortran_${kind}_flags}")
+
+  # Deal with OpenMP.
   if(OpenMP_Fortran_FOUND)
     if(BUILD_SHARED_LIBS)
       target_link_libraries(${lib_name}_shared PRIVATE OpenMP::OpenMP_Fortran)
