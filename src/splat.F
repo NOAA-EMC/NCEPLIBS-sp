@@ -15,7 +15,7 @@ C> 2012-09-01 | E.Mirvis & M.Iredell | Merging & debugging linux errors of _d an
 C> 2012-11-05 | E.Mirvis | Generic FFTPACK and LU lapack were removed.
 C>
 C> @author IREDELL @date 96-02-20
-C>
+
 C> Computes cosines of colatitude and gaussian weights
 C> for one of the following specific global sets of latitudes.
 C> - Gaussian latitudes (IDRT=4)
