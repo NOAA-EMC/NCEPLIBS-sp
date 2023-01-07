@@ -59,6 +59,7 @@ foreach(kind ${kinds})
     add_library(${lib_name}_shared SHARED $<TARGET_OBJECTS:${lib_name}_objlib>)
     set_target_properties(${lib_name}_shared PROPERTIES OUTPUT_NAME ${lib_name})
     set_target_properties(${lib_name}_shared PROPERTIES EXPORT_NAME ${lib_name})
+    set_target_properties(${lib_name}_shared PROPERTIES SOVERSION 0)
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
 
