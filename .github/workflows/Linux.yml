@@ -1,3 +1,8 @@
+# This is a CI workflow for the NCEPLIBS-sp project.
+#
+# This workflow builds on Linux with different build options.
+#
+# Ed Hartnett, 1/8/23
 name: Linux
 on:
   push:
