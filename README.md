@@ -13,14 +13,14 @@ https://noaa-emc.github.io/NCEPLIBS-sp/
 
 NCEP/EMC developers.
 
-Code Manager: Kyle Gerheiser, Ed Hartnett
+Code Manager: Alex Richert, Ed Hartnett
 
 ## Installing
 
 ```
 mkdir build
 cd build
-cmake -DCMAKE_INSTALL_PREFIX=/path/to/install /path/to/NCEPLIBS-sp
+cmake -DCMAKE_INSTALL_PREFIX=/path/to/install ..
 make -j2
 make install
 ```
