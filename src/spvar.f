@@ -1,21 +1,21 @@
 C> @file
-C>
-C> Compute variance by total wavenumber
-C> @author IREDELL @date 92-10-31
+C> @brief Compute variance by total wavenumber.
+C> @author Iredell @date 92-10-31
 
 C> Computes the variances by total wavenumber
 C> of a scalar field in spectral space.
 C>
-C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M        - INTEGER SPECTRAL TRUNCATION
-C> @param Q        - REAL ((M+1)*((I+1)*M+2)) SCALAR FIELD
-C> @param QVAR     - REAL (0:(I+1)*M) VARIANCES
+C> @param I integer spectral domain shape
+c> (0 for triangular, 1 for rhomboidal)
+C> @param M integer spectral truncation
+C> @param Q real ((M+1)*((I+1)*M+2)) scalar field
+C> @param QVAR real (0:(I+1)*M) variances
 C>
+C> @author Iredell @date 92-10-31
       SUBROUTINE SPVAR(I,M,Q,QVAR)
       REAL Q((M+1)*((I+1)*M+2))
       REAL QVAR(0:(I+1)*M)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       L=0
       DO N=0,M
         KS=L*(2*M+(I-1)*(L-1))+2*N
@@ -30,6 +30,6 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           QVAR(N)=QVAR(N)+Q(KS+1)**2+Q(KS+2)**2
         ENDDO
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       RETURN
       END
