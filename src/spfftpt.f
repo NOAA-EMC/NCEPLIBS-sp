@@ -1,23 +1,24 @@
 C> @file
-C>
-C> Compute fourier transform to gridpoints
-C> @author IREDELL @date 96-02-20
+C> @brief Compute fourier transform to gridpoints.
+C> @author Iredell @date 96-02-20
 
-C> THIS SUBPROGRAM COMPUTES A SLOW FOURIER TRANSFORM
-C> FROM FOURIER SPACE TO A SET OF GRIDPOINTS.
+C> This subprogram computes a slow Fourier transform
+c> from Fourier space to a set of gridpoints.
 C>
-C> @param M        - INTEGER FOURIER WAVENUMBER TRUNCATION
-C> @param N        - INTEGER NUMBER OF GRIDPOINTS
-C> @param INCW     - INTEGER FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
-C>                (INCW >= M+1)
-C> @param INCG     - INTEGER FIRST DIMENSION OF THE GRIDPOINT ARRAY
-C>                (INCG >= N)
-C> @param KMAX     - INTEGER NUMBER OF FOURIER FIELDS
-C> @param RLON     - REAL(N) GRID LONGITUDES IN DEGREES
-C> @param W        - COMPLEX(INCW,KMAX) FOURIER AMPLITUDES
-C> @param G        - REAL(INCG,KMAX) GRIDPOINT VALUES
+C> @note This subprogram is thread-safe.
 C>
-C> @note THIS SUBPROGRAM IS THREAD-SAFE.
+C> @param M integer Fourier wavenumber truncation
+C> @param N integer number of gridpoints
+C> @param INCW integer first dimension of the complex amplitude array
+C> (INCW >= M+1)
+C> @param INCG integer first dimension of the gridpoint array
+C> (INCG >= N)
+C> @param KMAX integer number of Fourier fields
+C> @param RLON real(N) grid longitudes in degrees
+C> @param W complex(INCW,KMAX) Fourier amplitudes
+C> @param G real(INCG,KMAX) gridpoint values
+C>
+C> @author Iredell @date 96-02-20
       SUBROUTINE SPFFTPT(M,N,INCW,INCG,KMAX,RLON,W,G)
 
         IMPLICIT NONE
@@ -28,7 +29,7 @@ C> @note THIS SUBPROGRAM IS THREAD-SAFE.
         INTEGER I,K,L
         REAL RADLON,SLON(M),CLON(M)
         REAL,PARAMETER:: PI=3.14159265358979
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         DO I=1,N
           RADLON=PI/180*RLON(I)
           DO L=1,M
@@ -44,5 +45,4 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
             ENDDO
           ENDDO
         ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END SUBROUTINE
