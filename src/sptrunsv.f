@@ -7,14 +7,14 @@ C>
 C> @author Iredell @date 96-02-29
 
 C> This subprogram spectrally truncates vector fields
-c> on a global cylindrical grid, returning the fields
-c> to specific pairs of polar stereographic scalar fields.
+C> on a global cylindrical grid, returning the fields
+C> to specific pairs of polar stereographic scalar fields.
 C>
 C> The wave-space can be either triangular or rhomboidal.
 C>
 C> The grid-space can be either an equally-spaced grid
-c> (with or without pole points) or a gaussian grid.
-c>
+C> (with or without pole points) or a gaussian grid.
+C>
 C> The grid fields may have general indexing.
 C>
 C> The transforms are all multiprocessed.
@@ -35,7 +35,7 @@ C> JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
 C> JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
 C>      
 C> @param IROMB integer spectral domain shape
-c> (0 for triangular, 1 for rhomboidal)
+C> (0 for triangular, 1 for rhomboidal)
 C> @param MAXWV integer spectral truncation
 C> @param IDRTI integer input grid identifier
 C> - IDRTI=4 for Gaussian grid
@@ -46,7 +46,7 @@ C> @param JMAXI integer number of input latitudes.
 C> @param KMAX integer number of fields to transform.
 C> @param NPS integer odd order of the polar stereographic grids
 C> @param IPRIME integer input longitude index for the prime meridian.
-c> (defaults to 1 if IPRIME=0)
+C> (defaults to 1 if IPRIME=0)
 C> (output longitude index for prime meridian assumed 1.)
 C> @param ISKIPI integer skip number between input longitudes
 C> (defaults to 1 if ISKIPI=0)

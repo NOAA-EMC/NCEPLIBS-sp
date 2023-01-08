@@ -6,7 +6,7 @@ C> Computes the variances by total wavenumber
 C> of a scalar field in spectral space.
 C>
 C> @param I integer spectral domain shape
-c> (0 for triangular, 1 for rhomboidal)
+C> (0 for triangular, 1 for rhomboidal)
 C> @param M integer spectral truncation
 C> @param Q real ((M+1)*((I+1)*M+2)) scalar field
 C> @param QVAR real (0:(I+1)*M) variances
