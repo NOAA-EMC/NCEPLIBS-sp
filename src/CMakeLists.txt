@@ -33,9 +33,8 @@ if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_V
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
 endif()
 
-# We build two versions of the library, _4 for standard, and _d for
+# We can build two versions of the library, _4 for standard, and _d for
 # 8-byte float.
-set(kinds "4" "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
 
