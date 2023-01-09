@@ -3,20 +3,20 @@ C> @brief Compute fourier transform to gridpoints.
 C> @author Iredell @date 96-02-20
 
 C> This subprogram computes a slow Fourier transform
-c> from Fourier space to a set of gridpoints.
+C> from Fourier space to a set of gridpoints.
 C>
 C> @note This subprogram is thread-safe.
 C>
-C> @param M integer Fourier wavenumber truncation
-C> @param N integer number of gridpoints
-C> @param INCW integer first dimension of the complex amplitude array
+C> @param M Fourier wavenumber truncation
+C> @param N number of gridpoints
+C> @param INCW first dimension of the complex amplitude array
 C> (INCW >= M+1)
-C> @param INCG integer first dimension of the gridpoint array
+C> @param INCG first dimension of the gridpoint array
 C> (INCG >= N)
-C> @param KMAX integer number of Fourier fields
-C> @param RLON real(N) grid longitudes in degrees
-C> @param W complex(INCW,KMAX) Fourier amplitudes
-C> @param G real(INCG,KMAX) gridpoint values
+C> @param KMAX number of Fourier fields
+C> @param RLON grid longitudes in degrees
+C> @param W Fourier amplitudes
+C> @param G gridpoint values
 C>
 C> @author Iredell @date 96-02-20
       SUBROUTINE SPFFTPT(M,N,INCW,INCG,KMAX,RLON,W,G)
