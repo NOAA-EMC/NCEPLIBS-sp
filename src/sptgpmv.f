@@ -7,18 +7,23 @@ C> 96-02-29 | IREDELL | Initial.
 C> 1998-12-15 | IREDELL | OpenMP directives inserted.
 C> @author IREDELL @date 96-02-29
 
-c> This subprogram performs a spherical transform
-c> from spectral coefficients of divergences and curls
-c> to vector fields on a Mercator grid.
-c> The wave-space can be either triangular or rhomboidal.
-c> The wave and grid fields may have general indexing,
-c> but each wave field is in sequential 'ibm order',
-c> i.e., with zonal wavenumber as the slower index.
-c> The Mercator grid is identified by the location
-c> of its first point and by its respective increments.
-c> The transforms are all multiprocessed over sector points.
-c> Transform several fields at a time to improve vectorization.
-c> Subprogram can be called from a multiprocessing environment.
+C> This subprogram performs a spherical transform
+C> from spectral coefficients of divergences and curls
+C> to vector fields on a Mercator grid.
+C>
+C> The wave-space can be either triangular or rhomboidal.
+C>
+C> The wave and grid fields may have general indexing,
+C> but each wave field is in sequential 'ibm order',
+C> i.e., with zonal wavenumber as the slower index.
+C>
+C> The Mercator grid is identified by the location
+C> of its first point and by its respective increments.
+C>
+C> The transforms are all multiprocessed over sector points.
+C> Transform several fields at a time to improve vectorization.
+C>
+C> Subprogram can be called from a multiprocessing environment.
 C>
 C> @param IROMB Spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
