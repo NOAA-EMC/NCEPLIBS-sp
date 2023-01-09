@@ -5,13 +5,17 @@ C> @author IREDELL @date 96-02-29
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of scalar fields
 C> to gradient fields on a Mercator grid.
+C>
 C> The wave-space can be either triangular or rhomboidal.
 C> The wave and grid fields may have general indexing,
 C> but each wave field is in sequential 'ibm order',
 C> i.e. with zonal wavenumber as the slower index.
+C>
 C> The Mercator grid is identified by the location
 C> of its first point and by its respective increments.
+C>
 C> The transforms are all multiprocessed over sector points.
+C>
 C> Transform several fields at a time to improve vectorization.
 C> subprogram can be called from a multiprocessing environment.
 C>
@@ -38,7 +42,7 @@ C> (in terms of grid increment dy valid at latitude RLATI,
 C> the latitude increment DLAT is determined as
 C> DLAT=DPR*DY/(RERTH*COS(RLATI/DPR))
 C> where DPR=180/PI and RERTH is Earth's radius)
-c> @param DLON Longitude increment in degrees such that
+C> @param DLON Longitude increment in degrees such that
 C> D(LAMBDA)/D(I)=DLON where I is zonal index.
 C> DLON is negative for grids indexed westward.
 C> @param WAVE Wave fields
