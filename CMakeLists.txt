@@ -16,6 +16,21 @@ include(GNUInstallDirs)
 option(OPENMP "use OpenMP threading" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 
+option(BUILD_STATIC_LIBS "Build static libraries" ON)
+option(BUILD_4 "Build the 4-byte real version of the library, libsp_4.a" ON)
+option(BUILD_D "Build the 8-byte real version of the library, libsp_d.a" ON)
+
+# Figure whether user wants a _4, a _d, or both libraries.
+if(BUILD_4 AND BUILD_D)
+  set(kinds "4" "d")
+elseif(BUILD_4 AND NOT BUILD_D)
+  set(kinds "4")
+elseif(BUILD_D AND NOT BUILD_4)
+  set(kinds "d")
+else()
+  message(FATAL_ERROR "At least one of BUILD_4 or BUILD_D must be turned on")
+endif()
+
 # Check build type.
 if(NOT CMAKE_BUILD_TYPE MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)$")
   message(STATUS "Setting build type to 'Release' as none was specified.")
