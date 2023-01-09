@@ -33,9 +33,8 @@ if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_V
   set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
 endif()
 
-# We build two versions of the library, _4 for standard, and _d for
+# We can build two versions of the library, _4 for standard, and _d for
 # 8-byte float.
-set(kinds "4" "d")
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
 
@@ -47,18 +46,21 @@ foreach(kind ${kinds})
   endif()
   add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name}_objlib)
 
-  # Create static object library from object library.
-  add_library(${lib_name}_static STATIC $<TARGET_OBJECTS:${lib_name}_objlib>)
-  set_target_properties(${lib_name}_static PROPERTIES OUTPUT_NAME ${lib_name})
-  set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name})
-  set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name}_static)
-  list(APPEND LIB_TARGETS ${lib_name}_static)
+  if(BUILD_STATIC_LIBS)
+    # Create static object library from object library.
+    add_library(${lib_name}_static STATIC $<TARGET_OBJECTS:${lib_name}_objlib>)
+    set_target_properties(${lib_name}_static PROPERTIES OUTPUT_NAME ${lib_name})
+    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name})
+    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name}_static)
+    list(APPEND LIB_TARGETS ${lib_name}_static)
+  endif()
 
   if(BUILD_SHARED_LIBS)
     # Create shared object library from object library.
     add_library(${lib_name}_shared SHARED $<TARGET_OBJECTS:${lib_name}_objlib>)
     set_target_properties(${lib_name}_shared PROPERTIES OUTPUT_NAME ${lib_name})
     set_target_properties(${lib_name}_shared PROPERTIES EXPORT_NAME ${lib_name})
+    set_target_properties(${lib_name}_shared PROPERTIES SOVERSION 0)
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
 
@@ -70,7 +72,9 @@ foreach(kind ${kinds})
     if(BUILD_SHARED_LIBS)
       target_link_libraries(${lib_name}_shared PRIVATE OpenMP::OpenMP_Fortran)
     endif()
-    target_link_libraries(${lib_name}_static PRIVATE OpenMP::OpenMP_Fortran)
+    if(BUILD_STATIC_LIBS)
+      target_link_libraries(${lib_name}_static PRIVATE OpenMP::OpenMP_Fortran)
+    endif()
   endif()
   
   set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
