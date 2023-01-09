@@ -5,11 +5,11 @@ C> @author Iredell @date 92-10-31
 C> Computes the variances by total wavenumber
 C> of a scalar field in spectral space.
 C>
-C> @param I integer spectral domain shape
+C> @param I spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
-C> @param M integer spectral truncation
-C> @param Q real ((M+1)*((I+1)*M+2)) scalar field
-C> @param QVAR real (0:(I+1)*M) variances
+C> @param M spectral truncation
+C> @param Q ((M+1)*((I+1)*M+2)) scalar field
+C> @param QVAR (0:(I+1)*M) variances
 C>
 C> @author Iredell @date 92-10-31
       SUBROUTINE SPVAR(I,M,Q,QVAR)
