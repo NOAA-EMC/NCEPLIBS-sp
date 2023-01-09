@@ -16,7 +16,7 @@ C>
 C> The wave-space can be either triangular or rhomboidal.
 C>
 C> The grid-space can be either an equally-spaced grid
-C> (with or without pole points) or a gaussian grid.
+C> (with or without pole points) or a Gaussian grid.
 C> the wave and grid fields may have general indexing,
 C> but each wave field is in sequential 'ibm order',
 C> i.e. with zonal wavenumber as the slower index.

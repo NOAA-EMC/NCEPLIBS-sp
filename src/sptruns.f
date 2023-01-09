@@ -7,7 +7,7 @@ C> This subprogram spectrally truncates scalar fields on a global
 C> cylindrical grid, returning the fields to specific pairs of polar
 C> stereographic scalar fields. The wave-space can be either
 C> triangular or rhomboidal. The grid-space can be either an
-C> equally-spaced grid (with or without pole points) or a gaussian
+C> equally-spaced grid (with or without pole points) or a Gaussian
 C> grid. The grid fields may have general indexing. The transforms
 C> are all multiprocessed. Transform several fields at a time to
 C> improve vectorization. Subprogram can be called from a

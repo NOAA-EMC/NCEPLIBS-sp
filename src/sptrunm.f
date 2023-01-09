@@ -1,13 +1,13 @@
 C> @file
 C>
-C> Spectrally interpolate scalars to mercator
+C> Spectrally interpolate scalars to Mercator
 C> @author IREDELL @date 96-02-29
 
 C> This subprogram spectrally truncates scalar fields on a global
-C> cylindrical grid, returning the fields to a mercator grid. The
+C> cylindrical grid, returning the fields to a Mercator grid. The
 C> wave-space can be either triangular or rhomboidal. The grid-space
 C> can be either an equally-spaced grid (with or without pole
-C> points) or a gaussian grid. The grid fields may have general
+C> points) or a Gaussian grid. The grid fields may have general
 C> indexing. The transforms are all multiprocessed. Transform
 C> several fields at a time to improve vectorization. Subprogram can
 C> be called from a multiprocessing environment.
@@ -59,7 +59,7 @@ C> @param GM       - REAL (*) MERCATOR FIELDS
 C>
 C> SUBPROGRAMS CALLED:
 C>   - sptran()       Perform a scalar spherical transform
-C>   - sptgpm()       Transform spectral scalar to mercator
+C>   - sptgpm()       Transform spectral scalar to Mercator
 C>   - ncpus()        Gets environment number of cpus
 C>
 C> MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
