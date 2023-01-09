@@ -1,6 +1,6 @@
 C> @file
 C>
-C> Spectrally interpolate vectors to mercator
+C> Spectrally interpolate vectors to Mercator
 C> @author IREDELL @date 96-02-29
 
 C> THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS
