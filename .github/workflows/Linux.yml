@@ -1,3 +1,8 @@
+# This is a CI workflow for the NCEPLIBS-sp project.
+#
+# This workflow builds on Linux with different build options.
+#
+# Ed Hartnett, 1/8/23
 name: Linux
 on:
   push:
@@ -17,6 +22,7 @@ jobs:
       matrix:
         openmp: [ON, OFF]
         sharedlibs: [ON, OFF]
+        options: [-DBUILD_D=OFF, -DBUILD_4=OFF]
 
     steps:
     
@@ -30,7 +36,7 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }}
+        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }}
         make -j2 VERBOSE=1
 
     - name: test-sp
