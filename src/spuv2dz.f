@@ -33,16 +33,16 @@ C>
 C> @param I integer spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
 C> @param M INTEGER spectral truncation
-C> @param ENN1 real ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
-C> @param ELONN1 real ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
-C> @param EON real ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
-C> @param EONTOP real (M+1) EPSILON/N*A over top
-C> @param U real ((M+1)*((I+1)*M+2)) zonal wind (over coslat)
-C> @param V real ((M+1)*((I+1)*M+2)) merid wind (over coslat)
-C> @param UTOP real (2*(M+1)) zonal wind (over coslat) over top
-C> @param VTOP real (2*(M+1)) merid wind (over coslat) over top
-C> @param D real ((M+1)*((I+1)*M+2)) divergence
-C> @param Z real ((M+1)*((I+1)*M+2)) vorticity
+C> @param ENN1 ((M+1)*((I+1)*M+2)/2) N*(N+1)/A**2
+C> @param ELONN1 ((M+1)*((I+1)*M+2)/2) L/(N*(N+1))*A
+C> @param EON ((M+1)*((I+1)*M+2)/2) EPSILON/N*A
+C> @param EONTOP (M+1) EPSILON/N*A over top
+C> @param U ((M+1)*((I+1)*M+2)) zonal wind (over coslat)
+C> @param V ((M+1)*((I+1)*M+2)) merid wind (over coslat)
+C> @param UTOP (2*(M+1)) zonal wind (over coslat) over top
+C> @param VTOP (2*(M+1)) merid wind (over coslat) over top
+C> @param D ((M+1)*((I+1)*M+2)) divergence
+C> @param Z ((M+1)*((I+1)*M+2)) vorticity
 C>
 C> @author Iredell @date 92-10-31
       SUBROUTINE SPUV2DZ(I,M,ENN1,ELONN1,EON,EONTOP,U,V,UTOP,VTOP,D,Z)
