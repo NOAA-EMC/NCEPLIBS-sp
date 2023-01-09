@@ -15,6 +15,8 @@ include(GNUInstallDirs)
 # Handle user options.
 option(OPENMP "use OpenMP threading" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
+
+option(BUILD_STATIC_LIBS "Build static libraries" ON)
 option(BUILD_4 "Build the 4-byte real version of the library, libsp_4.a" ON)
 option(BUILD_D "Build the 8-byte real version of the library, libsp_d.a" ON)
 
