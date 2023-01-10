@@ -3,13 +3,13 @@ C> @brief Perform simple scalar spherical transforms.
 C> @author Iredell @date 96-02-29
 
 C> This subprogram performs spherical transforms
-c> between spectral coefficients of scalar quantities
-c> and fields on a global cylindrical grid.
+C> between spectral coefficients of scalar quantities
+C> and fields on a global cylindrical grid.
 C>
 C> The wave-space can be either triangular or rhomboidal.
 C>
 C> The grid-space can be either an equally-spaced grid
-c> (with or without pole points) or a Gaussian grid.
+C> (with or without pole points) or a Gaussian grid.
 C>
 C> Wave fields are in sequential 'IBM ORDER'.
 C>
@@ -31,7 +31,7 @@ C> JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
 C> JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
 C>
 C> @param IROMB spectral domain shape
-c> (0 for triangular, 1 for rhomboidal)
+C> (0 for triangular, 1 for rhomboidal)
 C> @param MAXWV spectral truncation
 C> @param IDRT grid identifier
 C> - IDRT=4 for Gaussian grid
