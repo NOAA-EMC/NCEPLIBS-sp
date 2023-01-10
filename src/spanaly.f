@@ -4,11 +4,11 @@ C>
 C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
-C> 91-10-31 | MARK IREDELL | Initial
-C> 94-08-01 | MARK IREDELL | Moved zonal wavenumber loop inside
-C> 1998-12-15 | IREDELL | Openmp directives inserted.
+C> 91-10-31 | Mark Iredell | Initial.
+C> 94-08-01 | Mark Iredell | Moved zonal wavenumber loop inside.
+C> 1998-12-15 | Iredell | Openmp directives inserted.
 C>
-C> @author IREDELL @date 91-10-31
+C> @author Iredell @date 91-10-31
 
 C> Analyzes spectral coefficients from Fourier coefficients
 C> for a latitude pair (Northern and Southern hemispheres).
@@ -31,7 +31,7 @@ C> @param F Fourier coefficients combined
 C> @param SPC spectral coefficients
 C> @param SPCTOP spectral coefficients over top
 C>
-C> @author IREDELL @date 91-10-31
+C> @author Iredell @date 91-10-31
       SUBROUTINE SPANALY(I,M,IM,IX,NC,NCTOP,KM,WGT,CLAT,PLN,PLNTOP,MP,
      &                   F,SPC,SPCTOP)
       INTEGER MP(KM)
@@ -39,7 +39,7 @@ C> @author IREDELL @date 91-10-31
       REAL F(IX,2,KM)
       REAL SPC(NC,KM),SPCTOP(NCTOP,KM)
       REAL FW(2,2)
-C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C FOR EACH ZONAL WAVENUMBER, ANALYZE TERMS OVER TOTAL WAVENUMBER.
 C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.
       LX=MIN(M,IM/2)
@@ -72,6 +72,5 @@ C ANALYZE EVEN AND ODD POLYNOMIALS SEPARATELY.
           ENDDO
         ENDDO
       ENDDO
-C- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       RETURN
       END

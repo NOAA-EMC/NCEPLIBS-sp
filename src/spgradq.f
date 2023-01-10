@@ -3,20 +3,20 @@ C> @brief Compute gradient in spectral space.
 C> @author Iredell @date 92-10-31
 
 C> Computes the horizontal vector gradient of a scalar field
-c> in spectral space.
+C> in spectral space.
 C>
 C> Subprogram speps() should be called already.
 C>
 C> If l is the zonal wavenumber, n is the total wavenumber,
-c> eps(l,n)=sqrt((n**2-l**2)/(4*n**2-1)) and a is earth radius,
-c> then the zonal gradient of q(l,n) is simply i*l/a*q(l,n)
-c> while the meridional gradient of q(l,n) is computed as
-c> eps(l,n+1)*(n+2)/a*q(l,n+1)-eps(l,n+1)*(n-1)/a*q(l,n-1).
+C> eps(l,n)=sqrt((n**2-l**2)/(4*n**2-1)) and a is earth radius,
+C> then the zonal gradient of q(l,n) is simply i*l/a*q(l,n)
+C> while the meridional gradient of q(l,n) is computed as
+C> eps(l,n+1)*(n+2)/a*q(l,n+1)-eps(l,n+1)*(n-1)/a*q(l,n-1).
 C>
 C> Extra terms are computed over top of the spectral domain.
 C>
 C> Advantage is taken of the fact that eps(l,l)=0
-c> in order to vectorize over the entire spectral domain.
+C> in order to vectorize over the entire spectral domain.
 C>
 C> @param I spectral domain shape (0 for triangular, 1 for rhomboidal)
 C> @param M spectral truncation
