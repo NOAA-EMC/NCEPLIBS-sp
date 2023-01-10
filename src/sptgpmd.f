@@ -1,6 +1,6 @@
 C> @file
 C> @brief Transform spectral to Mercator gradients
-C> @author IREDELL @date 96-02-29
+C> @author Iredell @date 96-02-29
 
 C> This subprogram performs a spherical transform
 C> from spectral coefficients of scalar fields
@@ -49,7 +49,7 @@ C> @param WAVE Wave fields
 C> @param XM Mercator x-gradients
 C> @param YM Mercator y-gradients
 C>
-C> @author IREDELL @date 96-02-29
+C> @author Iredell @date 96-02-29
       SUBROUTINE SPTGPMD(IROMB,MAXWV,KMAX,MI,MJ,
      &                   KWSKIP,KGSKIP,NISKIP,NJSKIP,
      &                   RLAT1,RLON1,DLAT,DLON,WAVE,XM,YM)
@@ -61,14 +61,14 @@ C> @author IREDELL @date 96-02-29
       REAL EON((MAXWV+1)*((IROMB+1)*MAXWV+2)/2),EONTOP(MAXWV+1)
       REAL WD((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)
       REAL WZ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE PRELIMINARY CONSTANTS
       CALL SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
       MX=(MAXWV+1)*((IROMB+1)*MAXWV+2)/2
       MDIM=2*MX+1
       KW=KWSKIP
       IF(KW.EQ.0) KW=2*MX
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  CALCULATE GRADIENTS
 C$OMP PARALLEL DO PRIVATE(KWS)
       DO K=1,KMAX
@@ -78,5 +78,4 @@ C$OMP PARALLEL DO PRIVATE(KWS)
       ENDDO
       CALL SPTGPMV(IROMB,MAXWV,KMAX,MI,MJ,MDIM,KGSKIP,NISKIP,NJSKIP,
      &             RLAT1,RLON1,DLAT,DLON,WD,WZ,XM,YM)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END
