@@ -1,91 +1,90 @@
 C> @file
+C> @brief Spectrally interpolate vectors to polar stereo.
 C>
-C> Spectrally interpolate vectors to polar stereo
-C> @author IREDELL @date 96-02-29
+C> 96-02-29 | Iredell | Initial.
+C> 1998-12-15 | Iredell | Openmp directives inserted.
+C>
+C> @author Iredell @date 96-02-29
 
-C> THIS SUBPROGRAM SPECTRALLY TRUNCATES VECTOR FIELDS
-C> ON A GLOBAL CYLINDRICAL GRID, RETURNING THE FIELDS
-C> TO SPECIFIC PAIRS OF POLAR STEREOGRAPHIC SCALAR FIELDS.
-C> THE WAVE-SPACE CAN BE EITHER TRIANGULAR OR RHOMBOIDAL.
-C> THE GRID-SPACE CAN BE EITHER AN EQUALLY-SPACED GRID
-C> (WITH OR WITHOUT POLE POINTS) OR A GAUSSIAN GRID.
-C> THE GRID FIELDS MAY HAVE GENERAL INDEXING.
-C> THE TRANSFORMS ARE ALL MULTIPROCESSED.
-C> TRANSFORM SEVERAL FIELDS AT A TIME TO IMPROVE VECTORIZATION.
-C> SUBPROGRAM CAN BE CALLED FROM A MULTIPROCESSING ENVIRONMENT.
+C> This subprogram spectrally truncates vector fields
+C> on a global cylindrical grid, returning the fields
+C> to specific pairs of polar stereographic scalar fields.
 C>
-C> PROGRAM HISTORY LOG:
-C> -  96-02-29  IREDELL
-C> - 1998-12-15  IREDELL  OPENMP DIRECTIVES INSERTED
+C> The wave-space can be either triangular or rhomboidal.
 C>
-C> @param IROMB    - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param MAXWV    - INTEGER SPECTRAL TRUNCATION
-C> @param IDRTI    - INTEGER INPUT GRID IDENTIFIER
-C>                (IDRTI=4 FOR GAUSSIAN GRID,
-C>                 IDRTI=0 FOR EQUALLY-SPACED GRID INCLUDING POLES,
-C>                 IDRTI=256 FOR EQUALLY-SPACED GRID EXCLUDING POLES)
-C> @param IMAXI    - INTEGER EVEN NUMBER OF INPUT LONGITUDES.
-C> @param JMAXI    - INTEGER NUMBER OF INPUT LATITUDES.
-C> @param KMAX     - INTEGER NUMBER OF FIELDS TO TRANSFORM.
-C> @param NPS      - INTEGER ODD ORDER OF THE POLAR STEREOGRAPHIC GRIDS
-C> @param IPRIME   - INTEGER INPUT LONGITUDE INDEX FOR THE PRIME MERIDIAN.
-C>                (DEFAULTS TO 1 IF IPRIME=0)
-C>                (OUTPUT LONGITUDE INDEX FOR PRIME MERIDIAN ASSUMED 1.)
-C> @param ISKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT LONGITUDES
-C>                (DEFAULTS TO 1 IF ISKIPI=0)
-C> @param JSKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT LATITUDES FROM SOUTH
-C>                (DEFAULTS TO -IMAXI IF JSKIPI=0)
-C> @param KSKIPI   - INTEGER SKIP NUMBER BETWEEN INPUT GRID FIELDS
-C>                (DEFAULTS TO IMAXI*JMAXI IF KSKIPI=0)
-C> @param KGSKIP   - INTEGER SKIP NUMBER BETWEEN GRID FIELDS
-C>                (DEFAULTS TO NPS*NPS IF KGSKIP=0)
-C> @param NISKIP   - INTEGER SKIP NUMBER BETWEEN GRID I-POINTS
-C>                (DEFAULTS TO 1 IF NISKIP=0)
-C> @param NJSKIP   - INTEGER SKIP NUMBER BETWEEN GRID J-POINTS
-C>                (DEFAULTS TO NPS IF NJSKIP=0)
-C> @param JCPU     - INTEGER NUMBER OF CPUS OVER WHICH TO MULTIPROCESS
-C>                (DEFAULTS TO ENVIRONMENT NCPUS IF JCPU=0)
-C> @param TRUE     - REAL LATITUDE AT WHICH PS GRID IS TRUE (USUALLY 60.)
-C> @param XMESH    - REAL GRID LENGTH AT TRUE LATITUDE (M)
-C> @param ORIENT   - REAL LONGITUDE AT BOTTOM OF NORTHERN PS GRID
-C>                (SOUTHERN PS GRID WILL HAVE OPPOSITE ORIENTATION.)
-C> @param GRIDUI   - REAL (*) INPUT GRID U-WINDS
-C> @param GRIDVI   - REAL (*) INPUT GRID V-WINDS
-C> @param LUV      - LOGICAL FLAG WHETHER TO RETURN WINDS
-C> @param LDZ      - LOGICAL FLAG WHETHER TO RETURN DIVERGENCE AND VORTICITY
-C> @param LPS      - LOGICAL FLAG WHETHER TO RETURN POTENTIAL AND STREAMFCN
-C> @param UN       - REAL (*) NORTHERN PS U-WINDS IF LUV
-C> @param VN       - REAL (*) NORTHERN PS V-WINDS IF LUV
-C> @param US       - REAL (*) SOUTHERN PS U-WINDS IF LUV
-C> @param VS       - REAL (*) SOUTHERN PS V-WINDS IF LUV
-C> @param DN       - REAL (*) NORTHERN DIVERGENCES IF LDZ
-C> @param ZN       - REAL (*) NORTHERN VORTICITIES IF LDZ
-C> @param DS       - REAL (*) SOUTHERN DIVERGENCES IF LDZ
-C> @param ZS       - REAL (*) SOUTHERN VORTICITIES IF LDZ
-C> @param PN       - REAL (*) NORTHERN POTENTIALS IF LPS
-C> @param SN       - REAL (*) NORTHERN STREAMFCNS IF LPS
-C> @param PS       - REAL (*) SOUTHERN POTENTIALS IF LPS
-C> @param SS       - REAL (*) SOUTHERN STREAMFCNS IF LPS
+C> The grid-space can be either an equally-spaced grid
+C> (with or without pole points) or a gaussian grid.
 C>
-C> SUBPROGRAMS CALLED:
-C>   - SPWGET       GET WAVE-SPACE CONSTANTS
-C>   - SPLAPLAC     COMPUTE LAPLACIAN IN SPECTRAL SPACE
-C>   - SPTRANV      PERFORM A VECTOR SPHERICAL TRANSFORM
-C>   - SPTGPS       TRANSFORM SPECTRAL SCALAR TO POLAR STEREO.
-C>   - SPTGPSV      TRANSFORM SPECTRAL VECTOR TO POLAR STEREO.
-C>   - NCPUS        GETS ENVIRONMENT NUMBER OF CPUS
+C> The grid fields may have general indexing.
 C>
-C> REMARKS: MINIMUM GRID DIMENSIONS FOR UNALIASED TRANSFORMS TO SPECTRAL:
-C>   DIMENSION                    |LINEAR              |QUADRATIC
-C>   -----------------------      |---------           |-------------
-C>   IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
-C>   JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
-C>   JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
-C>   JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
-C>   JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
-C>   JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
-C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C> The transforms are all multiprocessed.
+C>
+C> Transform several fields at a time to improve vectorization.
+C>
+C> Subprogram can be called from a multiprocessing environment.
+C>
+C> Minimum grid dimensions for unaliased transforms to spectral:
+C> Dimension                    |Linear              |Quadratic
+C> -----------------------      |---------           |-------------
+C> IMAX                         |2*MAXWV+2           |3*MAXWV/2*2+2
+C> JMAX (IDRT=4,IROMB=0)        |1*MAXWV+1           |3*MAXWV/2+1
+C> JMAX (IDRT=4,IROMB=1)        |2*MAXWV+1           |5*MAXWV/2+1
+C> JMAX (IDRT=0,IROMB=0)        |2*MAXWV+3           |3*MAXWV/2*2+3
+C> JMAX (IDRT=0,IROMB=1)        |4*MAXWV+3           |5*MAXWV/2*2+3
+C> JMAX (IDRT=256,IROMB=0)      |2*MAXWV+1           |3*MAXWV/2*2+1
+C> JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
+C>      
+C> @param IROMB integer spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param MAXWV integer spectral truncation
+C> @param IDRTI integer input grid identifier
+C> - IDRTI=4 for Gaussian grid
+C> - IDRTI=0 for equally-spaced grid including poles
+C> - IDRTI=256 for equally-spaced grid excluding poles
+C> @param IMAXI integer even number of input longitudes.
+C> @param JMAXI integer number of input latitudes.
+C> @param KMAX integer number of fields to transform.
+C> @param NPS integer odd order of the polar stereographic grids
+C> @param IPRIME integer input longitude index for the prime meridian.
+C> (defaults to 1 if IPRIME=0)
+C> (output longitude index for prime meridian assumed 1.)
+C> @param ISKIPI integer skip number between input longitudes
+C> (defaults to 1 if ISKIPI=0)
+C> @param JSKIPI integer skip number between input latitudes from south
+C> (defaults to -IMAXI if JSKIPI=0)
+C> @param KSKIPI integer skip number between input grid fields
+C> (defaults to IMAXI*JMAXI if KSKIPI=0)
+C> @param KGSKIP integer skip number between grid fields
+C> (defaults to NPS*NPS if KGSKIP=0)
+C> @param NISKIP integer skip number between grid i-points
+C> (defaults to 1 if NISKIP=0)
+C> @param NJSKIP integer skip number between grid j-points
+C> (defaults to NPS if NJSKIP=0)
+C> @param JCPU integer number of cpus over which to multiprocess
+C> (defaults to environment NCPUS if JCPU=0)
+C> @param TRUE real latitude at which ps grid is true (usually 60.)
+C> @param XMESH real grid length at true latitude (m)
+C> @param ORIENT real longitude at bottom of Northern PS grid
+C> (Southern PS grid will have opposite orientation.)
+C> @param GRIDUI real input grid u-winds
+C> @param GRIDVI real input grid v-winds
+C> @param LUV logical flag whether to return winds
+C> @param LDZ logical flag whether to return divergence and vorticity
+C> @param LPS logical flag whether to return potential and streamfcn
+C> @param UN real northern ps u-winds if luv
+C> @param VN real northern ps v-winds if luv
+C> @param US real southern ps u-winds if luv
+C> @param VS real southern ps v-winds if luv
+C> @param DN real northern divergences if ldz
+C> @param ZN real northern vorticities if ldz
+C> @param DS real southern divergences if ldz
+C> @param ZS real southern vorticities if ldz
+C> @param PN real northern potentials if lps
+C> @param SN real northern streamfcns if lps
+C> @param PS real southern potentials if lps
+C> @param SS real southern streamfcns if lps
+C>
+C> @author Iredell @date 96-02-29
       SUBROUTINE SPTRUNSV(IROMB,MAXWV,IDRTI,IMAXI,JMAXI,KMAX,NPS,
      &                    IPRIME,ISKIPI,JSKIPI,KSKIPI,KGSKIP,
      &                    NISKIP,NJSKIP,JCPU,TRUE,XMESH,ORIENT,
@@ -102,7 +101,7 @@ C>   JMAX (IDRT=256,IROMB=1)      |4*MAXWV+1           |5*MAXWV/2*2+1
       REAL EON((MAXWV+1)*((IROMB+1)*MAXWV+2)/2),EONTOP(MAXWV+1)
       REAL WD((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)
       REAL WZ((MAXWV+1)*((IROMB+1)*MAXWV+2)/2*2+1,KMAX)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM INPUT GRID TO WAVE
       JC=JCPU
       IF(JC.EQ.0) JC=NCPUS()
@@ -117,13 +116,13 @@ C  TRANSFORM INPUT GRID TO WAVE
      &             IPRIME,ISKIPI,JN,JS,MDIM,KSKIPI,0,0,JC,
      &             WD,WZ,
      &             GRIDUI(INP),GRIDUI(ISP),GRIDVI(INP),GRIDVI(ISP),-1)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM WAVE TO OUTPUT WINDS
       IF(LUV) THEN
         CALL SPTGPSV(IROMB,MAXWV,KMAX,NPS,MDIM,KGSKIP,NISKIP,NJSKIP,
      &               TRUE,XMESH,ORIENT,WD,WZ,UN,VN,US,VS)
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM WAVE TO OUTPUT DIVERGENCE AND VORTICITY
       IF(LDZ) THEN
         CALL SPTGPS(IROMB,MAXWV,KMAX,NPS,MDIM,KGSKIP,NISKIP,NJSKIP,
@@ -131,7 +130,7 @@ C  TRANSFORM WAVE TO OUTPUT DIVERGENCE AND VORTICITY
         CALL SPTGPS(IROMB,MAXWV,KMAX,NPS,MDIM,KGSKIP,NISKIP,NJSKIP,
      &              TRUE,XMESH,ORIENT,WZ,ZN,ZS)
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  TRANSFORM WAVE TO OUTPUT POTENTIAL AND STREAMFUNCTION
       IF(LPS) THEN
         CALL SPWGET(IROMB,MAXWV,EPS,EPSTOP,ENN1,ELONN1,EON,EONTOP)
@@ -147,5 +146,4 @@ C$OMP PARALLEL DO
         CALL SPTGPS(IROMB,MAXWV,KMAX,NPS,MDIM,KGSKIP,NISKIP,NJSKIP,
      &              TRUE,XMESH,ORIENT,WZ,SN,SS)
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END

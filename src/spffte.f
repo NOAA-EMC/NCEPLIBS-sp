@@ -1,38 +1,23 @@
 C> @file
-C> @brief Perform multiple fast fourier transforms.
+C> @brief Perform multiple fast Fourier transforms.
 C>
 C> ### Program History Log
 C> Date | Programmer | Comments
 C> -----|------------|---------
-C> 1998-12-18 | IREDELL | Initial.
-C> 2012-11-12 | MIRVIS | fixing hard-wired types problem on Intel/Linux 
+C> 1998-12-18 | Iredell | Initial.
+C> 2012-11-12 | Mirvis | fixing hard-wired types problem on Intel/Linux.
 C>
-C> @author IREDELL @date 96-02-20
+C> @author Iredell @date 96-02-20
 
-C> This subprogram performs multiple fast fourier transforms
-C> between complex amplitudes in fourier space and real values
+C> This subprogram performs multiple fast Fourier transforms
+C> between complex amplitudes in Fourier space and real values
 C> in cyclic physical space.
 C>
 C> This subprogram must be invoked first with IDIR=0
 C> to initialize trigonemetric data. Use subprogram spfft1()
-C> to perform an fft without previous initialization.
+C> to perform an FFT without previous initialization.
 C>
-C> This version invokes the ibm essl fft.
-C>
-C> @param IMAX NUMBER OF VALUES IN THE CYCLIC PHYSICAL SPACE
-C>                (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
-C> @param INCW FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
-C>                (INCW >= IMAX/2+1)
-C> @param INCG FIRST DIMENSION OF THE REAL VALUE ARRAY
-C>                (INCG >= IMAX)
-C> @param KMAX NUMBER OF TRANSFORMS TO PERFORM
-C> @param[out] W COMPLEX AMPLITUDES IF IDIR>0
-C> @param[out] G REAL VALUES IF IDIR<0
-C> @param IDIR  DIRECTION FLAG
-C> - IDIR=0 TO INITIALIZE TRIGONOMETRIC DATA
-C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
-C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
-C> @param[out] AFFT AUXILIARY ARRAY IF IDIR<>0
+C> This version invokes the IBM ESSL FFT.
 C>
 C> @note The restrictions on IMAX are that it must be a multiple
 C> of 1 to 25 factors of two, up to 2 factors of three,
@@ -44,7 +29,22 @@ C> in succeeding calls until the next time it is called with IDIR=0.
 C>
 C> This subprogram is thread-safe.
 C>      
-C> @author IREDELL @date 96-02-20
+C> @param IMAX number of values in the cyclic physical space
+C> (see limitations on imax in remarks below.)
+C> @param INCW first dimension of the complex amplitude array
+C> (INCW >= IMAX/2+1)
+C> @param INCG first dimension of the real value array
+C> (INCG >= IMAX)
+C> @param KMAX number of transforms to perform
+C> @param[out] W complex amplitudes if IDIR>0
+C> @param[out] G real values if IDIR<0
+C> @param IDIR  direction flag
+C> - IDIR=0 to initialize trigonometric data
+C> - IDIR>0 to transform from Fourier to physical space
+C> - IDIR<0 to transform from physical to Fourier space
+C> @param[out] AFFT auxiliary array if IDIR<>0
+C>
+C> @author Iredell @date 96-02-20
       SUBROUTINE SPFFTE(IMAX,INCW,INCG,KMAX,W,G,IDIR,AFFT)
         IMPLICIT NONE
         INTEGER,INTENT(IN):: IMAX,INCW,INCG,KMAX,IDIR
@@ -56,13 +56,13 @@ C ==EM==       ^(4)
         REAL:: SCALE
         REAL(8):: AUX2(20000+2*IMAX),AUX3
         INTEGER:: IACR,IARC
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
         NAUX1=25000+2*IMAX
         NAUX2=20000+2*IMAX
         NAUX3=1
         IACR=1
         IARC=1+NAUX1
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  INITIALIZATION.
 C  FILL AUXILIARY ARRAYS WITH TRIGONOMETRIC DATA
         SELECT CASE(IDIR)
@@ -95,7 +95,7 @@ C  FILL AUXILIARY ARRAYS WITH TRIGONOMETRIC DATA
               CALL DRCFT(INIT,G,INC2X,W,INC2Y,N,M,ISIGN,SCALE,
      &                   AFFT(IARC),NAUX1,AUX2,NAUX2)
             ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  FOURIER TO PHYSICAL TRANSFORM.
           CASE(1:)
             INIT=0
@@ -112,7 +112,7 @@ C  FOURIER TO PHYSICAL TRANSFORM.
               CALL DCRFT(INIT,W,INC2X,G,INC2Y,N,M,ISIGN,SCALE,
      &                   AFFT(IACR),NAUX1,AUX2,NAUX2)
             ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  PHYSICAL TO FOURIER TRANSFORM.
           CASE(:-1)
             INIT=0

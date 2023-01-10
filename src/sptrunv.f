@@ -8,7 +8,7 @@ C> on a global cylindrical grid, returning the fields
 C> to a possibly different global cylindrical grid.
 C> The wave-space can be either triangular or rhomboidal.
 C> Either grid-space can be either an equally-spaced grid
-C> (with or without pole points) or a gaussian grid.
+C> (with or without pole points) or a Gaussian grid.
 C> The grid fields may have general indexing.
 C> The transforms are all multiprocessed.
 C> Over zonal wavenumber to ensure reproducibility.

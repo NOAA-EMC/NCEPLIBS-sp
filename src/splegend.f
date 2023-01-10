@@ -1,9 +1,9 @@
 C> @file
 C>
-C> Compute legendre polynomials
+C> Compute Legendre polynomials
 C> @author IREDELL @date 92-10-31
 
-C> Evaluates the orthonormal associated legendre polynomials in the
+C> Evaluates the orthonormal associated Legendre polynomials in the
 C> spectral domain at a given latitude. Subprogram splegend should
 C> be called already. If l is the zonal wavenumber, N is the total
 C> wavenumber, and EPS(L,N)=SQRT((N**2-L**2)/(4*N**2-1)) then the

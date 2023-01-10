@@ -1,32 +1,34 @@
 C> @file
-C> @brief Perform multiple fast fourier transforms.
-C> @author IREDELL @date 96-02-20
+C> @brief Perform multiple fast Fourier transforms.
+C> @author Iredell @date 96-02-20
 
-C> This subprogram performs multiple fast fourier transforms
-C> between complex amplitudes in fourier space and real values
+C> This subprogram performs multiple fast Fourier transforms
+C> between complex amplitudes in Fourier space and real values
 C> in cyclic physical space.
-C> Subprogram SPFFT1 initializes trigonometric data each call.
-C> Use subprogram SPFFT to save time and initialize once.
-C> this version invokes the ibm essl fft.
 C>
-C> @param IMAX NUMBER OF VALUES IN THE CYCLIC> PHYSICAL SPACE
-C> (SEE LIMITATIONS ON IMAX IN REMARKS BELOW.)
-C> @param INCW FIRST DIMENSION OF THE COMPLEX AMPLITUDE ARRAY
-C> (INCW >= IMAX/2+1)
-C> @param INCG FIRST DIMENSION OF THE REAL VALUE ARRAY (INCG >= IMAX)
-C> @param KMAX NUMBER OF TRANSFORMS TO PERFORM
-C> @param[out] W COMPLEX AMPLITUDES IF IDIR>0
-C> @param[out] G VALUES IF IDIR<0
-C> @param IDIR DIRECTION FLAG
-C> - IDIR>0 TO TRANSFORM FROM FOURIER TO PHYSICAL SPACE
-C> - IDIR<0 TO TRANSFORM FROM PHYSICAL TO FOURIER SPACE
+C> Subprogram spfft1() initializes trigonometric data each call.
+C> Use subprogram spfft() to save time and initialize once.
+C> This version invokes the IBM ESSL FFT.
 C>
 C> @note The restrictions on IMAX are that it must be a multiple of 1
 C> to 25 factors of two, up to 2 factors of three, and up to 1 factor of
 C> five, seven and eleven.
 C>
 C> @note This subprogram is thread-safe.
-C> @author IREDELL @date 96-02-20
+C>
+C> @param IMAX number of values in the cyclic physical space
+C> (see limitations on imax in remarks below.)
+C> @param INCW first dimension of the complex amplitude array
+C> (INCW >= IMAX/2+1)
+C> @param INCG first dimension of the real value array (INCG >= IMAX)
+C> @param KMAX number of transforms to perform
+C> @param[out] W complex amplitudes if IDIR>0
+C> @param[out] G values if IDIR<0
+C> @param IDIR direction flag
+C> - IDIR>0 to transform from Fourier to physical space
+C> - IDIR<0 to transform from physical to Fourier space
+C>
+C> @author Iredell @date 96-02-20
       SUBROUTINE SPFFT1(IMAX,INCW,INCG,KMAX,W,G,IDIR)
         IMPLICIT NONE
         INTEGER,INTENT(IN):: IMAX,INCW,INCG,KMAX,IDIR
