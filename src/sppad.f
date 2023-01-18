@@ -7,7 +7,7 @@ C>
 C> @param I1 input spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
 C> @param M1 input spectral truncation
-C> @param Q1 ((m+1)*((i+1)*m+2)) input field
+C> @param Q1 ((M+1)*((I+1)*M+2)) input field
 C> @param I2 output spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
 C> @param M2 output spectral truncation

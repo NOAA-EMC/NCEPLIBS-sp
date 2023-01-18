@@ -1,6 +1,9 @@
 C> @file
 C> @brief Synthesize Fourier coefficients from spectral coefficients.
 C>
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
 C> 91-10-31 | Mark Iredell | Initial.
 C> 1998-12-18 | Mark Iredell | Include scalar and gradient option.
 C>
@@ -28,7 +31,7 @@ C> @param SPC spectral coefficients
 C> @param SPCTOP spectral coefficients over top
 C> @param MP identifiers (0 for scalar, 1 for vector,
 C> or 10 for scalar and gradient)
-C> @param F Fourier coefficients for latitude pair.
+C> @param F Fourier coefficients for latitude pair
 C>
 C> @author Iredell @date 92-10-31
       SUBROUTINE SPSYNTH(I,M,IM,IX,NC,NCTOP,KM,CLAT,PLN,PLNTOP,MP,

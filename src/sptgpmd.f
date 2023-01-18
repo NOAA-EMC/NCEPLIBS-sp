@@ -1,5 +1,5 @@
 C> @file
-C> @brief Transform spectral to Mercator gradients
+C> @brief Transform spectral to Mercator gradients.
 C> @author Iredell @date 96-02-29
 
 C> This subprogram performs a spherical transform
@@ -8,7 +8,7 @@ C> to gradient fields on a Mercator grid.
 C>
 C> The wave-space can be either triangular or rhomboidal.
 C> The wave and grid fields may have general indexing,
-C> but each wave field is in sequential 'ibm order',
+C> but each wave field is in sequential 'IBM order',
 C> i.e. with zonal wavenumber as the slower index.
 C>
 C> The Mercator grid is identified by the location
@@ -17,7 +17,7 @@ C>
 C> The transforms are all multiprocessed over sector points.
 C>
 C> Transform several fields at a time to improve vectorization.
-C> subprogram can be called from a multiprocessing environment.
+C> Subprogram can be called from a multiprocessing environment.
 C>
 C> @param IROMB Spectral domain shape
 C> (0 for triangular, 1 for rhomboidal)
