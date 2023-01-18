@@ -1,24 +1,24 @@
 C> @file
-C>
-C> Pad or truncate a spectral field
-C> @author IREDELL @date 92-10-31
+C> @brief Pad or truncate a spectral field.
+C> @author Iredell @date 92-10-31
 
 C> Pad or truncate a spectral field.
 C>
-C> @param I1       - INTEGER INPUT SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M1       - INTEGER INPUT SPECTRAL TRUNCATION
-C> @param Q1       - REAL ((M+1)*((I+1)*M+2)) INPUT FIELD
-C> @param I2       - INTEGER OUTPUT SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M2       - INTEGER OUTPUT SPECTRAL TRUNCATION
+C> @param I1 input spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param M1 input spectral truncation
+C> @param Q1 ((M+1)*((I+1)*M+2)) input field
+C> @param I2 output spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param M2 output spectral truncation
+C> @param Q2 ((M+1)*((I+1)*M+2)) output field
 C>
-C> @param Q2       - REAL ((M+1)*((I+1)*M+2)) OUTPUT FIELD
+C> @author Iredell @date 92-10-31
       SUBROUTINE SPPAD(I1,M1,Q1,I2,M2,Q2)
 
       REAL Q1((M1+1)*((I1+1)*M1+2))
       REAL Q2((M2+1)*((I2+1)*M2+2))
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
       DO L=0,M2
         DO N=L,I2*L+M2
           KS2=L*(2*M2+(I2-1)*(L-1))+2*N
@@ -32,6 +32,5 @@ C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
           ENDIF
         ENDDO
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       RETURN
       END

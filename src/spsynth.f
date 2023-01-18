@@ -1,35 +1,39 @@
 C> @file
+C> @brief Synthesize Fourier coefficients from spectral coefficients.
 C>
-C> Synthesize fourier from spectral
-C> @author IREDELL @date 92-10-31
+C> ### Program History Log
+C> Date | Programmer | Comments
+C> -----|------------|---------
+C> 91-10-31 | Mark Iredell | Initial.
+C> 1998-12-18 | Mark Iredell | Include scalar and gradient option.
+C>
+C> @author Iredell @date 92-10-31
 
-C> SYNTHESIZES FOURIER COEFFICIENTS FROM SPECTRAL COEFFICIENTS
-C> FOR A LATITUDE PAIR (NORTHERN AND SOUTHERN HEMISPHERES).
-C> VECTOR COMPONENTS ARE DIVIDED BY COSINE OF LATITUDE.
+C> Synthesizes Fourier coefficients from spectral coefficients
+C> for a latitude pair (Northern and Southern hemispheres).
 C>
-C> PROGRAM HISTORY LOG:
-C> -  91-10-31  MARK IREDELL
-C> - 1998-12-18  MARK IREDELL  INCLUDE SCALAR AND GRADIENT OPTION
+C> Vector components are divided by cosine of latitude.
 C>
-C> @param I        - INTEGER SPECTRAL DOMAIN SHAPE
-C>                (0 FOR TRIANGULAR, 1 FOR RHOMBOIDAL)
-C> @param M        - INTEGER SPECTRAL TRUNCATION
-C> @param IM       - INTEGER EVEN NUMBER OF FOURIER COEFFICIENTS
-C> @param IX       - INTEGER DIMENSION OF FOURIER COEFFICIENTS (IX>=IM+2)
-C> @param NC       - INTEGER DIMENSION OF SPECTRAL COEFFICIENTS
-C>                (NC>=(M+1)*((I+1)*M+2))
-C> @param NCTOP    - INTEGER DIMENSION OF SPECTRAL COEFFICIENTS OVER TOP
-C>                (NCTOP>=2*(M+1))
-C> @param KM       - INTEGER NUMBER OF FIELDS
-C> @param CLAT     - REAL COSINE OF LATITUDE
-C> @param PLN      - REAL ((M+1)*((I+1)*M+2)/2) LEGENDRE POLYNOMIAL
-C> @param PLNTOP   - REAL (M+1) LEGENDRE POLYNOMIAL OVER TOP
-C> @param SPC      - REAL (NC,KM) SPECTRAL COEFFICIENTS
-C> @param SPCTOP   - REAL (NCTOP,KM) SPECTRAL COEFFICIENTS OVER TOP
-C> @param MP       - INTEGER (KM) IDENTIFIERS (0 FOR SCALAR, 1 FOR VECTOR,
-C>                OR 10 FOR SCALAR AND GRADIENT)
+C> @param I spectral domain shape
+C> (0 for triangular, 1 for rhomboidal)
+C> @param M spectral truncation
+C> @param IM even number of Fourier coefficients
+C> @param IX dimension of Fourier coefficients (IX>=IM+2)
+C> @param NC dimension of spectral coefficients
+C> (NC>=(M+1)*((I+1)*M+2))
+C> @param NCTOP dimension of spectral coefficients over top
+C> (NCTOP>=2*(M+1))
+C> @param KM number of fields
+C> @param CLAT cosine of latitude
+C> @param PLN ((M+1)*((I+1)*M+2)/2) Legendre polynomial
+C> @param PLNTOP Legendre polynomial over top
+C> @param SPC spectral coefficients
+C> @param SPCTOP spectral coefficients over top
+C> @param MP identifiers (0 for scalar, 1 for vector,
+C> or 10 for scalar and gradient)
+C> @param F Fourier coefficients for latitude pair
 C>
-C> @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS FOR LATITUDE PAIR
+C> @author Iredell @date 92-10-31
       SUBROUTINE SPSYNTH(I,M,IM,IX,NC,NCTOP,KM,CLAT,PLN,PLNTOP,MP,
      &                   SPC,SPCTOP,F)
 
@@ -37,7 +41,7 @@ C> @param F        - REAL (IX,2,KM) FOURIER COEFFICIENTS FOR LATITUDE PAIR
       INTEGER MP(KM)
       REAL SPC(NC,KM),SPCTOP(NCTOP,KM)
       REAL F(IX,2,KM)
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  ZERO OUT FOURIER COEFFICIENTS.
       DO K=1,KM
         DO L=0,IM/2
@@ -47,7 +51,7 @@ C  ZERO OUT FOURIER COEFFICIENTS.
           F(2*L+2,2,K)=0.
         ENDDO
       ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  SYNTHESIS OVER POLE.
 C  INITIALIZE FOURIER COEFFICIENTS WITH TERMS OVER TOP OF THE SPECTRUM.
 C  INITIALIZE EVEN AND ODD POLYNOMIALS SEPARATELY.
@@ -94,7 +98,7 @@ C  ODD POLYNOMIALS CONTRIBUTE NEGATIVELY TO THE SOUTHERN HEMISPHERE.
             F(2*L+2,2,K)=F1I-F(2*L+2,2,K)
           ENDDO
         ENDDO
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
 C  SYNTHESIS OVER FINITE LATITUDE.
 C  INITIALIZE FOURIER COEFFICIENTS WITH TERMS OVER TOP OF THE SPECTRUM.
 C  INITIALIZE EVEN AND ODD POLYNOMIALS SEPARATELY.
@@ -151,5 +155,4 @@ C  DIVIDE VECTOR COMPONENTS BY COSINE LATITUDE.
           ENDIF
         ENDDO
       ENDIF
-C - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
       END
