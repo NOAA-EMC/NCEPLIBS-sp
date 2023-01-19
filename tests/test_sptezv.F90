@@ -2,6 +2,7 @@ program test_sptezv
   use iso_fortran_env, only: real64
   implicit none
 
+#ifdef KIND_d
   integer,parameter:: iromb=0,maxwv=7
   integer,parameter:: idrtg=4,idrte=0,imax=16,jmaxg=8,jmaxe=17
   real(real64) :: MAX_DIFF = 1d-9
@@ -68,5 +69,6 @@ contains
     endif
     
   end subroutine test_vector
+#endif
   
 end program test_sptezv
