@@ -2,7 +2,7 @@
 !
 ! This test tests the splat() subrroutine.
 !
-! Kyle Gerheiser, Ed Hartnett
+! Kyle Gerheiser
 program test_splat
   use iso_fortran_env, only: real64
   implicit none

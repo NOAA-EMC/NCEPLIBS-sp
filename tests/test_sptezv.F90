@@ -1,3 +1,8 @@
+! This is a test from the NCEPLIBS-sp project.
+!
+! This test tests the sptez() and sptezv() subrroutines.
+!
+! Kyle Gerheiser
 program test_sptezv
   use iso_fortran_env, only: real64
   implicit none

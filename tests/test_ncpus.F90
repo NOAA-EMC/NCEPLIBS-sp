@@ -1,3 +1,8 @@
+! This is a test from the NCEPLIBS-sp project.
+!
+! This test tests the ncpus() function.
+!
+! Kyle Gerheiser
 program test_ncpus
   implicit none
 
