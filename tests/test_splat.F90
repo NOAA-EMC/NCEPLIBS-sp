@@ -1,7 +1,13 @@
+! This is a test from the NCEPLIBS-sp project.
+!
+! This test tests the splat() subrroutine.
+!
+! Kyle Gerheiser
 program test_splat
   use iso_fortran_env, only: real64
   implicit none
-  
+
+#ifdef KIND_d
   integer :: j, jmax
   real(real64) :: slat(584), wlat(584)
 
@@ -28,11 +34,12 @@ program test_splat
   do j = 2, jmax-1
      if (slat(j) < slat(j+1)) then
         error stop "slat should be monotonically decreasing"
-     endif     
+     endif
   end do
-  
+
   do j = 1, jmax
      print*,'J/SLAT/WLAT ',j, slat(j), wlat(j)
   enddo
+#endif
 
-end program
+end program test_splat
