@@ -142,6 +142,7 @@ C  EQUALLY-SPACED LATITUDES INCLUDING POLES
         ENDDO
 CDIR$ IVDEP
         DO J=1,JH
+           print *, j, jmax, JMAX+1-J
           SLAT(JMAX+1-J)=-SLAT(J)
           WLAT(JMAX+1-J)=WLAT(J)
         ENDDO

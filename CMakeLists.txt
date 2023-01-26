@@ -13,9 +13,9 @@ SET(PACKAGE_VERSION ${pVersion})
 include(GNUInstallDirs)
 
 # Handle user options.
+OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
 option(OPENMP "use OpenMP threading" OFF)
 option(BUILD_SHARED_LIBS "Build shared libraries" ON)
-
 option(BUILD_STATIC_LIBS "Build static libraries" ON)
 option(BUILD_4 "Build the 4-byte real version of the library, libsp_4.a" ON)
 option(BUILD_D "Build the 8-byte real version of the library, libsp_d.a" ON)
@@ -51,6 +51,24 @@ if(OpenMP_FOUND)
   add_compile_definitions(OPENMP)
 endif()
 
+# Set compiler flags.
+if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
+  set(CMAKE_Fortran_FLAGS
+    "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp ${CMAKE_Fortran_FLAGS}"
+    )
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(fortran_d_flags "-i4 -r8")
+elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
+  set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian ${CMAKE_Fortran_FLAGS}")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(fortran_d_flags "-fdefault-real-8")
+endif()
+
+# Handle argument mismatch problems for GNU versions > 10.
+if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 10)
+  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
+endif()
+
 # This is where the library code is.
 add_subdirectory(src)
 
@@ -60,15 +78,7 @@ if (BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
-# Create distributions.
-if (UNIX)
-  set(CPACK_PACKAGE_CONTACT "NOAA EMC")
-  set(CPACK_GENERATOR "STGZ;TGZ;TZ;DEB;RPM")
-  include(CPack)
-endif()
-  
-# Determine whether or not to generate documentation.
-OPTION(ENABLE_DOCS "Enable generation of doxygen-based documentation." OFF)
+# Does the user want to generate documentation?
 IF(ENABLE_DOCS)
   FIND_PACKAGE(Doxygen REQUIRED)
 ENDIF()
