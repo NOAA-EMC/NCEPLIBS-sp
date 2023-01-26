@@ -8,11 +8,7 @@ program test_splat
   implicit none
 
   integer :: j, jmax
-#ifdef KIND_d  
-  real(8) :: slat(584), wlat(584)
-#else
-  real(4) :: slat(584), wlat(584)
-#endif
+  real :: slat(584), wlat(584)
   
   jmax = 584  ! t382 grid
 

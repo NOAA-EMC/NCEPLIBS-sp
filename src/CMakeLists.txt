@@ -13,24 +13,6 @@ sptranf.f sptranfv.f sptranv.f sptrund.f sptrun.f sptrung.f sptrungv.f
 sptrunl.f sptrunm.f sptrunmv.f sptruns.f sptrunsv.f sptrunv.f
 spuv2dz.f spvar.f spwget.f )
 
-# Set compiler flags.
-if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
-  set(CMAKE_Fortran_FLAGS
-    "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp ${CMAKE_Fortran_FLAGS}"
-    )
-  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
-  set(fortran_d_flags "-i4 -r8")
-elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
-  set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian ${CMAKE_Fortran_FLAGS}")
-  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
-  set(fortran_d_flags "-fdefault-real-8")
-endif()
-
-# Handle argument mismatch problems for GNU versions > 10.
-if(${CMAKE_Fortran_COMPILER_ID} MATCHES "^(GNU)$" AND ${CMAKE_Fortran_COMPILER_VERSION} VERSION_GREATER_EQUAL 10)
-  set(CMAKE_Fortran_FLAGS "${CMAKE_Fortran_FLAGS} -w -fallow-argument-mismatch -fallow-invalid-boz")
-endif()
-
 # We can build two versions of the library, _4 for standard, and _d for
 # 8-byte float.
 foreach(kind ${kinds})
