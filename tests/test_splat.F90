@@ -7,10 +7,13 @@ program test_splat
   use iso_fortran_env, only: real64
   implicit none
 
-#ifdef KIND_d
   integer :: j, jmax
-  real(real64) :: slat(584), wlat(584)
-
+#ifdef KIND_d  
+  real(8) :: slat(584), wlat(584)
+#else
+  real(4) :: slat(584), wlat(584)
+#endif
+  
   jmax = 584  ! t382 grid
 
   call splat(0, jmax, slat, wlat)
@@ -40,6 +43,5 @@ program test_splat
   do j = 1, jmax
      print*,'J/SLAT/WLAT ',j, slat(j), wlat(j)
   enddo
-#endif
 
 end program test_splat
