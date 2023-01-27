@@ -54,14 +54,16 @@ endif()
 # Set compiler flags.
 if(CMAKE_Fortran_COMPILER_ID MATCHES "^(Intel)$")
   set(CMAKE_Fortran_FLAGS
-    "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp ${CMAKE_Fortran_FLAGS}"
-    )
+    "-g -traceback -auto -convert big_endian -assume byterecl -fp-model strict -fpp ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(fortran_d_flags "-i4 -r8")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
   set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(fortran_d_flags "-fdefault-real-8")
+elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(NVHPC)$")
+  set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
+  set(fortran_d_flags "-i4 -r8")
 endif()
 
 # Handle argument mismatch problems for GNU versions > 10.
