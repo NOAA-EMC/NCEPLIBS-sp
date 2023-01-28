@@ -19,6 +19,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" ON)
 option(BUILD_STATIC_LIBS "Build static libraries" ON)
 option(BUILD_4 "Build the 4-byte real version of the library, libsp_4.a" ON)
 option(BUILD_D "Build the 8-byte real version of the library, libsp_d.a" ON)
+option(BUILD_TESTING "Build tests of the library" ON)
 
 # Figure whether user wants a _4, a _d, or both libraries.
 if(BUILD_4 AND BUILD_D)
@@ -75,16 +76,16 @@ endif()
 add_subdirectory(src)
 
 # Build and run tests.
-include(CTest)
-if (BUILD_TESTING)
-    add_subdirectory(tests)
+if(BUILD_TESTING)
+  include(CTest)
+  add_subdirectory(tests)
 endif()
 
 # Does the user want to generate documentation?
-IF(ENABLE_DOCS)
-  FIND_PACKAGE(Doxygen REQUIRED)
-ENDIF()
-ADD_SUBDIRECTORY(docs)  
+if(ENABLE_DOCS)
+  find_package(Doxygen REQUIRED)
+  add_subdirectory(docs)
+endif()
 
 
 

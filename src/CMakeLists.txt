@@ -24,28 +24,23 @@ foreach(kind ${kinds})
   if(BUILD_SHARED_LIBS)
     set_property(TARGET ${lib_name}_objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
   endif()
-  add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name}_objlib)
+  # Set the flags for ${kind}
+  set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${fortran_${kind}_flags}")
 
   if(BUILD_STATIC_LIBS)
     # Create static object library from object library.
     add_library(${lib_name}_static STATIC $<TARGET_OBJECTS:${lib_name}_objlib>)
-    set_target_properties(${lib_name}_static PROPERTIES OUTPUT_NAME ${lib_name})
-    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name})
-    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name}_static)
+    add_library(${PROJECT_NAME}::${lib_name}_static ALIAS ${lib_name}_static)
     list(APPEND LIB_TARGETS ${lib_name}_static)
   endif()
 
   if(BUILD_SHARED_LIBS)
     # Create shared object library from object library.
     add_library(${lib_name}_shared SHARED $<TARGET_OBJECTS:${lib_name}_objlib>)
-    set_target_properties(${lib_name}_shared PROPERTIES OUTPUT_NAME ${lib_name})
-    set_target_properties(${lib_name}_shared PROPERTIES EXPORT_NAME ${lib_name})
+    add_library(${PROJECT_NAME}::${lib_name}_shared ALIAS ${lib_name}_shared)
     set_target_properties(${lib_name}_shared PROPERTIES SOVERSION 0)
     list(APPEND LIB_TARGETS ${lib_name}_shared)
   endif()
-
-  # Set the flags for _4 or _d.
-  set(BUILD_FLAGS "${fortran_${kind}_flags}")
 
   # Deal with OpenMP.
   if(OpenMP_Fortran_FOUND)
@@ -56,8 +51,6 @@ foreach(kind ${kinds})
       target_link_libraries(${lib_name}_static PRIVATE OpenMP::OpenMP_Fortran)
     endif()
   endif()
-  
-  set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
 
 endforeach()
 

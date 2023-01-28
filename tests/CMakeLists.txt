@@ -10,10 +10,10 @@ function(create_test name kind)
   if(OpenMP_Fortran_FOUND)
     target_link_libraries(${name}_${kind} PRIVATE OpenMP::OpenMP_Fortran)
   endif()
-  target_link_libraries(${name}_${kind} PRIVATE sp::sp_${kind})
+  target_link_libraries(${name}_${kind} PRIVATE sp::sp_${kind}_static)  # use static library for tests
   set_target_properties(${name}_${kind} PROPERTIES COMPILE_FLAGS "${fortran_${kind}_flags}")
   add_test(NAME ${name}_${kind} COMMAND ${name}_${kind})
-  target_compile_definitions(${name}_${kind} PUBLIC -DKIND_${kind})  
+  target_compile_definitions(${name}_${kind} PUBLIC -DKIND_${kind})
 endfunction()
 
 # At the moment, only _d is tested.
