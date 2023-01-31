@@ -1,6 +1,6 @@
 # This is the CMake file for the src directory of NCEPLIBS-sp.
 #
-# Mark Potts, Kyle Gerheiser
+# Mark Potts, Kyle Gerheiser, Ed Hartnett
 
 # These are the source files.
 set(fortran_src fftpack.F lapack_gen.F ncpus.F spanaly.f spdz2uv.f
@@ -11,37 +11,22 @@ sptgpmv.f sptgpsd.f sptgps.f sptgpsv.f sptgptd.f sptgpt.f sptgptsd.f
 sptgptvd.f sptgptv.f sptrand.f sptran.f sptranf0.f sptranf1.f
 sptranf.f sptranfv.f sptranv.f sptrund.f sptrun.f sptrung.f sptrungv.f
 sptrunl.f sptrunm.f sptrunmv.f sptruns.f sptrunsv.f sptrunv.f
-spuv2dz.f spvar.f spwget.f )
+spuv2dz.f spvar.f spwget.f)
 
 # We can build two versions of the library, _4 for standard, and _d for
 # 8-byte float.
 foreach(kind ${kinds})
   set(lib_name ${PROJECT_NAME}_${kind})
 
-  # Create object library. The object library will be used to build
-  # static and shared libraries.
-  add_library(${lib_name}_objlib OBJECT ${fortran_src})
-  if(BUILD_SHARED_LIBS)
-    set_property(TARGET ${lib_name}_objlib PROPERTY POSITION_INDEPENDENT_CODE 1)
-  endif()
-  add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name}_objlib)
+  # Create library. It will be STATIC by default, but SHARED if option
+  # BUILD_SHARED_LIBS is on.
+  add_library(${lib_name} ${fortran_src})
+  add_library(${PROJECT_NAME}::${lib_name} ALIAS ${lib_name})
 
-  if(BUILD_STATIC_LIBS)
-    # Create static object library from object library.
-    add_library(${lib_name}_static STATIC $<TARGET_OBJECTS:${lib_name}_objlib>)
-    set_target_properties(${lib_name}_static PROPERTIES OUTPUT_NAME ${lib_name})
-    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name})
-    set_target_properties(${lib_name}_static PROPERTIES EXPORT_NAME ${lib_name}_static)
-    list(APPEND LIB_TARGETS ${lib_name}_static)
-  endif()
-
+  # For shared, set SOVERSION; increment it if API changes (other than
+  # adding new functions).
   if(BUILD_SHARED_LIBS)
-    # Create shared object library from object library.
-    add_library(${lib_name}_shared SHARED $<TARGET_OBJECTS:${lib_name}_objlib>)
-    set_target_properties(${lib_name}_shared PROPERTIES OUTPUT_NAME ${lib_name})
-    set_target_properties(${lib_name}_shared PROPERTIES EXPORT_NAME ${lib_name})
-    set_target_properties(${lib_name}_shared PROPERTIES SOVERSION 0)
-    list(APPEND LIB_TARGETS ${lib_name}_shared)
+    set_target_properties(${lib_name} PROPERTIES SOVERSION 0)
   endif()
 
   # Set the flags for _4 or _d.
@@ -49,18 +34,15 @@ foreach(kind ${kinds})
 
   # Deal with OpenMP.
   if(OpenMP_Fortran_FOUND)
-    if(BUILD_SHARED_LIBS)
-      target_link_libraries(${lib_name}_shared PRIVATE OpenMP::OpenMP_Fortran)
-    endif()
-    if(BUILD_STATIC_LIBS)
-      target_link_libraries(${lib_name}_static PRIVATE OpenMP::OpenMP_Fortran)
-    endif()
+    target_link_libraries(${lib_name} PRIVATE OpenMP::OpenMP_Fortran)
   endif()
-  
-  set_target_properties(${lib_name}_objlib PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
 
+  # Set the compile flags.
+  set_target_properties(${lib_name} PROPERTIES COMPILE_FLAGS "${BUILD_FLAGS}")
+  list(APPEND LIB_TARGETS ${lib_name})  
 endforeach()
 
+# Set up install.
 install(
   TARGETS ${LIB_TARGETS}
   EXPORT ${PROJECT_NAME}Exports
