@@ -66,9 +66,10 @@ elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(GNU)$")
   set(CMAKE_Fortran_FLAGS "-g -fbacktrace -fconvert=big-endian ${CMAKE_Fortran_FLAGS}")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
   set(fortran_d_flags "-fdefault-real-8")
+  set(fortran_8_flags "-fdefault-integer-8 -fdefault-real-8")
 elseif(CMAKE_Fortran_COMPILER_ID MATCHES "^(NVHPC)$")
   set(CMAKE_Fortran_FLAGS_RELEASE "-O3")
-  set(fortran_d_flags "-i8 -r8")
+  set(fortran_d_flags "-i4 -r8")
   set(fortran_8_flags "-i8 -r8")
 endif()
 
@@ -82,15 +83,15 @@ add_subdirectory(src)
 
 # Build and run tests.
 include(CTest)
-if (BUILD_TESTING)
+if(BUILD_TESTING)
     add_subdirectory(tests)
 endif()
 
 # Does the user want to generate documentation?
-IF(ENABLE_DOCS)
-  FIND_PACKAGE(Doxygen REQUIRED)
-ENDIF()
-ADD_SUBDIRECTORY(docs)  
+if(ENABLE_DOCS)
+  find_package(Doxygen REQUIRED)
+endif()
+add_subdirectory(docs)  
 
 
 
