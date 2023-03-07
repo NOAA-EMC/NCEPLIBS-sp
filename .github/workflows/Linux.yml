@@ -39,8 +39,8 @@ jobs:
         cmake -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }} -DCMAKE_INSTALL_PREFIX="~/install" ..
         make -j2 VERBOSE=1
         make install
-        ls -l install
-        ls -l install/lib
+        ls -l ~/install
+        ls -l ~/install/lib
 
     - name: test-sp
       run: |
