@@ -22,7 +22,7 @@ jobs:
       matrix:
         openmp: [ON, OFF]
         sharedlibs: [ON, OFF]
-        options: [-DBUILD_D=OFF, -DBUILD_4=OFF]
+        options: [-DBUILD_D=OFF, -DBUILD_4=OFF, BUILD_8=ON]
 
     steps:
     
@@ -36,8 +36,11 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake .. -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }}
+        cmake -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }} -DCMAKE_INSTALL_PREFIX="~/install" ..
         make -j2 VERBOSE=1
+        make install
+        ls -l ~/install
+        ls -l ~/install/lib
 
     - name: test-sp
       run: |
