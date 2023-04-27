@@ -9,11 +9,13 @@ the [NCEPLIBS](https://github.com/NOAA-EMC/NCEPLIBS) project.
 For more detailed documentation see
 https://noaa-emc.github.io/NCEPLIBS-sp/
 
+To submit bug reports, feature requests, or other code-related issues including installation and usage questions, please create a [GitHub issue](https://github.com/NOAA-EMC/NCEPLIBS-sp/issues). For general NCEPLIBS inquiries, contact [Edward Hartnett](mailto:edward.hartnett@noaa.gov) (secondary point of contact [Alex Richert](mailto:alexander.richert@noaa.gov)).
+
 ## Authors
 
 NCEP/EMC developers.
 
-Code Manager: Alex Richert, Ed Hartnett
+Code Manager: [Alex Richert](mailto:alexander.richert@noaa.gov), [Edward Hartnett](mailto:edward.hartnett@noaa.gov)
 
 ## Installing
 
