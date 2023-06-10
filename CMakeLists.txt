@@ -19,6 +19,7 @@ option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 option(BUILD_4 "Build the 4-byte real version of the library, libsp_4.a" ON)
 option(BUILD_D "Build the 8-byte real version of the library, libsp_d.a" ON)
 option(BUILD_8 "Build the 8-byte integer version of the library, libsp_8.a" OFF)
+option(BUILD_DEPRECATED "Build deprecated functions" OFF)
 
 # Figure whether user wants a _4, a _d, or both libraries.
 if(BUILD_4)

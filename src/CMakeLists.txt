@@ -3,15 +3,17 @@
 # Mark Potts, Kyle Gerheiser, Ed Hartnett
 
 # These are the source files.
-set(fortran_src fftpack.F lapack_gen.F ncpus.F spanaly.f spdz2uv.f
-speps.f spfft1.f spffte.f spfft.f spfftpt.f spgradq.f spgradx.f
-spgrady.f splaplac.f splat.F splegend.f sppad.f spsynth.f sptezd.f
-sptez.f sptezmd.f sptezm.f sptezmv.f sptezv.f sptgpmd.f sptgpm.f
-sptgpmv.f sptgpsd.f sptgps.f sptgpsv.f sptgptd.f sptgpt.f sptgptsd.f
-sptgptvd.f sptgptv.f sptrand.f sptran.f sptranf0.f sptranf1.f
-sptranf.f sptranfv.f sptranv.f sptrund.f sptrun.f sptrung.f sptrungv.f
-sptrunl.f sptrunm.f sptrunmv.f sptruns.f sptrunsv.f sptrunv.f
-spuv2dz.f spvar.f spwget.f)
+set(fortran_src fftpack.F lapack_gen.F ncpus.F spanaly.f spdz2uv.f speps.f
+spfft1.f spffte.f spfftpt.f splaplac.f splat.F splegend.f sppad.f spsynth.f
+sptezd.f sptez.f sptezmd.f sptezm.f sptezmv.f sptezv.f sptgpm.f sptgpmv.f
+sptgps.f sptgpsv.f sptgpt.f sptgptv.f sptrand.f sptran.f sptranf0.f sptranf1.f
+sptranf.f sptranfv.f sptranv.f sptrun.f sptrung.f sptrungv.f sptrunm.f
+sptrunmv.f sptruns.f sptrunsv.f sptrunv.f spuv2dz.f spwget.f)
+
+if(BUILD_DEPRECATED)
+  set(fortran_src ${fortran_src} spfft.f spgradq.f spgradx.f spgrady.f sptgpmd.f
+  sptgpsd.f sptgptd.f sptgptsd.f sptgptvd.f sptrund.f sptrunl.f spvar.f)
+endif()
 
 # We can build two versions of the library, _4 for standard, and _d for
 # 8-byte float.
