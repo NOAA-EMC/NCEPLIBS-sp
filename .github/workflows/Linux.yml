@@ -22,7 +22,7 @@ jobs:
       matrix:
         openmp: [ON, OFF]
         sharedlibs: [ON, OFF]
-        options: [-DBUILD_D=OFF, -DBUILD_4=OFF, BUILD_8=ON]
+        options: [-DBUILD_D=OFF, -DBUILD_4=OFF, -DBUILD_8=ON]
 
     steps:
     
