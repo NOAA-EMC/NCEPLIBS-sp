@@ -8,7 +8,8 @@
 
 The spectral transform library splib, developed in the 1990s,
 contains FORTRAN subprograms to be used for a variety of spectral
-transform functions.
+transform functions. Supported compilers include GCC, Intel Classic,
+Intel OneAPI, and the NVIDIA HPC SDK.
 
 The library has been optimized for the CRAY machines, taking full
 advantage of both the vector and parallel capabilities. The library is
