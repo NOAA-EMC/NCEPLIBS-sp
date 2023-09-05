@@ -1,7 +1,9 @@
 # This is a CI workflow for the NCEPLIBS-sp project.
 #
-# This workflow builds sp with Spack, including installing with the "--test root"
-# option to run the CTest suite.
+# This workflow builds sp with Spack, including installing with the "--test
+# root" option to run the CTest suite. It also has a one-off job that validates
+# the recipe by ensuring that every CMake option that should be set in the
+# Spack recipe is so set.
 #
 # Alex Richert, Sep 2023
 name: Spack
@@ -14,8 +16,10 @@ on:
     - develop
 
 jobs:
+  # This job builds with Spack using every combination of variants and runs the CTest suite each time
   Linux:
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         openmp: ["+openmp", "~openmp"]
@@ -43,3 +47,21 @@ jobs:
         spack external find cmake gmake
         spack concretize
         spack install --verbose --test root
+
+  # This job validates the Spack recipe by making sure each cmake build option is represented
+  recipe-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    
+    - name: checkout-sp
+      uses: actions/checkout@v4
+      with: 
+        path: sp
+
+    - name: recipe-check
+      run: |
+        for opt in $(grep -ioP '^option\(\K(?!(ENABLE_DOCS))[^ ]+' $GITHUB_WORKSPACE/sp/CMakeLists.txt) ; do
+          echo "Checking for presence of '$opt' CMake option in package.py"
+          grep -cP "define.+\b${opt}\b" $GITHUB_WORKSPACE/sp/spack/package.py
+        done

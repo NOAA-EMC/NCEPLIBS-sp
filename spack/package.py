@@ -57,4 +57,5 @@ class Sp(CMakePackage):
         args.append(self.define("BUILD_4", self.spec.satisfies("precision=4")))
         args.append(self.define("BUILD_D", self.spec.satisfies("precision=d")))
         args.append(self.define("BUILD_8", self.spec.satisfies("precision=8")))
+        args.append(self.define("BUILD_DEPRECATED", False))
         return args
