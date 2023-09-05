@@ -26,9 +26,9 @@ jobs:
     steps:
     
     - name: checkout-sp
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
-        path: ~/sp
+        path: sp
 
     - name: spack-build-and-test
       run: |
@@ -36,9 +36,7 @@ jobs:
         . spack/share/spack/setup-env.sh
         spack env create sp-env
         spack env activate sp-env
-        ls ~/sp
-        ls ~/sp/spack
-        cp ~/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
+        cp $GITHUB_WORKSPACE/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
         mv ~/sp $SPACK_ENV/sp
         spack develop --no-clone sp@develop
         spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} ${{ matrix.precision }}
