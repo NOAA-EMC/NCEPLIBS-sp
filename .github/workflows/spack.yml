@@ -26,7 +26,7 @@ jobs:
     steps:
     
     - name: checkout-sp
-      uses: actions/checkout@v3
+      uses: actions/checkout@v2
       with: 
         path: ~/sp
 
@@ -36,6 +36,8 @@ jobs:
         . spack/share/spack/setup-env.sh
         spack env create sp-env
         spack env activate sp-env
+        ls ~/sp
+        ls ~/sp/spack
         cp ~/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
         mv ~/sp $SPACK_ENV/sp
         spack develop --no-clone sp@develop
