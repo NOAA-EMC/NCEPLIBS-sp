@@ -1,0 +1,45 @@
+# This is a CI workflow for the NCEPLIBS-sp project.
+#
+# This workflow builds sp with Spack, including installing with the "--test root"
+# option to run the CTest suite.
+#
+# Alex Richert, Sep 2023
+name: Spack
+on:
+  push:
+    branches:
+    - develop
+  pull_request:
+    branches:
+    - develop
+
+jobs:
+  Linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        openmp: ["+openmp", "~openmp"]
+        shared: ["+shared", "~shared"]
+        pic: ["+pic", "~pic"
+        precision: ["precision=d", "precision=4", "precision=8"]
+
+    steps:
+    
+    - name: checkout-sp
+      uses: actions/checkout@v3
+      with: 
+        path: ~/sp
+
+    - name: spack-build-and-test
+      run: |
+        git clone -c feature.manyFiles=true https://github.com/spack/spack
+        . spack/share/spack/setup-env.sh
+        spack env create sp-env
+        spack env activate sp-env
+        cp ~/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
+        mv ~/sp $SPACK_ENV/sp
+        spack develop --no-clone sp@develop
+        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.shared }} ${{ matrix.pic }} ${{ matrix.precision }}
+        spack external find cmake gmake
+        spack concretize
+        spack install --verbose --test root
