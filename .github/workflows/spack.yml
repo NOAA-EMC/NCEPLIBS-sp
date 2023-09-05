@@ -19,8 +19,8 @@ jobs:
     strategy:
       matrix:
         openmp: ["+openmp", "~openmp"]
-        shared: ["+shared", "~shared"]
-        pic: ["+pic", "~pic"
+        sharedlibs: ["+shared", "~shared"]
+        pic: ["+pic", "~pic"]
         precision: ["precision=d", "precision=4", "precision=8"]
 
     steps:
@@ -39,7 +39,7 @@ jobs:
         cp ~/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
         mv ~/sp $SPACK_ENV/sp
         spack develop --no-clone sp@develop
-        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.shared }} ${{ matrix.pic }} ${{ matrix.precision }}
+        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} ${{ matrix.precision }}
         spack external find cmake gmake
         spack concretize
         spack install --verbose --test root
