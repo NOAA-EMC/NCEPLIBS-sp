@@ -37,7 +37,7 @@ jobs:
         spack env create sp-env
         spack env activate sp-env
         cp $GITHUB_WORKSPACE/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
-        mv ~/sp $SPACK_ENV/sp
+        mv $GITHUB_WORKSPACE/sp $SPACK_ENV/sp
         spack develop --no-clone sp@develop
         spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} ${{ matrix.precision }}
         spack external find cmake gmake
