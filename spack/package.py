@@ -26,8 +26,8 @@ class Sp(CMakePackage):
     variant("pic", default=False, description="Enable position-independent code (PIC)")
     variant(
         "precision",
-        default=["4", "d"],
-        values=["4", "d", "8"],
+        default=("4", "d"),
+        values=("4", "d", "8"),
         multi=True,
         description="Library versions: 4=4-byte reals, d=8-byte reals, 8=8-byte ints and reals",
         when="@2.4:",
@@ -37,7 +37,7 @@ class Sp(CMakePackage):
         if self.spec.satisfies("@2.4:"):
             suffixes = self.spec.variants["precision"].value
         else:
-            suffixes = ["4", "d", "8"]
+            suffixes = ("4", "d", "8")
 
         for suffix in suffixes:
             lib = find_libraries(
