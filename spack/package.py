@@ -15,7 +15,7 @@ class Sp(CMakePackage):
     url = "https://github.com/NOAA-EMC/NCEPLIBS-sp/archive/refs/tags/v2.3.3.tar.gz"
     git = "https://github.com/NOAA-EMC/NCEPLIBS-sp"
 
-    maintainers("t-brown", "AlexanderRichert-NOAA", "edwardhartnett", "Hang-Lei-NOAA")
+    maintainers("AlexanderRichert-NOAA", "edwardhartnett", "Hang-Lei-NOAA")
 
     version("develop", branch="develop")
     version("2.4.0", sha256="dbb4280e622d2683b68a28f8e3837744adf9bbbb1e7940856e8f4597f481c708")
@@ -59,7 +59,7 @@ class Sp(CMakePackage):
         args.append(self.define("BUILD_8", self.spec.satisfies("precision=8")))
         args.append(self.define("BUILD_DEPRECATED", False))
         if self.spec.satisfies("@2.4:"):
-            args.append(self.define("BUILD_TESTING"), self.run_tests)
+            args.append(self.define("BUILD_TESTING", self.run_tests))
         return args
 
     def check(self):
