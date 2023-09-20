@@ -25,7 +25,7 @@ jobs:
         openmp: ["+openmp", "~openmp"]
         sharedlibs: ["+shared", "~shared"]
         pic: ["+pic", "~pic"]
-        precision: ["precision=d", "precision=4", "precision=8"]
+        precision: ["d", "4", "8"]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -42,15 +42,18 @@ jobs:
         spack env create sp-env
         spack env activate sp-env
         cp $GITHUB_WORKSPACE/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
-        mv $GITHUB_WORKSPACE/sp $SPACK_ENV/sp
-        spack develop --no-clone sp@develop
-        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} ${{ matrix.precision }}
+        spack develop --no-clone --path $GITHUB_WORKSPACE/sp sp@develop
+        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} precision=${{ matrix.precision }}
+        spack add ip@develop ${{ matrix.sharedlibs }} precision=${{ matrix.precision }} target=x86_64
+        spack add grib-util@develop
         spack external find cmake gmake
         spack concretize
         # Run installation and run CTest suite
         spack install --verbose --fail-fast --test root
-        # Run 'spack load' to check for obvious errors in setup_run_environment
+        # Run 'spack load' and check that key build options were respected
         spack load sp
+        if [ ${{ matrix.sharedlibs }} == "+shared" ]; then suffix="so" ; else suffix="a"; fi
+        ls ${SP_LIB${{ matrix.precision }}} | grep -cE '/libsp_${{ matrix.precision }}\.'$suffix'$'
 
   # This job validates the Spack recipe by making sure each cmake build option is represented
   recipe-check:
