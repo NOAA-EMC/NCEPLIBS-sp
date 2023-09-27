@@ -50,10 +50,23 @@ jobs:
         spack concretize
         # Run installation and run CTest suite
         spack install --verbose --fail-fast --test root
+        # Print test results
+        cat $(spack location -i sp)/.spack/install-time-test-log.txt
+        cat $(spack location -i ip)/.spack/install-time-test-log.txt
+        if [ ${{ matrix.precision }} == "d" ]; then
+          cat $(spack location -i grib-util)/.spack/install-time-test-log.txt
+        fi
         # Run 'spack load' and check that key build options were respected
         spack load sp
         if [ ${{ matrix.sharedlibs }} == "+shared" ]; then suffix="so" ; else suffix="a"; fi
         ls ${SP_LIB${{ matrix.precision }}} | grep -cE '/libsp_${{ matrix.precision }}\.'$suffix'$'
+
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      if: ${{ failure() }}
+      with:
+        name: spackci-ctest-output-${{ matrix.os }}-${{ matrix.openmp }}-${{ matrix.sharedlibs }}-${{ matrix.pic }}-${{ matrix.precision }}
+        path: ${{ github.workspace }}/*/spack-build-*/Testing/Temporary/LastTest.log
 
   # This job validates the Spack recipe by making sure each cmake build option is represented
   recipe-check:
