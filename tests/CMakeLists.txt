@@ -2,6 +2,11 @@
 
 # Kyle Gerheiser, Ed Hartnett
 
+execute_process(COMMAND cmake -E create_symlink
+  "${CMAKE_CURRENT_SOURCE_DIR}/data"
+  "${CMAKE_CURRENT_BINARY_DIR}/data"
+  )
+
 # This function builds, links, and runs a test program.
 function(create_test name kind)
   add_executable(${name}_${kind} ${name}.F90)
@@ -22,6 +27,7 @@ endfunction()
 foreach(kind ${kinds})
   create_test(test_ncpus ${kind})
   create_test(test_splat ${kind})
+  create_test(test_sptrungv ${kind})
   create_test(test_sptezv ${kind})
   create_test(test_fft ${kind})
 endforeach()
