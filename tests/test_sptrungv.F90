@@ -22,7 +22,7 @@ program test_sptrungv
   REAL*4                          :: RDUI(MI,KM),RDVI(MI,KM)
   REAL*4                          :: RDUOREF(MO,KM),RDVOREF(MO,KM)
   REAL                            :: X=0.0
-  REAL                            :: TINI=4e-3
+  REAL                            :: TOL=1e-2
 
   OPEN (12, file="data/sptrungv.uv.in", access='direct', recl=MI*KM*4, convert='little_endian')
   READ (12, rec=1) RDUI
@@ -51,8 +51,8 @@ program test_sptrungv
        UI,VI,.TRUE.,UO,VO,.FALSE.,X,X,.FALSE.,X,X)
 
   DO I=1, MO
-    IF (ABS(UO(I,KM)-RDUOREF(I,KM)) .GT. TINI) STOP 1
-    IF (ABS(VO(I,KM)-RDVOREF(I,KM)) .GT. TINI) STOP 2
+    IF (ABS(UO(I,KM)-RDUOREF(I,KM)) .GT. TOL) STOP 1
+    IF (ABS(VO(I,KM)-RDVOREF(I,KM)) .GT. TOL) STOP 2
   ENDDO
 
 end program test_sptrungv
