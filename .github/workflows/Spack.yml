@@ -57,8 +57,9 @@ jobs:
         fi
         # Run 'spack load' and check that key build options were respected
         spack load sp
-        if [ "${{ matrix.variants }}" =~ "+shared" ]; then suffix="so" ; else suffix="a"; fi
-        ls ${SP_LIB${precision}} | grep -cE "/libsp_${precision}\."$suffix'$'
+        if [[ "${{ matrix.variants }}" =~ "+shared" ]]; then suffix="so" ; else suffix="a"; fi
+        libvar=SP_LIB${precision}
+        ls ${!libvar} | grep -cE "/libsp_${precision}\."$suffix'$'
 
     - name: Upload test results
       uses: actions/upload-artifact@v3
