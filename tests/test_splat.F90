@@ -9,7 +9,7 @@ program test_splat
 
   integer :: j, jj, jmax, ref_j(5)
   real :: slat(584), wlat(584), ref_slat(5), ref_wlat(5)
-  real :: tini=tiny(1.0)
+  real :: tini=1e-5
   
   jmax = 584  ! t382 grid
 
