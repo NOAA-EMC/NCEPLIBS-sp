@@ -1,6 +1,6 @@
 # This is the CMake build file for the test directory of NCEPLIBS-sp.
 
-# Kyle Gerheiser, Ed Hartnett
+# Kyle Gerheiser, Ed Hartnett, Alex Richert
 
 execute_process(COMMAND cmake -E create_symlink
   "${CMAKE_CURRENT_SOURCE_DIR}/data"
@@ -14,6 +14,7 @@ function(create_test name kind timeout)
   # Include openMP if desired.
   if(OpenMP_Fortran_FOUND)
     target_link_libraries(${name}_${kind} PRIVATE OpenMP::OpenMP_Fortran)
+    execute_process(COMMAND awk "BEGIN {print ${timeout}/2}" OUTPUT_VARIABLE timeout)
   endif()
   target_link_libraries(${name}_${kind} PRIVATE sp::sp_${kind})
   set_target_properties(${name}_${kind} PROPERTIES COMPILE_FLAGS "${fortran_${kind}_flags}")
@@ -28,7 +29,7 @@ endfunction()
 foreach(kind ${kinds})
   create_test(test_ncpus ${kind} 0.05)
   create_test(test_splat ${kind} 0.05)
-  create_test(test_sptrungv ${kind} 15)
-  create_test(test_sptezv ${kind} 0.1)
+  create_test(test_sptezv ${kind} 0.2)
   create_test(test_fft ${kind} 0.05)
+  create_test(test_sptrungv ${kind} 15)
 endforeach()
