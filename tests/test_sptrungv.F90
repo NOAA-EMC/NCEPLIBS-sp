@@ -12,8 +12,8 @@ program test_sptrungv
   INTEGER                         :: IROMB=0, MAXWV=89
   INTEGER                         :: IDRTI=0, IMAXI=360, JMAXI=181
   INTEGER,parameter               :: KM=1
-  INTEGER                         :: NO=796590, IPRIME=1, ISKIPI=1, JSKIPI=-360
-  INTEGER,parameter               :: MI=65160, MO=796590
+  INTEGER                         :: NO=26553, IPRIME=1, ISKIPI=1, JSKIPI=-360
+  INTEGER,parameter               :: MI=65160, MO=26553
   REAL                            :: RLAT(MO),RLON(MO)
   REAL                            :: UI(MI,KM),VI(MI,KM)
   REAL                            :: UO(MO,KM),VO(MO,KM)
