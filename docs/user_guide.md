@@ -51,6 +51,11 @@ should always be zero, as should the global mean of any divergence and
 vorticity fields. The stride between the start of successive wave
 fields is general, defaulting to the computed length of each field.
 
+It should be noted that some routines may behave poorly or unpredictably when
+using 4-byte reals (libsp_4). In some routines, small numerical differences can
+be amplified into noticeable differences in output field values. Some
+applications may therefore benefit from the use of 8-byte reals (libsp_d).
+
 This documentation is divided into 3 chapters. Chapter I is this
 introduction.  Chapter II is a list of all entry points. Chapter III
 is a set of examples.
