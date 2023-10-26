@@ -29,6 +29,7 @@ endfunction()
 # _d builds of the library, for 4-byte real, and 8-byte real.
 foreach(kind ${kinds})
   create_test(test_ncpus ${kind} 0.3)
+  create_test(test_splaplac ${kind} 0.3)
   create_test(test_splat ${kind} 0.3)
   create_test(test_sppad ${kind} 0.3)
   create_test(test_sptezv ${kind} 0.3)
