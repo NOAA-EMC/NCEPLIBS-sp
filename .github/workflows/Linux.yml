@@ -36,7 +36,7 @@ jobs:
         cd sp
         mkdir build 
         cd build
-        cmake -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }} -DCMAKE_INSTALL_PREFIX="~/install" ..
+        cmake -DOPENMP=${{ matrix.openmp }} -DBUILD_SHARED_LIBS=${{ matrix.sharedlibs }} ${{ matrix.options }} -DTEST_TIME_LIMIT=ON -DCMAKE_INSTALL_PREFIX="~/install" ..
         make -j2 VERBOSE=1
         make install
         ls -l ~/install
