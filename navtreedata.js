@@ -26,9 +26,10 @@ var NAVTREE =
 [
   [ "NCEPLIBS-sp", "index.html", [
     [ "Files", "files.html", [
-      [ "Introduction", "index.html#autotoc_md0", null ],
-      [ "Subprograms", "index.html#autotoc_md1", null ],
-      [ "Examples", "index.html#autotoc_md2", null ],
+      [ "Documentation for Previous Versions of NCEPLIBS-sp", "index.html#autotoc_md0", null ],
+      [ "Introduction", "index.html#autotoc_md1", null ],
+      [ "Subprograms", "index.html#autotoc_md2", null ],
+      [ "Examples", "index.html#autotoc_md3", null ],
       [ "File List", "files.html", "files_dup" ],
       [ "Globals", "globals.html", [
         [ "All", "globals.html", null ],
@@ -40,7 +41,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"dir_68267d1309a1af8e8297ef4c3efbcdba.html"
+"fftpack_8F.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronisation';
