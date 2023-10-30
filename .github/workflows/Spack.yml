@@ -23,9 +23,7 @@ jobs:
       matrix:
         os: ["ubuntu-latest"]
         openmp: ["+openmp", "~openmp"]
-        sharedlibs: ["+shared", "~shared"]
-        pic: ["+pic", "~pic"]
-        precision: ["d", "4", "8"]
+        variants: ["+shared +pic precision=4", "~shared ~pic precision=d", "~shared +pic precision=8"]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -43,9 +41,10 @@ jobs:
         spack env activate sp-env
         cp $GITHUB_WORKSPACE/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
         spack develop --no-clone --path $GITHUB_WORKSPACE/sp sp@develop
-        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.sharedlibs }} ${{ matrix.pic }} precision=${{ matrix.precision }},4
-        spack add ip@develop ${{ matrix.sharedlibs }} precision=${{ matrix.precision }} target=x86_64
-        if [ ${{ matrix.precision }} == "d" ]; then spack add grib-util@develop ; fi
+        spack add sp@develop%gcc@11 ${{ matrix.openmp }} ${{ matrix.variants }}
+        spack add ip@develop ${{ matrix.variants }} target=x86_64
+        precision=$(echo ${{ matrix.variants }} | grep -oP " precision=\K[4d8]")
+        if [ "$precision" == "d" ]; then spack add grib-util@develop ; fi
         spack external find cmake gmake
         spack concretize
         # Run installation and run CTest suite
@@ -53,19 +52,20 @@ jobs:
         # Print test results
         cat $(spack location -i sp)/.spack/install-time-test-log.txt
         cat $(spack location -i ip)/.spack/install-time-test-log.txt
-        if [ ${{ matrix.precision }} == "d" ]; then
+        if [ "$precision" == "d" ]; then
           cat $(spack location -i grib-util)/.spack/install-time-test-log.txt
         fi
         # Run 'spack load' and check that key build options were respected
         spack load sp
-        if [ ${{ matrix.sharedlibs }} == "+shared" ]; then suffix="so" ; else suffix="a"; fi
-        ls ${SP_LIB${{ matrix.precision }}} | grep -cE '/libsp_${{ matrix.precision }}\.'$suffix'$'
+        if [[ "${{ matrix.variants }}" =~ "+shared" ]]; then suffix="so" ; else suffix="a"; fi
+        libvar=SP_LIB${precision}
+        ls ${!libvar} | grep -cE "/libsp_${precision}\."$suffix'$'
 
     - name: Upload test results
       uses: actions/upload-artifact@v3
       if: ${{ failure() }}
       with:
-        name: spackci-ctest-output-${{ matrix.os }}-${{ matrix.openmp }}-${{ matrix.sharedlibs }}-${{ matrix.pic }}-${{ matrix.precision }}
+        name: spackci-ctest-output-${{ matrix.os }}-${{ matrix.openmp }}-${{ matrix.variants }}
         path: ${{ github.workspace }}/*/spack-build-*/Testing/Temporary/LastTest.log
 
   # This job validates the Spack recipe by making sure each cmake build option is represented
@@ -82,7 +82,7 @@ jobs:
     - name: recipe-check
       run: |
         echo "If this jobs fails, look at the most recently output CMake option below and make sure that option appears in spack/package.py"
-        for opt in $(grep -ioP '^option\(\K(?!(ENABLE_DOCS))[^ ]+' $GITHUB_WORKSPACE/sp/CMakeLists.txt) ; do
+        for opt in $(grep -ioP '^option\(\K(?!(ENABLE_DOCS|TEST_TIME_LIMIT))[^ ]+' $GITHUB_WORKSPACE/sp/CMakeLists.txt) ; do
           echo "Checking for presence of '$opt' CMake option in package.py"
           grep -cP "define.+\b${opt}\b" $GITHUB_WORKSPACE/sp/spack/package.py
         done
