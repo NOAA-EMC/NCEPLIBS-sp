@@ -3,8 +3,10 @@
 > [!NOTE]
 > The functionality of this library has been merged into
 > [NCEPLIBS-ip](https://github.com/NOAA-EMC/NCEPLIBS-ip) as of the latest
-> version (5.0), which contains the full set of sp functionality as of
-> the most recent release (2.5.0). All future development should use **NCEPLIBS-ip**.
+> version (5.0), which contains the full set of NCEPLIBS-sp functionality as of
+> the most recent release (2.5.0). NCEPLIBS-sp should be considered deprecated,
+> and all future development should use **NCEPLIBS-ip** as soon as available
+> (ip v5.0 is slated for inclusion in spack-stack 1.7.0).
 
 # NCEPLIBS-sp
 
