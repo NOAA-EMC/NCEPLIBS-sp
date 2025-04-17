@@ -17,8 +17,8 @@ jobs:
   developer:
     runs-on: ubuntu-latest
     env:
-      FC: gfortran-9
-      CC: gcc-9
+      FC: gfortran
+      CC: gcc
 
     steps:
     
@@ -28,7 +28,7 @@ jobs:
         python3 -m pip install gcovr
         
     - name: checkout-sp
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: sp
 
@@ -41,7 +41,7 @@ jobs:
         cmake -DBUILD_8=ON -DOPENMP=ON -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug -DENABLE_SHARED_LIBS=ON ..
         make -j2 VERBOSE=1
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: docs
         path: |
@@ -57,7 +57,7 @@ jobs:
         cd sp/build
         gcovr --root .. -v  --html-details --exclude ../tests --exclude CMakeFiles --print-summary -o test-coverage.html &> /dev/null
 
-    - uses: actions/upload-artifact@v2
+    - uses: actions/upload-artifact@v4
       with:
         name: sp-test-coverage
         path: |
