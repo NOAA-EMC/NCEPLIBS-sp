@@ -35,6 +35,8 @@ make -j2
 make install
 ```
 
+NCEPLIBS-sp is also available through [Spack](https://spack.io) as '[sp](https://github.com/spack/spack/tree/develop/var/spack/repos/builtin/packages/sp)'.
+
 ## Disclaimer
 
 The United States Department of Commerce (DOC) GitHub project code is
