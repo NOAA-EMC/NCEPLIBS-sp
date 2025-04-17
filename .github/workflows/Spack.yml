@@ -54,9 +54,6 @@ jobs:
         # Print test results
         cat $(spack location -i sp)/.spack/install-time-test-log.txt
         cat $(spack location -i ip)/.spack/install-time-test-log.txt
-        if [ "$precision" == "d" ]; then
-          cat $(spack location -i grib-util)/.spack/install-time-test-log.txt
-        fi
         # Run 'spack load' and check that key build options were respected
         spack load sp
         if [[ "${{ matrix.variants }}" =~ "+shared" ]]; then suffix="so" ; else suffix="a"; fi
