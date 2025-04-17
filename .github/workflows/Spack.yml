@@ -38,6 +38,7 @@ jobs:
         git clone -c feature.manyFiles=true https://github.com/spack/spack
         cd spack
         git checkout a9c879d53e758f67cdbf4cec919425cb2a3a1082
+        cd ..
         . spack/share/spack/setup-env.sh
         spack env create sp-env
         spack env activate sp-env
