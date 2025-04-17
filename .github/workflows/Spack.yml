@@ -47,7 +47,6 @@ jobs:
         spack add sp@develop%gcc ${{ matrix.openmp }} ${{ matrix.variants }}
         spack add ip@4.4.0 ${{ matrix.variants }} target=x86_64
         precision=$(echo ${{ matrix.variants }} | grep -oP " precision=\K[4d8]")
-        if [ "$precision" == "d" ]; then spack add grib-util@develop ; fi
         spack external find cmake gmake
         spack concretize
         # Run installation and run CTest suite
