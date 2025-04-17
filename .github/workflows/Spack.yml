@@ -62,7 +62,7 @@ jobs:
         ls ${!libvar} | grep -cE "/libsp_${precision}\."$suffix'$'
 
     - name: Upload test results
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       if: ${{ failure() }}
       with:
         name: spackci-ctest-output-${{ matrix.os }}-${{ matrix.openmp }}-${{ matrix.variants }}
