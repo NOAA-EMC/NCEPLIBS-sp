@@ -45,7 +45,7 @@ jobs:
         cp $GITHUB_WORKSPACE/sp/spack/package.py $SPACK_ROOT/var/spack/repos/builtin/packages/sp/package.py
         spack develop --no-clone --path $GITHUB_WORKSPACE/sp sp@develop
         spack add sp@develop%gcc ${{ matrix.openmp }} ${{ matrix.variants }}
-        spack add ip@develop ${{ matrix.variants }} target=x86_64
+        spack add ip@4.4.0 ${{ matrix.variants }} target=x86_64
         precision=$(echo ${{ matrix.variants }} | grep -oP " precision=\K[4d8]")
         if [ "$precision" == "d" ]; then spack add grib-util@develop ; fi
         spack external find cmake gmake
