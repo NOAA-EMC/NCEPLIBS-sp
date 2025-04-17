@@ -38,14 +38,14 @@ jobs:
         mkdir build 
         cd build
         doxygen --version
-        cmake -DBUILD_8=ON -DOPENMP=ON -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=ON -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug -DENABLE_SHARED_LIBS=ON ..
+        cmake -DBUILD_8=ON -DOPENMP=ON -DCMAKE_PREFIX_PATH="~/" -DENABLE_DOCS=OFF -DCMAKE_Fortran_FLAGS="-g -fprofile-arcs -ftest-coverage -O0 -fsanitize=address" -DCMAKE_BUILD_TYPE=Debug -DENABLE_SHARED_LIBS=ON ..
         make -j2 VERBOSE=1
 
-    - uses: actions/upload-artifact@v4
-      with:
-        name: docs
-        path: |
-          sp/build/docs/html
+#    - uses: actions/upload-artifact@v4
+#      with:
+#        name: docs
+#        path: |
+#          sp/build/docs/html
           
     - name: test-sp
       run: |
