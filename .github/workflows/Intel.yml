@@ -42,7 +42,7 @@ jobs:
         echo "source /opt/intel/oneapi/setvars.sh" >> ~/.bash_profile
 
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: sp
 

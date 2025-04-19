@@ -16,8 +16,8 @@ jobs:
   Linux:
     runs-on: ubuntu-latest
     env:
-      FC: gfortran-10
-      CC: gcc-10
+      FC: gfortran
+      CC: gcc
     strategy:
       matrix:
         openmp: [ON, OFF]
@@ -27,7 +27,7 @@ jobs:
     steps:
     
     - name: checkout-sp
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with: 
         path: sp
 
